@@ -91,6 +91,9 @@ Attendees
                             <th>
                                {!!Html::sortable_link('Order Ref.', $sort_by, 'order_reference', $sort_order, ['q' => $q , 'page' => $attendees->currentPage()])!!}
                             </th>
+                            <th>
+                               {!!Html::sortable_link('Ticket Ref.', $sort_by, 'reference_index', $sort_order, ['q' => $q , 'page' => $attendees->currentPage()])!!}
+                            </th>
                             <th></th>
                         </tr>
                     </thead>
@@ -109,6 +112,14 @@ Attendees
                             <td>
                                 <a href="javascript:void(0);" data-modal-id="view-order-{{ $attendee->order->id }}" data-href="{{route('showManageOrder', ['order_id'=>$attendee->order->id])}}" title="View Order #{{$attendee->order->order_reference}}" class="loadModal">
                                     {{$attendee->order->order_reference}}
+                                </a>
+                            </td>
+                             <td>
+                                <a data-modal-id="EditAttendee"
+                                   href="javascript:void(0);"
+                                   data-href="{{route('showEditAttendee', ['event_id'=>$event->id, 'attendee_id'=>$attendee->id])}}"
+                                   class="loadModal">
+                                    {{$attendee->reference_index}}
                                 </a>
                             </td>
                             <td class="text-center">

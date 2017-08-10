@@ -79,7 +79,9 @@
                                         </td>
                                         <td>
                                             {{{$attendee->ticket->title}}}
-                                            {{{$order->order_reference}}}-{{{$attendee->reference_index}}}
+                                        </td>
+                                        <td>
+                                            {{{$attendee->getReferenceAttribute()}}}
                                         </td>
                                     </tr>
                                 @endforeach

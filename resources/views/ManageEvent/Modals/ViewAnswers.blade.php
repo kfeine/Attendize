@@ -34,7 +34,7 @@
                                            @if($answer->attendee->is_cancelled)
                                                (<span title="This attendee has been cancelled" class="text-danger">Cancelled</span>)
                                            @endif<br>
-                                           <a title="Go to attendee: {{ $answer->attendee->full_name }}" href="{{route('showEventAttendees', ['event_id' => $answer->attendee->event_id, 'q' => $answer->attendee->reference])}}">{{ $answer->attendee->email }}</a><br>
+                                           <a title="Go to attendee: {{ $answer->attendee->full_name }}" href="{{route('showEventAttendees', ['event_id' => $answer->attendee->event_id, 'q' => $answer->attendee->getReferenceAttribute()])}}">{{ $answer->attendee->getReferenceAttribute() }}</a><br>
 
                                        </td>
                                        <td>
