@@ -170,6 +170,7 @@ return [
         MaxHoffmann\Parsedown\ParsedownServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -232,6 +233,7 @@ return [
         'Purifier'     => Mews\Purifier\Facades\Purifier::class,
         'Markdown'     => MaxHoffmann\Parsedown\ParsedownFacade::class,
         'Omnipay'      => Omnipay\Omnipay::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
        // 'Omnipay'      => Omnipay\Omnipay::class,
 
     ],
