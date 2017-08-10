@@ -122,8 +122,8 @@
                                 @endif
                                 {{$ticket->title}}
                                 <span class="pull-right">
-                        {{ ($ticket->is_free) ? "FREE" : money($ticket->price, $event->currency) }}
-                    </span>
+                                    {{ ($ticket->is_free) ? "FREE" : money($ticket->price, $event->currency) }} 
+                                </span>
                             </h3>
                         </div>
                         <div class='panel-body'>
@@ -169,15 +169,25 @@
                                                 <span class="pauseTicketSales label label-info"
                                                       data-id="{{$ticket->id}}"
                                                       data-route="{{route('postPauseTicket', ['event_id'=>$event->id])}}">
-                                    <i class="ico-play4"></i> Resume
-                                </span>
+                                                    <i class="ico-play4"></i> Resume
+                                                </span>
                                             @else
                                                 On Sale &nbsp;
                                                 <span class="pauseTicketSales label label-info"
                                                       data-id="{{$ticket->id}}"
                                                       data-route="{{route('postPauseTicket', ['event_id'=>$event->id])}}">
-                                    <i class="ico-pause"></i> Pause
-                                </span>
+                                                    <i class="ico-pause"></i> Pause
+                                                </span>
+                                            @endif
+
+                                            @if($ticket->quantity_sold == 0)
+                                                {!! Form::model($ticket, ['url' => route('postDeleteTicket', ['event_id' => $event->id]), 'class' => 'ajax pull-right']) !!}
+
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
+
+                                                <button class="btn btn-danger btn-xs">Delete</button>
+                                                {!! Form::close() !!}
                                             @endif
                                         @else
                                             {{\App\Models\TicketStatus::find($ticket->sale_status)->name}}

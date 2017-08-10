@@ -161,10 +161,11 @@ class EventTicketsController extends MyBaseController
     /**
      * Deleted a ticket
      *
+     * @param $event_id
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postDeleteTicket(Request $request)
+    public function postDeleteTicket($event_id, Request $request)
     {
         $ticket_id = $request->get('ticket_id');
 
@@ -178,6 +179,9 @@ class EventTicketsController extends MyBaseController
                 'status'  => 'error',
                 'message' => 'Sorry, you can\'t delete this ticket as some have already been sold',
                 'id'      => $ticket->id,
+                'redirectUrl' => route('showEventTickets', [
+                  'event_id' => $event_id,
+                ]),
             ]);
         }
 
@@ -186,6 +190,9 @@ class EventTicketsController extends MyBaseController
                 'status'  => 'success',
                 'message' => 'Ticket Successfully Deleted',
                 'id'      => $ticket->id,
+                'redirectUrl' => route('showEventTickets', [
+                    'event_id' => $event_id,
+                ]),
             ]);
         }
 
