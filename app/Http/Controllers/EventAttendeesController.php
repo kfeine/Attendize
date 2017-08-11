@@ -705,15 +705,21 @@ class EventAttendeesController extends MyBaseController
         }
 
         $attendee->ticket->decrement('quantity_sold');
-        $attendee->ticket->decrement('sales_volume', $attendee->ticket->price);
-        $attendee->ticket->event->decrement('sales_volume', $attendee->ticket->price);
+
+        if($attendee->order->amount != 0){
+            $attendee->ticket->decrement('sales_volume', $attendee->ticket->price);
+            $attendee->ticket->event->decrement('sales_volume', $attendee->ticket->price);
+        }
+
         $attendee->is_cancelled = 1;
         $attendee->save();
 
         $eventStats = EventStats::where('event_id', $attendee->event_id)->where('date', $attendee->created_at->format('Y-m-d'))->first();
         if($eventStats){
             $eventStats->decrement('tickets_sold',  1);
-            $eventStats->decrement('sales_volume',  $attendee->ticket->price);
+            if($attendee->order->amount != 0){
+                $eventStats->decrement('sales_volume',  $attendee->ticket->price);
+            }
         }
 
         $data = [
@@ -726,7 +732,7 @@ class EventAttendeesController extends MyBaseController
                 $message->to($attendee->email, $attendee->full_name)
                     ->from(config('attendize.outgoing_email_noreply'), $attendee->event->organiser->name)
                     ->replyTo($attendee->event->organiser->email, $attendee->event->organiser->name)
-                    ->subject('You\'re ticket has been cancelled');
+                    ->subject('Your ticket has been cancelled');
             });
         }
 

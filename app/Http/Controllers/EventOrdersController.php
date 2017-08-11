@@ -147,7 +147,7 @@ class EventOrdersController extends MyBaseController
     }
 
     /**
-     * Cancels an order
+     * Edits an order
      *
      * @param Request $request
      * @param $order_id
@@ -216,12 +216,13 @@ class EventOrdersController extends MyBaseController
         $order = Order::scope()->findOrFail($order_id);
 
         $refund_order = ($request->get('refund_order') === 'on') ? true : false;
+        $is_free = $order->amount == 0;
         $refund_type = $request->get('refund_type');
         $refund_amount = round(floatval($request->get('refund_amount')), 2);
         $attendees = $request->get('attendees');
         $error_message = false;
 
-        if ($refund_order && $order->payment_gateway->can_refund) {
+        if ($refund_order && $order->payment_gateway->can_refund && !$is_free) {
             if (!$order->transaction_id) {
                 $error_message = 'Sorry, this order cannot be refunded.';
             }
@@ -291,18 +292,25 @@ class EventOrdersController extends MyBaseController
         if ($attendees) {
             foreach ($attendees as $attendee_id) {
                 $attendee = Attendee::scope()->where('id', '=', $attendee_id)->first();
-                $attendee->ticket->decrement('quantity_sold');
-                $attendee->ticket->decrement('sales_volume', $attendee->ticket->price);
-                $order->event->decrement('sales_volume', $attendee->ticket->price);
-                $order->decrement('amount', $attendee->ticket->price);
                 $attendee->is_cancelled = 1;
-                $attendee->save();
+
+                $attendee->ticket->decrement('quantity_sold');
+
+                if(!$is_free){
+                    $attendee->ticket->decrement('sales_volume', $attendee->ticket->price);
+                    $order->event->decrement('sales_volume', $attendee->ticket->price); $order->decrement('amount', $attendee->ticket->price);
+                }
 
                 $eventStats = EventStats::where('event_id', $attendee->event_id)->where('date', $attendee->created_at->format('Y-m-d'))->first();
                 if($eventStats){
                     $eventStats->decrement('tickets_sold',  1);
-                    $eventStats->decrement('sales_volume',  $attendee->ticket->price);
+
+                    if(!$is_free){
+                        $eventStats->decrement('sales_volume',  $attendee->ticket->price);
+                    }
                 }
+                
+                $attendee->save();
             }
         }
 
