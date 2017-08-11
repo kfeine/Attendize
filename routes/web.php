@@ -1,9 +1,17 @@
 <?php
 
 /*
- * Include our API routes file
- */
-include_once('api_routes.php');
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Auth::routes();
 
 /*
  * -------------------------
@@ -28,59 +36,20 @@ Route::any('payment/return/stripe', [
     'uses' => 'ManageAccountController@showStripeReturn',
 ]);
 
-/*
- * Logout
- */
-Route::any('/logout', [
-    'uses' => 'UserLogoutController@doLogout',
-    'as'   => 'logout',
-]);
-
 Route::group(['middleware' => ['installed']], function () {
-
-    /*
-     * Login
-     */
-    Route::get('/login', [
-        'as'   => 'login',
-        'uses' => 'UserLoginController@showLogin',
-    ]);
-    Route::post('/login', 'UserLoginController@postLogin');
 
     /*
      * Forgot password
      */
-    Route::get('login/forgot-password', [
-        'as'   => 'forgotPassword',
-        'uses' => 'RemindersController@getRemind',
-    ]);
+    //Route::get('login/forgot-password', [
+    //    'as'   => 'forgotPassword',
+    //    'uses' => 'RemindersController@getRemind',
+    //]);
 
-    Route::post('login/forgot-password', [
-        'as'   => 'postForgotPassword',
-        'uses' => 'RemindersController@postRemind',
-    ]);
-
-    /*
-     * Reset Password
-     */
-    Route::get('login/reset-password/{token}', [
-        'as'   => 'showResetPassword',
-        'uses' => 'RemindersController@getReset',
-    ]);
-
-    Route::post('login/reset-password', [
-        'as'   => 'postResetPassword',
-        'uses' => 'RemindersController@postReset',
-    ]);
-
-    /*
-     * Registration / Account creation
-     */
-    Route::get('/signup', [
-        'uses' => 'UserSignupController@showSignup',
-        'as'   => 'showSignup',
-    ]);
-    Route::post('/signup', 'UserSignupController@postSignup');
+    //Route::post('login/forgot-password', [
+    //    'as'   => 'postForgotPassword',
+    //    'uses' => 'RemindersController@postRemind',
+    //]);
 
     /*
      * Confirm Email

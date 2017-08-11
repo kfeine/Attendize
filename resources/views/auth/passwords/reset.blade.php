@@ -7,42 +7,46 @@ Reset Password
 @section('content')
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-
-           {!! Form::open(array('url' => route('postResetPassword'), 'class' => 'panel')) !!}
-
             <div class="panel-body">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
+                {!! Form::open(array('url' => '/password/reset', 'class' => 'panel')) !!}
+
                 <div class="logo">
                    {!!HTML::image('assets/images/logo-dark.png')!!}
                 </div>
                 <h2>Reset Password</h2>
-                @if (Session::has('status'))
-                <div class="alert alert-info">
-                    An email with the password reset has been sent to your email.
-                </div>
-                @else
 
-                @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-
-                <div class="form-group">
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     {!! Form::label('email', 'Your Email', ['class' => 'control-label']) !!}
                     {!! Form::text('email', null, ['class' => 'form-control', 'autofocus' => true]) !!}
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
                 </div>
-                <div class="form-group">
+                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                     {!! Form::label('password', 'New Password', ['class' => 'control-label']) !!}
                     {!! Form::password('password',  ['class' => 'form-control']) !!}
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
                 </div>
-                <div class="form-group">
+                <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                     {!! Form::label('password_confirmation', 'Confirm Password', ['class' => 'control-label']) !!}
                     {!! Form::password('password_confirmation',  ['class' => 'form-control']) !!}
+                    @if ($errors->has('password_confirmation'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password_confirmation') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 {!! Form::hidden('token',  $token) !!}
                 <div class="form-group nm">
@@ -55,8 +59,6 @@ Reset Password
                 </div>
             </div>
             {!! Form::close() !!}
-
-            @endif
         </div>
     </div>
-@stop
+@endsection

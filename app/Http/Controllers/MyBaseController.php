@@ -13,27 +13,31 @@ class MyBaseController extends Controller
 {
     public function __construct()
     {
-        /*
-         * Set up JS across all views
-         */
-        JavaScript::put([
-            'User'                => [
-                'full_name'    => Auth::user()->full_name,
-                'email'        => Auth::user()->email,
-                'is_confirmed' => Auth::user()->is_confirmed,
-            ],
+        $this->middleware(function ($request, $next) {
             /*
-             * @todo These should be user selectable
+             * Set up JS across all views
              */
-            'DateFormat'          => 'dd-MM-yyyy',
-            'DateTimeFormat'      => 'dd-MM-yyyy hh:mm',
-            'GenericErrorMessage' => 'Whoops! An unknown error has occurred. Please try again or contact support if the problem persists.'
-        ]);
+            JavaScript::put([
+                'User'                => [
+                    'full_name'    => Auth::user()->full_name,
+                    'email'        => Auth::user()->email,
+                    'is_confirmed' => Auth::user()->is_confirmed,
+                ],
+                /*
+                 * @todo These should be user selectable
+                 */
+                'DateFormat'          => 'dd-MM-yyyy',
+                'DateTimeFormat'      => 'dd-MM-yyyy hh:mm',
+                'GenericErrorMessage' => 'Whoops! An unknown error has occurred. Please try again or contact support if the problem persists.'
+            ]);
 
-        /*
-         * Share the organizers across all views
-         */
-        View::share('organisers', Organiser::scope()->get());
+            /*
+             * Share the organizers across all views
+             */
+            View::share('organisers', Organiser::scope()->get());
+
+            return $next($request);
+        });
     }
 
     /**

@@ -7,12 +7,12 @@ Sign Up
 @section('content')
     <div class="row">
         <div class="col-md-7 col-md-offset-2">
-            {!! Form::open(array('url' => 'signup', 'class' => 'panel')) !!}
+            {!! Form::open(array('url' => '/register', 'class' => 'panel')) !!}
             <div class="panel-body">
                 <div class="logo">
                    {!! HTML::image('assets/images/logo-dark.png') !!}
                 </div>
-                <h2>Sign up</h2>
+                <h2>Register</h2>
 
                 @if(Input::get('first_run'))
                     <div class="alert alert-info">
@@ -58,25 +58,10 @@ Sign Up
                 <div class="form-group {{ ($errors->has('password_confirmation')) ? 'has-error' : '' }}">
                     {!! Form::label('password_confirmation', 'Password again', ['class' => 'control-label required']) !!}
                     {!! Form::password('password_confirmation',  ['class' => 'form-control']) !!}
-                    @if($errors->has('password_confirmation'))
-                        <p class="help-block">{{ $errors->first('password_confirmation') }}</p>
-                    @endif
                 </div>
-
-                @if($is_attendize)
-                <div class="form-group {{ ($errors->has('terms_agreed')) ? 'has-error' : '' }}">
-                    <div class="checkbox custom-checkbox">
-                        {!! Form::checkbox('terms_agreed', Input::old('terms_agreed'), false, ['id' => 'terms_agreed']) !!}
-                        {!! Form::rawLabel('terms_agreed', '&nbsp;&nbsp;I agree to <a target="_blank" href="'.route('termsAndConditions').'"> Terms & Conditions </a>') !!}
-                        @if ($errors->has('terms_agreed'))
-                            <p class="help-block">{{ $errors->first('terms_agreed') }}</p>
-                        @endif
-                    </div>
-                </div>
-                @endif
 
                 <div class="form-group ">
-                   {!! Form::submit('Sign Up', array('class'=>"btn btn-block btn-success")) !!}
+                   {!! Form::submit('Register', array('class'=>"btn btn-block btn-success")) !!}
                 </div>
 
                 @if($is_attendize)
@@ -88,4 +73,4 @@ Sign Up
             {!! Form::close() !!}
         </div>
     </div>
-@stop
+@endsection

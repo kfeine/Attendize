@@ -19,22 +19,41 @@
                         </ul>
                     @endif
 
-                    <div class="form-group">
+                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                         {!! Form::label('email', 'Email', ['class' => 'control-label']) !!}
                         {!! Form::text('email', null, ['class' => 'form-control', 'autofocus' => true]) !!}
+                        @if ($errors->has('email'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        {!! Form::label('password', 'Password', ['class' => 'control-label']) !!}
+                        {!! Form::password('password',  ['class' => 'form-control']) !!}
+                        @if ($errors->has('password'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                        @endif
                     </div>
                     <div class="form-group">
-                        {!! Form::label('password', 'Password', ['class' => 'control-label']) !!}
-                        (<a class="forgotPassword" href="{{route('forgotPassword')}}" tabindex="-1">Forgot password?</a>)
-                        {!! Form::password('password',  ['class' => 'form-control']) !!}
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : ''}}> Remember Me
+                            </label>
+                        </div>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-block btn-success">Login</button>
+                        <a class="btn btn-link" href="{{ url('/password/reset') }}">
+                            Forgot Your Password?
+                        </a>
                     </div>
 
                     @if(Utils::isAttendize())
                     <div class="signup">
-                        <span>Don't have any account? <a class="semibold" href="{{ url('signup') }}">Sign up</a></span>
+                        <span>Don't have any account? <a class="semibold" href="{{ url('register') }}">Register</a></span>
                     </div>
                     @endif
                 </div>

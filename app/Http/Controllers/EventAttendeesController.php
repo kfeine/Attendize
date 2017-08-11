@@ -578,7 +578,7 @@ class EventAttendeesController extends MyBaseController
                         'orders.created_at',
                         DB::raw("(CASE WHEN attendees.has_arrived THEN 'YES' ELSE 'NO' END) AS has_arrived"),
                         'attendees.arrival_time',
-                    ])->get();
+                    ])->get()->all();
 
                 $sheet->fromArray($data);
                 $sheet->row(1, [

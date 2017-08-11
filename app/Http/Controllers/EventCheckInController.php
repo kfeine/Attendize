@@ -58,7 +58,7 @@ class EventCheckInController extends MyBaseController
             ->where(function ($query) use ($event_id) {
                 $query->where('attendees.event_id', '=', $event_id);
             })->where(function ($query) use ($searchQuery) {
-                $query->orWhere('attendees.first_name', 'like', $searchQuery . '%')
+                $query->where('attendees.first_name', 'like', $searchQuery . '%')
                     ->orWhere(DB::raw("CONCAT_WS(' ', attendees.first_name, attendees.last_name)"), 'like',
                         $searchQuery . '%')
                     //->orWhere('attendees.email', 'like', $searchQuery . '%')

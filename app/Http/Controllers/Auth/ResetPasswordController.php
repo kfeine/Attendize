@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
-class PasswordController extends Controller
+class ResetPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -21,18 +21,19 @@ class PasswordController extends Controller
     use ResetsPasswords;
 
     /**
-     * Create a new password controller instance.
+     * Where to redirect users after resetting their password.
      *
-     * @param \Illuminate\Contracts\Auth\Guard $auth
-     * @param \Illuminate\Contracts\Auth\PasswordBroker $passwords
+     * @var string
+     */
+    protected $redirectTo = '/select_organiser';
+
+    /**
+     * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->auth = $auth;
-        $this->passwords = $passwords;
-
         $this->middleware('guest');
     }
 }
