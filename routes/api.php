@@ -57,12 +57,12 @@ Route::resource('attendees', 'API\AttendeesApiController');
  */
 
 
-Route::get('/', function () {
+Route::middleware('auth:api')->get('/', function () {
     return response()->json([
         'Hello' => Auth::guard('api')->user()->full_name . '!'
     ]);
-})->middleware('auth:api');
+});
 
-Route::get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) { 
     return $request->user();
-})->middleware('auth:api');
+});
