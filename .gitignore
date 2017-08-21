@@ -11,3 +11,5 @@ installed
 /composer.phar
 _ide_helper.php
 *.swp
+docker/
+storage/database.sqlite
