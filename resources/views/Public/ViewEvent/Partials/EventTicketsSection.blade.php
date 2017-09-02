@@ -25,9 +25,9 @@
                                 @foreach($tickets as $ticket)
                                     <tr class="ticket" property="offers" typeof="Offer">
                                         <td>
-                                <span class="ticket-title semibold" property="name">
-                                    {{$ticket->title}}
-                                </span>
+                                            <span class="ticket-title semibold" property="name">
+                                                {{$ticket->title}}
+                                            </span>
                                             <p class="ticket-descripton mb0 text-muted" property="description">
                                                 {{$ticket->description}}
                                             </p>
@@ -53,24 +53,24 @@
                                             @if($ticket->is_paused)
 
                                                 <span class="text-danger">
-                                    Currently Not On Sale
-                                </span>
+                                                    Currently Not On Sale
+                                                </span>
 
                                             @else
 
                                                 @if($ticket->sale_status === config('attendize.ticket_status_sold_out'))
                                                     <span class="text-danger" property="availability"
                                                           content="http://schema.org/SoldOut">
-                                    Sold Out
-                                </span>
+                                                        Sold Out
+                                                    </span>
                                                 @elseif($ticket->sale_status === config('attendize.ticket_status_before_sale_date'))
                                                     <span class="text-danger">
-                                    Sales Have Not Started
-                                </span>
+                                                        Sales Have Not Started
+                                                    </span>
                                                 @elseif($ticket->sale_status === config('attendize.ticket_status_after_sale_date'))
                                                     <span class="text-danger">
-                                    Sales Have Ended
-                                </span>
+                                                        Sales Have Ended
+                                                    </span>
                                                 @else
                                                     {!! Form::hidden('tickets[]', $ticket->id) !!}
                                                     <meta property="availability" content="http://schema.org/InStock">
@@ -89,6 +89,25 @@
                                         </td>
                                     </tr>
                                 @endforeach
+
+                                <tr class="discout-count">
+                                        <td>
+                                            <span class="ticket-title semibold" property="name">
+                                                Code de réduction
+                                            </span>
+                                            <p class="ticket-descripton mb0 text-muted" property="description">
+                                                facultatif
+                                            </p>
+                                        </td>
+                                        <td style="width:180px; text-align: right;">
+                                            <div class="ticket-pricing" style="margin-right: 20px;">
+                                            </div>
+                                        </td>
+                                        <td style="width:85px;">
+                                            {!! Form::hidden('discount', '') !!}
+                                            <input type="text" name="discount" style="text-align: center" class="form-control">
+                                        </td>
+                                </tr>
 
                                 <tr class="checkout">
                                     <td colspan="3">

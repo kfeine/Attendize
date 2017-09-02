@@ -567,6 +567,26 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
 
         /*
          * -------
+         * Event Discount codes page
+         * -------
+         */
+        Route::get('{event_id}/discount-codes', [
+            'as'   => 'showEventDiscountCodes',
+            'uses' => 'EventDiscountCodeController@showEventDiscountCodes',
+        ]);
+
+        Route::get('{event_id}/discount-codes/create', [
+            'as'   => 'showCreateEventDiscountCode',
+            'uses' => 'EventDiscountCodeController@showCreateEventDiscountCode'
+        ]);
+
+        Route::post('{event_id}/discount-code/create', [
+            'as'   => 'postCreateEventDiscountCode',
+            'uses' => 'EventDiscountCodeController@postCreateEventDiscountCode'
+        ]);
+
+        /*
+         * -------
          * Event Survey page
          * -------
          */
@@ -583,7 +603,6 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
             'as'   => 'postCreateEventQuestion',
             'uses' => 'EventSurveyController@postCreateEventQuestion'
         ]);
-
 
         Route::get('{event_id}/question/{question_id}', [
             'as'   => 'showEditEventQuestion',

@@ -74,6 +74,18 @@ class EventCheckoutController extends Controller
         ReservedTickets::where('session_id', '=', session()->getId())->delete();
 
         /*
+         * Check if promotion code
+         * If so, add it to the item list
+         */
+        //$promo_code = $request->get('')
+        //if (validate_promo($promo_code) {
+        //    $order_total = $order_total - $promo_value
+        //    }
+        //if ($order_total < 0) {
+        //  $order_total = 0
+        //  }
+
+        /*
          * Go though the selected tickets and check if they're available
          * , tot up the price and reserve them to prevent over selling.
          */
@@ -398,7 +410,7 @@ class EventCheckoutController extends Controller
                      * when we return
                      */
                     session()->push('ticket_order_' . $event_id . '.transaction_data', $transaction_data);
-					Log::info("Redirect url: " . $response->getRedirectUrl());
+                    Log::info("Redirect url: " . $response->getRedirectUrl());
 
                     $return = [
                         'status'       => 'success',

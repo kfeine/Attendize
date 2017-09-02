@@ -35,39 +35,36 @@ Order Email: <b>{{$order->email}}</b><br>
             </td>
         </tr>
         @foreach($order->orderItems as $order_item)
-                                <tr>
-                                    <td>
-                                        {{$order_item->title}}
-                                    </td>
-                                    <td>
-                                        {{$order_item->quantity}}
-                                    </td>
-                                    <td>
-                                        @if((int)ceil($order_item->unit_price) == 0)
-                                        FREE
-                                        @else
-                                       {{money($order_item->unit_price, $order->event->currency)}}
-                                        @endif
-
-                                    </td>
-                                    <td>
-                                        @if((int)ceil($order_item->unit_price) == 0)
-                                        -
-                                        @else
-                                        {{money($order_item->unit_booking_fee, $order->event->currency)}}
-                                        @endif
-
-                                    </td>
-                                    <td>
-                                        @if((int)ceil($order_item->unit_price) == 0)
-                                        FREE
-                                        @else
-                                        {{money(($order_item->unit_price + $order_item->unit_booking_fee) * ($order_item->quantity), $order->event->currency)}}
-                                        @endif
-
-                                    </td>
-                                </tr>
-                                @endforeach
+        <tr>
+            <td>
+                {{$order_item->title}}
+            </td>
+            <td>
+                {{$order_item->quantity}}
+            </td>
+            <td>
+                @if((int)ceil($order_item->unit_price) == 0)
+                FREE
+                @else
+                {{money($order_item->unit_price, $order->event->currency)}}
+                @endif
+            </td>
+            <td>
+                @if((int)ceil($order_item->unit_price) == 0)
+                -
+                @else
+                {{money($order_item->unit_booking_fee, $order->event->currency)}}
+                @endif
+            </td>
+            <td>
+                @if((int)ceil($order_item->unit_price) == 0)
+                FREE
+                @else
+                {{money(($order_item->unit_price + $order_item->unit_booking_fee) * ($order_item->quantity), $order->event->currency)}}
+                @endif
+            </td>
+        </tr>
+        @endforeach
         <tr>
             <td>
             </td>

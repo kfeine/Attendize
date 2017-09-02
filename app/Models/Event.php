@@ -62,6 +62,16 @@ class Event extends MyBaseModel
     }
 
     /**
+     * The discount codes associated with the event.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function discount_codes()
+    {
+        return $this->hasMany(\App\Models\DiscountCode::class);
+    }
+
+    /**
      * The attendees associated with the event.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
