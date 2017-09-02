@@ -59,6 +59,6 @@ class DiscountCode extends MyBaseModel
      */
     public function getDates()
     {
-        return ['created_at', 'updated_at', 'start_sale_date', 'end_sale_date'];
+        return ['start_sale_date', 'end_sale_date'];
     }
 }
