@@ -23,7 +23,6 @@ class StoreEventDiscountCodeRequest extends Request
     {
         return [
             'title'  => 'required',
-            'code'   => 'required',
         ];
     }
 }

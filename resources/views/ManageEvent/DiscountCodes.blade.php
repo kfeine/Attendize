@@ -129,7 +129,7 @@
                             </thead>
 
                             <tbody class="sortable">
-                            @foreach ($discount_codes as $discount_code)
+                            @foreach($discount_codes as $discount_code)
                                 <tr id="discount_code-{{ $discount_code->id }}" data-discount_code-id="{{ $discount_code->id }}">
                                     <td>
                                         <div style="cursor: move;" class="sortHanlde">

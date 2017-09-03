@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreEventDiscountCodeRequest;
 use App\Models\Event;
 use App\Models\DiscountCode;
 use Illuminate\Http\Request;
+
+use App\Models\Attendee;
+use Excel;
+use JavaScript;
 
 class EventDiscountCodeController extends MyBaseController
 {
@@ -20,12 +25,16 @@ class EventDiscountCodeController extends MyBaseController
     {
         $event = Event::scope()->findOrFail($event_id);
 
+            //: $event->tickets()->orderBy($sort_by, 'asc')->paginate();
         $data = [
             'event'           => $event,
             'discount_codes'  => $event->discount_codes(),
         ];
+        //$discount_codes = $event->discount_codes()->get();
+        $discount_codes = $event->discount_codes()->orderBy('title', 'asc')->paginate();
 
-        return view('ManageEvent.DiscountCodes', $data);
+        //return view('ManageEvent.DiscountCodes', $data);
+        return view('ManageEvent.DiscountCodes', compact('event', 'discount_codes'));
     }
 
     /**
@@ -55,13 +64,16 @@ class EventDiscountCodeController extends MyBaseController
         $event = Event::findOrFail($event_id);
 
         // Create discount code.
-        //$question = DiscountCode::createNew(false, false, true);
-        $discount_code = DiscountCode::createNew();
+        // createNew($account_id = false, $user_id = false, $ignore_user_id = false)
+        $discount_code = DiscountCode::createNew(false, false, true);
         $discount_code->title = $request->get('title');
-        $discount_code->code  = $request->get('code');
+        $discount_code->code  = 'hello';
+        $discount_code->price = -12.3;
+        $discount_code->is_enabled = true;
+        $discount_code->event_id = $event_id;
         $discount_code->save();
 
-        $event->discount_codes()->attach($discount_code->id);
+        //$event->discount_codes()->attach($discount_code->id);
 
         session()->flash('message', 'Successfully Created Question');
 

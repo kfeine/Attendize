@@ -15,17 +15,19 @@ class CreateDiscountCode extends Migration
     {
         Schema::create('discount_codes', function (Blueprint $table) {
             $table->increments('id');
+
             $table->string('title', 255);
             $table->string('code', 255);
             $table->decimal('price', 5, 2);
-            $table->timestamp('start_sale_date');
-            $table->timestamp('end_sale_date');
-            $table->timestamp('created_at');
-            $table->timestamp('deleted_at');
-            $table->timestamp('updated_at');
-            $table->integer('event_id')->unsigned()->index();
+            $table->unsignedInteger('event_id')->index();
+            $table->unsignedInteger('account_id')->index();
+            $table->tinyInteger('is_enabled')->default(0);
+
+            $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
         });
     }
 
