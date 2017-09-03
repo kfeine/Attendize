@@ -19,5 +19,3 @@
     Invite Attendee
 </button>
 @stop
-
-

@@ -31,7 +31,7 @@
                 <button class="loadModal btn btn-success" type="button" data-modal-id="CreateDiscountCode"
                         href="javascript:void(0);"
                         data-href="{{route('showCreateEventDiscountCode', ['event_id' => $event->id])}}">
-                    <i class="ico-euro"></i> Add discount code
+                    <i class="ico-gift"></i> Add discount code
                 </button>
             </div>
         </div>

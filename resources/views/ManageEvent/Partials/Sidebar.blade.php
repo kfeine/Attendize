@@ -58,7 +58,7 @@
             </li>
             <li class="{{ Request::is('*discount-codes*') ? 'active' : '' }}">
                 <a href="{{route('showEventDiscountCodes', array('event_id' => $event->id))}}">
-                    <span class="figure"><i class="ico-euro"></i></span>
+                    <span class="figure"><i class="ico-gift"></i></span>
                     <span class="text">Discount Codes</span>
                 </a>
             </li>

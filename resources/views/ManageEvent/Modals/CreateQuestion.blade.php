@@ -99,5 +99,3 @@
     </div>
     {!! Form::close() !!}
 </div>
-
-
