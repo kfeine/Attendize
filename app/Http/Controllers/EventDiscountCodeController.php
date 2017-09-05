@@ -135,4 +135,67 @@ class EventDiscountCodeController extends MyBaseController
         ]);
 
     }
+
+
+    /**
+     * Toggle the enabled status of discount_code
+     *
+     * @param Request $request
+     * @param $event_id
+     * @param $discount_code_id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postEnableDiscountCode(Request $request, $event_id, $discount_code_id)
+    {
+        $discount_code = DiscountCode::scope()->find($discount_code_id);
+
+        $discount_code->is_enabled = ($discount_code->is_enabled == 1) ? 0 : 1;
+
+        if ($discount_code->save()) {
+            return response()->json([
+                'status'  => 'success',
+                'message' => 'DiscountCode Successfully Updated',
+                'id'      => $discount_code->id,
+            ]);
+        }
+
+        return response()->json([
+            'status'  => 'error',
+            'id'      => $discount_code->id,
+            'message' => 'Whoops! Looks like something went wrong. Please try again.',
+        ]);
+    }
+
+
+    /**
+     * Delete a discount_code
+     *
+     * @param Request $request
+     * @param $event_id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postDeleteEventDiscountCode(Request $request, $event_id)
+    {
+        $discount_code_id = $request->get('discount_code_id');
+
+        $discount_code = DiscountCode::scope()->find($discount_code_id);
+
+        if ($discount_code->delete()) {
+
+            session()->flash('message', 'Discount code successfully deleted');
+
+            return response()->json([
+                'status'      => 'success',
+                'message'     => 'Refreshing..',
+                'redirectUrl' => '',
+            ]);
+        }
+
+        return response()->json([
+            'status'  => 'error',
+            'id'      => $discount_code->id,
+            'message' => 'This discount code can\'t be deleted.',
+        ]);
+    }
+
 }

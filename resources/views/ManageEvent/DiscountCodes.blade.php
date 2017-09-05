@@ -177,6 +177,69 @@
             </div>
 
 
+            <script>
+                /*
+                @todo Move this into main JS file
+                 */
+                $(function () {
+                    $(document.body).on('click', '.enableDiscountCode', function (e) {
+
+                        var discountCodeId = $(this).data('id'),
+                                route = $(this).data('route');
+
+                        $.post(route, 'discount_code_id=' + discountCodeId)
+                                .done(function (data) {
+
+                                    if (typeof data.message !== 'undefined') {
+                                        showMessage(data.message);
+                                    }
+
+                                    switch (data.status) {
+                                        case 'success':
+                                            setTimeout(function () {
+                                                document.location.reload();
+                                            }, 300);
+                                            break;
+                                        case 'error':
+                                            showMessage(Attendize.GenericErrorMessages);
+                                            break;
+
+                                        default:
+                                            break;
+                                    }
+                                }).fail(function (data) {
+                            showMessage(Attendize.GenericErrorMessages);
+                        });
+
+                        e.preventDefault();
+                    });
+
+                    $('.sortable').sortable({
+                        handle: '.sortHanlde',
+                        forcePlaceholderSize: true,
+                        placeholder: '<tr><td class="bg-info" colspan="6">&nbsp;</td></tr>'
+                    }).bind('sortupdate', function (e, ui) {
+
+                        var data = $('.sortable tr').map(function () {
+                            return $(this).data('discount-code-id');
+                        }).get();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: Attendize.postUpdateDiscountCodesOrderRoute,
+                            dataType: 'json',
+                            data: {discount_code_ids: data},
+                            success: function (data) {
+                                showMessage(data.message)
+                            },
+                            error: function (data) {
+                                console.log(data);
+                            }
+                        });
+                    });
+                });
+            </script>
+
         @else
 
             <!-- TODO @include('ManageEvent.Partials.SurveyBlankSlate') -->
