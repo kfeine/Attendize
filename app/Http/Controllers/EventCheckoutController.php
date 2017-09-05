@@ -74,9 +74,16 @@ class EventCheckoutController extends Controller
         ReservedTickets::where('session_id', '=', session()->getId())->delete();
 
         /*
-         * Check if promotion code
+         * Check if discoutn code
          * If so, add it to the item list
          */
+        $discount_code = $request->get('discount-code');
+        $discount_code_ok = false;
+        $discount_code_price = 0;
+        if (!empty($discount_code)) {
+            $discount_code_ok = true;
+            $discount_code_price = -12;
+        }
         //$promo_code = $request->get('')
         //if (validate_promo($promo_code) {
         //    $order_total = $order_total - $promo_value
@@ -90,13 +97,13 @@ class EventCheckoutController extends Controller
          * , tot up the price and reserve them to prevent over selling.
          */
 
-        $validation_rules = [];
-        $validation_messages = [];
-        $tickets = [];
-        $order_total = 0;
-        $total_ticket_quantity = 0;
-        $booking_fee = 0;
-        $organiser_booking_fee = 0;
+        $validation_rules                    = [];
+        $validation_messages                 = [];
+        $tickets                             = [];
+        $order_total                         = 0;
+        $total_ticket_quantity               = 0;
+        $booking_fee                         = 0;
+        $organiser_booking_fee               = 0;
         $quantity_available_validation_rules = [];
 
         foreach ($ticket_ids as $ticket_id) {
@@ -111,7 +118,6 @@ class EventCheckoutController extends Controller
             $ticket = Ticket::find($ticket_id);
 
             $ticket_quantity_remaining = $ticket->quantity_remaining;
-
 
             $max_per_person = min($ticket_quantity_remaining, $ticket->max_per_person);
 
@@ -136,8 +142,8 @@ class EventCheckoutController extends Controller
                 ]);
             }
 
-            $order_total = $order_total + ($current_ticket_quantity * $ticket->price);
-            $booking_fee = $booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
+            $order_total           = $order_total + ($current_ticket_quantity * $ticket->price);
+            $booking_fee           = $booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
             $organiser_booking_fee = $organiser_booking_fee + ($current_ticket_quantity * $ticket->organiser_booking_fee);
 
             $tickets[] = [
@@ -152,12 +158,12 @@ class EventCheckoutController extends Controller
             /*
              * Reserve the tickets for X amount of minutes
              */
-            $reservedTickets = new ReservedTickets();
-            $reservedTickets->ticket_id = $ticket_id;
-            $reservedTickets->event_id = $event_id;
+            $reservedTickets                    = new ReservedTickets();
+            $reservedTickets->ticket_id         = $ticket_id;
+            $reservedTickets->event_id          = $event_id;
             $reservedTickets->quantity_reserved = $current_ticket_quantity;
-            $reservedTickets->expires = $order_expires_time;
-            $reservedTickets->session_id = session()->getId();
+            $reservedTickets->expires           = $order_expires_time;
+            $reservedTickets->session_id        = session()->getId();
             $reservedTickets->save();
 
             for ($i = 0; $i < $current_ticket_quantity; $i++) {
@@ -217,6 +223,8 @@ class EventCheckoutController extends Controller
             'affiliate_referral'      => Cookie::get('affiliate_' . $event_id),
             'account_payment_gateway' => count($event->account->active_payment_gateway) ? $event->account->active_payment_gateway : false,
             'payment_gateway'         => count($event->account->active_payment_gateway) ? $event->account->active_payment_gateway->payment_gateway : false,
+            'discount_code_ok'        => $discount_code_ok,
+            'discount_code_price'     => $discount_code_price,
         ]);
 
         /*
