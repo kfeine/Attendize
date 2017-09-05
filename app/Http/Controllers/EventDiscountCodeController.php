@@ -30,7 +30,6 @@ class EventDiscountCodeController extends MyBaseController
             'event'           => $event,
             'discount_codes'  => $event->discount_codes(),
         ];
-        //$discount_codes = $event->discount_codes()->get();
         $discount_codes = $event->discount_codes()->orderBy('title', 'asc')->paginate();
 
         //return view('ManageEvent.DiscountCodes', $data);
@@ -67,15 +66,15 @@ class EventDiscountCodeController extends MyBaseController
         // createNew($account_id = false, $user_id = false, $ignore_user_id = false)
         $discount_code = DiscountCode::createNew(false, false, true);
         $discount_code->title = $request->get('title');
-        $discount_code->code  = 'hello';
-        $discount_code->price = -12.3;
+        $discount_code->code  = $request->get('code');
+        $discount_code->price = $request->get('price');
         $discount_code->is_enabled = true;
         $discount_code->event_id = $event_id;
         $discount_code->save();
 
         //$event->discount_codes()->attach($discount_code->id);
 
-        session()->flash('message', 'Successfully Created Question');
+        session()->flash('message', 'Successfully created discount code');
 
         return response()->json([
             'status'      => 'success',
@@ -93,16 +92,47 @@ class EventDiscountCodeController extends MyBaseController
      * @param $discount_code
      * @return mixed
      */
-    // public function showEditEventDiscountCode(Request $request, $event_id, $discount_code_id)
-    // {
-    //     $discount_code = DiscountCode::scope()->findOrFail($discount_code_id);
-    //     $event = Event::scope()->findOrFail($event_id);
-    //
-    //     $data = [
-    //         'event'           => $event,
-    //         'discount_codes'  => $discount_code,
-    //     ];
-    //
-    //     return view('ManageEvent.Modals.EditDiscountCode', $data);
-    // }
+    public function showEditEventDiscountCode(Request $request, $event_id, $discount_code_id)
+    {
+        $discount_code = DiscountCode::scope()->findOrFail($discount_code_id);
+        $event = Event::scope()->findOrFail($event_id);
+
+        $data = [
+            'event'           => $event,
+            'discount_code'  => $discount_code,
+        ];
+
+        return view('ManageEvent.Modals.EditDiscountCode', $data);
+    }
+
+
+    /**
+     * Edit a discount_code
+     *
+     * @param Request $request
+     * @param $event_id
+     * @param $discount_code_id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postEditEventDiscountCode(Request $request, $event_id, $discount_code_id)
+    {
+        // Get the event or display a 'not found' warning.
+        $event = Event::scope()->findOrFail($event_id);
+
+        // Create discount_code.
+        $discount_code = DiscountCode::scope()->findOrFail($discount_code_id);
+        $discount_code->title = $request->get('title');
+        $discount_code->code = $request->get('code');
+        $discount_code->price = $request->get('price');
+        $discount_code->save();
+
+        session()->flash('message', 'Successfully edited discount code');
+
+        return response()->json([
+            'status'      => 'success',
+            'message'     => 'Refreshing..',
+            'redirectUrl' => '',
+        ]);
+
+    }
 }

@@ -22,12 +22,22 @@
                 </div>
                 <div class="form-group">
                     <label for="discount-code">
-                        Discount code
+                        Code
                     </label>
-                    {!! Form::text('title', '', [
-                        'id' => 'discount-code',
+                    {!! Form::text('code', '', [
+                        'id' => 'discount-code-code',
                         'class' => 'form-control',
                         'placeholder' => 'e.g. ABCD1234',
+                    ]) !!}
+                </div>
+                <div class="form-group">
+                    <label for="price">
+                        Price
+                    </label>
+                    {!! Form::text('price', '', [
+                        'id' => 'discount-code-price',
+                        'class' => 'form-control',
+                        'placeholder' => 'e.g. -12.3',
                     ]) !!}
                 </div>
             </div> <!-- /end modal body-->

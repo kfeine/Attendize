@@ -585,6 +585,27 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
             'uses' => 'EventDiscountCodeController@postCreateEventDiscountCode'
         ]);
 
+        Route::get('{event_id}/discount_code/{discount_code_id}', [
+            'as'   => 'showEditEventDiscountCode',
+            'uses' => 'EventDiscountCodeController@showEditEventDiscountCode'
+        ]);
+
+        Route::post('{event_id}/discount_code/{discount_code_id}', [
+            'as'   => 'postEditEventDiscountCode',
+            'uses' => 'EventDiscountCodeController@postEditEventDiscountCode'
+        ]);
+
+        Route::post('{event_id}/discount_code/{discount_code_id}/enable', [
+            'as'   => 'postEnableDiscountCode',
+            'uses' => 'EventDiscountCodeController@postEnableDiscountCode',
+        ]);
+
+        Route::post('{event_id}/discount_code/delete/{discount_code_id}', [
+            'as'   => 'postDeleteEventDiscountCode',
+            'uses' => 'EventDiscountCodeController@postDeleteEventDiscountCode'
+        ]);
+
+
         /*
          * -------
          * Event Survey page

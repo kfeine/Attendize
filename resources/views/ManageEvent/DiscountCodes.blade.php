@@ -124,6 +124,7 @@
                                 <th style="width: 25px;"> </th>
                                 <th> Description </th>
                                 <th> Code </th>
+                                <th> Price </th>
                                 <th> # Usage </th>
                                 <th> Actions </th>
                             </thead>
@@ -143,10 +144,29 @@
                                         {{ $discount_code->code }}
                                     </td>
                                     <td>
-                                        // TODO
+                                        {{ $discount_code->price }}
+                                    </td>
+                                    <td>
                                     </td>
                                     <td class="text-center">
-                                        <!-- TODO -->
+                                        <a class="btn btn-xs btn-primary loadModal" data-modal-id="EditDiscountCode"
+                                           href="javascript:void(0);"
+                                           data-href="{{route('showEditEventDiscountCode', ['event_id' => $event->id, 'discount_code_id' => $discount_code->id])}}">
+                                            Edit
+                                        </a>
+                                        <a class="btn btn-xs btn-primary enableDiscountCode" href="javascript:void(0);"
+                                           data-route="{{ route('postEnableDiscountCode', ['event_id' => $event->id, 'discount_code_id' => $discount_code->id]) }}"
+                                           data-id="{{ $discount_code->id }}"
+                                        >
+                                            {{ $discount_code->is_enabled ? 'Disable' : 'Enable' }}
+                                        </a>
+                                        <a data-id="{{ $discount_code->id }}"
+                                           title="The disount code won't be effective anymore, but existing reductions will still apply."
+                                           data-route="{{ route('postDeleteEventDiscountCode', ['event_id' => $event->id, 'discount_code_id' => $discount_code->id]) }}"
+                                           data-type="discount_code" href="javascript:void(0);"
+                                           class="deleteThis btn btn-xs btn-danger">
+                                            Delete
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
