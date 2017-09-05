@@ -78,12 +78,15 @@ class EventCheckoutController extends Controller
          * If so, add it to the item list
          */
         $discount_code = $request->get('discount-code');
+        Log::debug($discount_code);
         $discount_code_ok = false;
         $discount_code_price = 0;
         if (!empty($discount_code)) {
             $discount_code_ok = true;
             $discount_code_price = -12;
         }
+        Log::debug((int)$discount_code_price);
+
         //$promo_code = $request->get('')
         //if (validate_promo($promo_code) {
         //    $order_total = $order_total - $promo_value

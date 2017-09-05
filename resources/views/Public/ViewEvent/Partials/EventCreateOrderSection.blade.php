@@ -28,6 +28,14 @@
                             </td>
                         </tr>
                         @endforeach
+                        @if($discount_code_price < 0)
+                        <tr>
+                            <td class="pl0">Promotion</td>
+                            <td style="text-align: right;">
+                                {{ $discount_code_price }}
+                            </td>
+                        </tr>
+                        @endif
                     </table>
                 </div>
                 @if($order_total > 0)

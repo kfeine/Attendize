@@ -90,7 +90,7 @@
                                     </tr>
                                 @endforeach
 
-                                <tr class="discout-count">
+                                <tr class="discout-cocode">
                                         <td>
                                             <span class="ticket-title semibold" property="name">
                                                 Code de réduction
@@ -104,8 +104,8 @@
                                             </div>
                                         </td>
                                         <td style="width:85px;">
-                                            {!! Form::hidden('discount', '') !!}
-                                            <input type="text" name="discount" style="text-align: center" class="form-control">
+                                            {!! Form::hidden('discount-code', '') !!}
+                                            <input type="text" name="discount-code" style="text-align: center" class="form-control">
                                         </td>
                                 </tr>
 
