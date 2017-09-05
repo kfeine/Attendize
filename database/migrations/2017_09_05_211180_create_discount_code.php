@@ -17,7 +17,7 @@ class CreateDiscountCode extends Migration
             $table->increments('id');
 
             $table->string('title', 255);
-            $table->string('code', 255);
+            $table->string('code', 255)->unique();
             $table->decimal('price', 5, 2);
             $table->unsignedInteger('event_id')->index();
             $table->unsignedInteger('account_id')->index();
