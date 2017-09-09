@@ -121,7 +121,6 @@
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
-                                <th style="width: 25px;"> </th>
                                 <th> Description </th>
                                 <th> Code </th>
                                 <th> Price </th>
@@ -132,11 +131,6 @@
                             <tbody class="sortable">
                             @foreach($discount_codes as $discount_code)
                                 <tr id="discount_code-{{ $discount_code->id }}" data-discount_code-id="{{ $discount_code->id }}">
-                                    <td>
-                                        <div style="cursor: move;" class="sortHanlde">
-                                            <i class="ico-sort "></i>
-                                        </div>
-                                    </td>
                                     <td>
                                         {{ $discount_code->title }}
                                     </td>

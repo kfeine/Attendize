@@ -309,7 +309,7 @@ class EventOrdersController extends MyBaseController
                         $eventStats->decrement('sales_volume',  $attendee->ticket->price);
                     }
                 }
-                
+
                 $attendee->save();
             }
         }

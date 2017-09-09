@@ -12,6 +12,7 @@ use App\Models\OrderItem;
 use App\Models\QuestionAnswer;
 use App\Models\ReservedTickets;
 use App\Models\Ticket;
+use App\Models\DiscountCode;
 use Carbon\Carbon;
 use Cookie;
 use DB;
@@ -72,28 +73,6 @@ class EventCheckoutController extends Controller
          * Remove any tickets the user has reserved
          */
         ReservedTickets::where('session_id', '=', session()->getId())->delete();
-
-        /*
-         * Check if discoutn code
-         * If so, add it to the item list
-         */
-        $discount_code = $request->get('discount-code');
-        Log::debug($discount_code);
-        $discount_code_ok = false;
-        $discount_code_price = 0;
-        if (!empty($discount_code)) {
-            $discount_code_ok = true;
-            $discount_code_price = -12;
-        }
-        Log::debug((int)$discount_code_price);
-
-        //$promo_code = $request->get('')
-        //if (validate_promo($promo_code) {
-        //    $order_total = $order_total - $promo_value
-        //    }
-        //if ($order_total < 0) {
-        //  $order_total = 0
-        //  }
 
         /*
          * Go though the selected tickets and check if they're available
@@ -206,6 +185,23 @@ class EventCheckoutController extends Controller
         }
 
         /*
+         * Check if discount code
+         * If so, update total
+         */
+        $discount_code_code = $request->get('discount-code');
+        $discount_code = False;
+        if (!empty($discount_code_code)) {
+            $discount_code = DiscountCode::where('code', $discount_code_code)->first();
+        }
+        if ($discount_code) {
+            $order_total = $order_total + $discount_code->price;
+        }
+        // check if the total is positive…
+        if ($order_total < 0) {
+            $order_total = 0.0;
+        }
+
+        /*
          * The 'ticket_order_{event_id}' session stores everything we need to complete the transaction.
          */
         session()->put('ticket_order_' . $event->id, [
@@ -214,6 +210,7 @@ class EventCheckoutController extends Controller
             'event_id'                => $event->id,
             'tickets'                 => $tickets,
             'total_ticket_quantity'   => $total_ticket_quantity,
+            'discount_code'           => $discount_code,
             'order_started'           => time(),
             'expires'                 => $order_expires_time,
             'reserved_tickets_id'     => $reservedTickets->id,
@@ -226,8 +223,6 @@ class EventCheckoutController extends Controller
             'affiliate_referral'      => Cookie::get('affiliate_' . $event_id),
             'account_payment_gateway' => count($event->account->active_payment_gateway) ? $event->account->active_payment_gateway : false,
             'payment_gateway'         => count($event->account->active_payment_gateway) ? $event->account->active_payment_gateway->payment_gateway : false,
-            'discount_code_ok'        => $discount_code_ok,
-            'discount_code_price'     => $discount_code_price,
         ]);
 
         /*
@@ -238,9 +233,9 @@ class EventCheckoutController extends Controller
             return response()->json([
                 'status'      => 'success',
                 'redirectUrl' => route('showEventCheckout', [
-                        'event_id'    => $event_id,
-                        'is_embedded' => $this->is_embedded,
-                    ]) . '#order_form',
+                    'event_id'    => $event_id,
+                    'is_embedded' => $this->is_embedded,
+                ]) . '#order_form',
             ]);
         }
 
@@ -269,10 +264,10 @@ class EventCheckoutController extends Controller
         $secondsToExpire = Carbon::now()->diffInSeconds($order_session['expires']);
 
         $data = $order_session + [
-                'event'           => Event::findorFail($order_session['event_id']),
-                'secondsToExpire' => $secondsToExpire,
-                'is_embedded'     => $this->is_embedded,
-            ];
+            'event'           => Event::findorFail($order_session['event_id']),
+            'secondsToExpire' => $secondsToExpire,
+            'is_embedded'     => $this->is_embedded,
+        ];
 
         if ($this->is_embedded) {
             return view('Public.ViewEvent.Embedded.EventPageCheckout', $data);

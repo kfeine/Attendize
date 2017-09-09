@@ -10,7 +10,10 @@
     @include('ManageEvent.Partials.TopNav')
 @stop
 
-@section('page_title', '<i class="ico-home2"></i>&nbsp;Event Dashboard')
+@section('page_title')
+    <i class="ico-home2"></i>
+    Event Dashboard
+@stop
 
 @section('menu')
     @include('ManageEvent.Partials.Sidebar')

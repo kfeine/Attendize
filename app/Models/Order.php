@@ -43,6 +43,21 @@ class Order extends MyBaseModel
     }
 
     /**
+     * The discount codes associated with the order.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orderDiscountCode()
+    {
+        $discount_code = $this->belongsTo(\App\Models\DiscountCode::class);
+        if (count($discount_code)) {
+                return $discount_code;
+        } else {
+            return False;
+        }
+    }
+
+    /**
      * The attendees associated with the order.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

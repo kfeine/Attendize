@@ -28,23 +28,21 @@
                             </td>
                         </tr>
                         @endforeach
-                        @if($discount_code_price < 0)
+                        @if($discount_code)
                         <tr>
-                            <td class="pl0">Promotion</td>
+                            <td class="pl0">{{ $discount_code->title }}</td>
                             <td style="text-align: right;">
-                                {{ $discount_code_price }}
+                                {{ money($discount_code->price, $event->currency) }}
                             </td>
                         </tr>
                         @endif
                     </table>
                 </div>
-                @if($order_total > 0)
                 <div class="panel-footer">
                     <h5>
                         Total: <span style="float: right;"><b>{{ money($order_total + $total_booking_fee,$event->currency) }}</b></span>
                     </h5>
                 </div>
-                @endif
 
             </div>
             <div class="help-block">
