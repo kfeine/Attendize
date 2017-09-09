@@ -128,6 +128,24 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                @if($order->discountCode)
+                                <tr>
+                                    <td>
+                                        {{$order->discountCode->title}}
+                                    </td>
+                                    <td>
+                                        1
+                                    </td>
+                                    <td>
+                                        {{money($order->discountCode->price, $order->event->currency)}}
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        {{money($order->discountCode->price, $order->event->currency)}}
+                                    </td>
+                                </tr>
+                                @endif
                                 <tr>
                                     <td>
                                     </td>

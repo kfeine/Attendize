@@ -14,7 +14,7 @@ class CreateOrderDiscountCodeColumn extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->unsignedInteger('discount_code_id')->index();
+            $table->unsignedInteger('discount_code_id')->nullable()->index();
 
             $table->foreign('discount_code_id')->references('id')->on('discount_code')->onDelete('cascade');
         });

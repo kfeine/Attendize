@@ -68,7 +68,7 @@ Order Email: <b>{{$order->email}}</b><br>
         @if($order->discountCode)
         <tr>
             <td>
-                {{$discount_code->title}}
+                {{$order->discountCode->title}}
             </td>
             <td>
                 1

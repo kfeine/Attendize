@@ -45,11 +45,11 @@ class DiscountCode extends MyBaseModel
     /**
      * The order(s) associated with the discount code.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasToMany
      */
-    public function order()
+    public function orders()
     {
-        return $this->belongsToMany(\App\Models\Order::class);
+        return $this->hasMany(\App\Models\Order::class);
     }
 
     /**

@@ -172,21 +172,21 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            @if($order->discountCode)
+                            @if($order->orderDiscountCode)
                             <tr>
                                 <td>
-                                    {{$discount_code->title}}
+                                    {{$order->orderDiscountCode->title}}
                                 </td>
                                 <td>
                                     1
                                 </td>
                                 <td>
-                                    {{money($order->discountCode->price, $order->event->currency)}}
+                                    {{money($order->orderDiscountCode->price, $order->event->currency)}}
                                 </td>
                                 <td>
                                 </td>
                                 <td>
-                                    {{money($order->discountCode->price, $order->event->currency)}}
+                                    {{money($order->orderDiscountCode->price, $order->event->currency)}}
                                 </td>
                             </tr>
                             @endif

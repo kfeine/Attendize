@@ -74,6 +74,24 @@ Order Email: <b>{{$order->email}}</b><br>
             </td>
         </tr>
         @endforeach
+        @if($order->discountCode)
+        <tr>
+            <td>
+                {{$discount_code->title}}
+            </td>
+            <td>
+                1
+            </td>
+            <td>
+                {{money($order->discountCode->price, $order->event->currency)}}
+            </td>
+            <td>
+            </td>
+            <td>
+                {{money($order->discountCode->price, $order->event->currency)}}
+            </td>
+        </tr>
+        @endif
         <tr>
             <td>
             </td>

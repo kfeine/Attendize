@@ -46,72 +46,6 @@
     @section('content')
             <!--Start Discount codes table-->
     <div class="row">
-        <script>
-            /*
-            @todo Move this into main JS file
-             */
-            // $(function () {
-            //
-            //
-            //     $(document.body).on('click', '.enableQuestion', function (e) {
-            //
-            //         var questionId = $(this).data('id'),
-            //                 route = $(this).data('route');
-            //
-            //         $.post(route, 'question_id=' + questionId)
-            //                 .done(function (data) {
-            //
-            //                     if (typeof data.message !== 'undefined') {
-            //                         showMessage(data.message);
-            //                     }
-            //
-            //                     switch (data.status) {
-            //                         case 'success':
-            //                             setTimeout(function () {
-            //                                 document.location.reload();
-            //                             }, 300);
-            //                             break;
-            //                         case 'error':
-            //                             showMessage(Attendize.GenericErrorMessages);
-            //                             break;
-            //
-            //                         default:
-            //                             break;
-            //                     }
-            //                 }).fail(function (data) {
-            //             showMessage(Attendize.GenericErrorMessages);
-            //         });
-            //
-            //
-            //         e.preventDefault();
-            //     });
-            //
-            //
-            //     $('.sortable').sortable({
-            //         handle: '.sortHanlde',
-            //         forcePlaceholderSize: true,
-            //         placeholder: '<tr><td class="bg-info" colspan="6">&nbsp;</td></tr>'
-            //     }).bind('sortupdate', function (e, ui) {
-            //
-            //         var data = $('.sortable tr').map(function () {
-            //             return $(this).data('question-id');
-            //         }).get();
-            //
-            //         $.ajax({
-            //             type: 'POST',
-            //             url: Attendize.postUpdateQuestionsOrderRoute,
-            //             dataType: 'json',
-            //             data: {question_ids: data},
-            //             success: function (data) {
-            //                 showMessage(data.message)
-            //             },
-            //             error: function (data) {
-            //                 console.log(data);
-            //             }
-            //         });
-            //     });
-            // });
-        </script>
         @if($discount_codes->count())
 
             <div class="col-md-12">
@@ -141,6 +75,7 @@
                                         {{ $discount_code->price }}
                                     </td>
                                     <td>
+                                        {{ $discount_code->orders->count() }}
                                     </td>
                                     <td class="text-center">
                                         <a class="btn btn-xs btn-primary loadModal" data-modal-id="EditDiscountCode"

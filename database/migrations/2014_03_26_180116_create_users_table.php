@@ -247,7 +247,6 @@ class CreateUsersTable extends Migration
             $t->string('order_reference', 15);
             $t->string('transaction_id', 50)->nullable();
 
-            $t->decimal('discount', 8, 2)->nullable();
             $t->decimal('booking_fee', 8, 2)->nullable();
             $t->decimal('organiser_booking_fee', 8, 2)->nullable();
             $t->date('order_date')->nullable();

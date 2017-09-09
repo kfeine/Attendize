@@ -541,10 +541,15 @@ class EventCheckoutController extends Controller
             $order->amount = $ticket_order['order_total'];
             $order->booking_fee = $ticket_order['booking_fee'];
             $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
-            $order->discount = 0.00;
             $order->account_id = $event->account->id;
             $order->event_id = $ticket_order['event_id'];
             $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
+            if (isset($ticket_order['discount_code'])) {
+                $order->discount_code_id = $ticket_order['discount_code']->id;
+                Log::info('discount code id ' . $order->discount_code_id);
+            } else {
+                Log::info('no discount code id');
+            }
             $order->save();
 
             /*

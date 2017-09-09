@@ -5,6 +5,7 @@ namespace App\Models;
 use File;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use PDF;
+use Log;
 
 class Order extends MyBaseModel
 {
@@ -43,18 +44,13 @@ class Order extends MyBaseModel
     }
 
     /**
-     * The discount codes associated with the order.
+     * The discount code associated with the order.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function orderDiscountCode()
+    public function discountCode()
     {
-        $discount_code = $this->belongsTo(\App\Models\DiscountCode::class);
-        if (count($discount_code)) {
-                return $discount_code;
-        } else {
-            return False;
-        }
+        return $this->belongsTo(\App\Models\DiscountCode::class);
     }
 
     /**
