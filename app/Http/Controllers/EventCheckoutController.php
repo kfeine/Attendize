@@ -12,7 +12,7 @@ use App\Models\OrderItem;
 use App\Models\QuestionAnswer;
 use App\Models\ReservedTickets;
 use App\Models\Ticket;
-use App\Models\DiscountCode;
+use App\Models\Discount;
 use Carbon\Carbon;
 use Cookie;
 use DB;
@@ -185,16 +185,16 @@ class EventCheckoutController extends Controller
         }
 
         /*
-         * Check if discount code
+         * Check if discount
          * If so, update total
          */
-        $discount_code_code = $request->get('discount-code');
-        $discount_code = False;
-        if (!empty($discount_code_code)) {
-            $discount_code = DiscountCode::where('code', $discount_code_code)->first();
+        $discount = $request->get('discount-code');
+        $discount = False;
+        if (!empty($discount)) {
+            $discount = Discount::where('code', $discount)->first();
         }
-        if ($discount_code) {
-            $order_total = $order_total + $discount_code->price;
+        if ($discount) {
+            $order_total = $order_total + $discount->price;
         }
         // check if the total is positive…
         if ($order_total < 0) {
@@ -210,7 +210,7 @@ class EventCheckoutController extends Controller
             'event_id'                => $event->id,
             'tickets'                 => $tickets,
             'total_ticket_quantity'   => $total_ticket_quantity,
-            'discount_code'           => $discount_code,
+            'discount'           => $discount,
             'order_started'           => time(),
             'expires'                 => $order_expires_time,
             'reserved_tickets_id'     => $reservedTickets->id,
@@ -544,11 +544,8 @@ class EventCheckoutController extends Controller
             $order->account_id = $event->account->id;
             $order->event_id = $ticket_order['event_id'];
             $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
-            if (isset($ticket_order['discount_code'])) {
-                $order->discount_code_id = $ticket_order['discount_code']->id;
-                Log::info('discount code id ' . $order->discount_code_id);
-            } else {
-                Log::info('no discount code id');
+            if (isset($ticket_order['discount'])) {
+                $order->discount_id = $ticket_order['discount']->id;
             }
             $order->save();
 
@@ -770,4 +767,3 @@ class EventCheckoutController extends Controller
     }
 
 }
-

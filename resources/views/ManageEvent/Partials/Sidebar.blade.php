@@ -56,10 +56,10 @@
                     <span class="text">Check-In</span>
                 </a>
             </li>
-            <li class="{{ Request::is('*discount-codes*') ? 'active' : '' }}">
-                <a href="{{route('showEventDiscountCodes', array('event_id' => $event->id))}}">
+            <li class="{{ Request::is('*discounts*') ? 'active' : '' }}">
+                <a href="{{route('showEventDiscounts', array('event_id' => $event->id))}}">
                     <span class="figure"><i class="ico-gift"></i></span>
-                    <span class="text">Discount Codes</span>
+                    <span class="text">Discounts</span>
                 </a>
             </li>
             <li class="{{ Request::is('*surveys*') ? 'active' : '' }}">

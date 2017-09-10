@@ -44,13 +44,13 @@ class Order extends MyBaseModel
     }
 
     /**
-     * The discount code associated with the order.
+     * The discount associated with the order.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function discountCode()
     {
-        return $this->belongsTo(\App\Models\DiscountCode::class);
+        return $this->belongsTo(\App\Models\Discount::class);
     }
 
     /**

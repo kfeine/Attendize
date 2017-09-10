@@ -2,8 +2,7 @@
 
 @section('title')
     @parent
-
-    Event Discount Codes
+    Event Discounts
 @stop
 
 @section('top_nav')
@@ -16,11 +15,7 @@
 
 @section('page_title')
     <i class='ico-clipboard4 mr5'></i>
-    Event Discount Codes
-@stop
-
-@section('head')
-
+    Event Discounts
 @stop
 
 @section('page_header')
@@ -28,28 +23,25 @@
         <!-- Toolbar -->
         <div class="btn-toolbar" role="toolbar">
             <div class="btn-group btn-group btn-group-responsive">
-                <button class="loadModal btn btn-success" type="button" data-modal-id="CreateDiscountCode"
+                <button class="loadModal btn btn-success" type="button" data-modal-id="CreateDiscount"
                         href="javascript:void(0);"
-                        data-href="{{route('showCreateEventDiscountCode', ['event_id' => $event->id])}}">
-                    <i class="ico-gift"></i> Add discount code
+                        data-href="{{route('showCreateEventDiscount', ['event_id' => $event->id])}}">
+                    <i class="ico-gift"></i> Add discount
                 </button>
             </div>
         </div>
         <!--/ Toolbar -->
     </div>
     <div class="col-md-3 col-sm-6">
-
     </div>
-    @stop
+@stop
 
 
-    @section('content')
-            <!--Start Discount codes table-->
-    <div class="row">
-        @if($discount_codes->count())
-
+@section('content')
+    <!--Start Discounts table-->
+    @if($discounts->count())
+        <div class="row">
             <div class="col-md-12">
-
                 <!-- START panel -->
                 <div class="panel">
                     <div class="table-responsive">
@@ -63,36 +55,36 @@
                             </thead>
 
                             <tbody class="sortable">
-                            @foreach($discount_codes as $discount_code)
-                                <tr id="discount_code-{{ $discount_code->id }}" data-discount_code-id="{{ $discount_code->id }}">
+                            @foreach($discounts as $discount)
+                                <tr id="discount-{{ $discount->id }}" data-discount-id="{{ $discount->id }}">
                                     <td>
-                                        {{ $discount_code->title }}
+                                        {{ $discount->title }}
                                     </td>
                                     <td>
-                                        {{ $discount_code->code }}
+                                        {{ $discount->code }}
                                     </td>
                                     <td>
-                                        {{ $discount_code->price }}
+                                        {{ $discount->price }}
                                     </td>
                                     <td>
-                                        {{ $discount_code->orders->count() }}
+                                        {{ $discount->orders->count() }}
                                     </td>
                                     <td class="text-center">
-                                        <a class="btn btn-xs btn-primary loadModal" data-modal-id="EditDiscountCode"
+                                        <a class="btn btn-xs btn-primary loadModal" data-modal-id="EditDiscount"
                                            href="javascript:void(0);"
-                                           data-href="{{route('showEditEventDiscountCode', ['event_id' => $event->id, 'discount_code_id' => $discount_code->id])}}">
+                                           data-href="{{route('showEditEventDiscount', ['event_id' => $event->id, 'discount_id' => $discount->id])}}">
                                             Edit
                                         </a>
-                                        <a class="btn btn-xs btn-primary enableDiscountCode" href="javascript:void(0);"
-                                           data-route="{{ route('postEnableDiscountCode', ['event_id' => $event->id, 'discount_code_id' => $discount_code->id]) }}"
-                                           data-id="{{ $discount_code->id }}"
+                                        <a class="btn btn-xs btn-primary enableDiscount" href="javascript:void(0);"
+                                           data-route="{{ route('postEnableDiscount', ['event_id' => $event->id, 'discount_id' => $discount->id]) }}"
+                                           data-id="{{ $discount->id }}"
                                         >
-                                            {{ $discount_code->is_enabled ? 'Disable' : 'Enable' }}
+                                            {{ $discount->is_enabled ? 'Disable' : 'Enable' }}
                                         </a>
-                                        <a data-id="{{ $discount_code->id }}"
+                                        <a data-id="{{ $discount->id }}"
                                            title="The disount code won't be effective anymore, but existing reductions will still apply."
-                                           data-route="{{ route('postDeleteEventDiscountCode', ['event_id' => $event->id, 'discount_code_id' => $discount_code->id]) }}"
-                                           data-type="discount_code" href="javascript:void(0);"
+                                           data-route="{{ route('postDeleteEventDiscount', ['event_id' => $event->id, 'discount_id' => $discount->id]) }}"
+                                           data-type="discount" href="javascript:void(0);"
                                            class="deleteThis btn btn-xs btn-danger">
                                             Delete
                                         </a>
@@ -111,12 +103,12 @@
                 @todo Move this into main JS file
                  */
                 $(function () {
-                    $(document.body).on('click', '.enableDiscountCode', function (e) {
+                    $(document.body).on('click', '.enableDiscount', function (e) {
 
                         var discountCodeId = $(this).data('id'),
                                 route = $(this).data('route');
 
-                        $.post(route, 'discount_code_id=' + discountCodeId)
+                        $.post(route, 'discount_id=' + discountCodeId)
                                 .done(function (data) {
 
                                     if (typeof data.message !== 'undefined') {
@@ -150,14 +142,14 @@
                     }).bind('sortupdate', function (e, ui) {
 
                         var data = $('.sortable tr').map(function () {
-                            return $(this).data('discount-code-id');
+                            return $(this).data('discount-id');
                         }).get();
 
                         $.ajax({
                             type: 'POST',
-                            url: Attendize.postUpdateDiscountCodesOrderRoute,
+                            url: Attendize.postUpdateDiscountsOrderRoute,
                             dataType: 'json',
-                            data: {discount_code_ids: data},
+                            data: {discount_ids: data},
                             success: function (data) {
                                 showMessage(data.message)
                             },
@@ -169,12 +161,12 @@
                 });
             </script>
 
-        @else
+    @else
 
-            <!-- TODO @include('ManageEvent.Partials.SurveyBlankSlate') -->
+        @include('ManageEvent.Partials.DiscountsBlankSlate')
 
-        @endif
-    </div>    <!--/End discount codes table-->
+    @endif
+    </div>    <!--/End discounts table-->
 
 
 @stop

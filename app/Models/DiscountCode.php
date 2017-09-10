@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class DiscountCode extends MyBaseModel
+class Discount extends MyBaseModel
 {
     use SoftDeletes;
 
@@ -33,7 +33,7 @@ class DiscountCode extends MyBaseModel
     ];
 
     /**
-     * The event associated with the discount code.
+     * The event associated with the discount.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -43,7 +43,7 @@ class DiscountCode extends MyBaseModel
     }
 
     /**
-     * The order(s) associated with the discount code.
+     * The order(s) associated with the discount.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasToMany
      */

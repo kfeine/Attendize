@@ -1,5 +1,5 @@
 <div id="QuestionForm" role="dialog" class="modal fade" style="display: none;">
-    {!!  Form::open(['url' => route('postCreateEventDiscountCode', ['event_id'=>$event->id]), 'id' => 'edit-discount-code-form', 'class' => 'ajax']) !!}
+    {!!  Form::open(['url' => route('postCreateEventDiscount', ['event_id'=>$event->id]), 'id' => 'edit-discount-form', 'class' => 'ajax']) !!}
 
     <div class="modal-dialog">
         <div class="modal-content">
@@ -7,25 +7,25 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3 class="modal-title">
                     <i class="ico-question"></i>
-                    Create discount code</h3>
+                    Create discount</h3>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="discount-code-title" class="required">
+                    <label for="discount-title" class="required">
                         Name
                     </label>
                     {!! Form::text('title', '', [
-                        'id' => 'discount-code-title',
+                        'id' => 'discount-title',
                         'class' => 'form-control',
                         'placeholder' => 'e.g. VIP reduction',
                     ]) !!}
                 </div>
                 <div class="form-group">
-                    <label for="discount-code">
+                    <label for="discount">
                         Code
                     </label>
                     {!! Form::text('code', '', [
-                        'id' => 'discount-code-code',
+                        'id' => 'discount-code',
                         'class' => 'form-control',
                         'placeholder' => 'e.g. ABCD1234',
                     ]) !!}
@@ -35,7 +35,7 @@
                         Price
                     </label>
                     {!! Form::text('price', '', [
-                        'id' => 'discount-code-price',
+                        'id' => 'discount-price',
                         'class' => 'form-control',
                         'placeholder' => 'e.g. -12.3',
                     ]) !!}
@@ -44,7 +44,7 @@
 
             <div class="modal-footer">
                 {!! Form::button('Cancel', ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
-                {!! Form::submit('Save Discount Code', ['class'=>"btn btn-success"]) !!}
+                {!! Form::submit('Save Discount', ['class'=>"btn btn-success"]) !!}
             </div>
         </div><!-- /end modal content-->
     </div>

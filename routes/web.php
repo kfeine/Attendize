@@ -567,42 +567,42 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
 
         /*
          * -------
-         * Event Discount codes page
+         * Event Discounts page
          * -------
          */
-        Route::get('{event_id}/discount-codes', [
-            'as'   => 'showEventDiscountCodes',
-            'uses' => 'EventDiscountCodeController@showEventDiscountCodes',
+        Route::get('{event_id}/discounts', [
+            'as'   => 'showEventDiscounts',
+            'uses' => 'EventDiscountsController@showEventDiscounts',
         ]);
 
-        Route::get('{event_id}/discount-codes/create', [
-            'as'   => 'showCreateEventDiscountCode',
-            'uses' => 'EventDiscountCodeController@showCreateEventDiscountCode'
+        Route::get('{event_id}/discounts/create', [
+            'as'   => 'showCreateEventDiscount',
+            'uses' => 'EventDiscountController@showCreateEventDiscount'
         ]);
 
-        Route::post('{event_id}/discount-code/create', [
-            'as'   => 'postCreateEventDiscountCode',
-            'uses' => 'EventDiscountCodeController@postCreateEventDiscountCode'
+        Route::post('{event_id}/discounts/create', [
+            'as'   => 'postCreateEventDiscount',
+            'uses' => 'EventDiscountController@postCreateEventDiscount'
         ]);
 
-        Route::get('{event_id}/discount_code/{discount_code_id}', [
-            'as'   => 'showEditEventDiscountCode',
-            'uses' => 'EventDiscountCodeController@showEditEventDiscountCode'
+        Route::get('{event_id}/discounts/{discount_id}', [
+            'as'   => 'showEditEventDiscount',
+            'uses' => 'EventDiscountController@showEditEventDiscount'
         ]);
 
-        Route::post('{event_id}/discount_code/{discount_code_id}', [
-            'as'   => 'postEditEventDiscountCode',
-            'uses' => 'EventDiscountCodeController@postEditEventDiscountCode'
+        Route::post('{event_id}/discounts/{discount_id}', [
+            'as'   => 'postEditEventDiscount',
+            'uses' => 'EventDiscountController@postEditEventDiscount'
         ]);
 
-        Route::post('{event_id}/discount_code/{discount_code_id}/enable', [
-            'as'   => 'postEnableDiscountCode',
-            'uses' => 'EventDiscountCodeController@postEnableDiscountCode',
+        Route::post('{event_id}/discounts/{discount_id}/enable', [
+            'as'   => 'postEnableDiscount',
+            'uses' => 'EventDiscountController@postEnableDiscount',
         ]);
 
-        Route::post('{event_id}/discount_code/delete/{discount_code_id}', [
-            'as'   => 'postDeleteEventDiscountCode',
-            'uses' => 'EventDiscountCodeController@postDeleteEventDiscountCode'
+        Route::post('{event_id}/discounts/delete/{discount_id}', [
+            'as'   => 'postDeleteEventDiscount',
+            'uses' => 'EventDiscountController@postDeleteEventDiscount'
         ]);
 
 
@@ -733,4 +733,3 @@ Route::get('/terms_and_conditions', [
         return 'TODO: add terms and cond';
     }
 ]);
-

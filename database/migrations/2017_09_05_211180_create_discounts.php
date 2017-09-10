@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDiscountCode extends Migration
+class CreateDiscounts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDiscountCode extends Migration
      */
     public function up()
     {
-        Schema::create('discount_codes', function (Blueprint $table) {
+        Schema::create('discounts', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('title', 255);
@@ -38,7 +38,7 @@ class CreateDiscountCode extends Migration
      */
     public function down()
     {
-        Schema::table('discount_codes_update', function (Blueprint $table) {
+        Schema::table('discounts_update', function (Blueprint $table) {
             //
         });
     }

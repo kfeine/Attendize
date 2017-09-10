@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class StoreEventDiscountCodeRequest extends Request
+class StoreEventDiscountRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

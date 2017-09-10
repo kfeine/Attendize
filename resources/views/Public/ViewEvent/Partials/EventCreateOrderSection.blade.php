@@ -28,11 +28,11 @@
                             </td>
                         </tr>
                         @endforeach
-                        @if($discount_code)
+                        @if($discount)
                         <tr>
-                            <td class="pl0">{{ $discount_code->title }}</td>
+                            <td class="pl0">{{ $discount->title }}</td>
                             <td style="text-align: right;">
-                                {{ money($discount_code->price, $event->currency) }}
+                                {{ money($discount->price, $event->currency) }}
                             </td>
                         </tr>
                         @endif

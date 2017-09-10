@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderDiscountCodeColumn extends Migration
+class CreateOrderDiscountColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,9 @@ class CreateOrderDiscountCodeColumn extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->unsignedInteger('discount_code_id')->nullable()->index();
+            $table->unsignedInteger('discount_id')->nullable()->index();
 
-            $table->foreign('discount_code_id')->references('id')->on('discount_code')->onDelete('cascade');
+            $table->foreign('discount_id')->references('id')->on('discount')->onDelete('cascade');
         });
     }
 
