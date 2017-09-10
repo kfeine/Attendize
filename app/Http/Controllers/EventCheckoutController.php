@@ -188,10 +188,10 @@ class EventCheckoutController extends Controller
          * Check if discount
          * If so, update total
          */
-        $discount = $request->get('discount-code');
+        $discount_code = $request->get('discount-code');
         $discount = False;
-        if (!empty($discount)) {
-            $discount = Discount::where('code', $discount)->first();
+        if (!empty($discount_code)) {
+            $discount = Discount::where('code', $discount_code)->first();
         }
         if ($discount) {
             $order_total = $order_total + $discount->price;
@@ -210,7 +210,7 @@ class EventCheckoutController extends Controller
             'event_id'                => $event->id,
             'tickets'                 => $tickets,
             'total_ticket_quantity'   => $total_ticket_quantity,
-            'discount'           => $discount,
+            'discount'                => $discount,
             'order_started'           => time(),
             'expires'                 => $order_expires_time,
             'reserved_tickets_id'     => $reservedTickets->id,

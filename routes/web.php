@@ -577,32 +577,32 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
 
         Route::get('{event_id}/discounts/create', [
             'as'   => 'showCreateEventDiscount',
-            'uses' => 'EventDiscountController@showCreateEventDiscount'
+            'uses' => 'EventDiscountsController@showCreateEventDiscount'
         ]);
 
         Route::post('{event_id}/discounts/create', [
             'as'   => 'postCreateEventDiscount',
-            'uses' => 'EventDiscountController@postCreateEventDiscount'
+            'uses' => 'EventDiscountsController@postCreateEventDiscount'
         ]);
 
         Route::get('{event_id}/discounts/{discount_id}', [
             'as'   => 'showEditEventDiscount',
-            'uses' => 'EventDiscountController@showEditEventDiscount'
+            'uses' => 'EventDiscountsController@showEditEventDiscount'
         ]);
 
         Route::post('{event_id}/discounts/{discount_id}', [
             'as'   => 'postEditEventDiscount',
-            'uses' => 'EventDiscountController@postEditEventDiscount'
+            'uses' => 'EventDiscountsController@postEditEventDiscount'
         ]);
 
         Route::post('{event_id}/discounts/{discount_id}/enable', [
             'as'   => 'postEnableDiscount',
-            'uses' => 'EventDiscountController@postEnableDiscount',
+            'uses' => 'EventDiscountsController@postEnableDiscount',
         ]);
 
         Route::post('{event_id}/discounts/delete/{discount_id}', [
             'as'   => 'postDeleteEventDiscount',
-            'uses' => 'EventDiscountController@postDeleteEventDiscount'
+            'uses' => 'EventDiscountsController@postDeleteEventDiscount'
         ]);
 
 

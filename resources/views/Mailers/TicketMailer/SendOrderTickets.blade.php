@@ -72,21 +72,21 @@ Order Email: <b>{{$order->email}}</b><br>
             </td>
         </tr>
         @endforeach
-        @if($order->discountCode)
+        @if($order->discount)
         <tr>
             <td>
-                {{$discount->title}}
+                {{$order->discount->title}}
             </td>
             <td>
                 1
             </td>
             <td>
-                {{money($order->discountCode->price, $order->event->currency)}}
+                {{money($order->discount->price, $order->event->currency)}}
             </td>
             <td>
             </td>
             <td>
-                {{money($order->discountCode->price, $order->event->currency)}}
+                {{money($order->discount->price, $order->event->currency)}}
             </td>
         </tr>
         @endif

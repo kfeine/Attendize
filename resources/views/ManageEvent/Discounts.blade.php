@@ -105,10 +105,10 @@
                 $(function () {
                     $(document.body).on('click', '.enableDiscount', function (e) {
 
-                        var discountCodeId = $(this).data('id'),
+                        var discountId = $(this).data('id'),
                                 route = $(this).data('route');
 
-                        $.post(route, 'discount_id=' + discountCodeId)
+                        $.post(route, 'discount_id=' + discountId)
                                 .done(function (data) {
 
                                     if (typeof data.message !== 'undefined') {

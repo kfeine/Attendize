@@ -25,9 +25,8 @@ class EventDiscountsController extends MyBaseController
     {
         $event = Event::scope()->findOrFail($event_id);
 
-            //: $event->tickets()->orderBy($sort_by, 'asc')->paginate();
         $data = [
-            'event'           => $event,
+            'event'      => $event,
             'discounts'  => $event->discounts(),
         ];
         $discounts = $event->discounts()->orderBy('title', 'asc')->paginate();

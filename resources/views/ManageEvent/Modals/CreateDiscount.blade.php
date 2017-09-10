@@ -6,7 +6,7 @@
             <div class="modal-header text-center">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3 class="modal-title">
-                    <i class="ico-question"></i>
+                    <i class="ico-gift"></i>
                     Create discount</h3>
             </div>
             <div class="modal-body">
