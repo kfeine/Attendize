@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -15,8 +14,8 @@ class CreateOrderDiscountColumn extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->unsignedInteger('discount_id')->nullable()->index();
-
-            $table->foreign('discount_id')->references('id')->on('discount')->onDelete('cascade');
+            
+            $table->foreign('discount_id')->references('id')->on('discounts');
         });
     }
 
@@ -28,7 +27,8 @@ class CreateOrderDiscountColumn extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            //
+            $table->dropForeign('orders_discount_id_foreign');
+            $table->dropColumn('discount_id');
         });
     }
 }
