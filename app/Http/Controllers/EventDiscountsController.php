@@ -128,6 +128,14 @@ class EventDiscountsController extends MyBaseController
 
         // Create discount.
         $discount = Discount::scope()->findOrFail($discount_id);
+
+        if(!$discount->validate($request->all())){
+          return response()->json([
+              'status'      => 'error',
+              'messages'     => $discount->errors(),
+          ]);
+        }
+
         $discount->title = $request->get('title');
         $discount->code = $request->get('code');
         $discount->price = $request->get('price');
