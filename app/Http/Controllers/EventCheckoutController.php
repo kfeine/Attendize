@@ -544,7 +544,7 @@ class EventCheckoutController extends Controller
             $order->account_id = $event->account->id;
             $order->event_id = $ticket_order['event_id'];
             $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
-            if (isset($ticket_order['discount'])) {
+            if (isset($ticket_order['discount']) && is_object($ticket_order['discount'])) {
                 $order->discount_id = $ticket_order['discount']->id;
             }
             $order->save();
