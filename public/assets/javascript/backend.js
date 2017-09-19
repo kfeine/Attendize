@@ -9208,7 +9208,7 @@ $.cf = {
 
                 switch (data.status) {
                     case 'success':
-                        $('#' + deleteType + '_' + deleteId).fadeOut();
+                        $('#' + deleteType + '-' + deleteId).fadeOut();
                         break;
                     case 'error':
                         /* Error */
