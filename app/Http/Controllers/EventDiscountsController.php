@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreEventDiscountRequest;
 use App\Models\Event;
 use App\Models\Discount;
 use Illuminate\Http\Request;
+use Log;
 
 use App\Models\Attendee;
 use Excel;
@@ -64,6 +64,14 @@ class EventDiscountsController extends MyBaseController
         // Create discount.
         // createNew($account_id = false, $user_id = false, $ignore_user_id = false)
         $discount = Discount::createNew(false, false, true);
+
+        if(!$discount->validate($request->all())){
+          return response()->json([
+              'status'      => 'error',
+              'messages'     => $discount->errors(),
+          ]);
+        }
+
         $discount->title = $request->get('title');
         $discount->code  = $request->get('code');
         $discount->price = $request->get('price');
@@ -186,9 +194,12 @@ class EventDiscountsController extends MyBaseController
             return response()->json([
                 'status'      => 'success',
                 'message'     => 'Refreshing..',
-                'redirectUrl' => '',
             ]);
         }
+
+        Log::error('Discount Failed to delete', [
+            'discount' => $discount,
+        ]);
 
         return response()->json([
             'status'  => 'error',
