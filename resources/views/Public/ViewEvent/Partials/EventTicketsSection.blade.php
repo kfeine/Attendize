@@ -1,7 +1,8 @@
-<section id="tickets" class="container">
+<section id="tickets" class="content">
+<div class="container">
     <div class="row">
         <h1 class='section_head'>
-            Tickets
+            Réservation
         </h1>
     </div>
 
@@ -106,7 +107,7 @@
                                             </div>
 
                                         @endif
-                                        {!!Form::submit('Register', ['class' => 'btn btn-lg btn-primary pull-right'])!!}
+                                        {!!Form::submit('Reserver', ['class' => 'btn btn-lg btn-primary pull-right'])!!}
                                     </td>
                                 </tr>
                             </table>
@@ -127,4 +128,5 @@
 
     @endif
 
+</div>
 </section>
