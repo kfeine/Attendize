@@ -1,4 +1,5 @@
-<section id="organiser" class="container">
+<section id="organiser" class="content">
+<div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="event_organiser_details" property="organizer" typeof="Organization">
@@ -68,5 +69,6 @@
             </div>
         </div>
     </div>
+</div>
 </section>
 

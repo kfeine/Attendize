@@ -20,26 +20,47 @@ label.required::after {
   font-size: 9px;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
   .container {
-    width: 960px;
+    width: 750px;
   }
 }
 
-section.container {
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+@media (min-width: 1290px) {
+  .container {
+    width: 1260px;
+  }
+}
+
+section.content {
   padding: 40px;
   background-color: #ffffff;
-  margin-bottom: 25px;
+  //margin-bottom: 25px;
 }
 
 .section_head {
   border: none !important;
-  font-size: 35px;
-  text-align: center;
+  font-size: 28px;
+  //text-align: center;
+  color: #000;
   margin: 0;
+  margin-top: 30px;
   margin-bottom: 30px;
-  letter-spacing: .2em;
-  font-weight: 200;
+  letter-spacing: 2px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .section_head h1 {
@@ -99,7 +120,6 @@ section h1 {
 
   min-height: 100%;
   margin: 0 auto -60px; /* the bottom margin is the negative value of the footer's height */
-  background: rgba(0, 0, 0, .4);
 
   #organiserHead {
     text-align: center;
@@ -122,7 +142,7 @@ section h1 {
     text-align: center;
     font-weight: 100;
     padding: 20px 0 20px 0;
-    color: #ffffff;
+    color: #000000;
     border: none;
     background-color: transparent;
     margin-bottom: 0;
@@ -131,11 +151,13 @@ section h1 {
   #intro h1 {
     /*display: inline-block;*/
     position: relative;
-    padding: 10px 10px;
+    //padding: 10px 10px;
     /*background: rgba(0,0,0,0.4);*/
+    letter-spacing: 2px;
+    text-transform: uppercase;
     margin: 0;
-    font-weight: 400;
-    font-size: 60px;
+    font-weight: 600;
+    font-size: 40px;
     margin-bottom: 10px;
   }
 
@@ -147,6 +169,11 @@ section h1 {
 
   #intro .event_venue {
     font-size: 19px;
+  }
+
+  #intro .event_poster {
+    margin-top: 20px;
+    background: @primary;
   }
 
   #intro .event_buttons {
@@ -172,6 +199,10 @@ section h1 {
   #intro .event_buttons .btn-event-link:hover {
     border-color: rgba(255, 255, 255, 0.6);
 
+  }
+
+  #tickets {
+    background-color: #E5E5E5;
   }
 
   #tickets .tickets_table_wrap {
@@ -256,8 +287,7 @@ footer, .push {
 }
 
 #footer {
-  background-color: #888;
-  background-color: rgba(0, 0, 0, .4);
+  background-color: #111111;
   min-height: 60px;
   line-height: 60px;
   color: #fff;
@@ -266,6 +296,8 @@ footer, .push {
 
 #organiser {
   text-align: center;
+  background-color: #787878;
+  color: #eee;
 
   .contact_form {
     display: none;
@@ -307,7 +339,7 @@ Small devices (tablets, 768px and up)
     margin: 0;
   }
 
-  section.container {
+  section.content {
     margin-bottom: 0;
     padding: 10px;
   }

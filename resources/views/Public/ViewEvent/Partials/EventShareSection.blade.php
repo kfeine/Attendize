@@ -1,4 +1,6 @@
-<section id="share" class="container">
+@if($event->social_show_facebook || $event->social_show_linkedin || $event->social_show_email || $event->social_show_whatsapp || $event->social_show_googleplus || $event->social_show_twitter)
+<section id="share" class="content">
+<div class="container">
     <div class="row">
         <h1 class="section_head">
             Share Event
@@ -106,5 +108,6 @@
             </ul>
         </div>
     </div>
+</div>
 </section>
-
+@endif
