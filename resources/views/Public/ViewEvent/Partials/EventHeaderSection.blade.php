@@ -34,7 +34,4 @@
             </div>
         </div>
     </div>
-    <div class="event_poster">
-        <img alt="{{$event->title}}" src="{{config('attendize.cdn_url_user_assets').'/'.$event->images->first()['image_path']}}" property="image">
-    </div>
 </section>
