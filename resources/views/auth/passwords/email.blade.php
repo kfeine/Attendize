@@ -1,7 +1,7 @@
 @extends('Shared.Layouts.MasterWithoutMenus')
 
 @section('title')
-Forgot Password
+@lang('auth_passwords_email.title')
 @stop
 
 @section('content')
@@ -15,7 +15,7 @@ Forgot Password
                 <div class="logo">
                    {!!HTML::image('assets/images/logo-dark.png')!!}
                 </div>
-                <h2>Forgot Password</h2>
+                <h2>@lang('auth_passwords_email.title')</h2>
 
                 @if (session('status'))
                     <div class="alert alert-success">
@@ -25,7 +25,7 @@ Forgot Password
 
 
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    {!! Form::label('email', 'Your Email') !!}
+                    {!! Form::label('email', __('auth_passwords_email.email')) !!}
                     {!! Form::text('email', null, ['class' => 'form-control', 'autofocus' => true]) !!}
                     @if ($errors->has('email'))
                         <span class="help-block">
@@ -35,11 +35,11 @@ Forgot Password
                 </div>
 
                 <div class="form-group nm">
-                    <button type="submit" class="btn btn-block btn-success">Submit</button>
+                    <button type="submit" class="btn btn-block btn-success">@lang('auth_passwords_email.submit')</button>
                 </div>
                 <div class="signup">
                     <a class="semibold" href="{{route('login')}}">
-                        <i class="ico ico-arrow-left"></i> Back to login
+                        <i class="ico ico-arrow-left"></i> @lang('auth_passwords_email.back')
                     </a>
                 </div>
             </div>

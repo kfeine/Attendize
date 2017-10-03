@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{App::getLocale()}}">
     <head>
         <!--
                   _   _                 _ _
@@ -88,7 +88,7 @@
         @yield('footer')
 
         <a href="#intro" style="display:none;" class="totop"><i class="ico-angle-up"></i>
-            <span style="font-size:11px;">TOP</span></a>
+            <span style="font-size:11px;">@lang('public_viewevent_layouts_eventpage.top')</span></a>
 
         {!!HTML::script(config('attendize.cdn_url_static_assets').'/assets/javascript/frontend.js')!!}
 
