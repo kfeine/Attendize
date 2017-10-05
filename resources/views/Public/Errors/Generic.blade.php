@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>
-            Whoops!
+            @lang('public_errors_generic.whoops')
         </title>
         <style>
             body {
@@ -21,7 +21,7 @@
     </head>
     <body>
         <div class="missing">
-            <h2>Whoops!</h2>
+            <h2>@lang('public_errors_generic.whoops')</h2>
             {{$message}}
         </div>
     </body>
