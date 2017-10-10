@@ -10,7 +10,7 @@
 <section id="intro" class="content">
     <div class="container">
         <div class="col-md-3">
-            <img alt="{{$event->organiser->name}}" src="{{asset($event->organiser->full_logo_path)}}" property="logo">
+            <a title="{{$event->venue_name}}" href="{{$event->event_url}}"><img alt="{{$event->organiser->name}}" src="{{asset($event->organiser->full_logo_path)}}" property="logo"></a>
         </div>
         <div class="col-md-9">
             <h1 property="name">{{$event->title}}</h1>
