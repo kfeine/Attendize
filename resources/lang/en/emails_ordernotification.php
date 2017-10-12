@@ -18,7 +18,7 @@ return [
     'total' => 'Total',
     'free' => 'FREE',
     'subtotal' => 'Sub Total',
-    'message2' => 'You can manage this order at: :at'
+    'message2' => 'You can manage this order at: :at',
     'thanks' => 'Thank you',
 
 ];

@@ -2,6 +2,6 @@
 
 return [
 
-    'title' => 'Parager l\'événement',
+    'title' => 'Partager l\'événement',
 
 ];

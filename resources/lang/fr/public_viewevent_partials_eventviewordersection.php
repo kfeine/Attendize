@@ -11,7 +11,7 @@ return [
     'date' => 'Date',
     'email' => 'Email',
     'instructions' => 'Instruction de paiement',
-    'instructions_message' => 'Cette commande est en attente de paiement. Merci de prendre connaissance des instructions concernant le paiement.',
+    'instructions_message' => 'Cette commande est en attente de paiement. Merci de prendre connaissance des instructions concernant le réglement.',
     'items' => 'Contenu de la commande',
     'ticket' => 'Ticket',
     'quantity' => 'Quantité',

@@ -18,7 +18,7 @@ return [
     'total' => 'Total',
     'free' => 'Gratuit',
     'subtotal' => 'Sous-total',
-    'message2' => 'Vous pouvez gérer cet événement ici : :at.'
+    'message2' => 'Vous pouvez gérer cet événement ici : :at.',
     'thanks' => 'Merci,',
 
 ];
