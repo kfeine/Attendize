@@ -15,22 +15,22 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3 class="modal-title">
                     <i class="ico-question"></i>
-                    Create Question</h3>
+                    @lang('manageevent_modals_createquestion.create_question')</h3>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label for="question-title" class="required">
-                        Question
+                        @lang('manageevent_modals_createquestion.question')
                     </label>
                     {!! Form::text('title', '', [
                         'id' => 'question-title',
                         'class' => 'form-control',
-                        'placeholder' => 'e.g. Please enter your full address?',
+                        'placeholder' => __('manageevent_modals_createquestion.placeholder_address'),
                     ]) !!}
                 </div>
                 <div class="form-group">
                     <label for="question-type">
-                        Question Type
+                        @lang('manageevent_modals_createquestion.question_type')
                     </label>
 
                     <select id="question-type" class="form-control" name="question_type_id"
@@ -45,7 +45,7 @@
 
 
                 <fieldset id="question-options" class="hide">
-                    <h4>Question Options</h4>
+                    <h4>@lang('manageevent_modals_createquestion.question_options')</h4>
                     <table class="table table-bordered table-condensed">
                         <tbody>
                         <tr>
@@ -61,7 +61,7 @@
                                            <span id="add-question-option" class="btn btn-success btn-xs"
                                                  onclick="addQuestionOption();">
                                                <i class="ico-plus"></i>
-                                               Add another option
+                                               @lang('manageevent_modals_createquestion.another')
                                            </span>
                             </td>
                         </tr>
@@ -72,12 +72,12 @@
                 <div class="form-group">
                     <div class="custom-checkbox">
                         {!! Form::checkbox('is_required', 'yes', false, ['data-toggle' => 'toggle', 'id' => 'is_required']) !!}
-                        {!! Form::label('is_required', 'Make this a required question') !!}
+                        {!! Form::label('is_required', __('manageevent_modals_createquestion.required_question')) !!}
                     </div>
                 </div>
 
                 <h4>
-                    Require this question for ticket(s):
+                    @lang('manageevent_modals_createquestion.required_for_thicket')
                 </h4>
                 <div class="form-group">
 
@@ -92,8 +92,8 @@
 
             </div> <!-- /end modal body-->
             <div class="modal-footer">
-                {!! Form::button('Cancel', ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
-                {!! Form::submit('Save Question', ['class'=>"btn btn-success"]) !!}
+                {!! Form::button(__('manageevent_modals_createquestion.cancel'), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
+                {!! Form::submit(__('manageevent_modals_createquestion.save'), ['class'=>"btn btn-success"]) !!}
             </div>
         </div><!-- /end modal content-->
     </div>

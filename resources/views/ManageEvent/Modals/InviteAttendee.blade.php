@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal">×</button>
                 <h3 class="modal-title">
                     <i class="ico-user"></i>
-                    Invite Attendee</h3>
+                    @lang('manageevent_modals_inviteattendee.invite')</h3>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                   {!! Form::label('ticket_id', 'Ticket', array('class'=>'control-label required')) !!}
+                                   {!! Form::label('ticket_id', __('manageevent_modals_inviteattendee.ticket'), array('class'=>'control-label required')) !!}
                                    {!! Form::select('ticket_id', $tickets, null, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
@@ -23,7 +23,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                {!! Form::label('first_name', 'First Name', array('class'=>'control-label required')) !!}
+                                {!! Form::label('first_name', __('manageevent_modals_inviteattendee.firstname'), array('class'=>'control-label required')) !!}
 
                                 {!!  Form::text('first_name', Input::old('first_name'),
                                             array(
@@ -34,7 +34,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                {!! Form::label('last_name', 'Last Name', array('class'=>'control-label')) !!}
+                                {!! Form::label('last_name', __('manageevent_modals_inviteattendee.lastname'), array('class'=>'control-label')) !!}
 
                                 {!!  Form::text('last_name', Input::old('last_name'),
                                             array(
@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('email', 'Email Address', array('class'=>'control-label required')) !!}
+                            {!! Form::label('email', __('manageevent_modals_inviteattendee.email'), array('class'=>'control-label required')) !!}
 
                             {!!  Form::text('email', Input::old('email'),
                                                 array(
@@ -56,15 +56,15 @@
                         <div class="form-group">
                             <div class="checkbox custom-checkbox">
                                 <input type="checkbox" name="email_ticket" id="email_ticket" value="1" />
-                                <label for="email_ticket">&nbsp;&nbsp;Send invitation & ticket to attendee.</label>
+                                <label for="email_ticket">@lang('manageevent_modals_inviteattendee.ticket')</label>
                             </div>
                         </div>
                     </div>
                 </div>
             </div> <!-- /end modal body-->
             <div class="modal-footer">
-               {!! Form::button('Cancel', ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
-               {!! Form::submit('Invite Attendee', ['class'=>"btn btn-success"]) !!}
+               {!! Form::button(__('manageevent_modals_inviteattendee.cancel'), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
+               {!! Form::submit(__('manageevent_modals_inviteattendee.submit'), ['class'=>"btn btn-success"]) !!}
             </div>
         </div><!-- /end modal content-->
        {!! Form::close() !!}

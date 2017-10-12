@@ -2,7 +2,7 @@
 
 @section('title')
     @parent
-    Dashboard
+    @lang('manageevent_dashboard.dashboard')
 @stop
 
 
@@ -12,7 +12,7 @@
 
 @section('page_title')
     <i class="ico-home2"></i>
-    Event Dashboard
+    @lang('manageevent_dashboard.event_dashboard')
 @stop
 
 @section('menu')
@@ -36,25 +36,25 @@
         <div class="col-sm-3">
             <div class="stat-box">
                 <h3>{{ money($event->sales_volume + $event->organiser_fees_volume, $event->currency) }}</h3>
-                <span>Sales Volume</span>
+                <span>@lang('manageevent_dashboard.sales_volume')</span>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="stat-box">
                 <h3>{{ $event->orders->count() }}</h3>
-                <span>Orders</span>
+                <span>@lang('manageevent_dashboard.orders')</span>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="stat-box">
                 <h3>{{ $event->tickets->sum('quantity_sold') }}</h3>
-                <span>Tickets Sold</span>
+                <span>@lang('manageevent_dashboard.tickets_sold')</span>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="stat-box">
                 <h3>{{ $event->stats->sum('views') }}</h3>
-                <span>Event Views</span>
+                <span>@lang('manageevent_dashboard.event_views')</span>
             </div>
         </div>
     </div>
@@ -66,9 +66,9 @@
                     <div class="panel">
                         <div class="panel-heading panel-default">
                             <h3 class="panel-title">
-                                Tickets Sold
+                                @lang('manageevent_dashboard.tickets_sold')
                         <span style="color: green; float: right;">
-                            {{$event->tickets->sum('quantity_sold')}} Total
+                            {{$event->tickets->sum('quantity_sold')}} @lang('manageevent_dashboard.total')
                         </span>
                             </h3>
                         </div>
@@ -83,10 +83,10 @@
                     <div class="panel">
                         <div class="panel-heading panel-default">
                             <h3 class="panel-title">
-                                Ticket Sales Volume
+                                @lang('manageevent_dashboard.ticket_sales_volume')
                                 <span style="color: green; float: right;">
                                     {{money($event->sales_volume + $event->organiser_fees_volume, $event->currency)}}
-                                    Total
+                                    @lang('manageevent_dashboard.total')
                                 </span>
                             </h3>
                         </div>
@@ -106,9 +106,9 @@
                     <div class="panel">
                         <div class="panel-heading panel-default">
                             <h3 class="panel-title">
-                                Event Page Visits
+                                @lang('manageevent_dashboard.event_page_visits')
                                 <span style="color: green; float: right;">
-                                    {{$event->stats->sum('views')}} Total
+                                    {{$event->stats->sum('views')}} @lang('manageevent_dashboard.total')
                                 </span>
                             </h3>
                         </div>
@@ -123,7 +123,7 @@
                     <div class="panel">
                         <div class="panel-heading panel-default">
                             <h3 class="panel-title">
-                                Registrations By Ticket
+                                @lang('manageevent_dashboard.registrations_by_ticket')
                             </h3>
                         </div>
                         <div class="panel-body">
@@ -141,7 +141,7 @@
                 <div class="panel-body">
                     <i class="ico ico-clock"></i>
                     @if($event->happening_now)
-                        This event is on now
+                        @lang('manageevent_dashboard.on_now')
                     @else
                         <span id="countdown"></span>
                     @endif
@@ -151,7 +151,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <i class="ico-link mr5 ellipsis"></i>
-                        Event URL
+                        @lang('manageevent_dashboard.event_url')
                     </h3>
                 </div>
 
@@ -164,7 +164,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <i class="ico-share mr5 ellipsis"></i>
-                        Share Event
+                        @lang('manageevent_dashboard.share_event')
                     </h3>
                 </div>
 
@@ -279,26 +279,26 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <i class="ico-link mr5 ellipsis"></i>
-                        Quick Links
+                        @lang('manageevent_dashboard.quick_links')
                     </h3>
                 </div>
 
                 <div class="panel-body">
 
                     <a href="" class="btn-link btn">
-                        Edit Event Page Design <i class="ico ico-arrow-right3"></i>
+                        @lang('manageevent_dashboard.edit_event_page_design') <i class="ico ico-arrow-right3"></i>
                     </a>
                     <a href="" class="btn-link btn">
-                        Create Tickets <i class="ico ico-arrow-right3"></i>
+                        @lang('manageevent_dashboard.create_tickets') <i class="ico ico-arrow-right3"></i>
                     </a>
                     <a href="" class="btn-link btn">
-                        Website Embed Code <i class="ico ico-arrow-right3"></i>
+                        @lang('manageevent_dashboard.website_embed_code') <i class="ico ico-arrow-right3"></i>
                     </a>
                     <a href="" class="btn-link btn">
-                        Generate Affiliate Link <i class="ico ico-arrow-right3"></i>
+                        @lang('manageevent_dashboard.generate_link') <i class="ico ico-arrow-right3"></i>
                     </a>
                     <a href="" class="btn-link btn">
-                        Edit Organiser Fees <i class="ico ico-arrow-right3"></i>
+                        @lang('manageevent_dashboard.edit_fees') <i class="ico ico-arrow-right3"></i>
                     </a>
                 </div>
 
@@ -386,7 +386,7 @@
         var now = new Date();
         var countdown = document.getElementById("countdown");
         if (target_date < now) {
-            countdown.innerHTML = 'This event has started.';
+            countdown.innerHTML = __('manageevent_dashboard.started');
         } else {
 
             var days, hours, minutes, seconds;
@@ -404,7 +404,7 @@
                 seconds_left = seconds_left % 3600;
                 minutes = parseInt(seconds_left / 60);
                 // format countdown string + set tag value
-                countdown.innerHTML = (days > 0 ? '<b>' + days + "</b> days<b> " : '') + (hours > 0 ? hours + " </b>hours<b> " : '') + (minutes > 0 ? minutes + "</b> minutes" : '');
+                countdown.innerHTML = (days > 0 ? '<b>' + days + "</b> __('manageevent_dashboard.days')<b> " : '') + (hours > 0 ? hours + " </b>__('manageevent_dashboard.hours')<b> " : '') + (minutes > 0 ? minutes + "</b> __('manageevent_dashboard.minutes')" : '');
             }
         }
 

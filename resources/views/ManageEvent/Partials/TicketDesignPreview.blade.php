@@ -19,21 +19,21 @@
     </div>
 
     <div class="event_details">
-        <h4>Event</h4>Demo Event<h4>Organiser</h4>Demo Organiser<h4>Venue</h4>Demo Location<h4>Start Date / Time</h4>
-        Mar 18th 4:08PM
-        <h4>End Date / Time</h4>
-        Mar 18th 5:08PM
+        <h4>@lang('manageevent_partials_ticketdesignpreview.event')</h4>@lang('manageevent_partials_ticketdesignpreview.demo_event')<h4>@lang('manageevent_partials_ticketdesignpreview.organiser')</h4>@lang('manageevent_partials_ticketdesignpreview.demo_organiser')<h4>@lang('manageevent_partials_ticketdesignpreview.venue')</h4>@lang('manageevent_partials_ticketdesignpreview.demo_location')<h4>@lang('manageevent_partials_ticketdesignpreview.start_date')</h4>
+        @lang('manageevent_partials_ticketdesignpreview.demo_start')
+        <h4>@lang('manageevent_partials_ticketdesignpreview.end_date')</h4>
+        @lang('manageevent_partials_ticketdesignpreview.demo_end')
     </div>
 
     <div class="attendee_details">
-        <h4>Name</h4>Bill Blogs<h4>Ticket Type</h4>
-        General Admission
-        <h4>Order Ref.</h4>
-        #YLY9U73
-        <h4>Attendee Ref.</h4>
-        #YLY9U73-1
-        <h4>Price</h4>
-        €XX.XX
+        <h4>@lang('manageevent_partials_ticketdesignpreview.name')</h4>@lang('manageevent_partials_ticketdesignpreview.demo_name')<h4>@lang('manageevent_partials_ticketdesignpreview.type')</h4>
+        @lang('manageevent_partials_ticketdesignpreview.demo_type')
+        <h4>@lang('manageevent_partials_ticketdesignpreview.order_ref')</h4>
+        @lang('manageevent_partials_ticketdesignpreview.demo_order_ref')
+        <h4>@lang('manageevent_partials_ticketdesignpreview.attendee_ref')</h4>
+        @lang('manageevent_partials_ticketdesignpreview.demo_attendee_ref')
+        <h4>@lang('manageevent_partials_ticketdesignpreview.price')</h4>
+        @lang('manageevent_partials_ticketdesignpreview.demo_price')
     </div>
 
     <div class="barcode">

@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3 class="modal-title">
                     <i class="ico-edit"></i>
-                    Edit <b>{{$attendee->full_name}} <b></h3>
+                    @lang('manageevent_modals_editattendee.edit') <b>{{$attendee->full_name}} <b></h3>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                   {!! Form::label('ticket_id', 'Ticket', array('class'=>'control-label required')) !!}
+                                   {!! Form::label('ticket_id', __('manageevent_modals_editattendee.ticket'), array('class'=>'control-label required')) !!}
                                    {!! Form::select('ticket_id', $tickets, $attendee->ticket_id, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('first_name', 'First Name', array('class'=>'control-label required')) !!}
+                                    {!! Form::label('first_name', __('manageevent_modals_editattendee.firstname'), array('class'=>'control-label required')) !!}
                                     {!!  Form::text('first_name', Input::old('first_name'),
                                             array(
                                             'class'=>'form-control'
@@ -32,7 +32,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('last_name', 'Last Name', array('class'=>'control-label')) !!}
+                                    {!! Form::label('last_name', __('manageevent_modals_editattendee.lastname'), array('class'=>'control-label')) !!}
                                     {!!  Form::text('last_name', Input::old('last_name'),
                                             array(
                                             'class'=>'form-control'
@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    {!! Form::label('email', 'Email', array('class'=>'control-label required')) !!}
+                                    {!! Form::label('email', __('manageevent_modals_editattendee.email'), array('class'=>'control-label required')) !!}
 
                                     {!!  Form::text('email', Input::old('email'),
                                             array(
@@ -57,8 +57,8 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
                {!! Form::hidden('attendee_id', $attendee->id) !!}
-               {!! Form::button('Cancel', ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
-               {!! Form::submit('Edit Attendee', ['class'=>"btn btn-success"]) !!}
+               {!! Form::button(__('manageevent_modals_editattendee.cancel'), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
+               {!! Form::submit(__('manageevent_modals_editattendee.edit_submit'), ['class'=>"btn btn-success"]) !!}
             </div>
         </div><!-- /end modal content-->
        {!! Form::close() !!}

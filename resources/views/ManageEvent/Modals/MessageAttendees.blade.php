@@ -6,12 +6,12 @@
                 <button type="button" class="close" data-dismiss="modal">×</button>
                 <h3 class="modal-title">
                     <i class="ico-envelope"></i>
-                    Message Attendees</h3>
+                    @lang('manageevent_modals_messageattendees.message')</h3>
             </div>
             <div class="modal-body">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#new_message" data-toggle="tab">New Message</a></li>
-                    <li><a href="#sent_messages" data-toggle="tab">Sent Messages</a></li>
+                    <li class="active"><a href="#new_message" data-toggle="tab">@lang('manageevent_modals_messageattendees.new')</a></li>
+                    <li><a href="#sent_messages" data-toggle="tab">@lang('manageevent_modals_messageattendees.sent')</a></li>
                 </ul>
 
                 <div class="tab-content panel">
@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    {!! Form::label('subject', 'Message Subject', array('class'=>'control-label required')) !!}
+                                    {!! Form::label('subject', __('manageevent_modals_messageattendees.subject'), array('class'=>'control-label required')) !!}
                                     {!!  Form::text('subject', Input::old('subject'),
                                         array(
                                         'class'=>'form-control'
@@ -27,7 +27,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    {!! Form::label('message', 'Message Content', array('class'=>'control-label required')) !!}
+                                    {!! Form::label('message', @lang('manageevent_modals_messageattendees.content'), array('class'=>'control-label required')) !!}
                                     {!!  Form::textarea('message', Input::old('message'),
                                         array(
                                         'class'=>'form-control',
@@ -35,7 +35,7 @@
                                         ))  !!}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::label('recipients', 'Send To', array('class'=>'control-label required')) !!}
+                                    {!! Form::label('recipients', __('manageevent_modals_messageattendees.send'), array('class'=>'control-label required')) !!}
                                     {!!  Form::select('recipients', [
                                             'all' => 'All Event Attendees'
                                         ] + ['Attendees with ticket type' => $tickets] ,
@@ -45,13 +45,13 @@
                                 </div>
 
                                 <div class="form-group hide">
-                                    {!! Form::label('sent_time', 'Schedule Send Time', array('class'=>'control-label required')) !!}
+                                    {!! Form::label('sent_time', __('manageevent_modals_messageattendees.schedule'), array('class'=>'control-label required')) !!}
                                     {!!  Form::text('sent_time', Input::old('sent_time'),
                                         array(
                                         'class'=>'form-control'
                                         ))  !!}
                                     <div class="help-block">
-                                        Leave blank to send immediately.
+                                        @lang('manageevent_modals_messageattendees.schedule_help')
                                     </div>
                                 </div>
                             </div>
@@ -69,12 +69,12 @@
                                             <tr>
                                                 <td style="width: 100px;">
                                                     <h5>
-                                                        <b>Date</b>
+                                                        <b>@lang('manageevent_modals_messageattendees.date')</b>
                                                     </h5>
                                                 </td>
                                                 <td>
                                                     <h5>
-                                                        <b>Message</b>
+                                                        <b>@lang('manageevent_modals_messageattendees.message2')</b>
                                                     </h5>
                                                 </td>
                                             </tr>
@@ -102,15 +102,15 @@
                             </div>
                         @else
                             <div class="alert alert-info">
-                                You have not sent any messages for this event.
+                                @lang('manageevent_modals_messageattendees.no_message')
                             </div>
                         @endif
                     </div>
                 </div>
             </div> <!-- /end modal body-->
             <div class="modal-footer">
-                {!! Form::button('Cancel', ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
-                {!! Form::submit('Send Message', ['class'=>"btn btn-success"]) !!}
+                {!! Form::button(__('manageevent_modals_messageattendees.cancel'), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
+                {!! Form::submit(__('manageevent_modals_messageattendees.send_message'), ['class'=>"btn btn-success"]) !!}
             </div>
         </div><!-- /end modal content-->
         {!! Form::close() !!}

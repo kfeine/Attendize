@@ -6,45 +6,45 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3 class="modal-title">
                     <i class="ico-discount"></i>
-                    Edit Discount</h3>
+                    @lang('manageevent_modals_editdiscount.edit')</h3>
             </div>
             <div class="modal-body">
                         <div class="form-group">
                             <label for="discount-title" class="required">
-                                Title
+                                @lang('manageevent_modals_editdiscount.title')
                             </label>
                             {!! Form::text('title', $discount->title, [
                                 'id' => 'discount-title',
                                 'class' => 'form-control',
-                                'placeholder' => 'e.g.: VIP discount',
+                                'placeholder' => __('manageevent_modals_editdiscount.placeholder_title'),
                             ]) !!}
                         </div>
 
                         <div class="form-group">
                             <label for="discount-code" class="required">
-                                Code
+                                @lang('manageevent_modals_editdiscount.code')
                             </label>
                             {!! Form::text('code', $discount->code, [
                                 'id' => 'discount-code',
                                 'class' => 'form-control',
-                                'placeholder' => 'e.g.: ABCD1234',
+                                'placeholder' => __('manageevent_modals_editdiscount.placeholder_code'),
                             ]) !!}
                         </div>
 
                         <div class="form-group">
                             <label for="discount-price" class="required">
-                                Price
+                                @lang('manageevent_modals_editdiscount.price')
                             </label>
                             {!! Form::text('price', $discount->price, [
                                 'id' => 'discount-price',
                                 'class' => 'form-control',
-                                'placeholder' => 'e.g.: -12',
+                                'placeholder' => __('manageevent_modals_editdiscount.placeholder_price'),
                             ]) !!}
                         </div>
             </div> <!-- /end modal body-->
             <div class="modal-footer">
-                {!! Form::button('Cancel', ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
-                {!! Form::submit('Save discount', ['class'=>"btn btn-success"]) !!}
+                {!! Form::button(__('manageevent_modals_editdiscount.cancel'), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
+                {!! Form::submit(__('manageevent_modals_editdiscount.save'), ['class'=>"btn btn-success"]) !!}
             </div>
         </div><!-- /end modal content-->
     </div>
