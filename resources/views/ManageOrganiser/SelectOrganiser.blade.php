@@ -1,7 +1,7 @@
 @extends('Shared.Layouts.MasterWithoutMenus')
 
 @section('title')
-    Select Organiser
+    @lang('manageorganiser_selectorganiser.title')
 @stop
 
 @section('head')
@@ -23,7 +23,7 @@
                         {!!HTML::image('assets/images/logo-dark.png')!!}
                     </div>
 
-                    <h5>Continue to:</h5>
+                    <h5>@lang('manageorganiser_selectorganiser.continue')</h5>
                     <div class="list-group">
                         @foreach($organisers as $organiser)
                             <a href="{{route('showOrganiserDashboard', ['organiser_id'=>$organiser->id] )}}"
@@ -34,12 +34,11 @@
                     </div>
 
                     <div style="margin-top:-15px; padding: 10px; text-align: center;">
-                        OR
+                        @lang('manageorganiser_selectorganiser.or')
                     </div>
-                    <a style="color: white;" href="{{route('showCreateOrganiser')}}" class="btn btn-block btn-success">Create New Organiser</a>
+                    <a style="color: white;" href="{{route('showCreateOrganiser')}}" class="btn btn-block btn-success">@lang('manageorganiser_selectorganiser.create')</a>
                 </div>
             </div>
         </div>
     </div>
 @stop
-
