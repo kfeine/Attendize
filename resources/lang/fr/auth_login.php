@@ -8,7 +8,7 @@ return [
     'email' => 'Email',
     'password' => 'Mot de passe',
     'remember' => 'Se souvenir de moi',
-    'login' => 'Nom d\'utilisateur',
+    'login' => 'Se connecter',
     'forgot' => 'Mot de passe oublié',
     'no_account' => 'Pas encore de compte ?',
     'register' => 'S\'enregistrer',

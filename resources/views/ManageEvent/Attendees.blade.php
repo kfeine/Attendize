@@ -37,26 +37,26 @@
         </div>
 
         <div class="btn-group btn-group-responsive">
-            <a class="btn btn-success" href="{{route('showprintattendees', ['event_id'=>$event->id])}}" target="_blank" ><i class="ico-print"></i> @lang('manageevent_attendees.print_list')</a>
+            <a class="btn btn-success" href="{{route('showPrintAttendees', ['event_id'=>$event->id])}}" target="_blank" ><i class="ico-print"></i> @lang('manageevent_attendees.print_list')</a>
         </div>
         <div class="btn-group btn-group-responsive">
             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                 <i class="ico-users"></i> @lang('manageevent_attendees.export') <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="{{route('showexportattendees', ['event_id'=>$event->id,'export_as'=>'xlsx'])}}">excel (xlsx)</a></li>
-                <li><a href="{{route('showexportattendees', ['event_id'=>$event->id,'export_as'=>'xls'])}}">excel (xls)</a></li>
-                <li><a href="{{route('showexportattendees', ['event_id'=>$event->id,'export_as'=>'csv'])}}">csv</a></li>
-                <li><a href="{{route('showexportattendees', ['event_id'=>$event->id,'export_as'=>'html'])}}">html</a></li>
+                <li><a href="{{route('showExportAttendees', ['event_id'=>$event->id,'export_as'=>'xlsx'])}}">excel (xlsx)</a></li>
+                <li><a href="{{route('showExportAttendees', ['event_id'=>$event->id,'export_as'=>'xls'])}}">excel (xls)</a></li>
+                <li><a href="{{route('showExportAttendees', ['event_id'=>$event->id,'export_as'=>'csv'])}}">csv</a></li>
+                <li><a href="{{route('showExportAttendees', ['event_id'=>$event->id,'export_as'=>'html'])}}">html</a></li>
             </ul>
         </div>
         <div class="btn-group btn-group-responsive">
-            <button data-modal-id="messageattendees" href="javascript:void(0);" data-href="{{route('showmessageattendees', ['event_id'=>$event->id])}}" class="loadmodal btn btn-success" type="button"><i class="ico-envelope"></i> @lang('manageevent_attendees.message')</button>
+            <button data-modal-id="messageattendees" href="javascript:void(0);" data-href="{{route('showMessageAttendees', ['event_id'=>$event->id])}}" class="loadmodal btn btn-success" type="button"><i class="ico-envelope"></i> @lang('manageevent_attendees.message')</button>
         </div>
     </div>
 </div>
 <div class="col-md-3">
-   {!! form::open(array('url' => route('showeventattendees', ['event_id'=>$event->id,'sort_by'=>$sort_by]), 'method' => 'get')) !!}
+   {!! form::open(array('url' => route('showEventAttendees', ['event_id'=>$event->id,'sort_by'=>$sort_by]), 'method' => 'get')) !!}
     <div class="input-group">
         <input name="q" value="{{$q or ''}}" placeholder="@lang('manageevent_attendees.search')" type="text" class="form-control" />
         <span class="input-group-btn">

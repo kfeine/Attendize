@@ -404,7 +404,7 @@
                 seconds_left = seconds_left % 3600;
                 minutes = parseInt(seconds_left / 60);
                 // format countdown string + set tag value
-                countdown.innerHTML = (days > 0 ? '<b>' + days + "</b> __('manageevent_dashboard.days')<b> " : '') + (hours > 0 ? hours + " </b>__('manageevent_dashboard.hours')<b> " : '') + (minutes > 0 ? minutes + "</b> __('manageevent_dashboard.minutes')" : '');
+                countdown.innerHTML = (days > 0 ? '<b>' + days + "</b> @lang('manageevent_dashboard.days')<b> " : '') + (hours > 0 ? hours + " </b>@lang('manageevent_dashboard.hours')<b> " : '') + (minutes > 0 ? minutes + "</b> @lang('manageevent_dashboard.minutes')" : '');
             }
         }
 
