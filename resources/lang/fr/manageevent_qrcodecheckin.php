@@ -2,11 +2,11 @@
 
 return [
 
-    'title' => 'Attendize QRCode Check In: :title',
-    'checkin' => 'Check In:',
-    'success' => 'Success',
-    'help' => 'Put the QR code in front of your Camera (Not too close)',
-    'scan' => 'Scan another ticket',
-    'poweredby' => 'Powered By',
+    'title' => 'QRCode d\'enregistrement :title',
+    'checkin' => 'Enregistrement :',
+    'success' => 'Ok',
+    'help' => 'Mettre le QR code en face de la caméra',
+    'scan' => 'Scanner un autre ticket',
+    'poweredby' => 'Propulsé par',
 
 ];

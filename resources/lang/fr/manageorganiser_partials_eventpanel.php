@@ -2,10 +2,10 @@
 
 return [
 
-    'by' => 'By',
-    'tickets_sold' => 'Tickets Sold',
-    'revenue' => 'Revenue',
-    'edit' => 'Edit',
-    'manage' => 'Manage',
+    'by' => 'Par',
+    'tickets_sold' => 'Tickets vendus',
+    'revenue' => 'Recettes',
+    'edit' => 'Configurer',
+    'manage' => 'Administrer',
 
 ];

@@ -2,7 +2,7 @@
 
 return [
 
-    'title' => 'Promote Event',
-    'promote' => 'Promote',
+    'title' => 'Promotion de l\'événement',
+    'promote' => 'Promotion',
 
 ];

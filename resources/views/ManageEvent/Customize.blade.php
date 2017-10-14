@@ -506,7 +506,7 @@
                         <div class="offline_payment_details" style="display: none;">
                             {!! Form::textarea('offline_payment_instructions', $event->offline_payment_instructions, ['class' => 'form-control editable']) !!}
                             <div class="help-block">
-                                @lang('manageevent_customize.help_offline_payment'),
+                                @lang('manageevent_customize.help_offline_payment')
                             </div>
                         </div>
 

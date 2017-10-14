@@ -2,14 +2,14 @@
 
 return [
 
-      'discount' => 'Create discount',
-      'name' => 'Name',
-      'eg_reduction' => 'e.g. VIP reduction',
+      'discount' => 'Créer une réduction',
+      'name' => 'Nom',
+      'eg_reduction' => 'Exemple : Réduction pour les VIP',
       'code' => 'Code',
-      'eg_code' => 'e.g. ABCD1234',
-      'price' => 'Price',
-      'eg_price' => 'e.g. -12.3',
-      'cancel' => 'Cancel',
-      'submit' => 'Save Discount',
+      'eg_code' => 'Exemple : ABCD1234',
+      'price' => 'Montant',
+      'eg_price' => 'Exemple : -12.50',
+      'cancel' => 'Annuler',
+      'submit' => 'Créer',
 
 ];

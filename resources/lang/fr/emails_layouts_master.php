@@ -3,7 +3,7 @@
 return [
 
     'subject' => 'Attendize.com Email',
-    'powered' => 'Powered By',
+    'powered' => 'propulsé par',
     'site' => 'Attendize.com',
 
 ];

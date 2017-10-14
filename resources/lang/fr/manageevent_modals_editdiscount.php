@@ -2,13 +2,13 @@
 
 return [
 
-    'edit' => 'Edit Discount',
-    'title' => 'Title',
-    'placeholder_title' => 'e.g.: VIP discount',
+    'edit' => 'Modifier la réduction',
+    'title' => 'Nom',
+    'placeholder_title' => 'Exemple : Réduction pour les VIP',
     'code' => 'Code',
-    'placeholder_code' => 'e.g.: ABCD1234',
-    'price' => 'Price',
-    'placeholder_price' => 'e.g.: -12',
-    'cancel' => 'Cancel',
-    'save' => 'Save discount',
+    'placeholder_code' => 'Exemple : ABCD1234',
+    'price' => 'Montant',
+    'placeholder_price' => 'Exemple : -12.50',
+    'cancel' => 'Annuler',
+    'save' => 'Enregistrer',
 ];

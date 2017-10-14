@@ -2,13 +2,13 @@
 
 return [
 
-    'title' => 'Create Organiser',
-    'alert' => 'Before you create events you\'ll need to create an organiser. An organiser is simply whoever is organising the event. It can be anyone, from a person to an organisation.',
-    'name' => 'Organiser Name',
-    'email' => 'Organiser Email',
-    'description' => 'Organiser Description',
-    'facebook' => 'Organiser Facebook',
-    'twitter' => 'Organiser Twitter',
-    'logo' => 'Organiser Logo',
+    'title' => 'Créer un organisateur',
+    'alert' => 'Il est nécessaire de créer un organisateur avant de pouvoir créer des événements. Il s\'agit de la personne ou de l\'entité qui est en charge de l\'organisation d\'un ou plusieurs événements.',
+    'name' => 'Nom',
+    'email' => 'Email',
+    'description' => 'Description',
+    'facebook' => 'Compte Facebook',
+    'twitter' => 'Compte Twitter',
+    'logo' => 'Logo',
 
 ];

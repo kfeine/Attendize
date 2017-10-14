@@ -2,8 +2,8 @@
 
 return [
 
-    'title' => 'No Discounts Yet',
-    'text' => 'Create your first discount by clicking the button below.',
-    'create_discount' => 'Create Discount',
+    'title' => 'Pas de réduction',
+    'text' => 'Créer une réduction en cliquant sur le lien ci-dessous.',
+    'create_discount' => 'Créer une réduction',
 
 ];

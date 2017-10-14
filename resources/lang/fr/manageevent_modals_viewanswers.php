@@ -2,12 +2,12 @@
 
 return [
 
-    'title_questions' => 'Q: :title',
-    'details' => 'Attendee Details',
+    'title_questions' => 'Qu: :title',
+    'details' => 'Informations sur le paticipant',
     'ticket' => 'Ticket',
-    'answer' => 'Answer',
-    'cancelled' => 'Cancelled',
-    'alert' => 'Sorry, there are no answers to this question yet.',
-    'close' => 'Close',
+    'answer' => 'Réponse',
+    'cancelled' => 'Annulé',
+    'alert' => 'Aucun réponse pour cette question.',
+    'close' => 'Fermer',
 
 ];

@@ -2,14 +2,15 @@
 
 return [
 
-    'create_question' => 'Create Question',
+    'create_question' => 'Créer une question',
     'question' => 'Question',
-    'placeholder_address' => 'e.g. Please enter your full address?',
-    'question_type' => 'Question Type',
-    'question_options' => 'Question Options',
-    'another' => 'Add another option',
-    'required_question' => 'Make this a required question',
-    'required_for_thicket' => 'Require this question for ticket(s):',
-    'cancel' => 'Cancel',
-    'save' => 'Save Question',
+    'placeholder_address' => 'Exemple : quel est votre animal préféré ?',
+    'question_type' => 'Type de question',
+    'question_options' => 'Choix possibles',
+    'another' => 'Ajouter un choix',
+    'required_question' => 'Rendre la question obligatoire',
+    'required_for_thicket' => 'Rendre la question obligatoire pour le(s) ticket(s) :',
+    'cancel' => 'Annuler',
+    'save' => 'Enregistrer',
+
 ];

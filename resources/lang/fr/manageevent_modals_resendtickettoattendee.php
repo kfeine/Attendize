@@ -2,9 +2,9 @@
 
 return [
 
-    'title' => 'Resend Ticket to :fullname',
-    'help' => 'The attendee will be sent another copy of their ticket to :email',
-    'cancel' => 'Cancel',
-    'send' => 'Send Ticket',
+    'title' => 'Renvoyer le ticket à :fullname',
+    'help' => 'Le participant recevra à nouveau sont ticket à cette adresse : :email',
+    'cancel' => 'Annuler',
+    'send' => 'Renvoyer le ticket',
 
 ];

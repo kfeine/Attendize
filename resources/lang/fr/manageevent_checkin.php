@@ -2,15 +2,15 @@
 
 return [
 
-    'check_in' => 'Check In:',
-    'all_attendees' => 'All Attendees',
-    'for' => 'for',
-    'no_attendees' => 'No Attendees matching',
-    'name' => 'Name:',
-    'awaiting' => 'Awaitin Payment',
-    'reference' => 'Reference:',
-    'ticket' => 'Ticket:',
-    'scan' => 'Scan another ticket',
-    'scanning' => 'Scanning',
+    'check_in' => 'Enregistrement :',
+    'all_attendees' => 'Tous les participants',
+    'for' => 'pour',
+    'no_attendees' => 'Aucun participant',
+    'name' => 'Nom :',
+    'awaiting' => 'En attente de paiement',
+    'reference' => 'Reference :',
+    'ticket' => 'Ticket :',
+    'scan' => 'Scanner un autre ticket',
+    'scanning' => 'Scan en cours',
 
 ];

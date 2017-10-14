@@ -8,4 +8,5 @@ return [
     'tickets' => 'Tickets',
     'details' => 'Détails',
     'location' => 'Lieux',
+
 ];

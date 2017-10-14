@@ -2,9 +2,9 @@
 
 return [
 
-    'menu' => 'Organiser Menu',
-    'dashboard' => 'Dashboard',
-    'events' => 'Events',
-    'customize' => 'Customize',
+    'menu' => 'Menu de l\'organisateur',
+    'dashboard' => 'Tableau de bord',
+    'events' => 'Événements',
+    'customize' => 'Personnaliser',
 
 ];

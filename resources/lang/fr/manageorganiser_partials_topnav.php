@@ -2,6 +2,6 @@
 
 return [
 
-    'organiser_page' => '&nbsp;Organiser Page',
+    'organiser_page' => '&nbsp;Page de l\'organisateur',
 
 ];

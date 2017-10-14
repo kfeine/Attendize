@@ -2,22 +2,22 @@
 
 return [
 
-    'title' => 'Event Tickets',
-    'wrong' => 'Something went wrong. Please try again.',
-    'create_ticket' => 'Create Ticket',
+    'title' => 'Tickets de l\'événement',
+    'wrong' => 'Une erreur s\'est produite, merci de réessayer ou de contacter les administrateurs du site.',
+    'create_ticket' => 'Créer un ticket',
     'questions' => 'Questions',
-    'coupon' => 'Coupon Codes',
-    'search' => 'Search Tickets..',
+    'coupon' => 'Codes de réduction',
+    'search' => 'Rechercher…',
     'tickets' => ':number tickets',
-    'free' => 'FREE',
-    'sold' => 'Sold',
-    'remaining' => 'Remaining',
-    'revenue' => 'Revenue',
-    'paused' => 'Ticket Sales Paused',
-    'resume' => 'Resume',
-    'on_sale' => 'On Sale',
-    'pause' => 'Pause',
-    'delete' => 'Delete',
+    'free' => 'Gratuit',
+    'sold' => 'Vendu',
+    'remaining' => 'Restant',
+    'revenue' => 'Recttes',
+    'paused' => 'La vente de tickets est suspendue',
+    'resume' => 'Reprendre',
+    'on_sale' => 'En vente',
+    'pause' => 'Suspendre',
+    'delete' => 'Supprimer',
 
 
 ];

@@ -2,8 +2,8 @@
 
 return [
 
-    'title' => 'No Questions Yet',
-    'text' => 'Here you can add questions which attendees will be asked to answer during the check-out process.',
-    'create' => 'Create Question',
+    'title' => 'Pas encore de question',
+    'text' => 'Les questions vous permettent de demander des informations supplémentaires au cours des commandes.',
+    'create' => 'Créer un question',
 
 ];

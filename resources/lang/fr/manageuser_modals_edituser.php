@@ -2,18 +2,18 @@
 
 return [
 
-    'title' => 'My Profile',
-    'welcome' => 'Welcome to :appname !',
-    'update' => 'Before you continue please update your account with your name and a new password.',
-    'firstname' => 'First Name',
-    'lastname' => 'Last Name',
+    'title' => 'Mon profil',
+    'welcome' => 'Bienvenue sur :appname !',
+    'update' => 'Avant d\'aller plus loin, merci de saisir votre nom et de choisir un nouveau mot de passe.',
+    'firstname' => 'Prénom',
+    'lastname' => 'Nom',
     'email' => 'Email',
-    'oldpassword' => 'Old Password',
-    'newpassword' => 'New Password',
-    'confirmation' => 'Confirm New Password',
-    'hide' => 'Hide Change Password',
-    'change' => 'Change Password',
-    'cancel' => 'Cancel',
-    'save' => 'Save Details',
+    'oldpassword' => 'Ancien mot de passe',
+    'newpassword' => 'Nouveau mot de passe',
+    'confirmation' => 'Confirmer le mot de passe',
+    'hide' => 'Masque les champts de changement de mot de passe',
+    'change' => 'Changer de mot de passe',
+    'cancel' => 'Annuler',
+    'save' => 'Enregistrer',
 
 ];

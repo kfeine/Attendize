@@ -2,8 +2,8 @@
 
 return [
 
-    'title' => 'No Tickets Yet',
-    'text' => 'Create your first ticket by clicking the button below.',
-    'create' => 'Create Ticket',
+    'title' => 'Aucun ticket',
+    'text' => 'Créer un ticket en cliquant sur le lien ci-dessous.',
+    'create' => 'Créer un ticket',
 
 ];

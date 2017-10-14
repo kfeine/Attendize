@@ -2,13 +2,13 @@
 
 return [
 
-    'message' => 'Message Attendees',
-    'order' => 'Order:',
-    'subject' => 'Message Subject',
-    'content' => 'Message Content',
-    'send_copy' => '&nbsp;&nbsp;Send a copy to :email',
-    'help' => 'The order contact will be instructed to send any reply to :email',
-    'cancel' => 'Cancel',
-    'send' => 'Send Message',
+    'message' => 'Envoyer un message aux participants',
+    'order' => 'Commande :',
+    'subject' => 'Sujet',
+    'content' => 'Contenu',
+    'send_copy' => '&nbsp;&nbsp;Envoyer une copie à :email',
+    'help' => 'Le contact de la commande répondra à :email',
+    'cancel' => 'Annuler',
+    'send' => 'Envoyer le message',
 
 ];

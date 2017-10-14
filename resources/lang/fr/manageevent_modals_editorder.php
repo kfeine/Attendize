@@ -2,11 +2,11 @@
 
 return [
 
-    'order' => 'Order:',
-    'details' => 'Order Details',
-    'firstname' => 'First Name',
-    'lastname' => 'Last Name',
+    'order' => 'Commande :',
+    'details' => 'Détails de la commande',
+    'firstname' => 'Prénom',
+    'lastname' => 'Nom',
     'email' => 'Email',
-    'close' => 'Close',
-    'update' => 'Update Order',
+    'close' => 'Fermer',
+    'update' => 'Mettre à jour la commande',
 ];

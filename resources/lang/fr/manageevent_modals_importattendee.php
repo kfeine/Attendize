@@ -2,12 +2,12 @@
 
 return [
 
-    'invite' => 'Invite Attendees',
+    'invite' => 'Inviter des participants',
     'ticket' => 'Ticket',
-    'import' => 'Import File',
-    'import_help' => 'File must be .csv and the first line must contain first_name,last_name,email',
-    'send' => '&nbsp;&nbsp;Send invitation & ticket to attendees.',
-    'cancel' => 'Cancel',
-    'create' => 'Create Attendees',
+    'import' => 'Importer un fichier',
+    'import_help' => 'Le ficher doit être un CSV dont la première ligne contient : first_name,last_name,email',
+    'send' => '&nbsp;&nbsp;Envoyer les invitations et les tickets aux participants.',
+    'cancel' => 'Annuler',
+    'create' => 'Créer les participants',
 
 ];

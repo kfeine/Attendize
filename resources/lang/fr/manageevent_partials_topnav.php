@@ -2,8 +2,8 @@
 
 return [
 
-    'not_visible' => 'This event is not visible to the public.',
-    'click' => 'Click here to make it live',
-    'event_page' => '&nbsp;Event Page',
+    'not_visible' => 'Cet événement n\'est pas encore visible par les visiteurs',
+    'click' => 'Cliquer ici pour le rendre public',
+    'event_page' => '&nbsp;Page de l\'événement',
 
 ];

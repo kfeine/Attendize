@@ -2,18 +2,18 @@
 
 return [
 
-    'message' => 'Message Attendees',
-    'new' => 'New Message',
-    'sent' => 'Sent Messages',
-    'subject' => 'Message Subject',
-    'content' => 'Message Content',
-    'send' => 'Send To',
-    'schedule' => 'Schedule Send Time',
-    'schedule_help' => 'Leave blank to send immediately.',
+    'message' => 'Envoyer un message aux participants',
+    'new' => 'Nouveau message',
+    'sent' => 'Messages envoyés',
+    'subject' => 'Sujet',
+    'content' => 'Contenu',
+    'send' => 'Envoyer à',
+    'schedule' => 'Heure d\'envoi',
+    'schedule_help' => 'Laisser vide pour envoyer immédiatement',
     'date' => 'Date',
     'message2' => 'Message',
-    'no_message' => 'You have not sent any messages for this event.',
-    'cancel' => 'Cancel',
-    'send_message' => 'Send Message',
+    'no_message' => 'Aucun message concernant cet événement',
+    'cancel' => 'Annuler',
+    'send_message' => 'Envoyer le message',
 
 ];

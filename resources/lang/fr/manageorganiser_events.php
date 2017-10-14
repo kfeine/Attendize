@@ -2,10 +2,10 @@
 
 return [
 
-    'title' => 'Organiser Events',
-    'name_events' => ':name Events',
-    'create' => 'Create Event',
-    'search' => 'Search Events..',
-    'event_count' => ':count events', 
+    'title' => 'Événement de l\'organisateur',
+    'name_events' => 'Événements de :name',
+    'create' => 'Créer un événement',
+    'search' => 'Chercher un événement',
+    'event_count' => ':count événement', 
 
 ];

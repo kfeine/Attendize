@@ -2,7 +2,7 @@
 
 return [
 
-    'attendees' => 'Event Attendees',
-    'account' => 'Account / Payment',
+    'attendees' => 'Participants à l\'événement',
+    'account' => 'Compte / paiement',
 
 ];

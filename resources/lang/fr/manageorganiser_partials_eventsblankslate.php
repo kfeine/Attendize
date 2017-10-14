@@ -2,8 +2,8 @@
 
 return [
 
-    'title' => 'No Events Yet!',
-    'text' => 'Looks like you have yet to create an event. You can create one by clicking the button below.',
-    'create' => 'Create Event',
+    'title' => 'Aucun événement pour le moment',
+    'text' => 'Pour créer un événement, cliquer sur le bouton ci-dessous.',
+    'create' => 'Crééer un événement',
 
 ];

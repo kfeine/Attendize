@@ -2,17 +2,17 @@
 
 return [
 
-    'title' => 'Event Orders',
-    'subtitle' => 'Showing 30 orders out of <b>:count</b> Total',
-    'export' => 'Export',
-    'search' => 'Search Orders..',
-    'ref' => 'Order Ref.',
-    'date' => 'Order Date',
-    'name' => 'Name',
+    'title' => 'Commandes de l\'événement',
+    'subtitle' => '30 commandes sur <b>:count</b> Total',
+    'export' => 'Exporter',
+    'search' => 'Rechercher',
+    'ref' => 'Référence',
+    'date' => 'Date',
+    'name' => 'Nom',
     'email' => 'Email',
-    'amount' => 'Amount',
-    'status' => 'Status',
-    'refund' => 'Refund / Cancel',
-    'details' => 'Details',
+    'amount' => 'Montant',
+    'status' => 'Statut',
+    'refund' => 'Rembourser / annuler',
+    'details' => 'Détails',
 
 ];

@@ -2,15 +2,15 @@
 
 return [
 
-    'title' => 'Attendees',
-    'attendees_for_event' => 'Attendees for event:',
-    'name' => 'Name',
+    'title' => 'Participants',
+    'attendees_for_event' => 'Participants à l\'événement event:',
+    'name' => 'Nom',
     'email' => 'Email',
     'ticket' => 'Ticket',
-    'ref' => 'Attendee Ref.',
-    'date' => 'Purchase Date',
-    'status' => 'Status',
-    'arrived' => 'Arrived',
-    'payment_du' => 'PAYMENT DUE',
+    'ref' => 'Référence',
+    'date' => 'Date d\'achat',
+    'status' => 'Statut',
+    'arrived' => 'Enregistré',
+    'payment_du' => 'Non réglé',
 
 ];

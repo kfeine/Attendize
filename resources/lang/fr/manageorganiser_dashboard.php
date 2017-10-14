@@ -2,17 +2,17 @@
 
 return [
 
-    'title' => 'Dashboard',
-    'name_dashboard' => ':name Dashboard',
-    'events' => 'Events',
-    'tickets_sold' => 'Tickets Sold',
-    'sales_volume' => 'Sales Volume',
-    'event_calendar' => 'Event Calendar',
-    'upcoming_events' => 'Upcoming Events',
-    'alert1' => 'You have no events coming up.',
-    'alert2' => 'You can click here to create an event.',
-    'recent_orders' => 'Recent Orders',
-    'registered' => 'registered',
-    'alert3' => 'Looks like there are no recent orders.',
+    'title' => 'Tableau de bord',
+    'name_dashboard' => 'Tableau de bord de :name',
+    'events' => 'Événements',
+    'tickets_sold' => 'Tickets vendus',
+    'sales_volume' => 'Volume de ventes',
+    'event_calendar' => 'Calendrier des événements',
+    'upcoming_events' => 'Prochains événements',
+    'alert1' => 'Il n\'y a encore aucun événement',
+    'alert2' => 'Cliquer ici pour créer un événement',
+    'recent_orders' => 'Dernières commandes',
+    'registered' => 'enregistré',
+    'alert3' => 'Il n\'y a aucune commade récente',
 
 ];

@@ -2,11 +2,12 @@
 
 return [
 
-    'edit' => 'Edit',
+    'edit' => 'Modifier',
     'ticket' => 'Ticket',
-    'firstname' => 'First Name',
-    'lastname' => 'Last Name',
+    'firstname' => 'Prénom',
+    'lastname' => 'Nom',
     'email' => 'Email',
-    'cancel' => 'Cancel',
-    'edit_submit' => 'Edit Attendee',
+    'cancel' => 'Annuler',
+    'edit_submit' => 'Enregistrer',
+
 ];

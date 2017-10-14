@@ -2,18 +2,19 @@
 
 return [
 
-    'main_menu' => 'Main Menu',
-    'back' => 'Back To :organiser',
-    'event_menu' => 'Event Menu',
-    'dashboard' => 'Dashboard',
+    'main_menu' => 'Menu principal',
+    'back' => 'Retour à :organiser',
+    'event_menu' => 'Menu de l\'événement',
+    'dashboard' => 'Tableau de bord',
     'tickets' => 'Tickets',
-    'orders' => 'Orders',
-    'attendees' => 'Attendees',
-    'promote' => 'Promote',
-    'customize' => 'Customize',
-    'event_tools' => 'Event Tools',
-    'checkin' => 'Check-In',
-    'discounts' => 'Discounts',
-    'surveys' => 'Surveys',
+    'orders' => 'Commandes',
+    'attendees' => 'Participants',
+    'promote' => 'Promouvoir',
+    'customize' => 'Personnaliser',
+    'event_tools' => 'Outils',
+    'checkin' => 'Enregistrement',
+    'discounts' => 'Réductions',
+    'surveys' => 'Sondages',
     'widgets' => 'Widgets',
+
 ];
