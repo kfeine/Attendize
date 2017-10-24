@@ -72,6 +72,20 @@ Contribution
 
 Feel free to fork and contribute. I could use the help!
 
+Install
+---
+
+```
+git clone https://github.com/Attendize/Attendize
+sudo -R www-data: Attendize
+cd Attendize
+cp -a .env.example .env
+chmod -R a+w storage
+chmod -R a+w public/user_content
+sudo -u www-data composer install
+sudo -u www-data php artisan attendize:install
+```
+
 Docker dev environment
 ---
 
