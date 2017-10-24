@@ -7,44 +7,44 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3 class="modal-title">
                     <i class="ico-gift"></i>
-                    Create discount</h3>
+                    @lang('manageevent_modals_creatediscount.discount')</h3>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label for="discount-title" class="required">
-                        Name
+                        @lang('manageevent_modals_creatediscount.name')
                     </label>
                     {!! Form::text('title', '', [
                         'id' => 'discount-title',
                         'class' => 'form-control',
-                        'placeholder' => 'e.g. VIP reduction',
+                        'placeholder' => __('manageevent_modals_creatediscount.eg_reduction'),
                     ]) !!}
                 </div>
                 <div class="form-group">
                     <label for="discount">
-                        Code
+                        @lang('manageevent_modals_creatediscount.code')
                     </label>
                     {!! Form::text('code', '', [
                         'id' => 'discount-code',
                         'class' => 'form-control',
-                        'placeholder' => 'e.g. ABCD1234',
+                        'placeholder' => __('manageevent_modals_creatediscount.eg_code'),
                     ]) !!}
                 </div>
                 <div class="form-group">
                     <label for="price">
-                        Price
+                        @lang('manageevent_modals_creatediscount.price')
                     </label>
                     {!! Form::text('price', '', [
                         'id' => 'discount-price',
                         'class' => 'form-control',
-                        'placeholder' => 'e.g. -12.3',
+                        'placeholder' => __('manageevent_modals_creatediscount.eg_price'),
                     ]) !!}
                 </div>
             </div> <!-- /end modal body-->
 
             <div class="modal-footer">
-                {!! Form::button('Cancel', ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
-                {!! Form::submit('Save Discount', ['class'=>"btn btn-success"]) !!}
+                {!! Form::button(__('manageevent_modals_creatediscount.cancel'), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
+                {!! Form::submit(__('manageevent_modals_creatediscount.submit'), ['class'=>"btn btn-success"]) !!}
             </div>
         </div><!-- /end modal content-->
     </div>

@@ -10,8 +10,7 @@
                 @if(Utils::userOwns($organiser))
                     &bull;
                     <a class="adminLink"
-                       href="{{route('showOrganiserDashboard' , ['organiser_id' => $organiser->id])}}">Organiser
-                        Dashboard</a>
+                       href="{{route('showOrganiserDashboard' , ['organiser_id' => $organiser->id])}}">@lang('public_vieworganiser_partials_organiserfootersection.dashboard')</a>
                 @endif
             </div>
         </div>

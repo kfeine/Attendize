@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <h1 class="section_head">
-            Share Event
+            @lang('public_viewevent_partials_eventsharesection.title')
         </h1>
     </div>
     <div class="row">

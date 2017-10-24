@@ -1,7 +1,7 @@
 @extends('Shared.Layouts.MasterWithoutMenus')
 
 @section('title')
-Reset Password
+@lang('auth_passwords_reset.title')
 @stop
 
 @section('content')
@@ -22,7 +22,7 @@ Reset Password
                 <h2>Reset Password</h2>
 
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    {!! Form::label('email', 'Your Email', ['class' => 'control-label']) !!}
+                    {!! Form::label('email', __('auth_passwords_reset.email'), ['class' => 'control-label']) !!}
                     {!! Form::text('email', null, ['class' => 'form-control', 'autofocus' => true]) !!}
                     @if ($errors->has('email'))
                         <span class="help-block">
@@ -31,7 +31,7 @@ Reset Password
                     @endif
                 </div>
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    {!! Form::label('password', 'New Password', ['class' => 'control-label']) !!}
+                    {!! Form::label('password', __('auth_passwords_reset.password'), ['class' => 'control-label']) !!}
                     {!! Form::password('password',  ['class' => 'form-control']) !!}
                     @if ($errors->has('password'))
                         <span class="help-block">
@@ -40,7 +40,7 @@ Reset Password
                     @endif
                 </div>
                 <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                    {!! Form::label('password_confirmation', 'Confirm Password', ['class' => 'control-label']) !!}
+                    {!! Form::label('password_confirmation', __('auth_passwords_reset.confirm'), ['class' => 'control-label']) !!}
                     {!! Form::password('password_confirmation',  ['class' => 'form-control']) !!}
                     @if ($errors->has('password_confirmation'))
                         <span class="help-block">
@@ -50,11 +50,11 @@ Reset Password
                 </div>
                 {!! Form::hidden('token',  $token) !!}
                 <div class="form-group nm">
-                    <button type="submit" class="btn btn-block btn-success">Submit</button>
+                    <button type="submit" class="btn btn-block btn-success">@lang('auth_passwords_reset.submit')</button>
                 </div>
                 <div class="signup">
                   <a class="semibold" href="{{route('login')}}">
-                      <i class="ico ico-arrow-left"></i> Back to login
+                      <i class="ico ico-arrow-left"></i> @lang('auth_passwords_reset.back')
                   </a>
                 </div>
             </div>

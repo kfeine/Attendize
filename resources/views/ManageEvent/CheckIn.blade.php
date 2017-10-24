@@ -70,17 +70,17 @@
                 <div class="attendee_list">
                     <h4 class="attendees_title">
                         <span v-if="!searchTerm">
-                            All Attendees
+                            @lang('manageevent_checkin.all_attendees')
                         </span>
                         <span v-else v-cloak>
                             @{{searchResultsCount}} @{{searchResultsCount | pluralize 'Result'}}
-                            for <b>@{{ searchTerm }}</b>
+                            @lang('manageevent_checkin.for') <b>@{{ searchTerm }}</b>
                         </span>
                     </h4>
 
                     <div style="margin: 10px;" v-if="searchResultsCount == 0 && searchTerm" class="alert alert-info"
                          v-cloak>
-                        No Attendees matching <b>@{{ searchTerm }}</b>
+                        @lang('manageevent_checkin.no_attendees') <b>@{{ searchTerm }}</b>
                     </div>
 
                     <ul v-if="searchResultsCount > 0" class="list-group" id="attendee_list" v-cloak>
@@ -90,11 +90,11 @@
                         class="at list-group-item"
                         :class = "{arrived : attendee.has_arrived || attendee.has_arrived == '1'}"
                         >
-                        Name: <b>@{{ attendee.first_name }} @{{ attendee.last_name }} </b> &nbsp; <span v-if="!attendee.is_payment_received" class="label label-danger">Awaiting Payment</span>
+                        @lang('manageevent_checkin.name') <b>@{{ attendee.first_name }} @{{ attendee.last_name }} </b> &nbsp; <span v-if="!attendee.is_payment_received" class="label label-danger">@lang('manageevent_checkin.awaiting')</span>
                         <br>
-                        Reference: <b>@{{ attendee.order_reference + '-' + attendee.reference_index }}</b>
+                        @lang('manageevent_checkin.reference') <b>@{{ attendee.order_reference + '-' + attendee.reference_index }}</b>
                         <br>
-                        Ticket: <b>@{{ attendee.ticket }}</b>
+                        @lang('manageevent_checkin.ticket') <b>@{{ attendee.ticket }}</b>
                         <a href="" class="ci btn btn-successfulQrRead">
                             <i class="ico-checkmark"></i>
                         </a>
@@ -127,7 +127,7 @@
 
         <div class="scannerButtons">
                     <a @click="initScanner" v-show="!isScanning" href="javascript:void(0);">
-                    Scan another ticket
+                    @lang('manageevent_checkin.scan')
                     </a>
         </div>
         <div v-if="isScanning" class="scannerAimer">
@@ -143,7 +143,7 @@
                         @{{{ scanResultMessage }}}
                     </span>
                     <span v-else>
-                        <div id="scanning-ellipsis">Scanning<span>.</span><span>.</span><span>.</span></div>
+                        <div id="scanning-ellipsis">@lang('manageevent_checkin.scanning')<span>.</span><span>.</span><span>.</span></div>
                     </span>
         </div>
         <canvas id="QrCanvas" width="800" height="600"></canvas>

@@ -23,15 +23,15 @@
                             </h2>
                             <p class="desc ellipsis">{{ $event->venue_name }}</p>
                             <ul>
-                                <li style="width:50%;"><a href="{{$event->event_url }}">Tickets</a></li>
-                                <li style="width:50%;"><a href="{{$event->event_url }}">Information</a></li>
+                                <li style="width:50%;"><a href="{{$event->event_url }}">@lang('public_vieworganiser_partials_eventlistingpanel.tickets')</a></li>
+                                <li style="width:50%;"><a href="{{$event->event_url }}">@lang('public_vieworganiser_partials_eventlistingpanel.information')</a></li>
                             </ul>
                         </div>
                     </li>
                 @endforeach
             @else
                 <div class="alert alert-info">
-                    There are no {{ $panel_title }} to display.
+                    @lang('public_vieworganiser_partials_eventlistingpanel.no_panel', ['title' => $panel_title])
                 </div>
             @endif
 

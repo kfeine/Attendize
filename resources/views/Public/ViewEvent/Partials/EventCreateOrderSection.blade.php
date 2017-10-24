@@ -1,7 +1,7 @@
 <section id='order_form' class="container">
     <div class="row">
         <h1 class="section_head">
-            Détails de la commande
+            @lang('public_viewevent_partials_eventcreateordersection.order_details')
         </h1>
     </div>
     <div class="row">
@@ -10,7 +10,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <i class="ico-cart mr5"></i>
-                        Order Summary
+                        @lang('public_viewevent_partials_eventcreateordersection.order_summary')
                     </h3>
                 </div>
 
@@ -21,7 +21,7 @@
                             <td class="pl0">{{{$ticket['ticket']['title']}}} X <b>{{$ticket['qty']}}</b></td>
                             <td style="text-align: right;">
                                 @if((int)ceil($ticket['full_price']) === 0)
-                                FREE
+                                @lang('public_viewevent_partials_eventcreateordersection.free')
                                 @else
                                 {{ money($ticket['full_price'], $event->currency) }}
                                 @endif
@@ -46,7 +46,7 @@
 
             </div>
             <div class="help-block">
-                Please note you only have <span id='countdown'></span> to complete this transaction before your tickets are re-released.
+                @lang('public_viewevent_partials_eventcreateordersection.countdown', ['countdown'=> '<span id=\'countdown\'></span>'])
             </div>
         </div>
         <div class="col-md-8 col-md-pull-4">
@@ -55,18 +55,18 @@
 
                 {!! Form::hidden('event_id', $event->id) !!}
 
-                <h3>Your Information</h3>
+                <h3>@lang('public_viewevent_partials_eventcreateordersection.information')</h3>
 
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="form-group">
-                            {!! Form::label("order_first_name", 'First Name') !!}
+                            {!! Form::label("order_first_name", __('public_viewevent_partials_eventcreateordersection.first_name')) !!}
                             {!! Form::text("order_first_name", null, ['required' => 'required', 'class' => 'form-control']) !!}
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group">
-                            {!! Form::label("order_last_name", 'Last Name') !!}
+                            {!! Form::label("order_last_name", __('public_viewevent_partials_eventcreateordersection.last_name')) !!}
                             {!! Form::text("order_last_name", null, ['required' => 'required', 'class' => 'form-control']) !!}
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            {!! Form::label("order_email", 'Email') !!}
+                            {!! Form::label("order_email", __('public_viewevent_partials_eventcreateordersection.email')) !!}
                             {!! Form::text("order_email", null, ['required' => 'required', 'class' => 'form-control']) !!}
                         </div>
                     </div>
@@ -83,14 +83,14 @@
 
                 <div class="p20 pl0">
                     <a href="javascript:void(0);" class="btn btn-primary btn-xs" id="mirror_buyer_info">
-                        Copy buyer details to all ticket holders
+                        @lang('public_viewevent_partials_eventcreateordersection.copy')
                     </a>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
                         <div class="ticket_holders_details" >
-                            <h3>Ticket Holder Information</h3>
+                            <h3>@lang('public_viewevent_partials_eventcreateordersection.ticket')</h3>
                             <?php
                                 $total_attendee_increment = 0;
                             ?>
@@ -100,20 +100,20 @@
 
                                     <div class="panel-heading">
                                         <h3 class="panel-title">
-                                            <b>{{$ticket['ticket']['title']}}</b>: Ticket Holder {{$i+1}} Details
+                                            <b>{{$ticket['ticket']['title']}}</b>: @lang('public_viewevent_partials_eventcreateordersection.details', ['number' => $i+1])
                                         </h3>
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    {!! Form::label("ticket_holder_first_name[{$i}][{$ticket['ticket']['id']}]", 'First Name') !!}
+                                                    {!! Form::label("ticket_holder_first_name[{$i}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.first_name')) !!}
                                                     {!! Form::text("ticket_holder_first_name[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => "ticket_holder_first_name.$i.{$ticket['ticket']['id']} ticket_holder_first_name form-control"]) !!}
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    {!! Form::label("ticket_holder_last_name[{$i}][{$ticket['ticket']['id']}]", 'Last Name') !!}
+                                                    {!! Form::label("ticket_holder_last_name[{$i}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.last_name')) !!}
                                                     {!! Form::text("ticket_holder_last_name[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => "ticket_holder_last_name.$i.{$ticket['ticket']['id']} ticket_holder_last_name form-control"]) !!}
                                                 </div>
                                             </div>
@@ -121,7 +121,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    {!! Form::label("ticket_holder_email[{$i}][{$ticket['ticket']['id']}]", 'Email Address') !!}
+                                                    {!! Form::label("ticket_holder_email[{$i}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.email')) !!}
                                                     {!! Form::text("ticket_holder_email[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => "ticket_holder_email.$i.{$ticket['ticket']['id']} ticket_holder_email form-control"]) !!}
                                                 </div>
                                             </div>
@@ -147,17 +147,17 @@
 
                 @if($order_requires_payment)
 
-                <h3>Payment Information</h3>
+                <h3>@lang('public_viewevent_partials_eventcreateordersection.payment')</h3>
 
                 @if($event->enable_offline_payments)
                     <div class="offline_payment_toggle">
                         <div class="custom-checkbox">
                             <input data-toggle="toggle" id="pay_offline" name="pay_offline" type="checkbox" value="1">
-                            <label for="pay_offline">Pay using offline method</label>
+                            <label for="pay_offline">@lang('public_viewevent_partials_eventcreateordersection.offline')</label>
                         </div>
                     </div>
                     <div class="offline_payment" style="display: none;">
-                        <h5>Offline Payment Instructions</h5>
+                        <h5>@lang('public_viewevent_partials_eventcreateordersection.instructions')</h5>
                         <div class="well">
                             {!! Markdown::parse($event->offline_payment_instructions) !!}
                         </div>
@@ -171,7 +171,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    {!! Form::label('card-number', 'Card Number') !!}
+                                    {!! Form::label('card-number', __('public_viewevent_partials_eventcreateordersection.card')) !!}
                                     <input required="required" type="text" autocomplete="off" placeholder="**** **** **** ****" class="form-control card-number" size="20" data-stripe="number">
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    {!! Form::label('card-expiry-month', 'Expiry Month') !!}
+                                    {!! Form::label('card-expiry-month', __('public_viewevent_partials_eventcreateordersection.expiry_month')) !!}
                                     {!!  Form::selectRange('card-expiry-month',1,12,null, [
                                             'class' => 'form-control card-expiry-month',
                                             'data-stripe' => 'exp_month'
@@ -188,7 +188,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    {!! Form::label('card-expiry-year', 'Expiry Year') !!}
+                                    {!! Form::label('card-expiry-year', __('public_viewevent_partials_eventcreateordersection.expiry_year')) !!}
                                     {!!  Form::selectRange('card-expiry-year',date('Y'),date('Y')+10,null, [
                                             'class' => 'form-control card-expiry-year',
                                             'data-stripe' => 'exp_year'
@@ -198,7 +198,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    {!! Form::label('card-expiry-year', 'CVC Number') !!}
+                                    {!! Form::label('card-expiry-year', __('public_viewevent_partials_eventcreateordersection.cvc')) !!}
                                     <input required="required" placeholder="***" class="form-control card-cvc" data-stripe="cvc">
                                 </div>
                             </div>

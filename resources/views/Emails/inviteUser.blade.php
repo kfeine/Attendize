@@ -2,20 +2,20 @@
 
 @section('message_content')
 
-<p>Hello</p>
+<p>@lang('emails_inviteuser.hi')</p>
 <p>
-    You have been added to an {{ config('attendize.app_name') }} account by {{$inviter->first_name.' '.$inviter->last_name}}.
+    @lang('emails_inviteuser.message1', ['appname' => config('attendize.app_name'), 'by' => $inviter->first_name.' '.$inviter->last_name])
 </p>
 
 <p>
-    You can log in using the following details.<br><br>
+    @lang('emails_inviteuser.message2')<br><br>
     
-    Username: <b>{{$user->email}}</b> <br>
-    Password: <b>{{$temp_password}}</b>
+    @lang('emails_inviteuser.username') <b>{{$user->email}}</b> <br>
+    @lang('emails_inviteuser.password') <b>{{$temp_password}}</b>
 </p>
 
 <p>
-    You can change your temporary password once you have logged.
+    @lang('emails_inviteuser.message3') 
 </p>
 
 <div style="padding: 5px; border: 1px solid #ccc;" >
@@ -23,10 +23,10 @@
 </div>
 <br><br>
 <p>
-    If you have any questions please reply to this email.
+    @lang('emails_inviteuser.message4') 
 </p>
 <p>
-    Thank you
+    @lang('emails_inviteuser.thanks')
 </p>
 
 @stop

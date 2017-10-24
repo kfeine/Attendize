@@ -5,25 +5,25 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
-            {!! Form::label('is_live', 'Event Visibility', array('class'=>'control-label required')) !!}
+            {!! Form::label('is_live', __('manageevent_partials_editeventform.visibility'), array('class'=>'control-label required')) !!}
             {!!  Form::select('is_live', [
-            '1' => 'Make event visible to the public.',
-            '0' => 'Hide event from the public.'],null,
+            '1' => __('manageevent_partials_editeventform.make_visible'),
+            '0' => __('manageevent_partials_editeventform.hide')],null,
                                         array(
                                         'class'=>'form-control'
                                         ))  !!}
         </div>
         <div class="form-group">
-            {!! Form::label('title', 'Event Title', array('class'=>'control-label required')) !!}
+            {!! Form::label('title', __('manageevent_partials_editeventform.title'), array('class'=>'control-label required')) !!}
             {!!  Form::text('title', Input::old('title'),
                                         array(
                                         'class'=>'form-control',
-                                        'placeholder'=>'E.g: '.Auth::user()->first_name.'\'s Interational Conference'
+                                        'placeholder'=> __('manageevent_partials_editeventform.placeholder_title', ['firstname' => Auth::user()->first_name])
                                         ))  !!}
         </div>
 
         <div class="form-group">
-           {!! Form::label('description', 'Event Description', array('class'=>'control-label')) !!}
+           {!! Form::label('description', __('manageevent_partials_editeventform.description'), array('class'=>'control-label')) !!}
             {!!  Form::textarea('description', Input::old('description'),
                                         array(
                                         'class'=>'form-control editable',
@@ -32,11 +32,11 @@
         </div>
 
         <div class="form-group address-automatic" style="display:{{$event->location_is_manual ? 'none' : 'block'}};">
-            {!! Form::label('name', 'Venue Name', array('class'=>'control-label required ')) !!}
+            {!! Form::label('name', __('manageevent_partials_editeventform.venue_name'), array('class'=>'control-label required ')) !!}
             {!!  Form::text('venue_name_full', Input::old('venue_name_full'),
                                         array(
                                         'class'=>'form-control geocomplete location_field',
-                                        'placeholder'=>'E.g: The Crab Shack'
+                                        'placeholder'=>__('manageevent_partials_editeventform.placeholder_venue')
                                         ))  !!}
 
             <!--These are populated with the Google places info-->
@@ -62,43 +62,43 @@
 
         <div class="address-manual" style="display:{{$event->location_is_manual ? 'block' : 'none'}};">
             <div class="form-group">
-                {!! Form::label('location_venue_name', 'Venue Name', array('class'=>'control-label required ')) !!}
+                {!! Form::label('location_venue_name', __('manageevent_partials_editeventform.venue_name'), array('class'=>'control-label required ')) !!}
                 {!!  Form::text('location_venue_name', $event->venue_name, [
                                         'class'=>'form-control location_field',
-                                        'placeholder'=>'E.g: The Crab Shack'
+                                        'placeholder'=>__('manageevent_partials_editeventform.placeholder_venue')
                             ])  !!}
             </div>
             <div class="form-group">
-                {!! Form::label('location_address_line_1', 'Address Line 1', array('class'=>'control-label')) !!}
+                {!! Form::label('location_address_line_1', __('manageevent_partials_editeventform.address1'), array('class'=>'control-label')) !!}
                 {!!  Form::text('location_address_line_1', $event->location_address_line_1, [
                                         'class'=>'form-control location_field',
-                                        'placeholder'=>'E.g: 45 Grafton St.'
+                                        'placeholder'=>__('manageevent_partials_editeventform.placeholder_address1')
                             ])  !!}
             </div>
             <div class="form-group">
-                {!! Form::label('location_address_line_2', 'Address Line 2', array('class'=>'control-label')) !!}
+                {!! Form::label('location_address_line_2', __('manageevent_partials_editeventform.address2'), array('class'=>'control-label')) !!}
                 {!!  Form::text('location_address_line_2', $event->location_address_line_2, [
                                         'class'=>'form-control location_field',
-                                        'placeholder'=>'E.g: Dublin.'
+                                        'placeholder'=>__('manageevent_partials_editeventform.placeholder_address2')
                             ])  !!}
             </div>
 
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        {!! Form::label('location_state', 'City', array('class'=>'control-label')) !!}
+                        {!! Form::label('location_state', __('manageevent_partials_editeventform.city'), array('class'=>'control-label')) !!}
                         {!!  Form::text('location_state', $event->location_state, [
                                         'class'=>'form-control location_field',
-                                        'placeholder'=>'E.g: Dublin.'
+                                        'placeholder'=>__('manageevent_partials_editeventform.placeholder_city')
                             ])  !!}
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        {!! Form::label('location_post_code', 'Post Code', array('class'=>'control-label')) !!}
+                        {!! Form::label('location_post_code', __('manageevent_partials_editeventform.postcode'), array('class'=>'control-label')) !!}
                         {!!  Form::text('location_post_code', $event->location_post_code, [
                                         'class'=>'form-control location_field',
-                                        'placeholder'=>'E.g: 94568.'
+                                        'placeholder'=>__('manageevent_partials_editeventform.placeholder_postcode')
                             ])  !!}
                     </div>
                 </div>
@@ -107,14 +107,14 @@
 
         <div class="clearfix" style="margin-top:-10px; padding: 5px; padding-top: 0px;">
             <span class="pull-right">
-                or <a data-clear-field=".location_field" data-toggle-class=".address-automatic, .address-manual" data-show-less-text="{{$event->location_is_manual ? 'Enter Address Manually' : 'Select From Existing Venues'}}" href="javascript:void(0);" class="show-more-options clear_location">{{$event->location_is_manual ? 'Select From Existing Venues' : 'Enter Address Manually'}}</a>
+                @lang('manageevent_partials_editeventform.or') <a data-clear-field=".location_field" data-toggle-class=".address-automatic, .address-manual" data-show-less-text="{{$event->location_is_manual ? __('manageevent_partials_editeventform.manually') : __('manageevent_partials_editeventform.select')}}" href="javascript:void(0);" class="show-more-options clear_location">{{$event->location_is_manual ? __('manageevent_partials_editeventform.select_existing') : __('manageevent_partials_editeventform.enter_address')}}</a>
             </span>
         </div>
 
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    {!! Form::label('start_date', 'Event Start Date', array('class'=>'required control-label')) !!}
+                    {!! Form::label('start_date', __('manageevent_partials_editeventform.start'), array('class'=>'required control-label')) !!}
                     {!!  Form::text('start_date', $event->getFormattedDate('start_date'),
                                                         [
                                                     'class'=>'form-control start hasDatepicker ',
@@ -129,7 +129,7 @@
 
             <div class="col-sm-6 ">
                 <div class="form-group">
-                    {!!  Form::label('end_date', 'Event End Date',
+                    {!!  Form::label('end_date', __('manageevent_partials_editeventform.end'),
                                         [
                                     'class'=>'required control-label '
                                 ])  !!}
@@ -148,17 +148,17 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                   {!! Form::label('event_image', 'Event Flyer', array('class'=>'control-label ')) !!}
+                   {!! Form::label('event_image', __('manageevent_partials_editeventform.event_flyer'), array('class'=>'control-label ')) !!}
                    {!! Form::styledFile('event_image', 1) !!}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="float-l">
                     @if($event->images->count())
-                    {!! Form::label('', 'Current Event Flyer', array('class'=>'control-label ')) !!}
+                    {!! Form::label('', __('manageevent_partials_editeventform.current_event_flyer'), array('class'=>'control-label ')) !!}
                     <div class="form-group">
                         <div class="well well-sm well-small">
-                           {!! Form::label('remove_current_image', 'Delete?', array('class'=>'control-label ')) !!}
+                           {!! Form::label('remove_current_image', __('manageevent_partials_editeventform.delete'), array('class'=>'control-label ')) !!}
                            {!! Form::checkbox('remove_current_image') !!}
 
                         </div>
@@ -175,9 +175,8 @@
     <div class="col-md-12">
         <div class="panel-footer mt15 text-right">
            {!! Form::hidden('organiser_id', $event->organiser_id) !!}
-           {!! Form::submit('Save Changes', ['class'=>"btn btn-success"]) !!}
+           {!! Form::submit(__('manageevent_partials_editeventform.save'), ['class'=>"btn btn-success"]) !!}
         </div>
     </div>
     {!! Form::close() !!}
 </div>
-

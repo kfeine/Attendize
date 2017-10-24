@@ -5,16 +5,16 @@
 @stop
 
 @section('blankslate-title')
-    No Discounts Yet
+    @lang('manageevent_partials_discountblankslate.title')
 @stop
 
 @section('blankslate-text')
-    Create your first discount by clicking the button below.
+    @lang('manageevent_partials_discountblankslate.text')
 @stop
 
 @section('blankslate-body')
     <button data-invoke="modal" data-modal-id='CreateEventDiscount' data-href="{{route('showCreateEventDiscount', array('event_id'=>$event->id))}}" href='javascript:void(0);'  class=' btn btn-success mt5 btn-lg' type="button" >
         <i class="ico-gift"></i>
-        Create Discount
+        @lang('manageevent_partials_discountblankslate.create_discount')
     </button>
 @stop

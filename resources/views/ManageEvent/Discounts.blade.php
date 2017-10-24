@@ -2,7 +2,7 @@
 
 @section('title')
     @parent
-    Event Discounts
+    @lang('manageevent_discounts.title')
 @stop
 
 @section('top_nav')
@@ -15,7 +15,7 @@
 
 @section('page_title')
     <i class='ico-clipboard4 mr5'></i>
-    Event Discounts
+    @lang('manageevent_discounts.title')
 @stop
 
 @section('page_header')
@@ -26,7 +26,7 @@
                 <button class="loadModal btn btn-success" type="button" data-modal-id="CreateDiscount"
                         href="javascript:void(0);"
                         data-href="{{route('showCreateEventDiscount', ['event_id' => $event->id])}}">
-                    <i class="ico-gift"></i> Add discount
+                    <i class="ico-gift"></i> @lang('manageevent_discounts.add_discount')
                 </button>
             </div>
         </div>
@@ -47,11 +47,11 @@
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
-                                <th> Description </th>
-                                <th> Code </th>
-                                <th> Price </th>
-                                <th> # Usage </th>
-                                <th> Actions </th>
+                                <th> @lang('manageevent_discounts.description') </th>
+                                <th> @lang('manageevent_discounts.code') </th>
+                                <th> @lang('manageevent_discounts.price') </th>
+                                <th> @lang('manageevent_discounts.usage') </th>
+                                <th> @lang('manageevent_discounts.actions') </th>
                             </thead>
 
                             <tbody class="sortable">
@@ -73,7 +73,7 @@
                                         <a class="btn btn-xs btn-primary loadModal" data-modal-id="EditDiscount"
                                            href="javascript:void(0);"
                                            data-href="{{route('showEditEventDiscount', ['event_id' => $event->id, 'discount_id' => $discount->id])}}">
-                                            Edit
+                                            @lang('manageevent_discounts.edit')
                                         </a>
                                         <a class="btn btn-xs btn-primary enableDiscount" href="javascript:void(0);"
                                            data-route="{{ route('postEnableDiscount', ['event_id' => $event->id, 'discount_id' => $discount->id]) }}"
@@ -86,7 +86,7 @@
                                            data-route="{{ route('postDeleteEventDiscount', ['event_id' => $event->id, 'discount_id' => $discount->id]) }}"
                                            data-type="discount" href="javascript:void(0);"
                                            class="deleteThis btn btn-xs btn-danger">
-                                            Delete
+                                            @lang('manageevent_discounts.delete')
                                         </a>
                                     </td>
                                 </tr>

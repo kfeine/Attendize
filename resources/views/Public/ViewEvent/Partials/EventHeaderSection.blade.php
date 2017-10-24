@@ -2,15 +2,19 @@
 <section id="goLiveBar">
     <div class="container">
                 @if(!$event->is_live)
-                This event is not visible to the public - <a style="background-color: green; border-color: green;" class="btn btn-success btn-xs" href="{{route('MakeEventLive' , ['event_id' => $event->id])}}" >Publish Event</a>
+                @lang('public_viewevent_partials_eventheadersection.visibility') - <a style="background-color: green; border-color: green;" class="btn btn-success btn-xs" href="{{route('MakeEventLive' , ['event_id' => $event->id])}}" >@lang('public_viewevent_partials_eventheadersection.publish_event')</a>
                 @endif
     </div>
 </section>
 @endif
 <section id="intro" class="content">
     <div class="container">
-        <div class="col-md-3">
-            <a title="{{$event->venue_name}}" href="{{$event->event_url}}"><img alt="{{$event->organiser->name}}" src="{{asset($event->organiser->full_logo_path)}}" property="logo"></a>
+        <div class="row">
+            <div class="col-md-12">
+                <div onclick="window.location='{{$event->event_url}}#organiser'" class="event_organizer">
+                    <b>{{$event->organiser->name}}</b> @lang('public_viewevent_partials_eventheadersection.presents')
+                </div>
+            </div>
         </div>
         <div class="col-md-9">
             <h1 property="name">{{$event->title}}</h1>

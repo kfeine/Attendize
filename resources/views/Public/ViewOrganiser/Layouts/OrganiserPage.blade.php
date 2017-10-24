@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{App::getLocale()}}">
     <head>
         <!--
                   _   _                 _ _
@@ -40,7 +40,7 @@
         </div>
 
         <a href="#intro" style="display:none;" class="totop"><i class="ico-angle-up"></i>
-            <span style="font-size:11px;">TOP</span></a>
+            <span style="font-size:11px;">@lang('public_vieworganiser_layouts_organiserpage.top')</span></a>
 
         {!!HTML::script('assets/javascript/frontend.js')!!}
 

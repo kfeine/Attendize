@@ -2,14 +2,14 @@
 
 @section('title')
     @parent
-    Dashboard
+    @lang('manageorganiser_dashboard.title')
 @stop
 
 @section('top_nav')
     @include('ManageOrganiser.Partials.TopNav')
 @stop
 @section('page_title')
-    {{ $organiser->name }} Dashboard
+  @lang('manageorganiser_dashboard.name_dashboard', ['name' => $organiser->name])
 @stop
 
 @section('menu')
@@ -53,7 +53,7 @@
                     {{$organiser->events->count()}}
                 </h3>
             <span>
-                Events
+                @lang('manageorganiser_dashboard.events')
             </span>
             </div>
         </div>
@@ -63,7 +63,7 @@
                     {{$organiser->attendees->count()}}
                 </h3>
             <span>
-                Tickets Sold
+                @lang('manageorganiser_dashboard.tickets_sold')
             </span>
             </div>
         </div>
@@ -73,7 +73,7 @@
                     {{ money($organiser->events->sum('sales_volume') + $organiser->events->sum('organiser_fees_volume'), $organiser->account->currency) }}
                 </h3>
             <span>
-                Sales Volume
+                @lang('manageorganiser_dashboard.sales_volume')
             </span>
             </div>
         </div>
@@ -83,25 +83,25 @@
 
         <div class="col-md-8">
 
-            <h4 style="margin-bottom: 25px;margin-top: 20px;">Event Calendar</h4>
+            <h4 style="margin-bottom: 25px;margin-top: 20px;">@lang('manageorganiser_dashboard.event_calendar')</h4>
                     <div id="calendar"></div>
 
 
-            <h4 style="margin-bottom: 25px;margin-top: 20px;">Upcoming Events</h4>
+            <h4 style="margin-bottom: 25px;margin-top: 20px;">@lang('manageorganiser_dashboard.upcoming_events')</h4>
             @if($upcoming_events->count())
                 @foreach($upcoming_events as $event)
                     @include('ManageOrganiser.Partials.EventPanel')
                 @endforeach
             @else
                 <div class="alert alert-success alert-lg">
-                    You have no events coming up. <a href="#"
+                    @lang('manageorganiser_dashboard.alert1') <a href="#"
                                                      data-href="{{route('showCreateEvent', ['organiser_id' => $organiser->id])}}"
-                                                     class=" loadModal">You can click here to create an event.</a>
+                                                     class=" loadModal">@lang('manageorganiser_dashboard.alert2')</a>
                 </div>
             @endif
         </div>
         <div class="col-md-4">
-            <h4 style="margin-bottom: 25px;margin-top: 20px;">Recent Orders</h4>
+            <h4 style="margin-bottom: 25px;margin-top: 20px;">@lang('manageorganiser_dashboard.recent_orders')</h4>
               @if($organiser->orders->count())
             <ul class="list-group">
                     @foreach($organiser->orders()->orderBy('created_at', 'desc')->take(5)->get() as $order)
@@ -115,7 +115,7 @@
                                 <a href="{{ route('showEventOrders', ['event_id' => $order->event_id, 'q' => $order->order_reference]) }}">
                                     <b>#{{ $order->order_reference }}</b></a> -
                                 <a href="{{ route('showEventAttendees', ['event_id'=>$order->event->id,'q'=>$order->order_reference]) }}">{{ $order->full_name }}</a>
-                                registered {{ $order->attendees()->withTrashed()->count() }} ticket{{ $order->attendees()->withTrashed()->count()  > 1 ? 's' : '' }}.
+                                @lang('manageorganiser_dashboard.registered') {{ $order->attendees()->withTrashed()->count() }} ticket{{ $order->attendees()->withTrashed()->count()  > 1 ? 's' : '' }}.
                             </p>
                             <h6>
                                 {{ $order->created_at->diffForHumans() }} &bull; <span
@@ -125,7 +125,7 @@
                     @endforeach
                   @else
                             <div class="alert alert-success alert-lg">
-                                Looks like there are no recent orders.
+                                @lang('manageorganiser_dashboard.alert3')
                             </div>
                 @endif
             </ul>

@@ -561,9 +561,7 @@ class EventAttendeesController extends MyBaseController
 
             $excel->sheet('attendees_sheet_1', function ($sheet) use ($event_id) {
 
-                DB::connection()->setFetchMode(\PDO::FETCH_ASSOC);
-                $data = DB::table('attendees')
-                    ->where('attendees.event_id', '=', $event_id)
+                $data = Attendee::where('attendees.event_id', '=', $event_id)
                     ->where('attendees.is_cancelled', '=', 0)
                     ->where('attendees.account_id', '=', Auth::user()->account_id)
                     ->join('events', 'events.id', '=', 'attendees.event_id')
@@ -578,7 +576,7 @@ class EventAttendeesController extends MyBaseController
                         'orders.created_at',
                         DB::raw("(CASE WHEN attendees.has_arrived THEN 'YES' ELSE 'NO' END) AS has_arrived"),
                         'attendees.arrival_time',
-                    ])->get()->all();
+                    ])->get();
 
                 $sheet->fromArray($data);
                 $sheet->row(1, [
