@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col-md-9">
-            <h1 property="name">{{$event->title}}</h1>
+            <a href="{{route('showEventPagePreview', ['event_id'=>$event->id])}}"><h1 property="name">{{$event->title}}</h1></a>
             <div class="event_venue">
                 <span property="location" typeof="Place">
                     {{$event->venue_name}}
