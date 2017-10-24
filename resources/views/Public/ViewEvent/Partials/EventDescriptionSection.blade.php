@@ -25,6 +25,5 @@
         </div>
         @endif
     </div>
-<<<<<<< HEAD
 </div>
 </section>
