@@ -114,5 +114,5 @@
     <br><br>
 </div>
 <br><br>
-@lang('emails_ordernotification.')
+@lang('emails_ordernotification.thanks')
 @stop

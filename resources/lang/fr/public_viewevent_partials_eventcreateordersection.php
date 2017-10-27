@@ -5,7 +5,7 @@ return [
     'order_details' => 'Détails de la commande',
     'order_summary' => 'Résumé de la commande',
     'free' => 'Gratuit',
-    'countdown' => 'Attention, il vous reste :countdown pour finaliser votre commande avant qu\'elle ne soient remise à zéro.',
+    'countdown' => 'Attention, il vous reste :countdown pour finaliser votre commande avant qu\'elle ne soit remise à zéro.',
     'information' => 'Vos informations',
     'first_name' => 'Prénom',
     'last_name' => 'Nom',
