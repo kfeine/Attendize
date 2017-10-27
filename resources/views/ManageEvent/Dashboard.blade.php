@@ -360,24 +360,33 @@
                 return formatDate(x);
             }
         });
+
         function formatDate(x) {
-            var m_names = new Array("Jan", "Feb", "Mar",
-                    "Apr", "May", "Jun", "Jul", "Aug", "Sep",
-                    "Oct", "Nov", "Dec");
             var sup = "",
                     curr_date = x.getDate();
-            if (curr_date == 1 || curr_date == 21 || curr_date == 31) {
-                sup = "st";
-            }
-            else if (curr_date == 2 || curr_date == 22) {
-                sup = "nd";
-            }
-            else if (curr_date == 3 || curr_date == 23) {
-                sup = "rd";
-            }
-            else {
-                sup = "th";
-            }
+
+            @if ('fr' == App::getLocale())
+                var m_names = new Array("Jan", "Fév", "Mar",
+                    "Avr", "Mai", "Jun", "Jul", "Aoû", "Sep",
+                    "Oct", "Nov", "Déc");
+            @else
+                var m_names = new Array("Jan", "Feb", "Mar",
+                        "Apr", "May", "Jun", "Jul", "Aug", "Sep",
+                        "Oct", "Nov", "Dec");
+                
+                if (curr_date == 1 || curr_date == 21 || curr_date == 31) {
+                    sup = "st";
+                }
+                else if (curr_date == 2 || curr_date == 22) {
+                    sup = "nd";
+                }
+                else if (curr_date == 3 || curr_date == 23) {
+                    sup = "rd";
+                }
+                else {
+                    sup = "th";
+                }
+            @endif
 
             return curr_date + sup + ' ' + m_names[x.getMonth()];
         }
