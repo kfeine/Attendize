@@ -3,7 +3,7 @@
 @section('title')
 @parent
 
-Event Orders
+@lang('manageevent_orders.title')
 @stop
 
 @section('top_nav')
@@ -16,9 +16,9 @@ Event Orders
 
 @section('page_title')
 <i class='ico-cart mr5'></i>
-Event Orders
+@lang('manageevent_orders.title')
 <span class="page_title_sub_title hide">
-    Showing 30 orders out of <b>{{\App\Models\Order::scope()->count()}}</b> Total
+  @lang('manageevent_orders.subtitle', ['count' => \App\Models\Order::scope()->count()])
 </span>
 @stop
 
@@ -32,7 +32,7 @@ Event Orders
     <div class="btn-toolbar" role="toolbar">
         <div class="btn-group btn-group btn-group-responsive">
             <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                <i class="ico-users"></i> Export <span class="caret"></span>
+                <i class="ico-users"></i> @lang('manageevent_orders.export') <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
                 <li><a href="{{route('showExportOrders', ['event_id'=>$event->id,'export_as'=>'xlsx'])}}">Excel (XLSX)</a></li>
@@ -47,7 +47,7 @@ Event Orders
 <div class="col-md-3 col-sm-6">
    {!! Form::open(array('url' => route('showEventOrders', ['event_id'=>$event->id,'sort_by'=>$sort_by]), 'method' => 'get')) !!}
     <div class="input-group">
-        <input name='q' value="{{$q or ''}}" placeholder="Search Orders.." type="text" class="form-control">
+        <input name='q' value="{{$q or ''}}" placeholder="@lang('manageevent_orders.search')" type="text" class="form-control">
         <span class="input-group-btn">
             <button class="btn btn-default" type="submit"><i class="ico-search"></i></button>
         </span>
@@ -72,22 +72,22 @@ Event Orders
                     <thead>
                         <tr>
                             <th>
-                               {!! Html::sortable_link('Order Ref.', $sort_by, 'order_reference', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
+                               {!! Html::sortable_link(__('manageevent_orders.ref'), $sort_by, 'order_reference', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
                             </th>
                             <th>
-                               {!! Html::sortable_link('Order Date', $sort_by, 'created_at', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
+                               {!! Html::sortable_link(__('manageevent_orders.date'), $sort_by, 'created_at', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
                             </th>
                             <th>
-                               {!! Html::sortable_link('Name', $sort_by, 'first_name', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
+                               {!! Html::sortable_link(__('manageevent_orders.name'), $sort_by, 'first_name', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
                             </th>
                             <th>
-                               {!! Html::sortable_link('Email', $sort_by, 'email', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
+                               {!! Html::sortable_link(__('manageevent_orders.email'), $sort_by, 'email', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
                             </th>
                             <th>
-                               {!! Html::sortable_link('Amount', $sort_by, 'amount', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
+                               {!! Html::sortable_link(__('manageevent_orders.amount'), $sort_by, 'amount', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
                             </th>
                             <th>
-                               {!! Html::sortable_link('Status', $sort_by, 'order_status_id', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
+                               {!! Html::sortable_link(__('manageevent_orders.status'), $sort_by, 'order_status_id', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
                             </th>
                             <th></th>
                         </tr>
@@ -128,9 +128,9 @@ Event Orders
                             </td>
                             <td class="text-center">
                                 <a href="javascript:void(0);" data-modal-id="cancel-order-{{ $order->id }}" data-href="{{route('showCancelOrder', ['order_id'=>$order->id])}}" title="Cancel Order" class="btn btn-xs btn-danger loadModal">
-                                                Refund / Cancel
+                                                @lang('manageevent_orders.refund')
                                             </a>
-                                <a data-modal-id="view-order-{{ $order->id }}" data-href="{{route('showManageOrder', ['order_id'=>$order->id])}}" title="View Order" class="btn btn-xs btn-primary loadModal">Details</a>
+                                <a data-modal-id="view-order-{{ $order->id }}" data-href="{{route('showManageOrder', ['order_id'=>$order->id])}}" title="View Order" class="btn btn-xs btn-primary loadModal">@lang('manageevent_orders.details')</a>
                             </td>
                         </tr>
                         @endforeach

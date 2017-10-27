@@ -2,13 +2,13 @@
 
 @section('message_content')
 
-<p>Hi {{$first_name}}</p>
+<p>@lang('emails_confirmemail.hi')</p>
 <p>
-    Thank you for registering for {{ config('attendize.app_name') }}. We're thrilled to have you on board.
+    @lang('emails_confirmemail.message1', ['appname' => config('attendize.app_name')])
 </p>
 
 <p>
-    You can create you first event and confirm your email using the link below.
+    @lang('emails_confirmemail.message2') 
 </p>
 
 <div style="padding: 5px; border: 1px solid #ccc;">
@@ -16,10 +16,10 @@
 </div>
 <br><br>
 <p>
-    If you have any questions, feedback or suggestions feel free to reply to this email.
+   @lang('emails_confirmemail.message3') 
 </p>
 <p>
-    Thank you
+    @lang('emails_confirmemail.thanks')
 </p>
 
 @stop

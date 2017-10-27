@@ -6,40 +6,38 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3 class="modal-title">
                     <i class="ico-cancel"></i>
-                    Cancel <b>{{$attendee->full_name}} <b></h3>
+                    @lang('manageevent_modals_cancelattendee.cancel') <b>{{$attendee->full_name}} <b></h3>
             </div>
             <div class="modal-body">
                 <p>
-                    Cancelling Attendees will remove them from the attendee list.
+                    @lang('manageevent_modals_cancelattendee.cancelling_attendees')
                 </p>
 
                 <p>
-                    If you would like to refund the order which this attendee belongs to you can do so
-                    <a href="{{route('showEventOrders', ['event_id' => $attendee->event->id, 'q' => $attendee->order->order_reference])}}">here</a>.
+                    @lang('manageevent_modals_cancelattendee.refund_the_order', ['link' => '<a href="'.route('showEventOrders', ['event_id' => $attendee->event->id, 'q' => $attendee->order->order_reference]).'">', 'endlink' => '</a>.'])
                 </p>
                 <br>
                 <div class="form-group">
                     <div class="checkbox custom-checkbox">
                         <input type="checkbox" name="notify_attendee" id="notify_attendee" value="1">
-                        <label for="notify_attendee">&nbsp;&nbsp;Notify <b>{{$attendee->full_name}}</b> their ticket has been cancelled.</label>
+                        <label for="notify_attendee">@lang('manageevent_modals_cancelattendee.notify_attendee', ['fullname' => '<b>'.$attendee->full_name.'</b>'])</label>
                     </div>
                 </div>
                 @if(config('attendize.default_payment_gateway') == config('attendize.payment_gateway_stripe'))
                     <div class="form-group">
                             <div class="checkbox custom-checkbox">
                                 <input type="checkbox" name="refund_attendee" id="refund_attendee" value="1">
-                                <label for="refund_attendee">&nbsp;&nbsp;Refund <b>{{$attendee->full_name}}</b> for their ticket.</label>
+                                <label for="refund_attendee">@lang('manageevent_modals_cancelattendee.refund_attendee', ['fullname' => '<b>'.$attendee->full_name.'</b>'])</label>
                             </div>
                     </div>
                 @endif
             </div> <!-- /end modal body-->
             <div class="modal-footer">
                {!! Form::hidden('attendee_id', $attendee->id) !!}
-               {!! Form::button('Cancel', ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
-               {!! Form::submit('Confirm Cancel Attendee', ['class'=>"btn btn-success"]) !!}
+               {!! Form::button(__('manageevent_modals_cancelattendee.cancel'), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
+               {!! Form::submit(__('manageevent_modals_cancelattendee.confirm_cancel'), ['class'=>"btn btn-success"]) !!}
             </div>
         </div><!-- /end modal content-->
        {!! Form::close() !!}
     </div>
 </div>
-

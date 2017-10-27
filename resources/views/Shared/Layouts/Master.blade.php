@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{App::getLocale()}}">
 <head>
     <!--
               _   _                 _ _
@@ -60,7 +60,7 @@
                     <li>
                         <a href="{{route('showCreateOrganiser')}}">
                             <i class="ico ico-plus"></i>
-                            Create Organiser
+                            @lang('shared_layouts_master.create_organiser')
                         </a>
                     </li>
                     @foreach($organisers as $org)
@@ -76,19 +76,19 @@
 
                     <li>
                         <a data-href="{{route('showEditUser')}}" data-modal-id="EditUser"
-                           class="loadModal editUserModal" href="javascript:void(0);"><span class="icon ico-user"></span>My Profile</a>
+                           class="loadModal editUserModal" href="javascript:void(0);"><span class="icon ico-user"></span>@lang('shared_layouts_master.profile')</a>
                     </li>
                     <li class="divider"></li>
                     <li><a data-href="{{route('showEditAccount')}}" data-modal-id="EditAccount" class="loadModal"
-                           href="javascript:void(0);"><span class="icon ico-cog"></span>Account Settings</a></li>
+                           href="javascript:void(0);"><span class="icon ico-cog"></span>@lang('shared_layouts_master.settings')</a></li>
 
 
                     <li class="divider"></li>
-                    <li><a target="_blank" href="https://www.attendize.com/feedback.php?v={{ config('attendize.version') }}"><span class="icon ico-megaphone"></span>Feedback / Bug Report</a></li>
+                    <li><a target="_blank" href="https://www.attendize.com/feedback.php?v={{ config('attendize.version') }}"><span class="icon ico-megaphone"></span>@lang('shared_layouts_master.feedback')</a></li>
                     <li class="divider"></li>
                     <li>
                     {{ Form::open(array('url' => '/logout')) }}
-                        <button type="submit" class="btn-link"><span class="icon ico-exit"></span> Sign Out</button>
+                        <button type="submit" class="btn-link"><span class="icon ico-exit"></span> @lang('shared_layouts_master.signout')</button>
                     {{ Form::close() }}
                     </li>
                 </ul>

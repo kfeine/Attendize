@@ -5,16 +5,16 @@
 @stop
 
 @section('blankslate-title')
-    No Tickets Yet
+    @lang('manageevent_partials_ticketsblankslate.title')
 @stop
 
 @section('blankslate-text')
-    Create your first ticket by clicking the button below.
+    @lang('manageevent_partials_ticketsblankslate.text')
 @stop
 
 @section('blankslate-body')
     <button data-invoke="modal" data-modal-id='CreateTicket' data-href="{{route('showCreateTicket', array('event_id'=>$event->id))}}" href='javascript:void(0);'  class=' btn btn-success mt5 btn-lg' type="button" >
         <i class="ico-ticket"></i>
-        Create Ticket
+        @lang('manageevent_partials_ticketsblankslate.create')
     </button>
 @stop

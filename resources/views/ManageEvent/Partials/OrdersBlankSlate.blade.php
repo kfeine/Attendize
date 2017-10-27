@@ -6,14 +6,13 @@
 @stop
 
 @section('blankslate-title')
-    No Orders Yet
+    @lang('manageevent_partials_editeventform.title')
 @stop
 
 @section('blankslate-text')
-    New orders will appear here as they are created.
+    @lang('manageevent_partials_editeventform.text')
 @stop
 
 @section('blankslate-body')
 
 @stop
-

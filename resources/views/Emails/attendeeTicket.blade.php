@@ -1,10 +1,10 @@
-Hi {{{$attendee->first_name}}},<br><br>
+@lang('emails_attendeeticket.hi', ['firstname' => $attendee->first_name]),<br><br>
 
-We've attached your tickets to this email.<br><br>
+@lang('emails_attendeeticket.message1')<br><br>
 
-You can view your order info and download your tickets at {{route('showOrderDetails', ['order_reference' => $attendee->order->order_reference])}} anytime.<br><br>
+@lang('emails_attendeeticket.message2', ['url' => route('showOrderDetails', ['order_reference' => $attendee->order->order_reference])])<br><br>
 
-Your order reference is <b>{{$attendee->order->order_reference}}</b>.<br>
+@lang('emails_attendeeticket.reference') <b>{{$attendee->order->order_reference}}</b>.<br>
 
-Thank you<br>
+@lang('emails_attendeeticket.thanks')<br>
 

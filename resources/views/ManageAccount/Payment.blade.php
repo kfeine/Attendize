@@ -2,11 +2,11 @@
 
 @section('title')
 @parent
-Event Attendees
+@lang('manageaccount_payment.attendees')
 @stop
 
 
 @section('page_title')
 <i class="ico-users"></i>
-Account / Payment
+@lang('manageaccount_payment.account')
 @stop

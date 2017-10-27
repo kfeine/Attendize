@@ -2,7 +2,7 @@
 
 @section('title')
 @parent
-Promote Event
+@lang('manageevent_promote.title')
 @stop
 
 @section('top_nav')
@@ -16,7 +16,7 @@ Promote Event
 
 @section('page_title')
 <i class="ico-bullhorn mr5"></i>
-Promote Event
+@lang('manageevent_promote.title')
 @stop
 
 
@@ -24,7 +24,7 @@ Promote Event
 <div class='row'>
     <div class="col-md-12">
         <h1>
-            Promote
+            @lang('manageevent_promote.promote')
             <pre>
                 [PROMOTE PAGE]
             </pre>
@@ -32,5 +32,3 @@ Promote Event
     </div>
 </div>
 @stop
-
-

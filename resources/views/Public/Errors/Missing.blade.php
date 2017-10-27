@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>
-            Whoops!
+            @lang('public_errors_missing.whoops')
         </title>
         <style>
             body {
@@ -22,7 +22,7 @@
     <body>
         <div class="missing">
             <h2>404!</h2>
-            Looks like the page you are looking for no longer exists or has moved.
+            @lang('public_errors_missing.message') 
         </div>
     </body>
 </html>

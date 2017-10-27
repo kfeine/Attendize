@@ -5,18 +5,16 @@
 @stop
 
 @section('blankslate-title')
-    No Questions Yet
+    @lang('manageevent_partials_surveyblankslate.title')
 @stop
 
 @section('blankslate-text')
-    Here you can add questions which attendees will be asked to answer during the check-out process.
+    @lang('manageevent_partials_surveyblankslate.text')
 @stop
 
 @section('blankslate-body')
     <button data-invoke="modal" data-modal-id='CreateQuestion' data-href="{{route('showCreateEventQuestion', array('event_id'=>$event->id))}}" href='javascript:void(0);'  class=' btn btn-success mt5 btn-lg' type="button" >
         <i class="ico-question"></i>
-        Create Question
+        @lang('manageevent_partials_surveyblankslate.create')
     </button>
 @stop
-
-

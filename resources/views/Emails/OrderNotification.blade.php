@@ -1,43 +1,43 @@
 @extends('Emails.Layouts.Master')
 
 @section('message_content')
-Hello,<br><br>
+@lang('emails_ordernotification.hi')<br><br>
 
-You have received a new order for the event <b>{{$order->event->title}}</b>.<br><br>
+@lang('emails_ordernotification.message1', ['title' => '<b>'.$order->event->title.'</b>'])<br><br>
 
 @if(!$order->is_payment_received)
-    <b>Please note: This order still requires payment.</b>
+    <b>@lang('emails_ordernotification.not_received')</b>
     <br><br>
 @endif
 
 
-Order Summary:
+@lang('emails_ordernotification.summary')
 <br><br>
-Order Reference: <b>{{$order->order_reference}}</b><br>
-Order Name: <b>{{$order->full_name}}</b><br>
-Order Date: <b>{{$order->created_at->toDayDateTimeString()}}</b><br>
-Order Email: <b>{{$order->email}}</b><br>
+@lang('emails_ordernotification.reference') <b>{{$order->order_reference}}</b><br>
+@lang('emails_ordernotification.name') <b>{{$order->full_name}}</b><br>
+@lang('emails_ordernotification.date') <b>{{$order->created_at->toDayDateTimeString()}}</b><br>
+@lang('emails_ordernotification.email') <b>{{$order->email}}</b><br>
 
 
-<h3>Order Items</h3>
+<h3>@lang('emails_ordernotification.items')</h3>
 <div style="padding:10px; background: #F9F9F9; border: 1px solid #f1f1f1;">
 
     <table style="width:100%; margin:10px;">
         <tr>
             <th>
-                Ticket
+                @lang('emails_ordernotification.ticket')
             </th>
             <th>
-                Quantity
+                @lang('emails_ordernotification.quantity')
             </th>
             <th>
-                Price
+                @lang('emails_ordernotification.price')
             </th>
             <th>
-                Booking Fee
+                @lang('emails_ordernotification.booking')
             </th>
             <th>
-                Total
+                @lang('emails_ordernotification.total')
             </th>
         </tr>
         @foreach($order->orderItems as $order_item)
@@ -50,7 +50,7 @@ Order Email: <b>{{$order->email}}</b><br>
             </td>
             <td>
                 @if((int)ceil($order_item->unit_price) == 0)
-                FREE
+                @lang('emails_ordernotification.free')
                 @else
                 {{money($order_item->unit_price, $order->event->currency)}}
                 @endif
@@ -66,7 +66,7 @@ Order Email: <b>{{$order->email}}</b><br>
             </td>
             <td>
                 @if((int)ceil($order_item->unit_price) == 0)
-                FREE
+                @lang('emails_ordernotification.free')
                 @else
                 {{money(($order_item->unit_price + $order_item->unit_booking_fee) * ($order_item->quantity), $order->event->currency)}}
                 @endif
@@ -100,7 +100,7 @@ Order Email: <b>{{$order->email}}</b><br>
             <td>
             </td>
             <td>
-                <b>Sub Total</b>
+                <b>@lang('emails_ordernotification.subtotal')</b>
             </td>
             <td colspan="2">
                 {{money($order->total_amount, $order->event->currency)}}
@@ -110,9 +110,9 @@ Order Email: <b>{{$order->email}}</b><br>
 
 
     <br><br>
-    You can manage this order at: {{route('showEventOrders', ['event_id' => $order->event->id, 'q'=>$order->order_reference])}}
+    @lang('emails_ordernotification.message2', ['at' => route('showEventOrders', ['event_id' => $order->event->id, 'q'=>$order->order_reference])])
     <br><br>
 </div>
 <br><br>
-Thank you
+@lang('emails_ordernotification.')
 @stop

@@ -2,14 +2,14 @@
 
 @section('message_content')
 
-    <p>Hi there,</p>
+    <p>@lang('emails_notifyrefundedattendee.hi')</p>
     <p>
-        You have received a refund on behalf of your cancelled ticket for <b>{{{$attendee->event->title}}}</b>.
-        <b>{{{ $refund_amount }}} has been refunded to the original payee, you should see the payment in a few days.</b>
+        @lang('emails_notifyrefundedattendee.message1', ['for' => '<b>'.'$attendee->event->title.'</b>'])
+        <b>@lang('emails_notifyrefundedattendee.message2', ['amount' => $refund_amount ])</b>
     </p>
 
     <p>
-        You can contact <b>{{{ $attendee->event->organiser->name }}}</b> directly at <a href='mailto:{{{$attendee->event->organiser->email}}}'>{{{$attendee->event->organiser->email}}}</a> or by replying to this email should you require any more information.
+        @lang('emails_notifyrefundedattendee.message3', ['sender' => '<b>'.$attendee->event->organiser->name.'</b>', 'at' => '<a href="mailto:'.$attendee->event->organiser->email.'">'.$attendee->event->organiser->email.'</a>'])
     </p>
 @stop
 

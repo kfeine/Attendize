@@ -1,13 +1,13 @@
 <section id="tickets" class="container">
     <div class="row">
         <h1 class='section_head'>
-            Tickets
+            @lang('public_viewevent_partials_eventticketssection.title')
         </h1>
     </div>
 
     @if($event->start_date->isPast())
         <div class="alert alert-boring">
-            This event has {{($event->end_date->isFuture() ? 'already started' : 'ended')}}.
+             {{($event->end_date->isFuture() ? __('public_viewevent_partials_eventticketssection.has_started') : __('public_viewevent_partials_eventticketssection.has_ended'))}}.
         </div>
     @else
 
@@ -35,7 +35,7 @@
                                         <td style="width:180px; text-align: right;">
                                             <div class="ticket-pricing" style="margin-right: 20px;">
                                                 @if($ticket->is_free)
-                                                    FREE
+                                                    @lang('public_viewevent_partials_eventticketssection.free')
                                                     <meta property="price" content="0">
                                                 @else
                                                     <?php
@@ -53,7 +53,7 @@
                                             @if($ticket->is_paused)
 
                                                 <span class="text-danger">
-                                                    Currently Not On Sale
+                                                   @lang('public_viewevent_partials_eventticketssection.not_sale') 
                                                 </span>
 
                                             @else
@@ -61,15 +61,15 @@
                                                 @if($ticket->sale_status === config('attendize.ticket_status_sold_out'))
                                                     <span class="text-danger" property="availability"
                                                           content="http://schema.org/SoldOut">
-                                                        Sold Out
+                                                       @lang('public_viewevent_partials_eventticketssection.sold_out') 
                                                     </span>
                                                 @elseif($ticket->sale_status === config('attendize.ticket_status_before_sale_date'))
                                                     <span class="text-danger">
-                                                        Sales Have Not Started
+                                                       @lang('public_viewevent_partials_eventticketssection.not_started') 
                                                     </span>
                                                 @elseif($ticket->sale_status === config('attendize.ticket_status_after_sale_date'))
                                                     <span class="text-danger">
-                                                        Sales Have Ended
+                                                       @lang('public_viewevent_partials_eventticketssection.ended') 
                                                     </span>
                                                 @else
                                                     {!! Form::hidden('tickets[]', $ticket->id) !!}
@@ -93,10 +93,10 @@
                                 <tr class="discout-cocode">
                                         <td>
                                             <span class="ticket-title semibold" property="name">
-                                                Code de réduction
+                                                @lang('public_viewevent_partials_eventticketssection.discount')
                                             </span>
                                             <p class="ticket-descripton mb0 text-muted" property="description">
-                                                facultatif
+                                                @lang('public_viewevent_partials_eventticketssection.discount_description')
                                             </p>
                                         </td>
                                         <td style="width:180px; text-align: right;">
@@ -118,14 +118,14 @@
                                                 @if($event->enable_offline_payments)
 
                                                     <div class="help-block" style="font-size: 11px;">
-                                                        Offline Payment Methods Available
+                                                       @lang('public_viewevent_partials_eventticketssection.offline') 
                                                     </div>
                                                 @endif
 
                                             </div>
 
                                         @endif
-                                        {!!Form::submit('Register', ['class' => 'btn btn-lg btn-primary pull-right'])!!}
+                                        {!!Form::submit(__('public_viewevent_partials_eventticketssection.register'), ['class' => 'btn btn-lg btn-primary pull-right'])!!}
                                     </td>
                                 </tr>
                             </table>
@@ -139,7 +139,7 @@
         @else
 
             <div class="alert alert-boring">
-                Tickets are currently unavailable.
+               @lang('public_viewevent_partials_eventticketssection.unavailable') 
             </div>
 
         @endif

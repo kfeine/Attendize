@@ -1,41 +1,43 @@
 @extends('Emails.Layouts.Master')
 
 @section('message_content')
-Hello,<br><br>
+@lang('mailers_ticketmailer_sendordertickets.hi')<br><br>
 
-Your order for the event <b>{{$order->event->title}}</b> was successful.<br><br>
 
-Your tickets are attached to this email. You can also view you order details and download your tickets at: {{route('showOrderDetails', ['order_reference' => $order->order_reference])}}
+@lang('mailers_ticketmailer_sendordertickets.order', ['title' => '<b>'.$order->event->title.'</b>']).<br><br>
+
+@lang('mailers_ticketmailer_sendordertickets.tickets', ['reference' => route('showOrderDetails', ['order_reference' => $order->order_reference])])
 
 @if(!$order->is_payment_received)
 <br><br>
-<b>Please note: This order still requires payment. Instructions on how to make payment can be found on your order page: {{route('showOrderDetails', ['order_reference' => $order->order_reference])}}</b>
+<b>@lang('mailers_ticketmailer_sendordertickets.note', ['reference' => route('showOrderDetails', ['order_reference' => $order->order_reference])])
+</b>
 <br><br>
 @endif
-<h3>Order Details</h3>
-Order Reference: <b>{{$order->order_reference}}</b><br>
-Order Name: <b>{{$order->full_name}}</b><br>
-Order Date: <b>{{$order->created_at->toDayDateTimeString()}}</b><br>
-Order Email: <b>{{$order->email}}</b><br>
-<a href="{!! route('downloadCalendarIcs', ['event_id' => $order->event->id]) !!}">Add To Calendar</a>
-<h3>Order Items</h3>
+<h3>@lang('mailers_ticketmailer_sendordertickets.details')</h3>
+@lang('mailers_ticketmailer_sendordertickets.reference') <b>{{$order->order_reference}}</b><br>
+@lang('mailers_ticketmailer_sendordertickets.name') <b>{{$order->full_name}}</b><br>
+@lang('mailers_ticketmailer_sendordertickets.date') <b>{{$order->created_at->toDayDateTimeString()}}</b><br>
+@lang('mailers_ticketmailer_sendordertickets.email') <b>{{$order->email}}</b><br>
+<a href="{!! route('downloadCalendarIcs', ['event_id' => $order->event->id]) !!}">@lang('mailers_ticketmailer_sendordertickets.calendar')</a>
+<h3>@lang('mailers_ticketmailer_sendordertickets.items')</h3>
 <div style="padding:10px; background: #F9F9F9; border: 1px solid #f1f1f1;">
     <table style="width:100%; margin:10px;">
         <tr>
             <td>
-                <b>Ticket</b>
+                <b>@lang('mailers_ticketmailer_sendordertickets.ticket')</b>
             </td>
             <td>
-                <b>Qty.</b>
+                <b>@lang('mailers_ticketmailer_sendordertickets.qty')</b>
             </td>
             <td>
-                <b>Price</b>
+                <b>@lang('mailers_ticketmailer_sendordertickets.price')</b>
             </td>
             <td>
-                <b>Fee</b>
+                <b>@lang('mailers_ticketmailer_sendordertickets.fee')</b>
             </td>
             <td>
-                <b>Total</b>
+                <b>@lang('mailers_ticketmailer_sendordertickets.total')</b>
             </td>
         </tr>
         @foreach($order->orderItems as $order_item)
@@ -48,7 +50,7 @@ Order Email: <b>{{$order->email}}</b><br>
             </td>
             <td>
                 @if((int)ceil($order_item->unit_price) == 0)
-                FREE
+                @lang('mailers_ticketmailer_sendordertickets.free')
                 @else
                {{money($order_item->unit_price, $order->event->currency)}}
                 @endif
@@ -64,7 +66,7 @@ Order Email: <b>{{$order->email}}</b><br>
             </td>
             <td>
                 @if((int)ceil($order_item->unit_price) == 0)
-                FREE
+                @lang('mailers_ticketmailer_sendordertickets.free')
                 @else
                 {{money(($order_item->unit_price + $order_item->unit_booking_fee) * ($order_item->quantity), $order->event->currency)}}
                 @endif
@@ -98,7 +100,7 @@ Order Email: <b>{{$order->email}}</b><br>
             <td>
             </td>
             <td>
-                <b>Sub Total</b>
+                <b>@lang('mailers_ticketmailer_sendordertickets.subtotal')</b>
             </td>
             <td colspan="2">
                {{money($order->amount + $order->order_fee, $order->event->currency)}}
@@ -109,5 +111,5 @@ Order Email: <b>{{$order->email}}</b><br>
     <br><br>
 </div>
 <br><br>
-Thank you
+@lang('mailers_ticketmailer_sendordertickets.thanks')
 @stop

@@ -2,13 +2,13 @@
 
 @section('message_content')
 
-<p>Hi there,</p>
+<p>@lang('emails_notifycancelledattendee.hi')</p>
 <p>
-    Your ticket for the event <b>{{{$attendee->event->title}}}</b> has been cancelled.
+    @lang('emails_notifycancelledattendee.message1', ['title' => '<b>'.$attendee->event->title.'</b>'])
 </p>
 
 <p>
-    You can contact <b>{{{$attendee->event->organiser->name}}}</b> directly at <a href='mailto:{{{$attendee->event->organiser->email}}}'>{{{$attendee->event->organiser->email}}}</a> or by replying to this email should you require any more information.
+    @lang('emails_notifycancelledattendee.message2', ['sender' => '<b>'.$attendee->event->organiser->name.'</b>', 'at' => '<a href="mailto:'.$attendee->event->organiser->email.'">'.$attendee->event->organiser->email.'</a>'])
 </p>
 @stop
 
