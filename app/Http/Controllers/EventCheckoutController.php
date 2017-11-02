@@ -351,6 +351,7 @@ class EventCheckoutController extends Controller
 
                 switch ($ticket_order['payment_gateway']->id) {
                     case config('attendize.payment_gateway_paypal'):
+                    case config('attendize.payment_gateway_scellius'):
                     case config('attendize.payment_gateway_coinbase'):
 
                         $transaction_data += [

@@ -19,6 +19,16 @@ return [
             'driver'  => 'Stripe',
             'options' => [],
         ],
+        'scellius' => [
+            'driver' => 'Scellius',
+            'options' => [
+              'merchantId'=> '',
+              'merchantCountry'=> '',
+              'pathBinRequest'=> '',
+              'pathBinResponse'=> '',
+              'pathFile'=> '',
+            ],
+        ],
     ],
 
 ];
