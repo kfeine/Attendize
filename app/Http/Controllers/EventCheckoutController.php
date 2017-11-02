@@ -411,23 +411,39 @@ class EventCheckoutController extends Controller
                     return $this->completeOrder($event_id);
 
                 } elseif ($response->isRedirect()) {
+                    if($ticket_order['payment_gateway']->id == config('attendize.payment_gateway_scellius')) {
+                        $responseScellius = $response->getRedirectContentScellius();
+                        if($responseScellius['success']){
+                            $return = [
+                                'status'       => 'success',
+                                'completePurchase'  => true,
+                                'completePurchase'  => $responseScellius['message'],
+                            ];
+                        } else {
+                            $return = [
+                                'status'       => 'error',
+                                'completePurchase'  => true,
+                                'message'  => $responseScellius['message'],
+                            ];
+                        }
+                    } else {
 
-                    /*
-                     * As we're going off-site for payment we need to store some data in a session so it's available
-                     * when we return
-                     */
-                    session()->push('ticket_order_' . $event_id . '.transaction_data', $transaction_data);
-                    Log::info("Redirect url: " . $response->getRedirectUrl());
+                      /*
+                       * As we're going off-site for payment we need to store some data in a session so it's available
+                       * when we return
+                       */
+                      session()->push('ticket_order_' . $event_id . '.transaction_data', $transaction_data);
+                      Log::info("Redirect url: " . $response->getRedirectUrl());
 
-                    $return = [
-                        'status'       => 'success',
-                        'redirectUrl'  => $response->getRedirectUrl(),
-                        'message'      => 'Redirecting to ' . $ticket_order['payment_gateway']->provider_name
-                    ];
-
-                    // GET method requests should not have redirectData on the JSON return string
-                    if($response->getRedirectMethod() == 'POST') {
-                        $return['redirectData'] = $response->getRedirectData();
+                        $return = [
+                            'status'       => 'success',
+                            'redirectUrl'  => $response->getRedirectUrl(),
+                            'message'      => 'Redirecting to ' . $ticket_order['payment_gateway']->provider_name
+                        ];
+                        // GET method requests should not have redirectData on the JSON return string
+                        if($response->getRedirectMethod() == 'POST') {
+                            $return['redirectData'] = $response->getRedirectData();
+                        }
                     }
 
                     return response()->json($return);
