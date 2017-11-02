@@ -351,9 +351,7 @@ class EventCheckoutController extends Controller
 
                 switch ($ticket_order['payment_gateway']->id) {
                     case config('attendize.payment_gateway_paypal'):
-                    case config('attendize.payment_gateway_scellius'):
                     case config('attendize.payment_gateway_coinbase'):
-
                         $transaction_data += [
                             'cancelUrl' => route('showEventCheckoutPaymentReturn', [
                                 'event_id'             => $event_id,
@@ -389,6 +387,18 @@ class EventCheckoutController extends Controller
                         $transaction_data['description'] = "Ticket sales " . $transaction_data['transactionId'];
 
                         break;
+                    case config('attendize.payment_gateway_scellius'):
+                        $transaction_data += [
+                            'cancelUrl' => route('showEventCheckoutPaymentScelliusReturn', [
+                                'event_id'             => $event_id,
+                                'is_payment_cancelled' => 1
+                            ]),
+                            'returnUrl' => route('showEventCheckoutPaymentScelliusReturn', [
+                                'event_id'              => $event_id,
+                                'is_payment_successful' => 1
+                            ]),
+                        ];
+                        break;
                     default:
                         Log::error('No payment gateway configured.');
                         return repsonse()->json([
@@ -414,6 +424,8 @@ class EventCheckoutController extends Controller
                     if($ticket_order['payment_gateway']->id == config('attendize.payment_gateway_scellius')) {
                         $responseScellius = $response->getRedirectContentScellius();
                         if($responseScellius['success']){
+                            session()->push('ticket_order_' . $event_id . '.transaction_data', $transaction_data);
+                            Log::info("Redirect url: " . $response->getRedirectUrl());
                             $return = [
                                 'status'       => 'success',
                                 'completePurchase'  => true,

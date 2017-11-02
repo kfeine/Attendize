@@ -2245,12 +2245,12 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:shafan/omnipay-scellius.git",
-                "reference": "5d67b4787f3e2f78f47aef8ad4cc5c4c84d16cb3"
+                "reference": "6d8f0a14351c8829852eaa0152c81c552975c843"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/shafan%2Fomnipay-scellius/repository/archive.zip?sha=5d67b4787f3e2f78f47aef8ad4cc5c4c84d16cb3",
-                "reference": "5d67b4787f3e2f78f47aef8ad4cc5c4c84d16cb3",
+                "url": "https://gitlab.com/api/v4/projects/shafan%2Fomnipay-scellius/repository/archive.zip?sha=6d8f0a14351c8829852eaa0152c81c552975c843",
+                "reference": "6d8f0a14351c8829852eaa0152c81c552975c843",
                 "shasum": ""
             },
             "require": {
@@ -2286,7 +2286,7 @@
                 "payment",
                 "scellius"
             ],
-            "time": "2017-11-02T15:32:47+00:00"
+            "time": "2017-11-02T16:44:58+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
