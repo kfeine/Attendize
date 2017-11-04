@@ -55,6 +55,20 @@ class Discount extends MyBaseModel
     }
 
     /**
+     * Get the number of discounts remaining.
+     *
+     * @return \Illuminate\Support\Collection|int|mixed|static
+     */
+    public function getQuantityRemainingAttribute()
+    {
+        if (is_null($this->quantity_available)) {
+            return 9999; //Better way to do this?
+        }
+
+        return $this->quantity_available - $this->orders->count();
+    }
+
+    /**
      * The attributes that should be mutated to dates.
      *
      * @return array $dates

@@ -75,7 +75,7 @@
                                         {{ $discount->orders->count() }}
                                     </td>
                                     <td>
-                                        {{ ($discount->quantity_available === null) ? '&infin;' : $discount->quantity_available - $discount->orders->count() }}
+                                        {{ ($discount->quantity_available === null) ? '&infin;' : $discount->quantity_remaining }}
                                     </td>
                                     <td class="text-center">
                                         <a class="btn btn-xs btn-primary loadModal" data-modal-id="EditDiscount"
