@@ -4607,6 +4607,10 @@ function log() {
                         }
                         switch (data.status) {
                             case 'success':
+                                if (data.completePurchase) {
+                                    $form.replaceWith(data.completePurchase);
+                                    break; 
+                                }
 
                                 if (data.redirectUrl) {
                                     if(data.redirectData)  {
