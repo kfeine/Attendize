@@ -194,7 +194,11 @@ class EventCheckoutController extends Controller
             $discount = Discount::where('code', $discount_code)->first();
         }
         if ($discount) {
-            $order_total = $order_total + $discount->price;
+            if ($discount->quantity_available > $discount->orders->count()) {
+                $order_total = $order_total + $discount->price;
+            } else {
+                $discount = False;
+            }
         }
         // check if the total is positive…
         if ($order_total < 0) {
