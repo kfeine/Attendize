@@ -30,5 +30,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'Illuminate\Contracts\Auth\Registrar', 'App\Services\Registrar'
         );
+        setlocale(LC_TIME, config('app.locale'));
     }
 }

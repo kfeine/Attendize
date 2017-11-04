@@ -74,27 +74,18 @@ class Install extends Command
         if (Account::count() === 0) {
             DB::beginTransaction();
             try {
-                $this->comment('--------------------');
-                $this->comment('Please create an admin user.');
-                $this->comment('--------------------');
-                //Create the first user
-                $fname = $this->ask('Enter first name:');
-                $lname = $this->ask('Enter last name:');
-                $email = $this->ask('Enter your email:');
-                $password = $this->secret('Enter a password:');
-
-                $account_data['email'] = $email;
-                $account_data['first_name'] = $fname;
-                $account_data['last_name'] = $lname;
+                $account_data['email'] = env('ADMIN_EMAIL', 'root@localhost');
+                $account_data['first_name'] = env('ADMIN_FIRST_NAME', 'ad');
+                $account_data['last_name'] = env('ADMIN_LAST_NAME', 'min');
                 $account_data['currency_id'] = config('attendize.default_currency');
                 $account_data['timezone_id'] = config('attendize.default_timezone');
                 $account = Account::create($account_data);
 
-                $user_data['email'] = $email;
-                $user_data['first_name'] = $fname;
-                $user_data['last_name'] = $lname;
+                $user_data['email'] = env('ADMIN_EMAIL', 'root@localhost');
+                $user_data['first_name'] = env('ADMIN_FIRST_NAME', 'ad');
+                $user_data['last_name'] = env('ADMIN_LAST_NAME', 'min');
 
-                $user_data['password'] = Hash::make($password);
+                $user_data['password'] = Hash::make(env('ADMIN_PASSWORD'));
                 $user_data['account_id'] = $account->id;
                 $user_data['is_parent'] = 1;
                 $user_data['is_registered'] = 1;
@@ -115,9 +106,9 @@ class Install extends Command
         file_put_contents(base_path('installed'), $version);
 
         $this->comment("
-          _   _                 _ _         
-     /\  | | | |               | (_)        
-    /  \ | |_| |_ ___ _ __   __| |_ _______ 
+          _   _                 _ _
+     /\  | | | |               | (_)
+    /  \ | |_| |_ ___ _ __   __| |_ _______
    / /\ \| __| __/ _ \ '_ \ / _` | |_  / _ \
   / ____ \ |_| ||  __/ | | | (_| | |/ /  __/
  /_/    \_\__|\__\___|_| |_|\__,_|_/___\___|

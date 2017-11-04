@@ -17,7 +17,7 @@ return [
     'ticket_ref' => 'Référence du ticket',
     'message' => 'Message',
     'resend' => 'Renvoyer le ticket',
-    'dowload' => 'Télécharger le ticket au format PDF',
+    'download' => 'Télécharger le ticket au format PDF',
     'edit' => 'Modifier',
     'cancel' => 'Annuler',
 
