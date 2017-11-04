@@ -52,15 +52,6 @@ Route::group(['middleware' => ['installed']], function () {
     //]);
 
     /*
-     * Registration / Account creation
-     */
-    Route::get('/signup', [
-        'uses' => 'UserSignupController@showSignup',
-        'as'   => 'showSignup',
-    ]);
-    Route::post('/signup', 'UserSignupController@postSignup');
-
-    /*
      * Confirm Email
      */
     Route::get('signup/confirm_email/{confirmation_code}', [

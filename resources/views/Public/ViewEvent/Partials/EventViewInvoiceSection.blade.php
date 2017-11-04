@@ -1,8 +1,7 @@
-<section id="order_form" class="content">
-<div class="container">
+<section id="order_form" class="container">
     <div class="row">
         <h1 class="section_head">
-            Détails de la commande
+            Order Details
         </h1>
     </div>
     <div class="row">
@@ -101,5 +100,4 @@
             </div>
         </div>
     </div>
-</div>
 </section>
