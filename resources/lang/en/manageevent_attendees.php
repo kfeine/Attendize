@@ -17,7 +17,7 @@ return [
     'ticket_ref' => 'Ticket Ref.',
     'message' => 'Message',
     'resend' => 'Resend Ticket',
-    'dowload' => 'Download PDF Ticket',
+    'download' => 'Download PDF Ticket',
     'edit' => 'Edit',
     'cancel' => 'Cancel',
 
