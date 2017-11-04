@@ -1,6 +1,4 @@
-@if($event->location_state)
-<section id="location" class="content p0">
-<div class="container"
+<section id="location" class="container p0">
     <div class="row">
         <div class="col-md-12">
             <div class="google-maps content">
@@ -8,7 +6,4 @@
             </div>
         </div>
     </div>
-</div>
 </section>
-@endif
-

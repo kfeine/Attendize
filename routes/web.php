@@ -52,15 +52,6 @@ Route::group(['middleware' => ['installed']], function () {
     //]);
 
     /*
-     * Registration / Account creation
-     */
-    Route::get('/signup', [
-        'uses' => 'UserSignupController@showSignup',
-        'as'   => 'showSignup',
-    ]);
-    Route::post('/signup', 'UserSignupController@postSignup');
-
-    /*
      * Confirm Email
      */
     Route::get('signup/confirm_email/{confirmation_code}', [
@@ -132,6 +123,10 @@ Route::group(['prefix' => 'e'], function () {
         'uses' => 'EventCheckoutController@showEventCheckoutPaymentReturn',
     ]);
 
+    Route::post('/scellius/{event_id}/checkout/success', [
+        'as'   => 'showEventCheckoutPaymentScelliusReturn',
+        'uses' => 'EventCheckoutController@showEventCheckoutPaymentReturn',
+    ]);
 
     Route::post('{event_id}/checkout/create', [
         'as'   => 'postCreateOrder',

@@ -63,7 +63,7 @@ class EventCheckoutController extends Controller
         if (!$request->has('tickets')) {
             return response()->json([
                 'status'  => 'error',
-                'message' => 'No tickets selected',
+                'message' => __('controllers_eventcheckoutcontroller.no_tickets_selected'),
             ]);
         }
 
@@ -110,8 +110,8 @@ class EventCheckoutController extends Controller
             ];
 
             $quantity_available_validation_messages = [
-                'ticket_' . $ticket_id . '.max' => 'The maximum number of tickets you can register is ' . $ticket_quantity_remaining,
-                'ticket_' . $ticket_id . '.min' => 'You must select at least ' . $ticket->min_per_person . ' tickets.',
+                'ticket_' . $ticket_id . '.max' => __('controllers_eventcheckoutcontroller.max_number_tickets', ['quantity' => $ticket_quantity_remaining]),
+                'ticket_' . $ticket_id . '.min' => __('controllers_eventcheckoutcontroller.number_tickets', ['min_per_person' => $ticket->min_per_person]),
             ];
 
             $validator = Validator::make(['ticket_' . $ticket_id => (int)$request->get('ticket_' . $ticket_id)],
@@ -156,10 +156,10 @@ class EventCheckoutController extends Controller
                 $validation_rules['ticket_holder_last_name.' . $i . '.' . $ticket_id] = ['required'];
                 $validation_rules['ticket_holder_email.' . $i . '.' . $ticket_id] = ['required', 'email'];
 
-                $validation_messages['ticket_holder_first_name.' . $i . '.' . $ticket_id . '.required'] = 'Ticket holder ' . ($i + 1) . '\'s first name is required';
-                $validation_messages['ticket_holder_last_name.' . $i . '.' . $ticket_id . '.required'] = 'Ticket holder ' . ($i + 1) . '\'s last name is required';
-                $validation_messages['ticket_holder_email.' . $i . '.' . $ticket_id . '.required'] = 'Ticket holder ' . ($i + 1) . '\'s email is required';
-                $validation_messages['ticket_holder_email.' . $i . '.' . $ticket_id . '.email'] = 'Ticket holder ' . ($i + 1) . '\'s email appears to be invalid';
+                $validation_messages['ticket_holder_first_name.' . $i . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($i + 1)]);
+                $validation_messages['ticket_holder_last_name.' . $i . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($i + 1)]);
+                $validation_messages['ticket_holder_email.' . $i . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.email_required', ['person' => ($i + 1)]);
+                $validation_messages['ticket_holder_email.' . $i . '.' . $ticket_id . '.email'] = __('controllers_eventcheckoutcontroller.email_invalid', ['person' => ($i + 1)]);
 
                 /*
                  * Validation rules for custom questions
@@ -168,7 +168,7 @@ class EventCheckoutController extends Controller
 
                     if ($question->is_required && $question->is_enabled) {
                         $validation_rules['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id] = ['required'];
-                        $validation_messages['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id . '.required'] = "This question is required";
+                        $validation_messages['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id . '.required'] = __('controllers_eventcheckoutcontroller.question_required');
                     }
 
                 }
@@ -180,7 +180,7 @@ class EventCheckoutController extends Controller
         if (empty($tickets)) {
             return response()->json([
                 'status'  => 'error',
-                'message' => 'No tickets selected.',
+                'message' => __('controllers_eventcheckoutcontroller.no_tickets_selected'),
             ]);
         }
 
@@ -244,7 +244,7 @@ class EventCheckoutController extends Controller
         /*
          * Maybe display something prettier than this?
          */
-        exit('Please enable Javascript in your browser.');
+        exit(__('controllers_eventcheckoutcontroller.enable_javascript'));
     }
 
     /**
@@ -294,7 +294,7 @@ class EventCheckoutController extends Controller
         if (!session()->get('ticket_order_' . $event_id)) {
             return response()->json([
                 'status'      => 'error',
-                'message'     => 'Your session has expired.',
+                'message'     => __('controllers_eventcheckoutcontroller.session_expired'),
                 'redirectUrl' => route('showEventPage', [
                     'event_id' => $event_id,
                 ])
@@ -354,7 +354,6 @@ class EventCheckoutController extends Controller
                 switch ($ticket_order['payment_gateway']->id) {
                     case config('attendize.payment_gateway_paypal'):
                     case config('attendize.payment_gateway_coinbase'):
-
                         $transaction_data += [
                             'cancelUrl' => route('showEventCheckoutPaymentReturn', [
                                 'event_id'             => $event_id,
@@ -390,11 +389,23 @@ class EventCheckoutController extends Controller
                         $transaction_data['description'] = "Ticket sales " . $transaction_data['transactionId'];
 
                         break;
+                    case config('attendize.payment_gateway_scellius'):
+                        $transaction_data += [
+                            'cancelUrl' => route('showEventCheckoutPaymentScelliusReturn', [
+                                'event_id'             => $event_id,
+                                'is_payment_cancelled' => 1
+                            ]),
+                            'returnUrl' => route('showEventCheckoutPaymentScelliusReturn', [
+                                'event_id'              => $event_id,
+                                'is_payment_successful' => 1
+                            ]),
+                        ];
+                        break;
                     default:
                         Log::error('No payment gateway configured.');
                         return repsonse()->json([
                             'status'  => 'error',
-                            'message' => 'No payment gateway configured.'
+                            'message' => __('controllers_eventcheckoutcontroller.no_gateway_configured')
                         ]);
                         break;
                 }
@@ -412,23 +423,41 @@ class EventCheckoutController extends Controller
                     return $this->completeOrder($event_id);
 
                 } elseif ($response->isRedirect()) {
+                    if($ticket_order['payment_gateway']->id == config('attendize.payment_gateway_scellius')) {
+                        $responseScellius = $response->getRedirectContentScellius();
+                        if($responseScellius['success']){
+                            session()->push('ticket_order_' . $event_id . '.transaction_data', $transaction_data);
+                            Log::info("Redirect url: " . $response->getRedirectUrl());
+                            $return = [
+                                'status'       => 'success',
+                                'completePurchase'  => true,
+                                'completePurchase'  => $responseScellius['message'],
+                            ];
+                        } else {
+                            $return = [
+                                'status'       => 'error',
+                                'completePurchase'  => true,
+                                'message'  => $responseScellius['message'],
+                            ];
+                        }
+                    } else {
 
-                    /*
-                     * As we're going off-site for payment we need to store some data in a session so it's available
-                     * when we return
-                     */
-                    session()->push('ticket_order_' . $event_id . '.transaction_data', $transaction_data);
-                    Log::info("Redirect url: " . $response->getRedirectUrl());
+                      /*
+                       * As we're going off-site for payment we need to store some data in a session so it's available
+                       * when we return
+                       */
+                      session()->push('ticket_order_' . $event_id . '.transaction_data', $transaction_data);
+                      Log::info("Redirect url: " . $response->getRedirectUrl());
 
-                    $return = [
-                        'status'       => 'success',
-                        'redirectUrl'  => $response->getRedirectUrl(),
-                        'message'      => 'Redirecting to ' . $ticket_order['payment_gateway']->provider_name
-                    ];
-
-                    // GET method requests should not have redirectData on the JSON return string
-                    if($response->getRedirectMethod() == 'POST') {
-                        $return['redirectData'] = $response->getRedirectData();
+                        $return = [
+                            'status'       => 'success',
+                            'redirectUrl'  => $response->getRedirectUrl(),
+                            'message'      => 'Redirecting to ' . $ticket_order['payment_gateway']->provider_name
+                        ];
+                        // GET method requests should not have redirectData on the JSON return string
+                        if($response->getRedirectMethod() == 'POST') {
+                            $return['redirectData'] = $response->getRedirectData();
+                        }
                     }
 
                     return response()->json($return);
@@ -442,7 +471,7 @@ class EventCheckoutController extends Controller
                 }
             } catch (\Exeption $e) {
                 Log::error($e);
-                $error = 'Sorry, there was an error processing your payment. Please try again.';
+                $error = __('controllers_eventcheckoutcontroller.try_again');
             }
 
             if ($error) {
@@ -474,7 +503,7 @@ class EventCheckoutController extends Controller
     {
 
         if ($request->get('is_payment_cancelled') == '1') {
-            session()->flash('message', 'You cancelled your payment. You may try again.');
+            session()->flash('message', __('controllers_eventcheckoutcontroller.payment_cancelled'));
             return response()->redirectToRoute('showEventCheckout', [
                 'event_id'             => $event_id,
                 'is_payment_cancelled' => 1,
@@ -683,7 +712,7 @@ class EventCheckoutController extends Controller
 
             return response()->json([
                 'status'  => 'error',
-                'message' => 'Whoops! There was a problem processing your order. Please try again.'
+                'message' => __('controllers_eventcheckoutcontroller.problem_processing_order')
             ]);
 
         }

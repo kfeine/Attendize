@@ -121,6 +121,51 @@
 
 </section>
 
+{{--Scellius--}}
+<section class="payment_gateway_options"  id="gateway_{{config('attendize.payment_gateway_scellius')}}">
+    <h4>@lang('manageaccount_partials_paymentgatewayoptions.scellius_settings')</h4>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {!! Form::label('scellius[merchantId]', __('manageaccount_partials_paymentgatewayoptions.scellius_merchant_id'), array('class'=>'control-label ')) !!}
+                {!! Form::text('scellius[merchantId]', $account->getGatewayConfigVal(config('attendize.payment_gateway_scellius'), 'merchantId'),[ 'class'=>'form-control'])  !!}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                {!! Form::label('scellius[merchantCountry]', __('manageaccount_partials_paymentgatewayoptions.scellius_merchant_country'), array('class'=>'control-label ')) !!}
+                {!! Form::text('scellius[merchantCountry]', $account->getGatewayConfigVal(config('attendize.payment_gateway_scellius'), 'merchantCountry'),[ 'class'=>'form-control'])  !!}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                {!! Form::label('scellius[pathBinRequest]', __('manageaccount_partials_paymentgatewayoptions.scellius_pathbin_request'), array('class'=>'control-label ')) !!}
+                {!! Form::text('scellius[pathBinRequest]', $account->getGatewayConfigVal(config('attendize.payment_gateway_scellius'), 'pathBinRequest'),[ 'class'=>'form-control'])  !!}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                {!! Form::label('scellius[pathBinResponse]', __('manageaccount_partials_paymentgatewayoptions.scellius_pathbin_response'), array('class'=>'control-label ')) !!}
+                {!! Form::text('scellius[pathBinResponse]', $account->getGatewayConfigVal(config('attendize.payment_gateway_scellius'), 'pathBinResponse'),[ 'class'=>'form-control'])  !!}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                {!! Form::label('scellius[pathFile]', __('manageaccount_partials_paymentgatewayoptions.scellius_pathfile'), array('class'=>'control-label ')) !!}
+                {!! Form::text('scellius[pathFile]', $account->getGatewayConfigVal(config('attendize.payment_gateway_scellius'), 'pathFile'),[ 'class'=>'form-control'])  !!}
+            </div>
+        </div>
+    </div>
+
+</section>
+
 {{--BDO MIGS--}}
 <section class="payment_gateway_options"  id="gateway_{{config('attendize.payment_gateway_migs')}}">
     <h4>@lang('manageaccount_partials_paymentgatewayoptions.mastercard_settings')</h4>
