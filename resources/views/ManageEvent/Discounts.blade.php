@@ -50,7 +50,9 @@
                                 <th> @lang('manageevent_discounts.description') </th>
                                 <th> @lang('manageevent_discounts.code') </th>
                                 <th> @lang('manageevent_discounts.price') </th>
+                                <th> @lang('manageevent_discounts.quantity') </th>
                                 <th> @lang('manageevent_discounts.usage') </th>
+                                <th> @lang('manageevent_discounts.quantity_left') </th>
                                 <th> @lang('manageevent_discounts.actions') </th>
                             </thead>
 
@@ -67,7 +69,13 @@
                                         {{ $discount->price }}
                                     </td>
                                     <td>
+                                        {{ ($discount->quantity_available === null) ? '&infin;' : $discount->quantity_available }}
+                                    </td>
+                                    <td>
                                         {{ $discount->orders->count() }}
+                                    </td>
+                                    <td>
+                                        {{ ($discount->quantity_available === null) ? '&infin;' : $discount->quantity_remaining }}
                                     </td>
                                     <td class="text-center">
                                         <a class="btn btn-xs btn-primary loadModal" data-modal-id="EditDiscount"
@@ -82,7 +90,7 @@
                                             {{ $discount->is_enabled ? 'Disable' : 'Enable' }}
                                         </a>
                                         <a data-id="{{ $discount->id }}"
-                                           title="The disount code won't be effective anymore, but existing reductions will still apply."
+                                           title="The discount code won't be effective anymore, but existing reductions will still apply."
                                            data-route="{{ route('postDeleteEventDiscount', ['event_id' => $event->id, 'discount_id' => $discount->id]) }}"
                                            data-type="discount" href="javascript:void(0);"
                                            class="deleteThis btn btn-xs btn-danger">

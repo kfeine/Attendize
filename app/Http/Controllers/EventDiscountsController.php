@@ -75,6 +75,7 @@ class EventDiscountsController extends MyBaseController
         $discount->title = $request->get('title');
         $discount->code  = $request->get('code');
         $discount->price = $request->get('price');
+        $discount->quantity_available = !$request->get('quantity_available') ? null : $request->get('quantity_available');
         $discount->is_enabled = true;
         $discount->event_id = $event_id;
         $discount->save();
@@ -139,6 +140,7 @@ class EventDiscountsController extends MyBaseController
         $discount->title = $request->get('title');
         $discount->code = $request->get('code');
         $discount->price = $request->get('price');
+        $discount->quantity_available = !$request->get('quantity_available') ? null : $request->get('quantity_available');
         $discount->save();
 
         session()->flash('message', 'Successfully edited discount');

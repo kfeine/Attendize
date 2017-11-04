@@ -31,6 +31,15 @@
                     ]) !!}
                 </div>
                 <div class="form-group">
+                    {!! Form::label('quantity_available', __('manageevent_modals_creatediscount.quantity'), array('class'=>' control-label')) !!}
+                    {!! Form::text('quantity_available', Input::old('quantity_available'),
+                                array(
+                                'class'=>'form-control',
+                                'placeholder'=>'E.g: 100 (Leave blank for unlimited)'
+                                )
+                                ) !!}
+                </div>
+                <div class="form-group">
                     <label for="price">
                         @lang('manageevent_modals_creatediscount.price')
                     </label>

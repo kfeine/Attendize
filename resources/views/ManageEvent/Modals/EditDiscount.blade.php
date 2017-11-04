@@ -41,6 +41,11 @@
                                 'placeholder' => __('manageevent_modals_editdiscount.placeholder_price'),
                             ]) !!}
                         </div>
+
+                        <div class="form-group">
+                            {!! Form::label('quantity_available', __('manageevent_modals_editdiscount.quantity'), ['class'=>' control-label']) !!}
+                            {!! Form::text('quantity_available', null, ['class' => 'form-control', 'placeholder' => __('manageevent_modals_editdiscount.placeholder_quantity')]) !!}
+                        </div>
             </div> <!-- /end modal body-->
             <div class="modal-footer">
                 {!! Form::button(__('manageevent_modals_editdiscount.cancel'), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}

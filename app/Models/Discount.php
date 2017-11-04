@@ -19,6 +19,7 @@ class Discount extends MyBaseModel
         'start_sale_date'    => ['date'],
         'end_sale_date'      => ['date', 'after:start_sale_date'],
         'code'               => ['required', 'alpha_num', 'size:8'],
+        'quantity_available' => ['integer', 'min:0'],
     ];
 
     /**
@@ -30,6 +31,7 @@ class Discount extends MyBaseModel
         'price.numeric'              => 'The price must be a valid negative number (e.g -12.50)',
         'title.required'             => 'You must at least give a title for your ticket. (e.g Special discount)',
         'code.alpha_num'             => 'The code should be 8 alpha numerical characters (e.g ABCD1234).',
+        'quantity_available.integer' => 'Please ensure the quantity available is a number.',
     ];
 
     /**
@@ -50,6 +52,20 @@ class Discount extends MyBaseModel
     public function orders()
     {
         return $this->hasMany(\App\Models\Order::class);
+    }
+
+    /**
+     * Get the number of discounts remaining.
+     *
+     * @return \Illuminate\Support\Collection|int|mixed|static
+     */
+    public function getQuantityRemainingAttribute()
+    {
+        if (is_null($this->quantity_available)) {
+            return 9999; //Better way to do this?
+        }
+
+        return $this->quantity_available - $this->orders->count();
     }
 
     /**

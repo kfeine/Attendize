@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'edit' => 'Edit Ticket:',
     'title' => 'Ticket Title',
     'placeholder_title' => 'E.g: General Admission',
@@ -18,5 +17,4 @@ return [
     'more_options' => 'More Options',
     'close' => 'Close',
     'save' => 'Save Ticket',
-
 ];
