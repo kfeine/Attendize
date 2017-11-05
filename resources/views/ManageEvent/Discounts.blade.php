@@ -66,7 +66,11 @@
                                         {{ $discount->code }}
                                     </td>
                                     <td>
-                                        {{ $discount->price }}
+                                        @if($discount->type == "amount")
+                                        {{ money($discount->price, $event->currency) }}
+                                        @else
+                                        {{ $discount->price }} %
+                                        @endif
                                     </td>
                                     <td>
                                         {{ ($discount->quantity_available === null) ? '&infin;' : $discount->quantity_available }}

@@ -9,6 +9,7 @@
                     <i class="ico-gift"></i>
                     @lang('manageevent_modals_creatediscount.discount')</h3>
             </div>
+
             <div class="modal-body">
                 <div class="form-group">
                     <label for="discount-title" class="required">
@@ -20,6 +21,7 @@
                         'placeholder' => __('manageevent_modals_creatediscount.eg_reduction'),
                     ]) !!}
                 </div>
+
                 <div class="form-group">
                     <label for="discount">
                         @lang('manageevent_modals_creatediscount.code')
@@ -30,6 +32,7 @@
                         'placeholder' => __('manageevent_modals_creatediscount.eg_code'),
                     ]) !!}
                 </div>
+
                 <div class="form-group">
                     {!! Form::label('quantity_available', __('manageevent_modals_creatediscount.quantity'), array('class'=>' control-label')) !!}
                     {!! Form::text('quantity_available', Input::old('quantity_available'),
@@ -39,6 +42,17 @@
                                 )
                                 ) !!}
                 </div>
+
+                <div class="form-group">
+                    <label for="type">
+                        @lang('manageevent_modals_creatediscount.type')
+                    </label>
+                    {!! Form::select('type', [
+                        'amount'     => __('manageevent_modals_creatediscount.type_select_amount'),
+                        'percentage' => __('manageevent_modals_creatediscount.type_select_percentage')
+                    ]) !!}
+                </div>
+
                 <div class="form-group">
                     <label for="price">
                         @lang('manageevent_modals_creatediscount.price')

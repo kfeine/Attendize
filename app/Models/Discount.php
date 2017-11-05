@@ -16,6 +16,7 @@ class Discount extends MyBaseModel
     public $rules = [
         'title'              => ['required'],
         'price'              => ['required', 'numeric', 'max:0'],
+        'type'               => ['required', 'in:amount,percentage'],
         'start_sale_date'    => ['date'],
         'end_sale_date'      => ['date', 'after:start_sale_date'],
         'code'               => ['required', 'alpha_num', 'size:8'],

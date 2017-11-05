@@ -32,6 +32,17 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="type" class="required">
+                                @lang('manageevent_modals_creatediscount.type')
+                            </label>
+                            {!! Form::select('type', [
+                                'amount'     => __('manageevent_modals_creatediscount.type_select_amount'),
+                                'percentage' => __('manageevent_modals_creatediscount.type_select_percentage')
+                            ],
+                            $discount->type) !!}
+                        </div>
+
+                        <div class="form-group">
                             <label for="discount-price" class="required">
                                 @lang('manageevent_modals_editdiscount.price')
                             </label>
