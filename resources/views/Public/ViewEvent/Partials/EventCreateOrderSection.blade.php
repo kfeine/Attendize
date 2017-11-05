@@ -23,7 +23,7 @@
                                 @if((int)ceil($ticket['full_price']) === 0)
                                 @lang('public_viewevent_partials_eventcreateordersection.free')
                                 @else
-                                {{ money($ticket['full_price'], $event->currency) }}
+                                {{ money($ticket['full_price'] * $ticket['qty'], $event->currency) }}
                                 @endif
                             </td>
                         </tr>
