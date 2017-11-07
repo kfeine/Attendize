@@ -1,4 +1,5 @@
-<section id="tickets" class="container">
+<section id="tickets" class="content">
+<div class="container">
     <div class="row">
         <h1 class='section_head'>
             @lang('public_viewevent_partials_eventticketssection.title')
@@ -77,6 +78,7 @@
 
     @endif
 
+</div>
 </section>
 
 <script>
