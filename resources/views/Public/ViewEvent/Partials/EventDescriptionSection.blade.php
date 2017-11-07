@@ -1,4 +1,5 @@
-<section id="details" class="container">
+<section id="details" class="content">
+<div class="container">
     <div class="row">
         <h1 class="section_head">
             @lang('public_viewevent_partials_eventdescriptionsection.title')
@@ -24,4 +25,5 @@
         </div>
         @endif
     </div>
+</div>
 </section>
