@@ -9103,6 +9103,24 @@ $.cf = {
         dataType: 'json'
     });
 
+    /*
+     * --------------------
+     * Create a simple way to show link from the frontend
+     * --------------------
+     *
+     * E.g :
+     * <a href='/route/to/link' class='loadLink'>
+     * </a>
+     *
+     */
+    $(document.body).on('click', '.loadLink, [data-invoke~=modal]', function (e) {
+
+        var loadUrl = $(this).data('href');
+
+        window.location = loadUrl;
+
+        e.preventDefault();
+    });
 
     /*
      * --------------------
