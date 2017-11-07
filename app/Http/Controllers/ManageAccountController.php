@@ -101,9 +101,9 @@ class ManageAccountController extends MyBaseController
             ]);
         }
 
-        $account->first_name = Input::get('first_name');
-        $account->last_name = Input::get('last_name');
-        $account->email = Input::get('email');
+        $account->first_name  = Input::get('first_name');
+        $account->last_name   = Input::get('last_name');
+        $account->email       = Input::get('email');
         $account->timezone_id = Input::get('timezone_id');
         $account->currency_id = Input::get('currency_id');
         $account->save();
@@ -136,12 +136,12 @@ class ManageAccountController extends MyBaseController
             case config('attendize.payment_gateway_coinbase') : //BitPay
                 $config = $request->get('coinbase');
                 break;
-			      case config('attendize.payment_gateway_migs') : //MIGS
-			      	  $config = $request->get('migs');
-			      	  break;
+                  case config('attendize.payment_gateway_migs') : //MIGS
+                        $config = $request->get('migs');
+                        break;
             case config('attendize.payment_gateway_scellius') : //Scellius
-			      	  $config = $request->get('scellius');
-			      	  break;
+                        $config = $request->get('scellius');
+                        break;
             }
 
         $account_payment_gateway = AccountPaymentGateway::firstOrNew(
@@ -194,8 +194,8 @@ class ManageAccountController extends MyBaseController
 
         $user = new User();
 
-        $user->email = Input::get('email');
-        $user->password = Hash::make($temp_password);
+        $user->email      = Input::get('email');
+        $user->password   = Hash::make($temp_password);
         $user->account_id = Auth::user()->account_id;
 
         $user->save();

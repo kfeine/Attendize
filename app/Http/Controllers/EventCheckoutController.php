@@ -554,13 +554,12 @@ class EventCheckoutController extends Controller
 
         try {
 
-            $order = new Order();
-            $ticket_order = session()->get('ticket_order_' . $event_id);
-            $request_data = $ticket_order['request_data'][0];
-            $event = Event::findOrFail($ticket_order['event_id']);
+            $order              = new Order();
+            $ticket_order       = session()->get('ticket_order_' . $event_id);
+            $request_data       = $ticket_order['request_data'][0];
+            $event              = Event::findOrFail($ticket_order['event_id']);
             $attendee_increment = 1;
-            $ticket_questions = isset($request_data['ticket_holder_questions']) ? $request_data['ticket_holder_questions'] : [];
-
+            $ticket_questions   = isset($request_data['ticket_holder_questions']) ? $request_data['ticket_holder_questions'] : [];
 
             /*
              * Create the order
@@ -571,16 +570,16 @@ class EventCheckoutController extends Controller
             if ($ticket_order['order_requires_payment'] && !isset($request_data['pay_offline'])) {
                 $order->payment_gateway_id = $ticket_order['payment_gateway']->id;
             }
-            $order->first_name = $request_data['order_first_name'];
-            $order->last_name = $request_data['order_last_name'];
-            $order->email = $request_data['order_email'];
-            $order->order_status_id = isset($request_data['pay_offline']) ? config('attendize.order_awaiting_payment') : config('attendize.order_complete');
-            $order->amount = $ticket_order['order_total'];
-            $order->booking_fee = $ticket_order['booking_fee'];
+            $order->first_name            = mb_convert_case(trim($request_data['order_first_name']), MB_CASE_TITLE, 'UTF-8');
+            $order->last_name             = mb_convert_case(trim($request_data['order_last_name']), MB_CASE_UPPER, 'UTF-8');
+            $order->email                 = $request_data['order_email'];
+            $order->order_status_id       = isset($request_data['pay_offline']) ? config('attendize.order_awaiting_payment') : config('attendize.order_complete');
+            $order->amount                = $ticket_order['order_total'];
+            $order->booking_fee           = $ticket_order['booking_fee'];
             $order->organiser_booking_fee = $ticket_order['organiser_booking_fee'];
-            $order->account_id = $event->account->id;
-            $order->event_id = $ticket_order['event_id'];
-            $order->is_payment_received = isset($request_data['pay_offline']) ? 0 : 1;
+            $order->account_id            = $event->account->id;
+            $order->event_id              = $ticket_order['event_id'];
+            $order->is_payment_received   = isset($request_data['pay_offline']) ? 0 : 1;
             if (isset($ticket_order['discount']) && is_object($ticket_order['discount'])) {
                 $order->discount_id = $ticket_order['discount']->id;
             }
@@ -638,11 +637,11 @@ class EventCheckoutController extends Controller
                 /*
                  * Insert order items (for use in generating invoices)
                  */
-                $orderItem = new OrderItem();
-                $orderItem->title = $attendee_details['ticket']['title'];
-                $orderItem->quantity = $attendee_details['qty'];
-                $orderItem->order_id = $order->id;
-                $orderItem->unit_price = $attendee_details['ticket']['price'];
+                $orderItem                   = new OrderItem();
+                $orderItem->title            = $attendee_details['ticket']['title'];
+                $orderItem->quantity         = $attendee_details['qty'];
+                $orderItem->order_id         = $order->id;
+                $orderItem->unit_price       = $attendee_details['ticket']['price'];
                 $orderItem->unit_booking_fee = $attendee_details['ticket']['booking_fee'] + $attendee_details['ticket']['organiser_booking_fee'];
                 $orderItem->save();
 
@@ -651,23 +650,21 @@ class EventCheckoutController extends Controller
                  */
                 for ($i = 0; $i < $attendee_details['qty']; $i++) {
 
-                    $attendee = new Attendee();
-                    $attendee->first_name = $request_data["ticket_holder_first_name"][$i][$attendee_details['ticket']['id']];
-                    $attendee->last_name = $request_data["ticket_holder_last_name"][$i][$attendee_details['ticket']['id']];
-                    $attendee->email = $request_data["ticket_holder_email"][$i][$attendee_details['ticket']['id']];
-                    $attendee->event_id = $event_id;
-                    $attendee->order_id = $order->id;
-                    $attendee->ticket_id = $attendee_details['ticket']['id'];
-                    $attendee->account_id = $event->account->id;
+                    $attendee                  = new Attendee();
+                    $attendee->first_name      = mb_convert_case(trim($request_data["ticket_holder_first_name"][$i][$attendee_details['ticket']['id']]), MB_CASE_TITLE, 'UTF-8');
+                    $attendee->last_name       = mb_convert_case(trim($request_data["ticket_holder_last_name"][$i][$attendee_details['ticket']['id']]), MB_CASE_UPPER, 'UTF-8');
+                    $attendee->email           = $request_data["ticket_holder_email"][$i][$attendee_details['ticket']['id']];
+                    $attendee->event_id        = $event_id;
+                    $attendee->order_id        = $order->id;
+                    $attendee->ticket_id       = $attendee_details['ticket']['id'];
+                    $attendee->account_id      = $event->account->id;
                     $attendee->reference_index = $attendee_increment;
                     $attendee->save();
-
 
                     /*
                      * Save the attendee's questions
                      */
                     foreach ($attendee_details['ticket']->questions as $question) {
-
 
                         $ticket_answer = isset($ticket_questions[$attendee_details['ticket']->id][$i][$question->id]) ? $ticket_questions[$attendee_details['ticket']->id][$i][$question->id] : null;
 
