@@ -31,8 +31,8 @@ class EventOrdersController extends MyBaseController
         $allowed_sorts = ['first_name', 'email', 'order_reference', 'order_status_id', 'created_at'];
 
         $searchQuery = $request->get('q');
-        $sort_by = (in_array($request->get('sort_by'), $allowed_sorts) ? $request->get('sort_by') : 'created_at');
-        $sort_order = $request->get('sort_order') == 'asc' ? 'asc' : 'desc';
+        $sort_by     = (in_array($request->get('sort_by'), $allowed_sorts) ? $request->get('sort_by') : 'created_at');
+        $sort_order  = $request->get('sort_order') == 'asc' ? 'asc' : 'desc';
 
         $event = Event::scope()->find($event_id);
 
@@ -157,8 +157,8 @@ class EventOrdersController extends MyBaseController
     {
         $rules = [
             'first_name' => ['required'],
-            'last_name' => ['required'],
-            'email' => ['required', 'email'],
+            'last_name'  => ['required'],
+            'email'      => ['required', 'email'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -170,12 +170,10 @@ class EventOrdersController extends MyBaseController
             ]);
         }
 
-        $order = Order::scope()->findOrFail($order_id);
-
-        $order->first_name = $request->get('first_name');
-        $order->last_name = $request->get('last_name');
-        $order->email = $request->get('email');
-
+        $order             = Order::scope()->findOrFail($order_id);
+        $order->first_name = mb_convert_case(trim($request->get('first_name')), MB_CASE_TITLE, 'UTF-8');
+        $order->last_name  = mb_convert_case(trim($request->get('last_name')), MB_CASE_UPPER, 'UTF-8');
+        $order->email      = $request->get('email');
         $order->update();
 
 
@@ -186,7 +184,6 @@ class EventOrdersController extends MyBaseController
             'redirectUrl' => '',
         ]);
     }
-
 
     /**
      * Cancels an order
@@ -215,11 +212,11 @@ class EventOrdersController extends MyBaseController
 
         $order = Order::scope()->findOrFail($order_id);
 
-        $refund_order = ($request->get('refund_order') === 'on') ? true : false;
-        $is_free = $order->amount == 0;
-        $refund_type = $request->get('refund_type');
+        $refund_order  = ($request->get('refund_order') === 'on') ? true : false;
+        $is_free       = $order->amount == 0;
+        $refund_type   = $request->get('refund_type');
         $refund_amount = round(floatval($request->get('refund_amount')), 2);
-        $attendees = $request->get('attendees');
+        $attendees     = $request->get('attendees');
         $error_message = false;
 
         if ($refund_order && $order->payment_gateway->can_refund && !$is_free) {
