@@ -111,8 +111,8 @@
                 <div id="ticket_{{$ticket->id}}" class="col-md-4 col-sm-6 col-xs-12">
                     <div class="panel panel-success ticket" data-ticket-id="{{$ticket->id}}">
                         <div style="cursor: pointer;" data-modal-id='ticket-{{ $ticket->id }}'
-                             data-href="{{ route('showEditTicket', ['event_id' => $event->id, 'ticket_id' => $ticket->id]) }}"
-                             class="panel-heading loadModal">
+                             data-href="{{ route('showTicketDetails', ['event_id' => $event->id, 'ticket_id' => $ticket->id]) }}"
+                             class="panel-heading loadLink">
                             <h3 class="panel-title">
                                 @if($ticket->is_hidden)
                                     <i title="This ticket is hidden"
@@ -152,6 +152,15 @@
                                             <sub title="Doesn't account for refunds.">*</sub>
                                         </h4>
                                         <p class="nm text-muted">@lang('manageevent_tickets.revenue')</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-section nav-justified mt5 mb5">
+                                <li>
+                                    <div class="section">
+                                        <h4 class="nm">{{ $ticket->options->count() }}</h4>
+
+                                        <p class="nm text-muted">@lang('manageevent_tickets.options')</p>
                                     </div>
                                 </li>
                             </ul>

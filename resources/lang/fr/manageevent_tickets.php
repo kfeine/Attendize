@@ -18,6 +18,7 @@ return [
     'on_sale' => 'En vente',
     'pause' => 'Suspendre',
     'delete' => 'Supprimer',
+    'options' => 'Options',
 
 
 ];
