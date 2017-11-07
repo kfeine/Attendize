@@ -194,7 +194,13 @@ class EventCheckoutController extends Controller
             $discount = Discount::where('code', $discount_code)->first();
         }
         if ($discount && $discount->quantity_remaining > 0 && $discount->is_enabled) {
-            $order_total = $order_total + $discount->price;
+            if ($discount->type == 'amount') {
+                $order_total = $order_total + $discount->price;
+            } else if ($discount->type == 'percentage') {
+                $order_total = $order_total - abs($discount->price) * $order_total / 100;
+            } else {
+                $discount = False;
+            }
         } else {
             $discount = False;
         }

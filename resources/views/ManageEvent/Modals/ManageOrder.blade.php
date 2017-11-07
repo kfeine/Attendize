@@ -137,12 +137,20 @@
                                         1
                                     </td>
                                     <td>
-                                        {{money($order->discount->price, $order->event->currency)}}
+                                        @if($order->discount->type == "amount")
+                                        {{ money($order->discount->price, $order->event->currency) }}
+                                        @else
+                                        {{ $order->discount->price }} %
+                                        @endif
                                     </td>
                                     <td>
                                     </td>
                                     <td>
-                                        {{money($order->discount->price, $order->event->currency)}}
+                                        @if($order->discount->type == "amount")
+                                        {{ money($order->discount->price, $order->event->currency) }}
+                                        @else
+                                        {{ $order->discount->price }} %
+                                        @endif
                                     </td>
                                 </tr>
                                 @endif
