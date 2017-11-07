@@ -285,4 +285,29 @@ class EventTicketsController extends MyBaseController
             'message' => 'Ticket Order Successfully Updated',
         ]);
     }
+
+    /**
+     * Show Ticket Details
+     *
+     * @param Request $request
+     * @param $event_id
+     * @param $ticket_id
+     * @return mixed
+     */
+    public function showTicketDetails(Request $request, $event_id, $ticket_id)
+    {
+        // Find ticket or return 404 error.
+        $event = Event::scope()->find($event_id);
+        if ($event === null) {
+            abort(404);
+        }
+        // Find ticket or return 404 error.
+        $ticket = Ticket::scope()->find($ticket_id);
+        if ($ticket === null) {
+            abort(404);
+        }
+
+        // Return view.
+        return view('ManageEvent.TicketDetails', compact('ticket', 'event'));
+    }
 }

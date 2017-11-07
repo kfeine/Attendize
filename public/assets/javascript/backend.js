@@ -9402,6 +9402,38 @@ $.cf = {
         e.preventDefault();
     });
 
+    $(document.body).on('click', '.enableTicketOption', function (e) {
+
+        var optionId = $(this).data('id'),
+                route = $(this).data('route');
+
+        $.post(route, 'option_id=' + optionId)
+                .done(function (data) {
+
+                    if (typeof data.message !== 'undefined') {
+                        showMessage(data.message);
+                    }
+
+                    switch (data.status) {
+                        case 'success':
+                            setTimeout(function () {
+                                document.location.reload();
+                            }, 300);
+                            break;
+                        case 'error':
+                            showMessage(Attendize.GenericErrorMessages);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }).fail(function (data) {
+            showMessage(Attendize.GenericErrorMessages);
+        });
+
+        e.preventDefault();
+    });
+
 
 });
 
