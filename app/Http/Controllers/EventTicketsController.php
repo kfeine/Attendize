@@ -119,8 +119,9 @@ class EventTicketsController extends MyBaseController
             'status'      => 'success',
             'id'          => $ticket->id,
             'message'     => 'Refreshing...',
-            'redirectUrl' => route('showEventTickets', [
+            'redirectUrl' => route('showTicketDetails', [
                 'event_id' => $event_id,
+                'ticket_id' => $ticket_id,
             ]),
         ]);
     }
@@ -256,8 +257,9 @@ class EventTicketsController extends MyBaseController
             'status'      => 'success',
             'id'          => $ticket->id,
             'message'     => 'Refreshing...',
-            'redirectUrl' => route('showEventTickets', [
+            'redirectUrl' => route('showTicketDetails', [
                 'event_id' => $event_id,
+                'ticket_id' => $ticket_id,
             ]),
         ]);
     }
