@@ -12,6 +12,7 @@ use App\Models\OrderItem;
 use App\Models\QuestionAnswer;
 use App\Models\ReservedTickets;
 use App\Models\Ticket;
+use App\Models\TicketOptions;
 use App\Models\Discount;
 use Carbon\Carbon;
 use Cookie;
@@ -128,6 +129,23 @@ class EventCheckoutController extends Controller
             $booking_fee           = $booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
             $organiser_booking_fee = $organiser_booking_fee + ($current_ticket_quantity * $ticket->organiser_booking_fee);
 
+            //validation options
+            $option_ids = $request->get('options_'.$ticket_id);
+            $options = [];
+            foreach($option_ids as $option_id){
+                if (!(bool)$request->get('option_' . $ticket_id .'_'. $option_id)) {
+                    continue;
+                }
+              
+                $option = TicketOptions::find($option_id);
+                if($option->ticket_id != $ticket_id || !$option->is_enabled){
+                    continue; 
+                }
+
+                $options[] = $option;
+                $order_total = $order_total + $option->price;
+            }
+
             $tickets[] = [
                 'ticket'                => $ticket,
                 'qty'                   => $current_ticket_quantity,
@@ -135,6 +153,7 @@ class EventCheckoutController extends Controller
                 'booking_fee'           => ($current_ticket_quantity * $ticket->booking_fee),
                 'organiser_booking_fee' => ($current_ticket_quantity * $ticket->organiser_booking_fee),
                 'full_price'            => $ticket->price + $ticket->total_booking_fee,
+                'options'               => $options,
             ];
 
             /*
