@@ -121,7 +121,7 @@ class EventTicketsController extends MyBaseController
             'message'     => 'Refreshing...',
             'redirectUrl' => route('showTicketDetails', [
                 'event_id' => $event_id,
-                'ticket_id' => $ticket_id,
+                'ticket_id' => $ticket->id,
             ]),
         ]);
     }
