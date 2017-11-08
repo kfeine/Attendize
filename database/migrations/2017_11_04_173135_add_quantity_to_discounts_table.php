@@ -26,7 +26,7 @@ class AddQuantityToDiscountsTable extends Migration
     public function down()
     {
         Schema::table('discounts', function (Blueprint $table) {
-            //
+            $table->dropColumn('quantity_available');
         });
     }
 }

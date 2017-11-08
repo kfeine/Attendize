@@ -18,6 +18,7 @@
                     <table class="table mb0 table-condensed">
                         @foreach($tickets as $ticket)
                         <tr>
+                            <td><table><tr>
                             <td class="pl0">{{{$ticket['ticket']['title']}}} X <b>{{$ticket['qty']}}</b></td>
                             <td style="text-align: right;">
                                 @if((int)ceil($ticket['full_price']) === 0)
@@ -26,6 +27,18 @@
                                 {{ money($ticket['full_price'], $event->currency) }}
                                 @endif
                             </td>
+                            </tr>
+                            @foreach($ticket['options'] as $option)
+                              <tr><td>
+                                  <table><tr>
+                                      <td class="pl0">+ {{{$option->title}}}</td>
+                                      <td style="text-align: right;">
+                                          {{ money($option->price, $event->currency) }}
+                                      </td>
+                                  </tr></table>
+                              </td></tr>
+                            @endforeach
+                            </table></td> 
                         </tr>
                         @endforeach
                         @if($discount)
