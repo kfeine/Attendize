@@ -12,8 +12,8 @@ return [
     'payment_gateway_stripe'   => 1,
     'payment_gateway_paypal'   => 2,
     'payment_gateway_coinbase' => 3,
-	  'payment_gateway_migs'     => 4,
-	  'payment_gateway_scellius' => 5,
+    'payment_gateway_migs'     => 4,
+    'payment_gateway_scellius' => 5,
 
     'outgoing_email_noreply' => env('MAIL_FROM_ADDRESS'),
     'outgoing_email'         => env('MAIL_FROM_ADDRESS'),

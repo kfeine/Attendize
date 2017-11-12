@@ -22,11 +22,17 @@
                 @endif
 
                 @if(!$order->is_payment_received)
-                    <div class="alert alert-info">
+                    <div class="alert alert-danger">
                         @lang('manageevent_modals_manageorder.awaiting_payment')
                     </div>
-                    <a data-id="{{ $order->id }}" data-route="{{ route('postMarkPaymentReceived', ['order_id' => $order->id]) }}" class="btn btn-primary btn-sm markPaymentReceived" href="javascript:void(0);">@lang('manageevent_modals_manageorder.mark')</a>
+                    <a data-id="{{ $order->id }}" data-route="{{ route('postMarkPaymentReceived', ['order_id' => $order->id]) }}" class="btn btn-success btn-sm markPaymentReceived" href="javascript:void(0);">@lang('manageevent_modals_manageorder.mark_payment_received')</a>
+                @else
+                    <div class="alert alert-success">
+                        @lang('manageevent_modals_manageorder.payment_received')
+                    </div>
+                    <a data-id="{{ $order->id }}" data-route="{{ route('postMarkPaymentNotReceived', ['order_id' => $order->id]) }}" class="btn btn-danger btn-sm markPaymentNotReceived" href="javascript:void(0);">@lang('manageevent_modals_manageorder.mark_payment_not_received')</a>
                 @endif
+                <a href="javascript:void(0);" data-modal-id="cancel-order-{{ $order->id }}" data-href="{{ route('showCancelOrder', ['order_id'=>$order->id]) }}" title="Cancel Order" class="btn btn-sm btn-danger loadModal">@lang('manageevent_modals_manageorder.refund')</a>
 
                 <h3>@lang('manageevent_modals_manageorder.overview')</h3>
                 <style>

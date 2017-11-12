@@ -127,9 +127,6 @@
                                 </span>
                             </td>
                             <td class="text-center">
-                                <a href="javascript:void(0);" data-modal-id="cancel-order-{{ $order->id }}" data-href="{{route('showCancelOrder', ['order_id'=>$order->id])}}" title="Cancel Order" class="btn btn-xs btn-danger loadModal">
-                                                @lang('manageevent_orders.refund')
-                                            </a>
                                 <a data-modal-id="view-order-{{ $order->id }}" data-href="{{route('showManageOrder', ['order_id'=>$order->id])}}" title="View Order" class="btn btn-xs btn-primary loadModal">@lang('manageevent_orders.details')</a>
                             </td>
                         </tr>

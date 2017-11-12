@@ -477,4 +477,27 @@ class EventOrdersController extends MyBaseController
             'status' => 'success',
         ]);
     }
+
+    /**
+     * Mark an order as payment not received
+     *
+     * @param Request $request
+     * @param $order_id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postMarkPaymentNotReceived(Request $request, $order_id)
+    {
+        $order = Order::scope()->findOrFail($order_id);
+
+        $order->is_payment_received = 0;
+        $order->order_status_id     = config('attendize.order_awaiting_payment');
+
+        $order->save();
+
+        session()->flash('message', 'Order Payment Status Successfully Updated');
+
+        return response()->json([
+            'status' => 'success',
+        ]);
+    }
 }
