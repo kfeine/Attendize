@@ -109,13 +109,24 @@
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    {!! Form::label("ticket_holder_gender[{$i}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.gender')) !!}
+                                                    {!! Form::select(
+                                                        "ticket_holder_gender[{$i}][{$ticket['ticket']['id']}]",
+                                                        array('M' => __('public_viewevent_partials_eventcreateordersection.gender_male'), 'W' => __('public_viewevent_partials_eventcreateordersection.gender_female')),
+                                                        null,
+                                                        ['required' => 'required', 'class' => "ticket_holder_gender.$i.{$ticket['ticket']['id']} ticket_holder_gender form-control"]
+                                                    ) !!}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
                                                 <div class="form-group">
                                                     {!! Form::label("ticket_holder_first_name[{$i}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.first_name')) !!}
                                                     {!! Form::text("ticket_holder_first_name[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => "ticket_holder_first_name.$i.{$ticket['ticket']['id']} ticket_holder_first_name form-control"]) !!}
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-5">
                                                 <div class="form-group">
                                                     {!! Form::label("ticket_holder_last_name[{$i}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.last_name')) !!}
                                                     {!! Form::text("ticket_holder_last_name[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => "ticket_holder_last_name.$i.{$ticket['ticket']['id']} ticket_holder_last_name form-control"]) !!}

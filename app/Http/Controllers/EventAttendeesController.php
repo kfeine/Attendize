@@ -38,8 +38,8 @@ class EventAttendeesController extends MyBaseController
         $allowed_sorts = ['first_name', 'email', 'ticket_id', 'order_reference', 'reference_index'];
 
         $searchQuery = $request->get('q');
-        $sort_order = $request->get('sort_order') == 'asc' ? 'asc' : 'desc';
-        $sort_by = (in_array($request->get('sort_by'), $allowed_sorts) ? $request->get('sort_by') : 'created_at');
+        $sort_order  = $request->get('sort_order') == 'asc' ? 'asc' : 'desc';
+        $sort_by     = (in_array($request->get('sort_by'), $allowed_sorts) ? $request->get('sort_by') : 'created_at');
 
         $event = Event::scope()->find($event_id);
 
@@ -134,6 +134,7 @@ class EventAttendeesController extends MyBaseController
 
         $ticket_id           = $request->get('ticket_id');
         $ticket_price        = 0;
+        $attendee_gender     = $request->get('gender');
         $attendee_first_name = mb_convert_case(trim($request->get('first_name')), MB_CASE_TITLE, 'UTF-8');
         $attendee_last_name  = mb_convert_case(trim($request->get('last_name')), MB_CASE_UPPER, 'UTF-8');
         $attendee_email      = $request->get('email');
@@ -186,6 +187,7 @@ class EventAttendeesController extends MyBaseController
              * Create the attendee
              */
             $attendee                  = new Attendee();
+            $attendee->gender          = $attendee_gender;
             $attendee->first_name      = $attendee_first_name;
             $attendee->last_name       = $attendee_last_name;
             $attendee->email           = $attendee_email;
@@ -195,7 +197,6 @@ class EventAttendeesController extends MyBaseController
             $attendee->account_id      = Auth::user()->account_id;
             $attendee->reference_index = 1;
             $attendee->save();
-
 
             if ($email_attendee == '1') {
                 $this->dispatch(new SendAttendeeInvite($attendee));
@@ -291,6 +292,7 @@ class EventAttendeesController extends MyBaseController
             foreach ($the_file as $rows) {
                 if (!empty($rows['first_name']) && !empty($rows['last_name']) && !empty($rows['email'])) {
                     $num_added++;
+                    $attendee_gender     = $rows['gender'];
                     $attendee_first_name = mb_convert_case(trim($rows['first_name']), MB_CASE_TITLE, 'UTF-8');
                     $attendee_last_name  = mb_convert_case(trim($rows['last_name']), MB_CASE_UPPER, 'UTF-8');
                     $attendee_email      = $rows['email'];
@@ -302,6 +304,7 @@ class EventAttendeesController extends MyBaseController
                      */
                     $order                  = new Order();
                     $order->first_name      = $attendee_first_name;
+                    $order->gender          = $attendee_gender;
                     $order->last_name       = $attendee_last_name;
                     $order->email           = $attendee_email;
                     $order->order_status_id = config('attendize.order_complete');
@@ -339,6 +342,7 @@ class EventAttendeesController extends MyBaseController
                      * Create the attendee
                      */
                     $attendee                  = new Attendee();
+                    $attendee->gender          = $attendee_gender;
                     $attendee->first_name      = $attendee_first_name;
                     $attendee->last_name       = $attendee_last_name;
                     $attendee->email           = $attendee_email;
@@ -567,6 +571,7 @@ class EventAttendeesController extends MyBaseController
                     ->join('orders', 'orders.id', '=', 'attendees.order_id')
                     ->join('tickets', 'tickets.id', '=', 'attendees.ticket_id')
                     ->select([
+                        'attendees.gender',
                         'attendees.first_name',
                         'attendees.last_name',
                         'attendees.email',
@@ -579,6 +584,7 @@ class EventAttendeesController extends MyBaseController
 
                 $sheet->fromArray($data);
                 $sheet->row(1, [
+                    'Gender',
                     'First Name',
                     'Last Name',
                     'Email',
@@ -649,6 +655,7 @@ class EventAttendeesController extends MyBaseController
         }
 
         $attendee             = Attendee::scope()->findOrFail($attendee_id);
+        $attendee->gender     = $request->get('gender');
         $attendee->first_name = mb_convert_case(trim($request->get('first_name')), MB_CASE_TITLE, 'UTF-8');
         $attendee->last_name  = mb_convert_case(trim($request->get('last_name')), MB_CASE_UPPER, 'UTF-8');
         $attendee->email      = $request->get('email');

@@ -19,27 +19,39 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 <div class="form-group">
-                                    {!! Form::label('first_name', __('manageevent_modals_editattendee.firstname'), array('class'=>'control-label required')) !!}
-                                    {!!  Form::text('first_name', Input::old('first_name'),
-                                            array(
-                                            'class'=>'form-control'
-                                            ))  !!}
+                                    {!! Form::label('gender', __('manageevent_modals_editattendee.gender'), array('class'=>'control-label required')) !!}
+                                    {!! Form::select(
+                                        'gender',
+                                        array('M' => __('manageevent_modals_editattendee.gender_male'), 'W' => __('manageevent_modals_editattendee.gender_female')),
+                                        null,
+                                        ['required' => 'required', 'class' => "required form-control"]
+                                    ) !!}
                                 </div>
                             </div>
-
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <div class="form-group">
-                                    {!! Form::label('last_name', __('manageevent_modals_editattendee.lastname'), array('class'=>'control-label')) !!}
-                                    {!!  Form::text('last_name', Input::old('last_name'),
+                                    {!! Form::label('first_name', __('manageevent_modals_editattendee.firstname'), array('class'=>'control-label required')) !!}
+                                    {!! Form::text('first_name', Input::old('first_name'),
                                             array(
                                             'class'=>'form-control'
-                                            ))  !!}
+                                        ))  !!}
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    {!! Form::label('last_name', __('manageevent_modals_editattendee.lastname'), array('class'=>'control-label required')) !!}
+                                    {!! Form::text('last_name', Input::old('last_name'),
+                                            array(
+                                            'class'=>'form-control'
+                                        ))  !!}
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">

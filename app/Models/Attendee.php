@@ -23,6 +23,7 @@ class Attendee extends MyBaseModel
      * @var array $fillable
      */
     protected $fillable = [
+        'gender',
         'first_name',
         'last_name',
         'email',
@@ -115,9 +116,12 @@ class Attendee extends MyBaseModel
      */
     public function getFullNameAttribute()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        if ($this->gender === 'M') {
+            return __('attendee.gender_male') . ' ' . $this->first_name . ' ' . $this->last_name;
+        } else {
+            return __('attendee.gender_female') . ' ' . $this->first_name . ' ' . $this->last_name;
+        }
     }
-
 
     /**
      * The attributes that should be mutated to dates.

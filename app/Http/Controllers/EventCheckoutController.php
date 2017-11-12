@@ -651,6 +651,7 @@ class EventCheckoutController extends Controller
                 for ($i = 0; $i < $attendee_details['qty']; $i++) {
 
                     $attendee                  = new Attendee();
+                    $attendee->gender          = $request_data["ticket_holder_gender"][$i][$attendee_details['ticket']['id']];
                     $attendee->first_name      = mb_convert_case(trim($request_data["ticket_holder_first_name"][$i][$attendee_details['ticket']['id']]), MB_CASE_TITLE, 'UTF-8');
                     $attendee->last_name       = mb_convert_case(trim($request_data["ticket_holder_last_name"][$i][$attendee_details['ticket']['id']]), MB_CASE_UPPER, 'UTF-8');
                     $attendee->email           = $request_data["ticket_holder_email"][$i][$attendee_details['ticket']['id']];
