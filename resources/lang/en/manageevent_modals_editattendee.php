@@ -9,4 +9,7 @@ return [
     'email'       => 'Email',
     'cancel'      => 'Cancel',
     'edit_submit' => 'Edit Attendee',
+    'gender'        => 'Sex',
+    'gender_male'   => 'Mr',
+    'gender_female' => 'Ms',
 ];
