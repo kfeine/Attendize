@@ -20,5 +20,8 @@ return [
     'expiry_month'  => 'Mois d\'expiration', 
     'expiry_year'   => 'Année d\'expiration', 
     'cvc'           => 'Cryptogramme', 
+    'gender'        => 'Civilité',
+    'gender_male'   => 'M.',
+    'gender_female' => 'Mme',
 
 ];

@@ -9,5 +9,8 @@ return [
     'email'       => 'Email',
     'cancel'      => 'Annuler',
     'edit_submit' => 'Enregistrer',
+    'gender'        => 'Civilité',
+    'gender_male'   => 'M.',
+    'gender_female' => 'Mme',
 
 ];

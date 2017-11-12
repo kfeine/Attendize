@@ -20,5 +20,8 @@ return [
     'expiry_month'  => 'Expiry Month',
     'expiry_year'   => 'Expiry Year',
     'cvc'           => 'CVC Number',
+    'gender'        => 'Gender',
+    'gender_male'   => 'Male',
+    'gender_female' => 'Female',
 
 ];
