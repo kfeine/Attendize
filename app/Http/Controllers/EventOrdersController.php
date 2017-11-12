@@ -343,19 +343,47 @@ class EventOrdersController extends MyBaseController
 
             $excel->sheet('orders_sheet_1', function ($sheet) use ($event) {
 
-                $data = Order::where('orders.event_id', '=', $event->id)
-                    ->where('orders.event_id', '=', $event->id)
-                    ->select([
-                        'orders.first_name',
-                        'orders.last_name',
-                        'orders.email',
-                        'orders.order_reference',
-                        'orders.amount',
-                        \DB::raw("(CASE WHEN orders.is_refunded = 1 THEN 'YES' ELSE 'NO' END) AS `orders.is_refunded`"),
-                        \DB::raw("(CASE WHEN orders.is_partially_refunded = 1 THEN 'YES' ELSE 'NO' END) AS `orders.is_partially_refunded`"),
-                        'orders.amount_refunded',
-                        'orders.created_at',
-                    ])->get();
+                if (env('APP_LANG') === "fr") {
+                    $data = Order::where('orders.event_id', '=', $event->id)
+                        ->where('orders.event_id', '=', $event->id)
+                        ->select([
+                            'orders.first_name',
+                            'orders.last_name',
+                            'orders.email',
+                            'orders.order_reference',
+                            \DB::raw('replace(orders.amount, ".", ",")'),
+                            \DB::raw("(CASE
+                                        WHEN orders.order_status_id = 1 THEN 'Completed'
+                                        WHEN orders.order_status_id = 2 THEN 'Fully refunded'
+                                        WHEN orders.order_status_id = 3 THEN 'Partially refunded'
+                                        WHEN orders.order_status_id = 4 THEN 'Cancelled'
+                                        WHEN orders.order_status_id = 5 THEN 'Awaiting payment'
+                                        ELSE 'Unknown' END)
+                                        AS `orders.order_status_id`"),
+                            'orders.amount_refunded',
+                            'orders.created_at',
+                        ])->get();
+                } else {
+                    $data = Order::where('orders.event_id', '=', $event->id)
+                        ->where('orders.event_id', '=', $event->id)
+                        ->select([
+                            'orders.first_name',
+                            'orders.last_name',
+                            'orders.email',
+                            'orders.order_reference',
+                            'orders.amount',
+                            \DB::raw("(CASE
+                                        WHEN orders.order_status_id = 1 THEN 'Completed'
+                                        WHEN orders.order_status_id = 2 THEN 'Fully refunded'
+                                        WHEN orders.order_status_id = 3 THEN 'Partially refunded'
+                                        WHEN orders.order_status_id = 4 THEN 'Cancelled'
+                                        WHEN orders.order_status_id = 5 THEN 'Awaiting payment'
+                                        ELSE 'Unknown' END)
+                                        AS `orders.order_status_id`"),
+                            'orders.amount_refunded',
+                            'orders.created_at',
+                        ])->get();
+                }
 
                 $sheet->fromArray($data);
 
@@ -366,8 +394,7 @@ class EventOrdersController extends MyBaseController
                     'Email',
                     'Order Reference',
                     'Amount',
-                    'Fully Refunded',
-                    'Partially Refunded',
+                    'Status',
                     'Amount Refunded',
                     'Order Date',
                 ]);
