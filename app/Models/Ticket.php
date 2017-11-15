@@ -221,4 +221,10 @@ class Ticket extends MyBaseModel
 
         return config('attendize.ticket_status_on_sale');
     }
+
+    public function getTitleWithPriceAttribute()
+    {
+        return $this->title . ' (' . money($this->price, $this->event->currency) .')';
+    }
+
 }
