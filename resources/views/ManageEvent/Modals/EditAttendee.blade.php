@@ -64,6 +64,20 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('custom_field', __('manageevent_modals_editattendee.custom_field'), array('class'=>'control-label')) !!}
+                                    {!! Form::textarea('custom_field', Input::old('custom_field'),
+                                            array(
+                                            'class' => 'form-control',
+                                            'size'  => '20x8'
+                                            )) !!}
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div> <!-- /end modal body-->

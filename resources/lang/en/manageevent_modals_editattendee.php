@@ -12,4 +12,5 @@ return [
     'gender'        => 'Sex',
     'gender_male'   => 'Mr',
     'gender_female' => 'Ms',
+    'custom_field'  => 'Custom Field',
 ];
