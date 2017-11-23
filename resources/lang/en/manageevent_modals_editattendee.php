@@ -10,6 +10,7 @@ return [
     'firstname'     => 'First Name',
     'lastname'      => 'Last Name',
     'email'         => 'Email',
+    'custom_field'  => 'Custom Field',
     'cancel'        => 'Cancel',
     'edit_submit'   => 'Edit Attendee',
 

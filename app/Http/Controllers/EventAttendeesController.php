@@ -580,6 +580,7 @@ class EventAttendeesController extends MyBaseController
                         'orders.created_at',
                         DB::raw("(CASE WHEN attendees.has_arrived THEN 'YES' ELSE 'NO' END) AS has_arrived"),
                         'attendees.arrival_time',
+                        'attendees.custom_field',
                     ])->get();
 
                 $sheet->fromArray($data);
@@ -593,6 +594,7 @@ class EventAttendeesController extends MyBaseController
                     'Purchase Date',
                     'Has Arrived',
                     'Arrival Time',
+                    'Custom_field',
                 ]);
 
                 // Set gray background on first row
@@ -654,12 +656,13 @@ class EventAttendeesController extends MyBaseController
             ]);
         }
 
-        $attendee             = Attendee::scope()->findOrFail($attendee_id);
-        $attendee->gender     = $request->get('gender');
-        $attendee->first_name = mb_convert_case(trim($request->get('first_name')), MB_CASE_TITLE, 'UTF-8');
-        $attendee->last_name  = mb_convert_case(trim($request->get('last_name')), MB_CASE_UPPER, 'UTF-8');
-        $attendee->email      = $request->get('email');
-        $attendee->ticket_id  = $request->get('ticket_id');
+        $attendee               = Attendee::scope()->findOrFail($attendee_id);
+        $attendee->gender       = $request->get('gender');
+        $attendee->first_name   = mb_convert_case(trim($request->get('first_name')), MB_CASE_TITLE, 'UTF-8');
+        $attendee->last_name    = mb_convert_case(trim($request->get('last_name')), MB_CASE_UPPER, 'UTF-8');
+        $attendee->email        = $request->get('email');
+        $attendee->ticket_id    = $request->get('ticket_id');
+        $attendee->custom_field = $request->get('custom_field');
         $attendee->update();
 
         session()->flash('message', 'Successfully Updated Attendee');

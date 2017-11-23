@@ -10,6 +10,7 @@ return [
     'firstname'     => 'Prénom',
     'lastname'      => 'Nom',
     'email'         => 'Email',
+    'custom_field'  => 'Champ personnalisé',
     'cancel'        => 'Annuler',
     'edit_submit'   => 'Enregistrer',
 
