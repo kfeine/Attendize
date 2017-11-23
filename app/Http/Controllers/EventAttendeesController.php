@@ -580,6 +580,7 @@ class EventAttendeesController extends MyBaseController
                         'orders.created_at',
                         DB::raw("(CASE WHEN attendees.has_arrived THEN 'YES' ELSE 'NO' END) AS has_arrived"),
                         'attendees.arrival_time',
+                        'attendees.custom_field',
                     ])->get();
 
                 $sheet->fromArray($data);
@@ -593,6 +594,7 @@ class EventAttendeesController extends MyBaseController
                     'Purchase Date',
                     'Has Arrived',
                     'Arrival Time',
+                    'Custom_field',
                 ]);
 
                 // Set gray background on first row
@@ -660,6 +662,7 @@ class EventAttendeesController extends MyBaseController
         $attendee->email        = $request->get('email');
         $attendee->ticket_id    = $request->get('ticket_id');
         $attendee->gender     = $request->get('gender');
+        $attendee->custom_field = $request->get('custom_field');
         $attendee->update();
 
         session()->flash('message', 'Successfully Updated Attendee');

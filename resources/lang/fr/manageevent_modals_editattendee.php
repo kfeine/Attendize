@@ -12,5 +12,6 @@ return [
     'gender'        => 'Civilité',
     'gender_male'   => 'M.',
     'gender_female' => 'Mme',
+    'custom_field'  => 'Champ personnalisé',
 
 ];

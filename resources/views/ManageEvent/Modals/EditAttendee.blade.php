@@ -56,7 +56,6 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {!! Form::label('email', __('manageevent_modals_editattendee.email'), array('class'=>'control-label required')) !!}
-
                                     {!! Form::text('email', Input::old('email'),
                                             array(
                                             'class'=>'form-control'
@@ -64,6 +63,20 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('custom_field', __('manageevent_modals_editattendee.custom_field'), array('class'=>'control-label')) !!}
+                                    {!! Form::textarea('custom_field', Input::old('custom_field'),
+                                            array(
+                                            'class' => 'form-control',
+                                            'size'  => '20x8'
+                                            )) !!}
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div> <!-- /end modal body-->
