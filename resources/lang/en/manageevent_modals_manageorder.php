@@ -28,6 +28,7 @@ return [
     'free'                      => 'FREE',
     'subtotal'                  => 'Sub Total',
     'attendees'                 => 'Order Attendees',
+    'custom_field'              => 'Custom Field',
     'cancelled'                 => 'Cancelled',
     'refunded'                  => 'Refunded',
     'edit'                      => 'Edit',

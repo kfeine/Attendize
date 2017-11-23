@@ -174,6 +174,7 @@ class EventOrdersController extends MyBaseController
         $order->first_name  = mb_convert_case(trim($request->get('first_name')), MB_CASE_TITLE, 'UTF-8');
         $order->last_name   = mb_convert_case(trim($request->get('last_name')), MB_CASE_UPPER, 'UTF-8');
         $order->email       = $request->get('email');
+        $order->custom_field = $request->get('custom_field');
         $order->update();
 
 
@@ -358,6 +359,7 @@ class EventOrdersController extends MyBaseController
                                         AS `orders.order_status_id`"),
                             'orders.amount_refunded',
                             'orders.created_at',
+                            'orders.custom_field',
                         ])->get();
                 } else {
                     $data = Order::where('orders.event_id', '=', $event->id)
@@ -378,6 +380,7 @@ class EventOrdersController extends MyBaseController
                                         AS `orders.order_status_id`"),
                             'orders.amount_refunded',
                             'orders.created_at',
+                            'orders.custom_field',
                         ])->get();
                 }
 
@@ -393,6 +396,7 @@ class EventOrdersController extends MyBaseController
                     'Status',
                     'Amount Refunded',
                     'Order Date',
+                    'Custom Field'
                 ]);
 
                 // Set gray background on first row

@@ -217,6 +217,14 @@
                         </table>
                     </div>
                 </div>
+
+                <h3>@lang('manageevent_modals_manageorder.custom_field')</h3>
+                <div class="p0 well bgcolor-white">
+                    <div class="row">
+                        {!! nl2br(e($order->custom_field)) !!}
+                    </div>
+                </div>
+
             </div> <!-- /end modal body-->
 
             <div class="modal-footer">
