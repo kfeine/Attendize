@@ -9,4 +9,5 @@ return [
     'email'       => 'Email',
     'close'       => 'Close',
     'update'      => 'Update Order',
+    'custom_field' => 'Custom Field',
 ];

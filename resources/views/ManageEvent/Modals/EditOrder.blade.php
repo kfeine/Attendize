@@ -38,7 +38,13 @@
                         <input type="text" name="email" class="form-control" value="{{ $order->email }}">
                     </div>
                 </div>
-            </div> <!-- /end modal body-->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label for="custom_field" class="form-control-label">@lang('manageevent_modals_editorder.custom_field')</label>
+                        <textarea name="custom_field" class="form-control" rows="8">{{ $order->custom_field }}</textarea>
+                    </div>
+                </div>
+            </div>
 
             <div class="modal-footer">
                 {!! Form::button(__('manageevent_modals_editorder.close'), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}

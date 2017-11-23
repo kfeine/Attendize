@@ -28,6 +28,7 @@ return [
     'free'                      => 'Gratuit',
     'subtotal'                  => 'Sous-total',
     'attendees'                 => 'Participants',
+    'custom_field'              => 'Champ personnalisé',
     'cancelled'                 => 'Annulé',
     'refunded'                  => 'Remboursé',
     'edit'                      => 'Modifer',
