@@ -79,6 +79,16 @@ class Attendee extends MyBaseModel
     }
 
     /**
+     * The options that belong to the attendee.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function options()
+    {
+        return $this->belongsToMany(\App\Models\TicketOptions::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function answers()
