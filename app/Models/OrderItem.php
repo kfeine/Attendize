@@ -19,4 +19,14 @@ class OrderItem extends MyBaseModel
      * @var bool $timestamps
      */
     public $timestamps = false;
+
+    /**
+     * The options associated with the orderItem.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orderItemOptions()
+    {
+        return $this->hasMany(\App\Models\OrderItemOption::class);
+    }
 }
