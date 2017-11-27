@@ -85,6 +85,38 @@
                                                 ))  !!}
                     </div>
                     <div class="form-group">
+                        {!! Form::label('email2', __('manageorganiser_customize.other_email'), array('class'=>'control-label required')) !!}
+                        {!!  Form::text('email2', Input::old('email2'),
+                                                array(
+                                                'class'=>'form-control ',
+                                                'placeholder'=>''
+                                                ))  !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('email3', __('manageorganiser_customize.other_email'), array('class'=>'control-label required')) !!}
+                        {!!  Form::text('email3', Input::old('email3'),
+                                                array(
+                                                'class'=>'form-control ',
+                                                'placeholder'=>''
+                                                ))  !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('email4', __('manageorganiser_customize.other_email'), array('class'=>'control-label required')) !!}
+                        {!!  Form::text('email4', Input::old('email4'),
+                                                array(
+                                                'class'=>'form-control ',
+                                                'placeholder'=>''
+                                                ))  !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('email5', __('manageorganiser_customize.other_email'), array('class'=>'control-label required')) !!}
+                        {!!  Form::text('email5', Input::old('email5'),
+                                                array(
+                                                'class'=>'form-control ',
+                                                'placeholder'=>''
+                                                ))  !!}
+                    </div>
+                    <div class="form-group">
                         {!! Form::label('about', __('manageorganiser_customize.description'), array('class'=>'control-label ')) !!}
                         {!!  Form::textarea('about', Input::old('about'),
                                                 array(

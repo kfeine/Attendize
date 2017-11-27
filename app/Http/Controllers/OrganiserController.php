@@ -47,11 +47,15 @@ class OrganiserController extends MyBaseController
             ]);
         }
 
-        $organiser->name = $request->get('name');
-        $organiser->about = $request->get('about');
-        $organiser->email = $request->get('email');
-        $organiser->facebook = $request->get('facebook');
-        $organiser->twitter = $request->get('twitter');
+        $organiser->name             = $request->get('name');
+        $organiser->about            = $request->get('about');
+        $organiser->email            = $request->get('email');
+        $organiser->email2           = $request->get('email2');
+        $organiser->email3           = $request->get('email3');
+        $organiser->email4           = $request->get('email4');
+        $organiser->email5           = $request->get('email5');
+        $organiser->facebook         = $request->get('facebook');
+        $organiser->twitter          = $request->get('twitter');
         $organiser->confirmation_key = str_random(15);
 
         if ($request->hasFile('organiser_logo')) {
