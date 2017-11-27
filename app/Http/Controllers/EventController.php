@@ -115,11 +115,15 @@ class EventController extends MyBaseController
                 ]);
             }
 
-            $organiser->name = $request->get('organiser_name');
-            $organiser->about = $request->get('organiser_about');
-            $organiser->email = $request->get('organiser_email');
+            $organiser->name     = $request->get('organiser_name');
+            $organiser->about    = $request->get('organiser_about');
+            $organiser->email    = $request->get('organiser_email');
+            $organiser->email2   = $request->get('organiser_email2');
+            $organiser->email3   = $request->get('organiser_email3');
+            $organiser->email4   = $request->get('organiser_email4');
+            $organiser->email5   = $request->get('organiser_email5');
             $organiser->facebook = $request->get('organiser_facebook');
-            $organiser->twitter = $request->get('organiser_twitter');
+            $organiser->twitter  = $request->get('organiser_twitter');
             $organiser->save();
             $event->organiser_id = $organiser->id;
 

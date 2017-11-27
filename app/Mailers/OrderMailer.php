@@ -15,7 +15,7 @@ class OrderMailer
         ];
 
         Mail::send('Emails.OrderNotification', $data, function ($message) use ($order) {
-            $message->to($order->account->email);
+            $message->to($order->event->organiser->emails);
             $message->subject('New order received on the event ' . $order->event->title . ' [' . $order->order_reference . ']');
         });
 

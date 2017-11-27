@@ -47,6 +47,10 @@ class OrganiserCustomizeController extends MyBaseController
         $organiser->about                 = $request->get('about');
         $organiser->google_analytics_code = $request->get('google_analytics_code');
         $organiser->email                 = $request->get('email');
+        $organiser->email2                = $request->get('email2');
+        $organiser->email3                = $request->get('email3');
+        $organiser->email4                = $request->get('email4');
+        $organiser->email5                = $request->get('email5');
         $organiser->enable_organiser_page = $request->get('enable_organiser_page');
         $organiser->facebook              = $request->get('facebook');
         $organiser->twitter               = $request->get('twitter');
