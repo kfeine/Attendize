@@ -448,7 +448,7 @@ class EventAttendeesController extends MyBaseController
         /* Could bcc in the above? */
         if ($request->get('send_copy') == '1') {
             Mail::send('Emails.messageReceived', $data, function ($message) use ($attendee, $data) {
-                $message->to($attendee->event->organiser->email, $attendee->event->organiser->name)
+                $message->to($attendee->event->organiser->emails)
                     ->from(config('attendize.outgoing_email_noreply'), $attendee->event->organiser->name)
                     ->replyTo($attendee->event->organiser->email, $attendee->event->organiser->name)
                     ->subject($data['subject'] . '[ORGANISER COPY]');

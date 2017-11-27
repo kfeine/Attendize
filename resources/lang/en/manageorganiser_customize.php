@@ -27,5 +27,6 @@ return [
     'background'    => 'Background Color',
     'preview'       => 'Organiser Page Preview',
     'save'          => 'Save Changes',
+    'other_email'  => 'Other Email (for notifications)',
 
 ];

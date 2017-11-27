@@ -27,5 +27,6 @@ return [
     'background'    => 'Couleur de fond',
     'preview'       => 'Prévisualisation de la page',
     'save'          => 'Enregistrer',
+    'other_email'  => 'Autre email (pour les notifications)',
 
 ];

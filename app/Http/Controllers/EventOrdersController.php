@@ -469,7 +469,7 @@ class EventOrdersController extends MyBaseController
         /* Send a copy to the Organiser with a different subject */
         if ($request->get('send_copy') == '1') {
             Mail::send('Emails.messageReceived', $data, function ($message) use ($order, $data) {
-                $message->to($order->event->organiser->email)
+                $message->to($order->event->organiser->emails)
                     ->from(config('attendize.outgoing_email_noreply'), $order->event->organiser->name)
                     ->replyTo($order->event->organiser->email, $order->event->organiser->name)
                     ->subject($data['subject'] . ' [Organiser copy]');

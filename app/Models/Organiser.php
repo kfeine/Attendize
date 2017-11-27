@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Http\UploadedFile;
 use Str;
 use Image;
+use Log;
 
 class Organiser extends MyBaseModel
 {
@@ -16,6 +17,10 @@ class Organiser extends MyBaseModel
     protected $rules = [
         'name'           => ['required'],
         'email'          => ['required', 'email'],
+        'email2'         => ['email'],
+        'email3'         => ['email'],
+        'email4'         => ['email'],
+        'email5'         => ['email'],
         'organiser_logo' => ['mimes:jpeg,jpg,png', 'max:10000'],
     ];
 
@@ -96,6 +101,22 @@ class Organiser extends MyBaseModel
             'organiser_id'   => $this->id,
             'organiser_slug' => Str::slug($this->oraganiser_name),
         ]);
+    }
+
+    /**
+     * Get all emails
+     *
+     * @return array
+     */
+    public function getEmailsAttribute()
+    {
+        $emails = [$this->email];
+        if ($this->email2 != "") { array_push($emails, $this->email2); }
+        if ($this->email3 != "") { array_push($emails, $this->email3); }
+        if ($this->email4 != "") { array_push($emails, $this->email4); }
+        if ($this->email5 != "") { array_push($emails, $this->email5); }
+
+        return $emails;
     }
 
     /**
