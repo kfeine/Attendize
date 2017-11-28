@@ -40,10 +40,15 @@ class TicketOptions extends MyBaseModel
      * The tickets associated with the option.
      *
      * @access public
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function tickets()
+    public function ticket()
     {
-        return $this->belongsToMany(\App\Models\Ticket::class);
+        return $this->belongsTo(\App\Models\Ticket::class);
+    }
+
+    public function getTitleWithPriceAttribute()
+    {
+        return $this->title . ' (' . money($this->price, $this->ticket->event->currency) .')';
     }
 }

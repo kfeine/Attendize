@@ -136,13 +136,9 @@ class EventCheckoutController extends Controller
             $organiser_booking_fee = $organiser_booking_fee +  $ticket->organiser_booking_fee;
 
             //validation options
-            $option_ids = $request->get('attendee_' .$attendee_id. '_options_'.$ticket_id);
+            $option_ids = $request->get('attendee_' .$attendee_id. '_option_'.$ticket_id);
             $options = [];
             foreach((array)$option_ids as $option_id){
-                if (!(bool)$request->get('attendee_' .$attendee_id. '_option_'. $ticket_id .'_'. $option_id)) {
-                    continue;
-                }
-
                 $option = TicketOptions::find($option_id);
                 if($option->ticket_id != $ticket_id || !$option->is_enabled){
                     continue; 
