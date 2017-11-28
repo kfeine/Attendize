@@ -54,7 +54,7 @@
                             </div> 
                             @foreach ($tickets as $ticket)
                                 <div class="ticket-options ticket-options-{{$ticket->id}} hide form-group">
-                                    {!! Form::select("attendee_1_option_$ticket->id[]",$ticket->options->pluck('title_with_price', 'id'), null, ['multiple' => 'multiple','class' => "ticket_holder_questions.{$ticket->id}.{$ticket['attendee_id']}   form-control"]) !!}
+                                    {!! Form::select("attendee_1_option_$ticket->id[]",$ticket->options_enabled->pluck('title_with_price', 'id'), null, ['multiple' => 'multiple','class' => "ticket_holder_questions.{$ticket->id}.{$ticket['attendee_id']}   form-control"]) !!}
                                 </div>
                             @endforeach
                         </div>
@@ -121,7 +121,7 @@
                             @foreach ($tickets as $ticket)
                                 <div class="ticket-options ticket-options-{{$ticket->id}} hide form-group">
 
-                                    {!! Form::select("attendee_`+number+`_option_'.$ticket->id.[]",$ticket->options->pluck('title_with_price', 'id'), null, ['multiple' => 'multiple','class' => "ticket_holder_questions.{$ticket->id}.{$ticket['attendee_id']}   form-control"]) !!}
+                                    {!! Form::select("attendee_`+number+`_option_'.$ticket->id.[]",$ticket->options_enabled->pluck('title_with_price', 'id'), null, ['multiple' => 'multiple','class' => "ticket_holder_questions.{$ticket->id}.{$ticket['attendee_id']}   form-control"]) !!}
                                 </div>
                             @endforeach
                         </div>
