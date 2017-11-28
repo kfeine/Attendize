@@ -54,49 +54,7 @@
                             </div> 
                             @foreach ($tickets as $ticket)
                                 <div class="ticket-options ticket-options-{{$ticket->id}} hide form-group">
-                                            <table>
-                                                @foreach($ticket->options as $option)
-                                                    <tr>
-                                                        <td>
-                                                            <span class="option-title semibold" property="name">
-                                                                {{$option->title}}
-                                                            </span>
-                                                            <p class="option-descripton mb0 text-muted" property="description">
-                                                                {{$option->description}}
-                                                            </p>
-                                                        </td>
-                                                        <td style="width:180px; text-align: right;">
-                                                            <div class="option-pricing" style="margin-right: 20px;">
-                                                                @if($option->is_free)
-                                                                    "__gratuit"
-                                                                    <meta property="price" content="0">
-                                                                @else
-                                                                    <?php
-                                                                    $is_free_event = false;
-                                                                    ?>
-                                                                    <span title='{{money($option->price, $event->currency)}} Option Price'>{{money($option->price, $event->currency)}} </span>
-                                                                    <meta property="priceCurrency"
-                                                                          content="{{ $event->currency->code }}">
-                                                                    <meta property="price"
-                                                                          content="{{ number_format($option->price, 2, '.', '') }}">
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td style="width:85px;">
-                                                            @if(!$option->is_enabled)
-
-                                                                <span class="text-danger">
-                                                                   "__pas en vente" 
-                                                                </span>
-
-                                                            @else
-                                                                {!! Form::hidden('attendee_1_options_'.$ticket->id.'[]', $option->id) !!}
-                                                                {!! Form::checkbox('attendee_1_option_'.$ticket->id.'_'.$option->id, 1, null, ['id' => 'option_'.$ticket->id.'_'.$option->id]) !!}
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                </table>
+                                    {!! Form::select("attendee_1_option_$ticket->id[]",$ticket->options->pluck('title_with_price', 'id'), null, ['multiple' => 'multiple','class' => "ticket_holder_questions.{$ticket->id}.{$ticket['attendee_id']}   form-control"]) !!}
                                 </div>
                             @endforeach
                         </div>
@@ -162,49 +120,8 @@
                             </div> 
                             @foreach ($tickets as $ticket)
                                 <div class="ticket-options ticket-options-{{$ticket->id}} hide form-group">
-                                            <table>
-                                                @foreach($ticket->options as $option)
-                                                    <tr>
-                                                        <td>
-                                                            <span class="option-title semibold" property="name">
-                                                                {{$option->title}}
-                                                            </span>
-                                                            <p class="option-descripton mb0 text-muted" property="description">
-                                                                {{$option->description}}
-                                                            </p>
-                                                        </td>
-                                                        <td style="width:180px; text-align: right;">
-                                                            <div class="option-pricing" style="margin-right: 20px;">
-                                                                @if($option->is_free)
-                                                                    "__gratuit"
-                                                                    <meta property="price" content="0">
-                                                                @else
-                                                                    <?php
-                                                                    $is_free_event = false;
-                                                                    ?>
-                                                                    <span title='{{money($option->price, $event->currency)}} Option Price'>{{money($option->price, $event->currency)}} </span>
-                                                                    <meta property="priceCurrency"
-                                                                          content="{{ $event->currency->code }}">
-                                                                    <meta property="price"
-                                                                          content="{{ number_format($option->price, 2, '.', '') }}">
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                        <td style="width:85px;">
-                                                            @if(!$option->is_enabled)
 
-                                                                <span class="text-danger">
-                                                                   "__pas en vente" 
-                                                                </span>
-
-                                                            @else
-                                                                {!! Form::hidden('attendee_`+number+`_options_'.$ticket->id.'[]', $option->id) !!}
-                                                                {!! Form::checkbox('attendee_`+number+`_option_'.$ticket->id.'_'.$option->id, 1, null, ['id' => 'option_'.$ticket->id.'_'.$option->id]) !!}
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                </table>
+                                    {!! Form::select("attendee_`+number+`_option_'.$ticket->id.[]",$ticket->options->pluck('title_with_price', 'id'), null, ['multiple' => 'multiple','class' => "ticket_holder_questions.{$ticket->id}.{$ticket['attendee_id']}   form-control"]) !!}
                                 </div>
                             @endforeach
                         </div>
