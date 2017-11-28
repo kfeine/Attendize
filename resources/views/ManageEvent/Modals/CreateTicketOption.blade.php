@@ -6,37 +6,35 @@
                 <button type="button" class="close" data-dismiss="modal">×</button>
                 <h3 class="modal-title">
                     <i class="ico-ticket"></i>
-                    __créer une option</h3>
+                    @lang('manageevent_modals_createticketoption.create_option')</h3>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            {!! Form::label('title', "__title", array('class'=>'control-label required')) !!}
-                            {!!  Form::text('title', Input::old('title'),
+                            {!! Form::label('title', __('manageevent_modals_createticketoption.name'), array('class'=>'control-label required')) !!}
+                            {!! Form::text('title', Input::old('title'),
                                         array(
                                         'class'=>'form-control',
-                                        'placeholder'=>"__title"
-                                        ))  !!}
+                                        'placeholder'=>__('manageevent_modals_createticketoption.name')
+                                        )) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('description', "__description", array('class'=>'control-label required')) !!}
-                            {!!  Form::text('description', Input::old('description'),
+                            {!! Form::label('description', __('manageevent_modals_createticketoption.description'), array('class'=>'control-label required')) !!}
+                            {!! Form::text('description', Input::old('description'),
                                         array(
                                         'class'=>'form-control'
-                                        ))  !!}
+                                        )) !!}
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    {!! Form::label('price', "__prix", array('class'=>'control-label required')) !!}
-                                    {!!  Form::text('price', Input::old('price'),
+                                    {!! Form::label('price', __('manageevent_modals_createticketoption.price'), array('class'=>'control-label required')) !!}
+                                    {!! Form::text('price', Input::old('price'),
                                                 array(
                                                 'class'=>'form-control',
-                                                'placeholder'=>"__prix"
-                                                ))  !!}
-
-
+                                                'placeholder'=>__('manageevent_modals_createticketoption.price')
+                                                )) !!}
                                 </div>
                             </div>
                         </div>
@@ -45,8 +43,8 @@
 
             </div> <!-- /end modal body-->
             <div class="modal-footer">
-               {!! Form::button('__cancel', ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
-               {!! Form::submit("__create", ['class'=>"btn btn-success"]) !!}
+               {!! Form::button(__('manageevent_modals_createticketoption.close'), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
+               {!! Form::submit(__('manageevent_modals_createticketoption.create'), ['class'=>"btn btn-success"]) !!}
             </div>
         </div><!-- /end modal content-->
        {!! Form::close() !!}
