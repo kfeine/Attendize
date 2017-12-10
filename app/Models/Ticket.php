@@ -222,6 +222,20 @@ class Ticket extends MyBaseModel
         return config('attendize.ticket_status_on_sale');
     }
 
+    public function getMultipleOptionsEnabledAttribute()
+    {
+        return $this->options->filter(function($value, $key) {
+            return $value->multiple && $value->is_enabled;
+        });
+    }
+
+    public function getSingleOptionsEnabledAttribute()
+    {
+        return $this->options->filter(function($value, $key) {
+            return !$value->multiple && $value->is_enabled;
+        });
+    }
+
     public function getOptionsEnabledAttribute()
     {
         return $this->options->filter(function($value, $key) {

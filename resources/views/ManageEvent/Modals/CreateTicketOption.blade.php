@@ -26,6 +26,10 @@
                                         'class'=>'form-control'
                                         )) !!}
                         </div>
+                        <div class="form-group">
+                            {!! Form::checkbox('multiple', 1, false) !!}
+                            {!! Form::label('multiple', __('manageevent_modals_createticketoption.multiple'), array('class'=>'control-label required')) !!}
+                        </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">

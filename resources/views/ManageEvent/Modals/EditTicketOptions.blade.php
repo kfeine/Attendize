@@ -24,7 +24,7 @@
                      array(
                      'class'=>'form-control',
                      'placeholder'=>__('manageevent_modals_editticketoptions.description')
-                     ))  
+                     ))
                   !!}
               </div>
               <div class="row">
@@ -32,6 +32,14 @@
                       <div class="form-group">
                           {!! Form::label('price', __('manageevent_modals_editticketoptions.price'), ['class'=>'control-label required']) !!}
                           {!! Form::text('price', $option->price,['class' => 'form-control', 'placeholder' => __('manageevent_modals_editticketoptions.price')]) !!}
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                          {!! Form::checkbox('multiple', 1, $option->multiple) !!}
+                          {!! Form::label('multiple', __('manageevent_modals_editticketoptions.multiple'), ['class'=>'control-label required']) !!}
                       </div>
                   </div>
               </div>

@@ -56,8 +56,13 @@ class EventTicketOptionsController extends MyBaseController
         $option->title = $request->get('title');
         $option->description = $request->get('description');
         $option->price = $request->get('price');
+        if ($request->get('multiple')) {
+            $option->multiple = $request->get('multiple');
+        } else {
+            $option->multiple = 0;
+        }
         $option->is_enabled = true;
-        
+
         $ticket->options()->save($option);
 
         session()->flash('message', 'Successfully Created Option');
@@ -87,7 +92,7 @@ class EventTicketOptionsController extends MyBaseController
 
         return view('ManageEvent.Modals.EditTicketOptions', $data);
     }
-    
+
     /**
      * Edit a ticket
      *
@@ -109,6 +114,12 @@ class EventTicketOptionsController extends MyBaseController
 
         $option->title = $request->get('title');
         $option->price = $request->get('price');
+        Log::info($request->get('multiple'));
+        if ($request->get('multiple')) {
+            $option->multiple = $request->get('multiple');
+        } else {
+            $option->multiple = 0;
+        }
         $option->description = $request->get('description');
 
         $option->save();
@@ -120,7 +131,7 @@ class EventTicketOptionsController extends MyBaseController
             'redirectUrl' => ""
         ]);
     }
-    
+
     /**
      * Delete an option
      *
