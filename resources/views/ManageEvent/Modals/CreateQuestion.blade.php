@@ -77,7 +77,7 @@
                 </div>
 
                 <h4>
-                    @lang('manageevent_modals_createquestion.required_for_thicket')
+                    @lang('manageevent_modals_createquestion.show_for_ticket')
                 </h4>
                 <div class="form-group">
 
