@@ -55,6 +55,13 @@ class QuestionTypesSeeder extends Seeder
                 'has_options' => 1,
                 'allow_multiple' => 0,
             ],
+            [
+                'id' => 7,
+                'alias' => 'datalist',
+                'name' => 'Data list',
+                'has_options' => 1,
+                'allow_multiple' => 0,
+            ],
         ]);
     }
 }
