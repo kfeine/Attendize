@@ -19,20 +19,20 @@
                     <div class="modal-content">
                         {!! Form::hidden('attendees[]', "1") !!}
                         <div class="modal-header text-center">
-                            <h3>Participant 1</h3>
+                            <h3>@lang('public_viewevent_partials_eventticketssection.attendee') 1</h3>
                         </div>
                         <!-- start modal body -->
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label("attendee_1_first_name", "__prénom") !!}
+                                        {!! Form::label("attendee_1_first_name", __('public_viewevent_partials_eventticketssection.first_name')) !!}
                                         {!! Form::text("attendee_1_first_name", null, ['required' => 'required', 'class' => "attendee_1_first_name attendee_first_name form-control"]) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label("attendee_1_last_name", "__nom") !!}
+                                        {!! Form::label("attendee_1_last_name", __('public_viewevent_partials_eventticketssection.last_name')) !!}
                                         {!! Form::text("attendee_1_last_name", null, ['required' => 'required', 'class' => "attendee_1_last_name attendee_last_name form-control"]) !!}
                                     </div>
                                 </div>
@@ -40,7 +40,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        {!! Form::label("attendee_1_email", "__email") !!}
+                                        {!! Form::label("attendee_1_email", __('public_viewevent_partials_eventticketssection.email')) !!}
                                         {!! Form::text("attendee_1_email", null, ['required' => 'required', 'class' => "attendee_1_email attendee_email form-control"]) !!}
                                     </div>
                                 </div>
@@ -51,18 +51,31 @@
                                 @foreach ($tickets as $ticket)
                                     <small class="ticket-options ticket-options-{{$ticket->id}} hide form-text">{{$ticket->description}}</small>
                                 @endforeach
-                            </div> 
-                            @foreach ($tickets as $ticket)
-                                <div class="ticket-options ticket-options-{{$ticket->id}} hide form-group">
-                                    {!! Form::select("attendee_1_option_$ticket->id[]",$ticket->options_enabled->pluck('title_with_price', 'id'), null, ['multiple' => 'multiple','class' => "ticket_holder_questions.{$ticket->id}.{$ticket['attendee_id']}   form-control"]) !!}
-                                </div>
-                            @endforeach
+                            </div>
+                            <div class="p0 well bgcolor-white order_overview">
+                                <h5>@lang('public_viewevent_partials_eventticketssection.options')</h5>
+                                @foreach ($tickets as $ticket)
+                                    @if($ticket->single_options_enabled->count())
+                                    <div class="ticket-options ticket-options-{{$ticket->id}} hide form-group">
+                                        {!! Form::select("attendee_1_option_$ticket->id[]",$ticket->single_options_enabled->pluck('title_with_price', 'id'), null, ['class' => "ticket_holder_questions.{$ticket->id}.{$ticket['attendee_id']}   form-control"]) !!}
+                                    </div>
+                                    @endif
+                                    @if($ticket->multiple_options_enabled->count())
+                                    @foreach ($ticket->multiple_options_enabled as $option)
+                                    <div class="ticket-options ticket-options-{{$ticket->id}} hide form-group">
+                                        {!! Form::checkbox("attendee_1_option_$ticket->id[]", 1, false) !!}
+                                        {{ $option->title }} ({{ money($option->price, $event->currency) }})
+                                    </div>
+                                    @endforeach
+                                    @endif
+                                @endforeach
+                            </div>
                         </div>
                         <!-- end modal body -->
                     </div>
                 </div>
             </div>
-               <input class="btn btn-success" onClick="addAttendee()" value="Ajouter un participant">
+               <input class="btn btn-success" onClick="addAttendee()" value="@lang('public_viewevent_partials_eventticketssection.add_attendee')">
             {!!Form::submit(__('public_viewevent_partials_eventticketssection.register'), ['class' => 'btn btn-lg btn-primary pull-right'])!!}
             {!! Form::hidden('is_embedded', $is_embedded) !!}
             {!! Form::close() !!}
@@ -70,7 +83,7 @@
         @else
 
             <div class="alert alert-boring">
-               @lang('public_viewevent_partials_eventticketssection.unavailable') 
+               @lang('public_viewevent_partials_eventticketssection.unavailable')
             </div>
 
         @endif
@@ -81,7 +94,7 @@
 
 <script>
   function getFormAttendeeTicket(number){
-                
+
       return `<div class="col-md-6" id='attendee`+number+`'> <div class='modal-content'>
                         {!! Form::hidden('attendees[]', "`+number+`") !!}
                         <div class="modal-header text-center">

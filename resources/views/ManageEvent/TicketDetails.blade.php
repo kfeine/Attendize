@@ -96,6 +96,7 @@
                                     <th>@lang('manageevent_ticketdetails.name')</th>
                                     <th>@lang('manageevent_ticketdetails.description')</th>
                                     <th>@lang('manageevent_ticketdetails.price')</th>
+                                    <th>@lang('manageevent_ticketdetails.multiple')</th>
                                     <th>@lang('manageevent_ticketdetails.actions')</th>
                                 </tr>
                             </thead>
@@ -106,6 +107,7 @@
                                     <td>{{$option->title}} </td>
                                     <td>{{$option->description}}</td>
                                     <td>{{money($option->price, $event->currency)}}</td>
+                                    <td>{{ $option->multiple }}</td>
                                     <td class="text-center">
                                         <a data-modal-id="view-option-{{ $option->id }}" data-href="{{route('showEditTicketOptions', ['event_id' => $event->id, 'ticket_id' => $ticket->id, 'option_id'=>$option->id])}}" title="View Option" class="btn btn-xs btn-primary loadModal">@lang('manageevent_ticketdetails.edit')</a>
                                         <a class="btn btn-xs btn-primary enableTicketOption" href="javascript:void(0);"
