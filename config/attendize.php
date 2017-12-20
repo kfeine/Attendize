@@ -55,6 +55,7 @@ return [
     'question_dropdown_multi'       => 4,
     'question_checkbox_multi'       => 5,
     'question_radio_single'         => 6,
+    'question_datalist'             => 7,
 
     /* Attendee ticket options types */
     'ticket_options_dropdown_single'      => 1,
