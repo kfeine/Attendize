@@ -11,6 +11,10 @@ class TicketStatusSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
+        DB::table('ticket_statuses')->delete();
+        Schema::enableForeignKeyConstraints();
+
         $ticket_statuses = [
             [
                 'id' => 1,
@@ -30,7 +34,7 @@ class TicketStatusSeeder extends Seeder
             ],
             [
                 'id' => 5,
-                'name' => 'On Sale',
+                'name' => 'Off Sale',
             ],
         ];
 

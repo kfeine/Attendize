@@ -451,7 +451,7 @@
                     {!! Form::close() !!}
                 </div>
                 <div class="tab-pane" id="social">
-                    <h4>__('manageevent_customize.social_settings')</h4>
+                    <h4>@lang('manageevent_customize.social_settings')</h4>
 
                     <div class="form-group">
                         <div class="checkbox custom-checkbox">
@@ -469,7 +469,7 @@
 
                 <div class="tab-pane {{$tab == 'order_page' ? 'active' : ''}}" id="order_page">
                     {!! Form::model($event, array('url' => route('postEditEventOrderPage', ['event_id' => $event->id]), 'class' => 'ajax ')) !!}
-                    <h4>__('manageevent_customize.order_page_settings')</h4>
+                    <h4>@lang('manageevent_customize.order_page_settings')</h4>
 
                     <div class="form-group">
                         {!! Form::label('pre_order_display_message', __('manageevent_customize.message_display'), array('class'=>'control-label ')) !!}
