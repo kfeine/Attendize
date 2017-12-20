@@ -27,13 +27,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         {!! Form::label("attendee_1_first_name", __('public_viewevent_partials_eventticketssection.first_name')) !!}
-                                        {!! Form::text("attendee_1_first_name", null, ['required' => 'required', 'class' => "attendee_1_first_name attendee_first_name form-control"]) !!}
+                                        {!! Form::text("attendee_1_first_name", null, ['required' => 'required', 'class' => "required attendee_1_first_name attendee_first_name form-control"]) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         {!! Form::label("attendee_1_last_name", __('public_viewevent_partials_eventticketssection.last_name')) !!}
-                                        {!! Form::text("attendee_1_last_name", null, ['required' => 'required', 'class' => "attendee_1_last_name attendee_last_name form-control"]) !!}
+                                        {!! Form::text("attendee_1_last_name", null, ['required' => 'required', 'class' => "required attendee_1_last_name attendee_last_name form-control"]) !!}
                                     </div>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         {!! Form::label("attendee_1_email", __('public_viewevent_partials_eventticketssection.email')) !!}
-                                        {!! Form::text("attendee_1_email", null, ['required' => 'required', 'class' => "attendee_1_email attendee_email form-control"]) !!}
+                                        {!! Form::text("attendee_1_email", null, ['required' => 'required', 'class' => "required attendee_1_email attendee_email form-control"]) !!}
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                             <div class="p0 well bgcolor-white order_overview">
                                 <h5>@lang('public_viewevent_partials_eventticketssection.options')</h5>
                                 <hr/>
-                                @include('Public.ViewEvent.Partials.TicketOptions', ['tickets' => $tickets])
+                                @include('Public.ViewEvent.Partials.TicketOptions', ['tickets' => $tickets, 'numAttendee' => 1])
                             </div>
                         </div>
                         <!-- end modal body -->
@@ -92,38 +92,38 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label("attendee_`+number+`_first_name", "__prénom") !!}
-                                        {!! Form::text("attendee_`+number+`_first_name", null, ['required' => 'required', 'class' => "attendee_`+number+`_first_name attendee_first_name form-control"]) !!}
+
+                                        {!! Form::label("attendee_`+number+`_first_name", __('public_viewevent_partials_eventticketssection.first_name')) !!}
+                                        {!! Form::text("attendee_`+number+`_first_name", null, ['required' => 'required', 'class' => "required attendee_`+number+`_first_name attendee_first_name form-control"]) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        {!! Form::label("attendee_`+number+`_last_name", "__nom") !!}
-                                        {!! Form::text("attendee_`+number+`_last_name", null, ['required' => 'required', 'class' => "attendee_`+number+`_last_name attendee_last_name form-control"]) !!}
+                                        {!! Form::label("attendee_`+number+`_last_name", __('public_viewevent_partials_eventticketssection.last_name')) !!}
+                                        {!! Form::text("attendee_`+number+`_last_name", null, ['required' => 'required', 'class' => "required attendee_`+number+`_last_name attendee_last_name form-control"]) !!}
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        {!! Form::label("attendee_`+number+`_email", "__email") !!}
-                                        {!! Form::text("attendee_`+number+`_email", null, ['required' => 'required', 'class' => "attendee_`+number+`_email attendee_email form-control"]) !!}
+                                        {!! Form::label("attendee_`+number+`_email", __('public_viewevent_partials_eventticketssection.email')) !!}
+                                        {!! Form::text("attendee_`+number+`_email", null, ['required' => 'required', 'class' => "required attendee_`+number+`_email attendee_email form-control"]) !!}
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                {{ Form::label('attendee_`+number+`_ticket', null, ['class' => "control-label"]) }}
+                                {{ Form::label('attendee_`+number+`_ticket', "Formule", ['class' => "control-label"]) }}
                                 {{ Form::select('attendee_`+number+`_ticket', $tickets->pluck('title_with_price', 'id')->all(), null, ['class' => "form-control", 'onChange' => 'changeTicket(this, `+number+`)']) }}
                                 @foreach ($tickets as $ticket)
                                     <small class="ticket-options ticket-options-{{$ticket->id}} hide form-text">{{$ticket->description}}</small>
                                 @endforeach
-                            </div> 
-                            @foreach ($tickets as $ticket)
-                                <div class="ticket-options ticket-options-{{$ticket->id}} hide form-group">
-
-                                    {!! Form::select("attendee_`+number+`_option_'.$ticket->id.[]",$ticket->options_enabled->pluck('title_with_price', 'id'), null, ['multiple' => 'multiple','class' => "ticket_holder_questions.{$ticket->id}.{$ticket['attendee_id']}   form-control"]) !!}
-                                </div>
-                            @endforeach
+                            </div>
+                            <div class="p0 well bgcolor-white order_overview">
+                                <h5>@lang('public_viewevent_partials_eventticketssection.options')</h5>
+                                <hr/>
+                                @include('Public.ViewEvent.Partials.TicketOptions', ['tickets' => $tickets, 'numAttendee' => "`+number+`"])
+                            </div>
                         </div>
                         <!-- end modal body -->
                         <div class="modal-footer">

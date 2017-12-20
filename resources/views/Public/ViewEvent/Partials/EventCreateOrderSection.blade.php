@@ -80,13 +80,13 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                             {!! Form::label("order_first_name", __('public_viewevent_partials_eventcreateordersection.first_name')) !!}
-                            {!! Form::text("order_first_name", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                            {!! Form::text("order_first_name", null, ['required' => 'required', 'class' => 'required form-control']) !!}
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group">
                             {!! Form::label("order_last_name", __('public_viewevent_partials_eventcreateordersection.last_name')) !!}
-                            {!! Form::text("order_last_name", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                            {!! Form::text("order_last_name", null, ['required' => 'required', 'class' => 'required form-control']) !!}
                         </div>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label("order_email", __('public_viewevent_partials_eventcreateordersection.email')) !!}
-                            {!! Form::text("order_email", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                            {!! Form::text("order_email", null, ['required' => 'required', 'class' => 'required form-control']) !!}
                         </div>
                     </div>
                 </div>
@@ -126,13 +126,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     {!! Form::label("ticket_holder_first_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.first_name')) !!}
-                                                    {!! Form::text("ticket_holder_first_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['first_name'], ['required' => 'required', 'class' => "ticket_holder_first_name.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_first_name form-control"]) !!}
+                                                    {!! Form::text("ticket_holder_first_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['first_name'], ['required' => 'required', 'class' => "required ticket_holder_first_name.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_first_name form-control"]) !!}
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     {!! Form::label("ticket_holder_last_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.last_name')) !!}
-                                                    {!! Form::text("ticket_holder_last_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['last_name'], ['required' => 'required', 'class' => "ticket_holder_last_name.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_last_name form-control"]) !!}
+                                                    {!! Form::text("ticket_holder_last_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['last_name'], ['required' => 'required', 'class' => "required ticket_holder_last_name.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_last_name form-control"]) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -140,7 +140,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     {!! Form::label("ticket_holder_email[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.email')) !!}
-                                                    {!! Form::text("ticket_holder_email[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['email'], ['required' => 'required', 'class' => "ticket_holder_email.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_email form-control"]) !!}
+                                                    {!! Form::text("ticket_holder_email[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['email'], ['required' => 'required', 'class' => "required ticket_holder_email.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_email form-control"]) !!}
                                                 </div>
                                             </div>
                                             @include('Public.ViewEvent.Partials.AttendeeQuestions', ['ticket' => $ticket['ticket'],'attendee_number' => $total_attendee_increment++])
@@ -189,7 +189,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {!! Form::label('card-number', __('public_viewevent_partials_eventcreateordersection.card')) !!}
-                                    <input required="required" type="text" autocomplete="off" placeholder="**** **** **** ****" class="form-control card-number" size="20" data-stripe="number">
+                                    <input required="required" type="text" autocomplete="off" placeholder="**** **** **** ****" class="required form-control card-number" size="20" data-stripe="number">
                                 </div>
                             </div>
                         </div>
@@ -216,7 +216,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {!! Form::label('card-expiry-year', __('public_viewevent_partials_eventcreateordersection.cvc')) !!}
-                                    <input required="required" placeholder="***" class="form-control card-cvc" data-stripe="cvc">
+                                    <input required="required" placeholder="***" class="required form-control card-cvc" data-stripe="cvc">
                                 </div>
                             </div>
                         </div>

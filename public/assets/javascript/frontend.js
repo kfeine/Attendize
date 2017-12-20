@@ -15,6 +15,8 @@ void 0===c?d&&"get"in d&&null!==(e=d.get(a,b))?e:(e=n.find.attr(a,b),null==e?voi
 +function ($) {
   'use strict';
 
+  $('.required').prop('required', $(this).is(':visible'));
+
   // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
   // ============================================================
 
@@ -4963,6 +4965,9 @@ function addAttendee()
   var formNumberAttendee = $('form').find('input[name="attendees[]"]').last().val();
   var formAttendee = getFormAttendeeTicket(parseInt(formNumberAttendee)+1);
   $( ".content-form" ).append( formAttendee );
+  console.log('#attendee'+(parseInt(formNumberAttendee)+1)+' .required');
+
+  $('.required').prop('required', $(this).is(':visible'));
 }
 
 function removeAttendee(id)

@@ -2,19 +2,19 @@
     <div class="ticket-options ticket-options-{{$ticket->id}} {{$loop->first?"":"hide"}} form-group">
         @foreach ($ticket->options_enabled as $option)
             <div class="form-group">
-                {!! Form::label("attendee_1_ticket_{$ticket->id}_options_$option->id", $option->title, ['class' => $option->is_required ? 'required' : '']) !!}
+                {!! Form::label("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id", $option->title, ['class' => $option->is_required ? 'required' : '']) !!}
                 @if($option->ticket_options_type_id == config('attendize.ticket_options_dropdown_single'))
-                    {!! Form::select("attendee_1_ticket_{$ticket->id}_options_$option->id", array('' => 'Please select one option') + $option->options->pluck('title', 'id')->toArray(), null, [$option->is_required ? 'required' : '', 'class' =>  "form-control"]) !!}
+                    {!! Form::select("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id", array('' => 'Please select one option') + $option->options->pluck('title', 'id')->toArray(), null, [$option->is_required ? 'required' : '', 'class' =>  "required form-control"]) !!}
                 @elseif($option->ticket_options_type_id == config('attendize.ticket_options_dropdown_multi'))
-                    {!! Form::select("attendee_1_ticket_{$ticket->id}_options_$option->id",$option->options->pluck('title', 'id'), null, [$option->is_required ? 'required' : '' => $option->is_required ? 'required' : '', 'multiple' => 'multiple','class' => "form-control"]) !!}
+                    {!! Form::select("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id",$option->options->pluck('title', 'id'), null, [$option->is_required ? 'required' : '' => $option->is_required ? 'required' : '', 'multiple' => 'multiple','class' => "required form-control"]) !!}
                 @elseif($option->ticket_options_type_id == config('attendize.ticket_options_checkbox_multi'))
                     <br>
                     @foreach($option->options as $detail)
                         <?php
-                            $checkbox_id = md5("1".$ticket->id.$option->id.$detail->title);
+                            $checkbox_id = md5($numAttendee.$ticket->id.$option->id.$detail->title);
                         ?>
                         <div class="custom-checkbox">
-                            {!! Form::checkbox("attendee_1_ticket_{$ticket->id}_options_$option->id[]",$detail->id, false,['class' => "", 'id' => $checkbox_id]) !!}
+                            {!! Form::checkbox("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id[]",$detail->id, false,['class' => "", 'id' => $checkbox_id]) !!}
                             <label for="{{ $checkbox_id }}">{{$detail->title}}</label>
                         </div>
                     @endforeach
@@ -22,10 +22,10 @@
                     <br>
                     @foreach($option->options as $detail)
                         <?php
-                            $radio_id = md5("1".$ticket->id.$option->id.$detail->title);
+                            $radio_id = md5($numAttendee.$ticket->id.$option->id.$detail->title);
                         ?>
                     <div class="custom-radio">
-                        {!! Form::radio("attendee_1_ticket_{$ticket->id}_options_$option->id",$detail->id, false, ['id' => $radio_id, 'class' => ""]) !!}
+                        {!! Form::radio("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id",$detail->id, false, ['id' => $radio_id, 'class' => ""]) !!}
                         <label for="{{ $radio_id }}">{{$detail->title}}</label>
                     </div>
                     @endforeach
