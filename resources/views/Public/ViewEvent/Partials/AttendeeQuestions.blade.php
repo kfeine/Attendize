@@ -8,10 +8,10 @@
             @elseif($question->question_type_id == config('attendize.question_textbox_multi'))
                 {!! Form::textarea("ticket_holder_questions[{$ticket->id}][{$attendee_id}][$question->id]", null, ['rows'=>5, $question->is_required ? 'required' : '' => $question->is_required ? 'required' : '', 'class' => "ticket_holder_questions.{$ticket->id}.{$attendee_id}.{$question->id}  form-control"]) !!}
             @elseif($question->question_type_id == config('attendize.question_dropdown_single'))
-                {!! Form::select("ticket_holder_questions[{$ticket->id}][{$i}][$question->id]", array_merge(['' => '-- Please Select --'], $question->options->pluck('name', 'name')->toArray()), null, [$question->is_required ? 'required' : '' => $question->is_required ? 'required' : '', 'class' => "ticket_holder_questions.{$ticket->id}.{$i}.{$question->id} form-control"]) !!}
+                {!! Form::select("ticket_holder_questions[{$ticket->id}][{$attendee_id}][$question->id]", array_merge(['' => '-- Please Select --'], $question->options->pluck('name', 'name')->toArray()), null, [$question->is_required ? 'required' : '' => $question->is_required ? 'required' : '', 'class' => "ticket_holder_questions.{$ticket->id}.{$attendee_id}.{$question->id} form-control"]) !!}
             @elseif($question->question_type_id == config('attendize.question_datalist'))
-                <input list="list_ticket_holder_questions.{{ $ticket->id }}.{{ $i }}.{{ $question->id }}" name="ticket_holder_questions[{{ $ticket->id }}][{{ $i }}][{{ $question->id }}]" id="ticket_holder_questions[{{ $ticket->id }}][{{ $i }}][{{ $question->id }}]" class="ticket_holder_questions.{{ $ticket->id }}.{{ $i }}.{{ $question->id }} form-control" {{ $question->is_required ? 'required' : '' }}>
-                <datalist id="list_ticket_holder_questions.{{ $ticket->id }}.{{ $i }}.{{ $question->id }}">
+                <input list="list_ticket_holder_questions.{{ $ticket->id }}.{{ $attendee_id }}.{{ $question->id }}" name="ticket_holder_questions[{{ $ticket->id }}][{{ $attendee_id }}][{{ $question->id }}]" id="ticket_holder_questions[{{ $ticket->id }}][{{ $attendee_id }}][{{ $question->id }}]" class="ticket_holder_questions.{{ $ticket->id }}.{{ $attendee_id }}.{{ $question->id }} form-control" {{ $question->is_required ? 'required' : '' }}>
+                <datalist id="list_ticket_holder_questions.{{ $ticket->id }}.{{ $attendee_id }}.{{ $question->id }}">
                     @foreach($question->options as $option)
                     <option value="{{ $option->name }}">
                     @endforeach
