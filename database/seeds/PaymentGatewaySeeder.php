@@ -11,6 +11,10 @@ class PaymentGatewaySeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
+        DB::table('payment_gateways')->delete();
+        Schema::enableForeignKeyConstraints();
+
         $payment_gateways = [
             [
                 'id' => 1,

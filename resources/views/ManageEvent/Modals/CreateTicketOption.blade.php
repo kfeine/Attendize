@@ -9,39 +9,62 @@
                     @lang('manageevent_modals_createticketoption.create_option')</h3>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            {!! Form::label('title', __('manageevent_modals_createticketoption.name'), array('class'=>'control-label required')) !!}
-                            {!! Form::text('title', Input::old('title'),
-                                        array(
-                                        'class'=>'form-control',
-                                        'placeholder'=>__('manageevent_modals_createticketoption.name')
-                                        )) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('description', __('manageevent_modals_createticketoption.description'), array('class'=>'control-label required')) !!}
-                            {!! Form::text('description', Input::old('description'),
-                                        array(
-                                        'class'=>'form-control'
-                                        )) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::checkbox('multiple', 1, false) !!}
-                            {!! Form::label('multiple', __('manageevent_modals_createticketoption.multiple'), array('class'=>'control-label required')) !!}
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    {!! Form::label('price', __('manageevent_modals_createticketoption.price'), array('class'=>'control-label required')) !!}
-                                    {!! Form::text('price', Input::old('price'),
-                                                array(
-                                                'class'=>'form-control',
-                                                'placeholder'=>__('manageevent_modals_createticketoption.price')
-                                                )) !!}
-                                </div>
-                            </div>
-                        </div>
+                <div class="form-group">
+                    {!! Form::label('title', __('manageevent_modals_createticketoption.block_name'), array('class'=>'control-label required')) !!}
+                    {!! Form::text('title', Input::old('title'),
+                                array(
+                                'class'=>'form-control',
+                                'placeholder'=>__('manageevent_modals_createticketoption.block_name')
+                                )) !!}
+                </div>
+                <div class="form-group">
+                    <label for="ticket-options-type">
+                        @lang('manageevent_modals_createticketoption.option_type')
+                    </label>
+
+                    <select id="ticket-options-type" class="form-control" name="ticket_options_type_id"
+                            onchange="changeTicketOptionsType(this);">
+                        @foreach ($ticket_options_types as $option_type)
+                            <option data-has-options="{{$option_type->has_options}}" value="{{$option_type->id}}">
+                                {{$option_type->name}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <fieldset id="ticket-options">
+                    <h4>@lang('manageevent_modals_createticketoption.options_details')</h4>
+                    <table class="table table-bordered table-condensed">
+                        <tbody>
+                        <tr>
+                            <td>{!! Form::hidden('details[]', "1") !!}
+                                {!! Form::label("details_1_title", __('manageevent_modals_createticketoption.title')) !!}
+                                {!! Form::text("details_1_title", null, ['required' => 'required', 'class' => "form-control"]) !!}
+                                {!! Form::label("details_1_price", __('manageevent_modals_createticketoption.price')) !!}
+                                {!! Form::text("details_1_price", null, ['required' => 'required', 'class' => "form-control"]) !!}</td>
+                            <td width="50">
+                                <i class="btn btn-danger ico-remove" onclick="removeTicketOptionsDetails(this);"></i>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="2">
+                                           <span id="add-ticket-options-details" class="btn btn-success btn-xs"
+                                                 onclick="addTicketOptionsDetails();">
+                                               <i class="ico-plus"></i>
+                                               @lang('manageevent_modals_creaticketoption.another')
+                                           </span>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </fieldset>
+
+                <div class="form-group">
+                    <div class="custom-checkbox">
+                        {!! Form::checkbox('is_required', 'yes', false, ['data-toggle' => 'toggle', 'id' => 'is_required']) !!}
+                        {!! Form::label('is_required', __('manageevent_modals_createticketoption.required_option')) !!}
                     </div>
                 </div>
 
@@ -54,3 +77,20 @@
        {!! Form::close() !!}
     </div>
 </div>
+
+<script>
+  function getFormTicketDetails(number){
+
+      return ` 
+        <tr>
+            <td>{!! Form::hidden('details[]', "`+number+`") !!}
+                {!! Form::label("details_`+number+`_title", __('manageevent_modals_createticketoption.title')) !!}
+                {!! Form::text("details_`+number+`_title", null, ['required' => 'required', 'class' => "form-control"]) !!}
+                {!! Form::label("details_`+number+`_price", __('manageevent_modals_createticketoption.price')) !!}
+                {!! Form::text("details_`+number+`_price", null, ['required' => 'required', 'class' => "form-control"]) !!}</td>
+            <td width="50">
+                <i class="btn btn-danger ico-remove" onclick="removeTicketOptionsDetails(this);"></i>
+            </td>
+        </tr>`; 
+  }
+</script>

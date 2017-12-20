@@ -26,7 +26,7 @@ class AddMultipleOptionToTicketOptionsTable extends Migration
     public function down()
     {
         Schema::table('ticket_options', function (Blueprint $table) {
-            //
+            $table->dropColumn('multiple');
         });
     }
 }

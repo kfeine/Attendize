@@ -14,6 +14,7 @@ use App\Models\QuestionAnswer;
 use App\Models\ReservedTickets;
 use App\Models\Ticket;
 use App\Models\TicketOptions;
+use App\Models\TicketOptionsDetails;
 use App\Models\Discount;
 use Carbon\Carbon;
 use Cookie;
@@ -136,16 +137,25 @@ class EventCheckoutController extends Controller
             $organiser_booking_fee = $organiser_booking_fee +  $ticket->organiser_booking_fee;
 
             //validation options
-            $option_ids = $request->get('attendee_' .$attendee_id. '_option_'.$ticket_id);
-            $options = [];
-            foreach((array)$option_ids as $option_id){
-                $option = TicketOptions::find($option_id);
-                if($option->ticket_id != $ticket_id || !$option->is_enabled){
-                    continue; 
+            $details = [];
+            foreach($ticket->options_enabled as $option){
+                $detail_ids = $request->get('attendee_' .$attendee_id. '_ticket_'.$ticket_id.'_options_'.$option->id);
+                if(!is_array($detail_ids)){
+                    $detail_ids = [$detail_ids];   
                 }
+                foreach($detail_ids as $detail_id){
+                    $detail = TicketOptionsDetails::find($detail_id);
+                    if(!$detail){
+                      continue;
+                    }
 
-                $options[] = $option;
-                $order_total = $order_total + $option->price;
+                    if($detail->ticket_options_id != $option->id){
+                        continue; 
+                    }
+
+                    $details[] = $detail;
+                    $order_total = $order_total + $detail->price;
+                }
             }
 
             $attendee['first_name'] = $request->get('attendee_' .$attendee_id. '_first_name');
@@ -159,7 +169,7 @@ class EventCheckoutController extends Controller
                 'booking_fee'           => $ticket->booking_fee,
                 'organiser_booking_fee' => $ticket->organiser_booking_fee,
                 'full_price'            => $ticket->price + $ticket->total_booking_fee,
-                'options'               => $options,
+                'options'               => $details,
                 'attendee'              => $attendee,
                 'attendee_id'           => $attendee_id,
             ];
@@ -252,8 +262,8 @@ class EventCheckoutController extends Controller
             'order_requires_payment'  => (ceil($order_total) == 0) ? false : true,
             'account_id'              => $event->account->id,
             'affiliate_referral'      => Cookie::get('affiliate_' . $event_id),
-            'account_payment_gateway' => count($event->account->active_payment_gateway) ? $event->account->active_payment_gateway : false,
-            'payment_gateway'         => count($event->account->active_payment_gateway) ? $event->account->active_payment_gateway->payment_gateway : false,
+            'account_payment_gateway' => $event->account->active_payment_gateway ? $event->account->active_payment_gateway : false,
+            'payment_gateway'         => $event->account->active_payment_gateway ? $event->account->active_payment_gateway->payment_gateway : false,
         ]);
 
         /*
