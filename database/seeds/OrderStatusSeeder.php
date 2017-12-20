@@ -32,6 +32,10 @@ class OrderStatusSeeder extends Seeder
                 'id' => 4,
                 'name' => 'Cancelled',
             ],
+            [
+                'id' => 5,
+                'name' => 'Awaiting Payment',
+            ],
         ];
 
         DB::table('order_statuses')->insert($order_statuses);

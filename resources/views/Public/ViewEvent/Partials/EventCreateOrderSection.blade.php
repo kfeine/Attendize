@@ -154,7 +154,7 @@
                                                     {!! Form::text("ticket_holder_email[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['email'], ['required' => 'required', 'class' => "required ticket_holder_email.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_email form-control"]) !!}
                                                 </div>
                                             </div>
-                                            @include('Public.ViewEvent.Partials.AttendeeQuestions', ['ticket' => $ticket['ticket'],'attendee_number' => $total_attendee_increment++])
+                                            @include('Public.ViewEvent.Partials.AttendeeQuestions', ['ticket' => $ticket['ticket'],'attendee_number' => $total_attendee_increment++, 'attendee_id' => $ticket['attendee_id']])
 
                                         </div>
 
