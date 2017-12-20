@@ -10,31 +10,15 @@ class TicketOptions extends MyBaseModel
     use SoftDeletes;
 
     /**
-     * Indicates if the model should be timestamped.
+     * The type associated with the question.
      *
-     * @var bool
+     * @access public
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public $timestamps = false;
-
-    /**
-     * The rules to validate the model.
-     *
-     * @var array $rules
-     */
-    public $rules = [
-        'title'              => ['required'],
-        'description'        => ['required'],
-        'price'              => ['required', 'numeric', 'min:0'],
-    ];
-    /**
-     * The validation error messages.
-     *
-     * @var array $messages
-     */
-    public $messages = [
-        'price.numeric'              => 'The price must be a valid number (e.g 12.50)',
-        'title.required'             => 'You must at least give a title for your option. (e.g Early Bird)',
-    ];
+    public function type()
+    {
+        return $this->belongsTo(\App\Models\TicketOptionsType::class);
+    }
 
     /**
      * The tickets associated with the option.
@@ -47,8 +31,42 @@ class TicketOptions extends MyBaseModel
         return $this->belongsTo(\App\Models\Ticket::class);
     }
 
-    public function getTitleWithPriceAttribute()
+    /**
+     * The options associated with the option block
+     *
+     * @access public
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function options()
     {
-        return $this->title . ' (' . money($this->price, $this->ticket->event->currency) .')';
+        return $this->hasMany(\App\Models\TicketOptionsDetails::class);
     }
+
+    /**
+     * The rules to validate the model.
+     *
+     * @var array $rules
+     */
+    public $rules = [
+        'title'              => ['required'],
+    ];
+    /**
+     * The validation error messages.
+     *
+     * @var array $messages
+     */
+    public $messages = [
+        'title.required'             => 'You must at least give a title for your block option. (e.g Early Bird)',
+    ];
+
+    /**
+     * Scope a query to only include active options.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeIsEnabled($query)
+    {
+        return $query->where('is_enabled', 1);
+    }
+
 }

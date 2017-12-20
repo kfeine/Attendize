@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Ticket;
 use App\Models\TicketOptions;
+use App\Models\TicketOptionsDetails;
+use App\Models\TicketOptionsType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Log;
@@ -25,9 +27,13 @@ class EventTicketOptionsController extends MyBaseController
      */
     public function showCreateTicketOption($event_id, $ticket_id)
     {
+        $event = Event::scope()->findOrFail($event_id);
+        $ticket = Ticket::scope()->findOrFail($ticket_id);
+
         return view('ManageEvent.Modals.CreateTicketOption', [
-            'event' => Event::scope()->find($event_id),
-            'ticket' => Ticket::scope()->find($ticket_id),
+            'event' => $event,
+            'ticket' => $ticket,
+            'ticket_options_types' => TicketOptionsType::all(),
         ]);
     }
 
@@ -42,28 +48,46 @@ class EventTicketOptionsController extends MyBaseController
     public function postCreateTicketOption(Request $request, $event_id, $ticket_id)
     {
         // Get the event or display a 'not found' warning.
+        $event = Event::findOrFail($event_id);
         $ticket = Ticket::findOrFail($ticket_id);
+        $ticket_options_type = TicketOptionsType::findOrFail($request->get('ticket_options_type_id'));
 
-        $option = TicketOptions::createNew(false, false, true);
-
-        if (!$option->validate($request->all())) {
+        if (!$request->has('details')) {
             return response()->json([
-                'status'   => 'error',
-                'messages' => $option->errors(),
+                'status'  => 'error',
+                'message' => __('controllers_eventticket.no_options_selected'),
             ]);
         }
 
-        $option->title = $request->get('title');
-        $option->description = $request->get('description');
-        $option->price = $request->get('price');
-        if ($request->get('multiple')) {
-            $option->multiple = $request->get('multiple');
-        } else {
-            $option->multiple = 0;
-        }
-        $option->is_enabled = true;
+        $optionBlock = TicketOptions::createNew(false, false, true);
 
-        $ticket->options()->save($option);
+        if (!$optionBlock->validate($request->all())) {
+            return response()->json([
+                'status'   => 'error',
+                'messages' => $optionBlock->errors(),
+            ]);
+        }
+
+        $optionBlock->title = $request->get('title');
+        $optionBlock->is_required = ($request->get('is_required') == 'yes');
+        $optionBlock->ticket_options_type_id = $ticket_options_type->id;
+        $ticket->options()->save($optionBlock);
+
+
+        // Get details
+        $optionDetails_ids = $request->get('details');
+
+        foreach ($optionDetails_ids as $optionDetails_id) {
+            $title = $request->get('details_'. $optionDetails_id .'_title');
+            $price = $request->get('details_'. $optionDetails_id .'_price');
+
+            $optionDetails = new TicketOptionsDetails();
+            $optionDetails->title = $title;
+            $optionDetails->price = $price;
+
+            $optionBlock->options()->save($optionDetails);
+        }
+
 
         session()->flash('message', 'Successfully Created Option');
 
@@ -84,10 +108,18 @@ class EventTicketOptionsController extends MyBaseController
      */
     public function showEditOption($event_id, $ticket_id, $option_id)
     {
+        $event = Event::scope()->findOrFail($event_id);
+        $ticket = Ticket::scope()->findOrFail($ticket_id);
+        $option = TicketOptions::scope()->findOrFail($option_id);
+        $details = $option->options;
+        $optionType = TicketOptionsType::all();
+
         $data = [
-            'event'  => Event::scope()->find($event_id),
-            'ticket' => Ticket::scope()->find($ticket_id),
-            'option' => TicketOptions::scope()->find($option_id),
+            'event'  => $event,
+            'ticket' => $ticket,
+            'option' => $option,
+            'details' => $details,
+            'ticket_options_types' => $optionType,
         ];
 
         return view('ManageEvent.Modals.EditTicketOptions', $data);
@@ -103,30 +135,61 @@ class EventTicketOptionsController extends MyBaseController
      */
     public function postEditOption(Request $request, $event_id, $ticket_id, $option_id)
     {
-        $option = TicketOptions::scope()->findOrFail($option_id);
+        $event = Event::findOrFail($event_id);
+        $ticket = Ticket::findOrFail($ticket_id);
+        $optionBlock = TicketOptions::findOrFail($option_id);
+        $ticket_options_type = TicketOptionsType::findOrFail($request->get('ticket_options_type_id'));
 
-        if (!$option->validate($request->all())) {
+
+        if (!$request->has('details')) {
             return response()->json([
-                'status'   => 'error',
-                'messages' => $option->errors(),
+                'status'  => 'error',
+                'message' => __('controllers_eventticket.no_options_selected'),
             ]);
         }
 
-        $option->title = $request->get('title');
-        $option->price = $request->get('price');
-        Log::info($request->get('multiple'));
-        if ($request->get('multiple')) {
-            $option->multiple = $request->get('multiple');
-        } else {
-            $option->multiple = 0;
+        if (!$optionBlock->validate($request->all())) {
+            return response()->json([
+                'status'   => 'error',
+                'messages' => $optionBlock->errors(),
+            ]);
         }
-        $option->description = $request->get('description');
 
-        $option->save();
+        $optionBlock->title = $request->get('title');
+        $optionBlock->is_required = ($request->get('is_required') == 'yes');
+        $optionBlock->ticket_options_type_id = $ticket_options_type->id;
+        $optionBlock->save();
+
+
+        //detail ids du formulare
+        $optionDetails_ids = $request->get('details');
+
+        foreach($optionBlock->options as $detail){
+            if(!in_array($detail->id, $optionDetails_ids))  {
+              //si ce n'est pas dans la liste, supprimer de la base
+              $detail->delete();
+            }
+        }
+
+        foreach ($optionDetails_ids as $optionDetails_id) {
+            $title = $request->get('details_'. $optionDetails_id .'_title');
+            $price = $request->get('details_'. $optionDetails_id .'_price');
+
+            // ICI
+            $optionDetails = TicketOptionsDetails::find($optionDetails_id);
+            if(!$optionDetails){
+                $optionDetails = new TicketOptionsDetails();
+            }
+            $optionDetails->title = $title;
+            $optionDetails->price = $price;
+            $optionDetails->ticket_options_id = $optionBlock->id;
+            $optionDetails->save();
+
+        }
 
         return response()->json([
             'status'      => 'success',
-            'id'          => $option->id,
+            'id'          => $optionBlock->id,
             'message'     => 'Refreshing...',
             'redirectUrl' => ""
         ]);
@@ -147,7 +210,7 @@ class EventTicketOptionsController extends MyBaseController
 
         if ($option->delete()) {
 
-            session()->flash('message', '__Option Successfully Deleted');
+            session()->flash('message', __('controllers_eventticket.option_deleted'));
 
             return response()->json([
                 'status'      => 'success',
@@ -159,7 +222,7 @@ class EventTicketOptionsController extends MyBaseController
         return response()->json([
             'status'  => 'error',
             'id'      => $option->id,
-            'message' => '__This option can\'t be deleted.',
+            'message' => __('controllers_eventticket.cant_be_deleted'),
         ]);
     }
 

@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                {{ Form::label('attendee_1_ticket', null, ['class' => "control-label"]) }}
+                                {{ Form::label('Formule', null, ['class' => "control-label"]) }}
                                 {{ Form::select('attendee_1_ticket', $tickets->pluck('title_with_price', 'id')->all(), null, ['class' => "form-control", 'onChange' => 'changeTicket(this, 1)']) }}
                                 @foreach ($tickets as $ticket)
                                     <small class="ticket-options ticket-options-{{$ticket->id}} hide form-text">{{$ticket->description}}</small>
@@ -54,21 +54,8 @@
                             </div>
                             <div class="p0 well bgcolor-white order_overview">
                                 <h5>@lang('public_viewevent_partials_eventticketssection.options')</h5>
-                                @foreach ($tickets as $ticket)
-                                    @if($ticket->single_options_enabled->count())
-                                    <div class="ticket-options ticket-options-{{$ticket->id}} hide form-group">
-                                        {!! Form::select("attendee_1_option_$ticket->id[]",$ticket->single_options_enabled->pluck('title_with_price', 'id'), null, ['class' => "ticket_holder_questions.{$ticket->id}.{$ticket['attendee_id']}   form-control"]) !!}
-                                    </div>
-                                    @endif
-                                    @if($ticket->multiple_options_enabled->count())
-                                    @foreach ($ticket->multiple_options_enabled as $option)
-                                    <div class="ticket-options ticket-options-{{$ticket->id}} hide form-group">
-                                        {!! Form::checkbox("attendee_1_option_$ticket->id[]", 1, false) !!}
-                                        {{ $option->title }} ({{ money($option->price, $event->currency) }})
-                                    </div>
-                                    @endforeach
-                                    @endif
-                                @endforeach
+                                <hr/>
+                                @include('Public.ViewEvent.Partials.TicketOptions', ['tickets' => $tickets])
                             </div>
                         </div>
                         <!-- end modal body -->
