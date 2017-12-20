@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddQuantityToDiscountsTable extends Migration
+class AddMultipleOptionToTicketOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddQuantityToDiscountsTable extends Migration
      */
     public function up()
     {
-        Schema::table('discounts', function (Blueprint $table) {
-            $table->integer('quantity_available')->nullable()->default(null);
+        Schema::table('ticket_options', function (Blueprint $table) {
+            $table->boolean('multiple')->default(False);
         });
     }
 
@@ -25,8 +25,8 @@ class AddQuantityToDiscountsTable extends Migration
      */
     public function down()
     {
-        Schema::table('discounts', function (Blueprint $table) {
-            $table->dropColumn('quantity_available');
+        Schema::table('ticket_options', function (Blueprint $table) {
+            $table->dropColumn('multiple');
         });
     }
 }

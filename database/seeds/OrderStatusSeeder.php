@@ -11,6 +11,10 @@ class OrderStatusSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
+        DB::table('order_statuses')->delete();
+        Schema::enableForeignKeyConstraints();
+
         $order_statuses = [
             [
                 'id' => 1,
@@ -27,6 +31,10 @@ class OrderStatusSeeder extends Seeder
             [
                 'id' => 4,
                 'name' => 'Cancelled',
+            ],
+            [
+                'id' => 5,
+                'name' => 'Awaiting Payment',
             ],
         ];
 

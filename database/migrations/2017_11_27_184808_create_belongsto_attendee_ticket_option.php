@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddQuantityToDiscountsTable extends Migration
+class CreateBelongstoAttendeeTicketOption extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddQuantityToDiscountsTable extends Migration
      */
     public function up()
     {
-        Schema::table('discounts', function (Blueprint $table) {
-            $table->integer('quantity_available')->nullable()->default(null);
+        Schema::create('attendee_ticket_options', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('attendee_id');
+            $table->integer('ticket_options_id');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddQuantityToDiscountsTable extends Migration
      */
     public function down()
     {
-        Schema::table('discounts', function (Blueprint $table) {
-            $table->dropColumn('quantity_available');
-        });
+        Schema::dropIfExists('attendee_ticket_options');
     }
 }

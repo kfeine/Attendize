@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call('OrderStatusSeeder');
         $this->call('PaymentGatewaySeeder');
         $this->call('QuestionTypesSeeder');
+        $this->call('TicketOptionsTypesSeeder');
         $this->call('TicketStatusSeeder');
         $this->call('TimezoneSeeder');
     }
