@@ -730,12 +730,6 @@ class EventCheckoutController extends Controller
                     }
                 }
 
-                    /*
-                     * If there are multiple answers to a question then join them with a comma
-                     * and treat them as a single answer.
-                     */
-                    $ticket_answer = is_array($ticket_answer) ? implode(', ', $ticket_answer) : $ticket_answer;
-
                 /* Keep track of total number of attendees */
                 $attendee_increment++;
                 
