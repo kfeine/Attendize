@@ -18,6 +18,7 @@ return [
     'on_sale' => 'On Sale',
     'pause' => 'Pause',
     'delete' => 'Delete',
+    'options' => 'Options',
 
 
 ];

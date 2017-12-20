@@ -15,132 +15,63 @@
         @if($tickets->count() > 0)
 
             {!! Form::open(['url' => route('postValidateTickets', ['event_id' => $event->id]), 'class' => 'ajax']) !!}
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="content">
-                        <div class="tickets_table_wrap">
-                            <table class="table">
-                                <?php
-                                $is_free_event = true;
-                                ?>
-                                @foreach($tickets as $ticket)
-                                    <tr class="ticket" property="offers" typeof="Offer">
-                                        <td>
-                                            <span class="ticket-title semibold" property="name">
-                                                {{$ticket->title}}
-                                            </span>
-                                            <p class="ticket-descripton mb0 text-muted" property="description">
-                                                {{$ticket->description}}
-                                            </p>
-                                        </td>
-                                        <td style="width:180px; text-align: right;">
-                                            <div class="ticket-pricing" style="margin-right: 20px;">
-                                                @if($ticket->is_free)
-                                                    @lang('public_viewevent_partials_eventticketssection.free')
-                                                    <meta property="price" content="0">
-                                                @else
-                                                    <?php
-                                                    $is_free_event = false;
-                                                    ?>
-                                                    <span title='{{money($ticket->price, $event->currency)}} Ticket Price + {{money($ticket->total_booking_fee, $event->currency)}} Booking Fees'>{{money($ticket->total_price, $event->currency)}} </span>
-                                                    <meta property="priceCurrency"
-                                                          content="{{ $event->currency->code }}">
-                                                    <meta property="price"
-                                                          content="{{ number_format($ticket->price, 2, '.', '') }}">
-                                                @endif
-                                            </div>
-                                        </td>
-                                        <td style="width:85px;">
-                                            @if($ticket->is_paused)
-
-                                                <span class="text-danger">
-                                                   @lang('public_viewevent_partials_eventticketssection.not_sale') 
-                                                </span>
-
-                                            @else
-
-                                                @if($ticket->sale_status === config('attendize.ticket_status_sold_out'))
-                                                    <span class="text-danger" property="availability"
-                                                          content="http://schema.org/SoldOut">
-                                                       @lang('public_viewevent_partials_eventticketssection.sold_out') 
-                                                    </span>
-                                                @elseif($ticket->sale_status === config('attendize.ticket_status_before_sale_date'))
-                                                    <span class="text-danger">
-                                                       @lang('public_viewevent_partials_eventticketssection.not_started') 
-                                                    </span>
-                                                @elseif($ticket->sale_status === config('attendize.ticket_status_after_sale_date'))
-                                                    <span class="text-danger">
-                                                       @lang('public_viewevent_partials_eventticketssection.ended') 
-                                                    </span>
-                                                @else
-                                                    {!! Form::hidden('tickets[]', $ticket->id) !!}
-                                                    <meta property="availability" content="http://schema.org/InStock">
-                                                    <select name="ticket_{{$ticket->id}}" class="form-control"
-                                                            style="text-align: center">
-                                                        @if ($tickets->count() > 1)
-                                                            <option value="0">0</option>
-                                                        @endif
-                                                        @for($i=$ticket->min_per_person; $i<=$ticket->max_per_person; $i++)
-                                                            <option value="{{$i}}">{{$i}}</option>
-                                                        @endfor
-                                                    </select>
-                                                @endif
-
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                                <tr class="discout-cocode">
-                                        <td>
-                                            <span class="ticket-title semibold" property="name">
-                                                @lang('public_viewevent_partials_eventticketssection.discount')
-                                            </span>
-                                            <p class="ticket-descripton mb0 text-muted" property="description">
-                                                @lang('public_viewevent_partials_eventticketssection.discount_description')
-                                            </p>
-                                        </td>
-                                        <td style="width:180px; text-align: right;">
-                                            <div class="ticket-pricing" style="margin-right: 20px;">
-                                            </div>
-                                        </td>
-                                        <td style="width:85px;">
-                                            {!! Form::hidden('discount-code', '') !!}
-                                            <input type="text" name="discount-code" style="text-align: center" class="form-control">
-                                        </td>
-                                </tr>
-
-                                <tr class="checkout">
-                                    <td colspan="3">
-                                        @if(!$is_free_event)
-                                            <div class="hidden-xs pull-left">
-                                                <img class=""
-                                                     src="{{asset('assets/images/public/EventPage/credit-card-logos.png')}}"/>
-                                                @if($event->enable_offline_payments)
-
-                                                    <div class="help-block" style="font-size: 11px;">
-                                                       @lang('public_viewevent_partials_eventticketssection.offline') 
-                                                    </div>
-                                                @endif
-
-                                            </div>
-
-                                        @endif
-                                        {!!Form::submit(__('public_viewevent_partials_eventticketssection.register'), ['class' => 'btn btn-lg btn-primary pull-right'])!!}
-                                    </td>
-                                </tr>
-                            </table>
+            <div class="row content-form">
+                <div class="col-md-6" id="attendee1">
+                    <div class="modal-content">
+                        {!! Form::hidden('attendees[]', "1") !!}
+                        <div class="modal-header text-center">
+                            <h3>@lang('public_viewevent_partials_eventticketssection.attendee') 1</h3>
                         </div>
+                        <!-- start modal body -->
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!! Form::label("attendee_1_first_name", __('public_viewevent_partials_eventticketssection.first_name')) !!}
+                                        {!! Form::text("attendee_1_first_name", null, ['required' => 'required', 'class' => "required attendee_1_first_name attendee_first_name form-control"]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!! Form::label("attendee_1_last_name", __('public_viewevent_partials_eventticketssection.last_name')) !!}
+                                        {!! Form::text("attendee_1_last_name", null, ['required' => 'required', 'class' => "required attendee_1_last_name attendee_last_name form-control"]) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {!! Form::label("attendee_1_email", __('public_viewevent_partials_eventticketssection.email')) !!}
+                                        {!! Form::text("attendee_1_email", null, ['required' => 'required', 'class' => "required attendee_1_email attendee_email form-control"]) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ Form::label('Formule', null, ['class' => "control-label"]) }}
+                                {{ Form::select('attendee_1_ticket', $tickets->pluck('title_with_price', 'id')->all(), null, ['class' => "form-control", 'onChange' => 'changeTicket(this, 1)']) }}
+                                @foreach ($tickets as $ticket)
+                                    <small class="ticket-options ticket-options-{{$ticket->id}} hide form-text">{{$ticket->description}}</small>
+                                @endforeach
+                            </div>
+                            <div class="p0 well bgcolor-white order_overview">
+                                <h5>@lang('public_viewevent_partials_eventticketssection.options')</h5>
+                                <hr/>
+                                @include('Public.ViewEvent.Partials.TicketOptions', ['tickets' => $tickets, 'numAttendee' => 1])
+                            </div>
+                        </div>
+                        <!-- end modal body -->
                     </div>
                 </div>
             </div>
+               <input class="btn btn-success" onClick="addAttendee()" value="@lang('public_viewevent_partials_eventticketssection.add_attendee')">
+            {!!Form::submit(__('public_viewevent_partials_eventticketssection.register'), ['class' => 'btn btn-lg btn-primary pull-right'])!!}
             {!! Form::hidden('is_embedded', $is_embedded) !!}
             {!! Form::close() !!}
 
         @else
 
             <div class="alert alert-boring">
-               @lang('public_viewevent_partials_eventticketssection.unavailable') 
+               @lang('public_viewevent_partials_eventticketssection.unavailable')
             </div>
 
         @endif
@@ -149,3 +80,57 @@
 
 </div>
 </section>
+
+<script>
+  function getFormAttendeeTicket(number){
+
+      return `<div class="col-md-6" id='attendee`+number+`'> <div class='modal-content'>
+                        {!! Form::hidden('attendees[]', "`+number+`") !!}
+                        <div class="modal-header text-center">
+                            <h3>Participant `+number+`</h3>
+                        </div>
+                        <!-- start modal body -->
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        {!! Form::label("attendee_`+number+`_first_name", __('public_viewevent_partials_eventticketssection.first_name')) !!}
+                                        {!! Form::text("attendee_`+number+`_first_name", null, ['required' => 'required', 'class' => "required attendee_`+number+`_first_name attendee_first_name form-control"]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!! Form::label("attendee_`+number+`_last_name", __('public_viewevent_partials_eventticketssection.last_name')) !!}
+                                        {!! Form::text("attendee_`+number+`_last_name", null, ['required' => 'required', 'class' => "required attendee_`+number+`_last_name attendee_last_name form-control"]) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {!! Form::label("attendee_`+number+`_email", __('public_viewevent_partials_eventticketssection.email')) !!}
+                                        {!! Form::text("attendee_`+number+`_email", null, ['required' => 'required', 'class' => "required attendee_`+number+`_email attendee_email form-control"]) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ Form::label('attendee_`+number+`_ticket', "Formule", ['class' => "control-label"]) }}
+                                {{ Form::select('attendee_`+number+`_ticket', $tickets->pluck('title_with_price', 'id')->all(), null, ['class' => "form-control", 'onChange' => 'changeTicket(this, `+number+`)']) }}
+                                @foreach ($tickets as $ticket)
+                                    <small class="ticket-options ticket-options-{{$ticket->id}} hide form-text">{{$ticket->description}}</small>
+                                @endforeach
+                            </div>
+                            <div class="p0 well bgcolor-white order_overview">
+                                <h5>@lang('public_viewevent_partials_eventticketssection.options')</h5>
+                                <hr/>
+                                @include('Public.ViewEvent.Partials.TicketOptions', ['tickets' => $tickets, 'numAttendee' => "`+number+`"])
+                            </div>
+                        </div>
+                        <!-- end modal body -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" onClick="removeAttendee(`+number+`)">Supprimer le participant</button>
+                        </div>
+                    </div>`; 
+  }
+</script>

@@ -63,6 +63,16 @@ class Ticket extends MyBaseModel
     }
 
     /**
+     * The options associated with the ticket.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function options()
+    {
+        return $this->hasMany(\App\Models\TicketOptions::class);
+    }
+
+    /**
      * TODO:implement the reserved method.
      */
     public function reserved()
@@ -211,4 +221,17 @@ class Ticket extends MyBaseModel
 
         return config('attendize.ticket_status_on_sale');
     }
+
+    public function getOptionsEnabledAttribute()
+    {
+        return $this->options->filter(function($value, $key) {
+            return $value->is_enabled;
+        });
+    }
+
+    public function getTitleWithPriceAttribute()
+    {
+        return $this->title . ' (' . money($this->price, $this->event->currency) .')';
+    }
+
 }

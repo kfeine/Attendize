@@ -18,14 +18,29 @@
                     <table class="table mb0 table-condensed">
                         @foreach($tickets as $ticket)
                         <tr>
-                            <td class="pl0">{{{$ticket['ticket']['title']}}} X <b>{{$ticket['qty']}}</b></td>
-                            <td style="text-align: right;">
-                                @if((int)ceil($ticket['full_price']) === 0)
-                                @lang('public_viewevent_partials_eventcreateordersection.free')
-                                @else
-                                {{ money($ticket['full_price'] * $ticket['qty'], $event->currency) }}
-                                @endif
-                            </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td class="pl0"><b>Participant {{{$ticket['attendee_id']}}}</b></br>{{{$ticket['ticket']['title']}}}</td>
+                                        <td style="text-align: right;">
+                                            @if((int)ceil($ticket['full_price']) === 0)
+                                            @lang('public_viewevent_partials_eventcreateordersection.free')
+                                            @else
+                                            {{ money($ticket['full_price'], $event->currency) }}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @foreach($ticket['options'] as $option)
+                                    <tr>
+                                        <td>+ {{{$option->title}}}</td>
+                                              <td style="text-align: right;">
+                                                  {{ money($option->price, $event->currency) }}
+                                              </td>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </table>
+                            </td> 
                         </tr>
                         @endforeach
                         @if($discount)
@@ -65,13 +80,13 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                             {!! Form::label("order_first_name", __('public_viewevent_partials_eventcreateordersection.first_name')) !!}
-                            {!! Form::text("order_first_name", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                            {!! Form::text("order_first_name", null, ['required' => 'required', 'class' => 'required form-control']) !!}
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group">
                             {!! Form::label("order_last_name", __('public_viewevent_partials_eventcreateordersection.last_name')) !!}
-                            {!! Form::text("order_last_name", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                            {!! Form::text("order_last_name", null, ['required' => 'required', 'class' => 'required form-control']) !!}
                         </div>
                     </div>
                 </div>
@@ -80,7 +95,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label("order_email", __('public_viewevent_partials_eventcreateordersection.email')) !!}
-                            {!! Form::text("order_email", null, ['required' => 'required', 'class' => 'form-control']) !!}
+                            {!! Form::text("order_email", null, ['required' => 'required', 'class' => 'required form-control']) !!}
                         </div>
                     </div>
                 </div>
@@ -99,12 +114,11 @@
                                 $total_attendee_increment = 0;
                             ?>
                             @foreach($tickets as $ticket)
-                                @for($i=0; $i<=$ticket['qty']-1; $i++)
                                 <div class="panel panel-primary">
 
                                     <div class="panel-heading">
                                         <h3 class="panel-title">
-                                            <b>{{$ticket['ticket']['title']}}</b>: @lang('public_viewevent_partials_eventcreateordersection.details', ['number' => $i+1])
+                                            @lang('public_viewevent_partials_eventcreateordersection.details', ['number' => $ticket['attendee_id']]): <b>{{$ticket['ticket']['title']}}</b> 
                                         </h3>
                                     </div>
                                     <div class="panel-body">
@@ -122,22 +136,22 @@
                                             </div>
                                             <div class="col-md-5">
                                                 <div class="form-group">
-                                                    {!! Form::label("ticket_holder_first_name[{$i}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.first_name')) !!}
-                                                    {!! Form::text("ticket_holder_first_name[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => "ticket_holder_first_name.$i.{$ticket['ticket']['id']} ticket_holder_first_name form-control"]) !!}
+                                                    {!! Form::label("ticket_holder_first_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.first_name')) !!}
+                                                    {!! Form::text("ticket_holder_first_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['first_name'], ['required' => 'required', 'class' => "required ticket_holder_first_name.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_first_name form-control"]) !!}
                                                 </div>
                                             </div>
                                             <div class="col-md-5">
                                                 <div class="form-group">
-                                                    {!! Form::label("ticket_holder_last_name[{$i}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.last_name')) !!}
-                                                    {!! Form::text("ticket_holder_last_name[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => "ticket_holder_last_name.$i.{$ticket['ticket']['id']} ticket_holder_last_name form-control"]) !!}
+                                                    {!! Form::label("ticket_holder_last_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.last_name')) !!}
+                                                    {!! Form::text("ticket_holder_last_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['last_name'], ['required' => 'required', 'class' => "required ticket_holder_last_name.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_last_name form-control"]) !!}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    {!! Form::label("ticket_holder_email[{$i}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.email')) !!}
-                                                    {!! Form::text("ticket_holder_email[{$i}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => "ticket_holder_email.$i.{$ticket['ticket']['id']} ticket_holder_email form-control"]) !!}
+                                                    {!! Form::label("ticket_holder_email[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.email')) !!}
+                                                    {!! Form::text("ticket_holder_email[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['email'], ['required' => 'required', 'class' => "required ticket_holder_email.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_email form-control"]) !!}
                                                 </div>
                                             </div>
                                             @include('Public.ViewEvent.Partials.AttendeeQuestions', ['ticket' => $ticket['ticket'],'attendee_number' => $total_attendee_increment++])
@@ -148,7 +162,6 @@
 
 
                                 </div>
-                                @endfor
                             @endforeach
                         </div>
                     </div>
@@ -187,7 +200,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {!! Form::label('card-number', __('public_viewevent_partials_eventcreateordersection.card')) !!}
-                                    <input required="required" type="text" autocomplete="off" placeholder="**** **** **** ****" class="form-control card-number" size="20" data-stripe="number">
+                                    <input required="required" type="text" autocomplete="off" placeholder="**** **** **** ****" class="required form-control card-number" size="20" data-stripe="number">
                                 </div>
                             </div>
                         </div>
@@ -214,7 +227,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {!! Form::label('card-expiry-year', __('public_viewevent_partials_eventcreateordersection.cvc')) !!}
-                                    <input required="required" placeholder="***" class="form-control card-cvc" data-stripe="cvc">
+                                    <input required="required" placeholder="***" class="required form-control card-cvc" data-stripe="cvc">
                                 </div>
                             </div>
                         </div>

@@ -350,6 +350,40 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
             'as'   => 'postUpdateTicketsOrder',
             'uses' => 'EventTicketsController@postUpdateTicketsOrder',
         ]);
+        Route::get('{event_id}/tickets/detail/{ticket_id}', [
+            'as'   => 'showTicketDetails',
+            'uses' => 'EventTicketsController@showTicketDetails',
+        ]);
+
+        /*
+         * -------
+         * Ticket Options
+         * -------
+         */
+        Route::get('{event_id}/tickets/{ticket_id}/options/create', [
+            'as'   => 'showCreateTicketOption',
+            'uses' => 'EventTicketOptionsController@showCreateTicketOption',
+        ]);
+        Route::post('{event_id}/tickets/{ticket_id}/options/create', [
+            'as'   => 'postCreateTicketOption',
+            'uses' => 'EventTicketOptionsController@postCreateTicketOption',
+        ]);
+        Route::get('{event_id}/tickets/{ticket_id}/options/edit/{option_id}', [
+            'as'   => 'showEditTicketOptions',
+            'uses' => 'EventTicketOptionsController@showEditOption',
+        ]);
+        Route::post('{event_id}/tickets/{ticket_id}/options/edit/{option_id}', [
+            'as'   => 'postEditTicketOption',
+            'uses' => 'EventTicketOptionsController@postEditOption',
+        ]);
+        Route::post('{event_id}/tickets/{ticket_id}/options/delete/{option_id}', [
+            'as'   => 'postDeleteTicketOption',
+            'uses' => 'EventTicketOptionsController@postDeleteTicketOption',
+        ]);
+        Route::post('{event_id}/tickets/{ticket_id}/options/{option_id}/enable', [
+            'as'   => 'postEnableTicketOption',
+            'uses' => 'EventTicketOptionsController@postEnableOption',
+        ]);
 
         /*
          * Ticket questions
