@@ -18,27 +18,29 @@
                     <table class="table mb0 table-condensed">
                         @foreach($tickets as $ticket)
                         <tr>
-                            <td><table><tr>
-                            <td class="pl0"><b>Participant {{{$ticket['attendee_id']}}}</b></br>{{{$ticket['ticket']['title']}}}</td>
-                            <td style="text-align: right;">
-                                @if((int)ceil($ticket['full_price']) === 0)
-                                @lang('public_viewevent_partials_eventcreateordersection.free')
-                                @else
-                                {{ money($ticket['full_price'] * $ticket['qty'], $event->currency) }}
-                                @endif
-                            </td>
-                            </tr>
-                            @foreach($ticket['options'] as $option)
-                              <tr><td>
-                                  <table><tr>
-                                      <td class="pl0">+ {{{$option->title}}}</td>
-                                      <td style="text-align: right;">
-                                          {{ money($option->price, $event->currency) }}
-                                      </td>
-                                  </tr></table>
-                              </td></tr>
-                            @endforeach
-                            </table></td> 
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td class="pl0"><b>Participant {{{$ticket['attendee_id']}}}</b></br>{{{$ticket['ticket']['title']}}}</td>
+                                        <td style="text-align: right;">
+                                            @if((int)ceil($ticket['full_price']) === 0)
+                                            @lang('public_viewevent_partials_eventcreateordersection.free')
+                                            @else
+                                            {{ money($ticket['full_price'], $event->currency) }}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @foreach($ticket['options'] as $option)
+                                    <tr>
+                                        <td>+ {{{$option->title}}}</td>
+                                              <td style="text-align: right;">
+                                                  {{ money($option->price, $event->currency) }}
+                                              </td>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </table>
+                            </td> 
                         </tr>
                         @endforeach
                         @if($discount)
