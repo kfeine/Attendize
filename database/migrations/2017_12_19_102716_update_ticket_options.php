@@ -30,11 +30,7 @@ class UpdateTicketOptions extends Migration
          */
         Schema::table('ticket_options', function (Blueprint $table)
         {
-            $table->dropColumn('description');
-            $table->dropColumn('price');
-            $table->dropColumn('multiple');
-
-            $table->unsignedInteger('ticket_options_type_id');
+            $table->unsignedInteger('ticket_options_type_id')->default(0);
             $table->integer('sort_order')->default(1);
 
             $table->tinyInteger('is_required')->default(0);
@@ -45,13 +41,37 @@ class UpdateTicketOptions extends Migration
         });
 
         /**
+         * The ticket options.
+         */
+        Schema::table('ticket_options', function (Blueprint $table)
+        {
+            $table->dropColumn('price');
+        });
+
+        /**
+         * The ticket options.
+         */
+        Schema::table('ticket_options', function (Blueprint $table)
+        {
+            $table->dropColumn('description');
+        });
+
+        /**
+         * The ticket options.
+         */
+        Schema::table('ticket_options', function (Blueprint $table)
+        {
+            $table->dropColumn('multiple');
+        });
+
+        /**
          * Used for the ticket options that allow details (checkbox, radio, dropdown).
          */
         Schema::create('ticket_options_details', function (Blueprint $table)
         {
             $table->increments('id');
             $table->string('title', 255);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->decimal('price', 13, 2);
 
             $table->integer('ticket_options_id')->unsigned()->index();
