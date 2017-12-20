@@ -9103,6 +9103,24 @@ $.cf = {
         dataType: 'json'
     });
 
+    /*
+     * --------------------
+     * Create a simple way to show link from the frontend
+     * --------------------
+     *
+     * E.g :
+     * <a href='/route/to/link' class='loadLink'>
+     * </a>
+     *
+     */
+    $(document.body).on('click', '.loadLink, [data-invoke~=modal]', function (e) {
+
+        var loadUrl = $(this).data('href');
+
+        window.location = loadUrl;
+
+        e.preventDefault();
+    });
 
     /*
      * --------------------
@@ -9433,6 +9451,38 @@ $.cf = {
         e.preventDefault();
     });
 
+    $(document.body).on('click', '.enableTicketOption', function (e) {
+
+        var optionId = $(this).data('id'),
+                route = $(this).data('route');
+
+        $.post(route, 'option_id=' + optionId)
+                .done(function (data) {
+
+                    if (typeof data.message !== 'undefined') {
+                        showMessage(data.message);
+                    }
+
+                    switch (data.status) {
+                        case 'success':
+                            setTimeout(function () {
+                                document.location.reload();
+                            }, 300);
+                            break;
+                        case 'error':
+                            showMessage(Attendize.GenericErrorMessages);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }).fail(function (data) {
+            showMessage(Attendize.GenericErrorMessages);
+        });
+
+        e.preventDefault();
+    });
+
 
 });
 
@@ -9448,6 +9498,18 @@ function changeQuestionType(select)
     }
 }
 
+function changeTicketOptionsType(select)
+{
+    var select = $(select);
+    var selected = select.find(':selected');
+
+    if (selected.data('has-options') == '1') {
+        $('#ticket-options').removeClass('hide');
+    } else {
+        $('#ticket-options').addClass('hide');
+    }
+}
+
 
 
 function addQuestionOption()
@@ -9458,7 +9520,29 @@ function addQuestionOption()
     tbody.append(questionOption);
 }
 
+function addTicketOptionsDetails()
+{
+    var formNumberDetails = $('form').find('input[name="details[]"]').last().val();
+    var formDetails = getFormTicketDetails(parseInt(formNumberDetails)+1);
+
+    var tbody = $('#ticket-options tbody');
+
+    tbody.append(formDetails);
+}
+
 function removeQuestionOption(removeBtn)
+{
+    var removeBtn = $(removeBtn);
+    var tbody = removeBtn.parents('tbody');
+
+    if (tbody.find('tr').length > 1) {
+        removeBtn.parents('tr').remove();
+    } else {
+        alert('You must have at least one option.');
+    }
+}
+
+function removeTicketOptionsDetails(removeBtn)
 {
     var removeBtn = $(removeBtn);
     var tbody = removeBtn.parents('tbody');

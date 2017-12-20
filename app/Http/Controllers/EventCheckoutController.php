@@ -9,9 +9,12 @@ use App\Models\Event;
 use App\Models\EventStats;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\OrderItemOption;
 use App\Models\QuestionAnswer;
 use App\Models\ReservedTickets;
 use App\Models\Ticket;
+use App\Models\TicketOptions;
+use App\Models\TicketOptionsDetails;
 use App\Models\Discount;
 use Carbon\Carbon;
 use Cookie;
@@ -60,14 +63,15 @@ class EventCheckoutController extends Controller
 
         $event = Event::findOrFail($event_id);
 
-        if (!$request->has('tickets')) {
+        if (!$request->has('attendees')) {
             return response()->json([
                 'status'  => 'error',
-                'message' => __('controllers_eventcheckoutcontroller.no_tickets_selected'),
+                'message' => "__pas de participants choisis",
+                //'message' => __('controllers_eventcheckoutcontroller.no_tickets_selected'),
             ]);
         }
 
-        $ticket_ids = $request->get('tickets');
+        $attendees_ids = $request->get('attendees');
 
         /*
          * Remove any tickets the user has reserved
@@ -88,14 +92,25 @@ class EventCheckoutController extends Controller
         $organiser_booking_fee               = 0;
         $quantity_available_validation_rules = [];
 
-        foreach ($ticket_ids as $ticket_id) {
-            $current_ticket_quantity = (int)$request->get('ticket_' . $ticket_id);
+        $tickets_quantity_verification = [];
 
-            if ($current_ticket_quantity < 1) {
+        foreach ($attendees_ids as $attendee_id) {
+            //on récupère le ticket choisi pour l'utilisateur
+            $ticket_id = (int)$request->get('attendee_' . $attendee_id . '_ticket');
+
+            if (!$ticket_id) {
                 continue;
             }
 
-            $total_ticket_quantity = $total_ticket_quantity + $current_ticket_quantity;
+            // Debut de la vérification du nombre de ticket pris par rapport au nombre de ticket disponible...
+            if(array_key_exists($ticket_id, $tickets_quantity_verification)){
+                $tickets_quantity_verification[$ticket_id] = $tickets_quantity_verification[$ticket_id] + 1;
+            } else {
+                $tickets_quantity_verification[$ticket_id] = 1;
+            }
+            $current_ticket_quantity = $tickets_quantity_verification[$ticket_id];
+
+            $total_ticket_quantity = $total_ticket_quantity + 1;
 
             $ticket = Ticket::find($ticket_id);
 
@@ -103,38 +118,60 @@ class EventCheckoutController extends Controller
 
             $max_per_person = min($ticket_quantity_remaining, $ticket->max_per_person);
 
-            $quantity_available_validation_rules['ticket_' . $ticket_id] = [
-                'numeric',
-                'min:' . $ticket->min_per_person,
-                'max:' . $max_per_person
-            ];
-
-            $quantity_available_validation_messages = [
-                'ticket_' . $ticket_id . '.max' => __('controllers_eventcheckoutcontroller.max_number_tickets', ['quantity' => $ticket_quantity_remaining]),
-                'ticket_' . $ticket_id . '.min' => __('controllers_eventcheckoutcontroller.number_tickets', ['min_per_person' => $ticket->min_per_person]),
-            ];
-
-            $validator = Validator::make(['ticket_' . $ticket_id => (int)$request->get('ticket_' . $ticket_id)],
-                $quantity_available_validation_rules, $quantity_available_validation_messages);
-
-            if ($validator->fails()) {
+            if($total_ticket_quantity < $ticket->min_per_person){
                 return response()->json([
                     'status'   => 'error',
-                    'messages' => $validator->messages()->toArray(),
+                    'messages' => '__ le nombre de ticket "'.$ticket->title.'" excigé par personne n\'est pas respecté',
+                ]);
+            } else if($total_ticket_quantity > $max_per_person){
+                return response()->json([
+                    'status'   => 'error',
+                    'messages' => '__ le nombre de ticket "'.$ticket->title.'" reservé dépasse la quantité disponible',
                 ]);
             }
 
-            $order_total           = $order_total + ($current_ticket_quantity * $ticket->price);
-            $booking_fee           = $booking_fee + ($current_ticket_quantity * $ticket->booking_fee);
-            $organiser_booking_fee = $organiser_booking_fee + ($current_ticket_quantity * $ticket->organiser_booking_fee);
+            //fin vérification quantitié ticket disponible.
+
+            $order_total           = $order_total +  $ticket->price;
+            $booking_fee           = $booking_fee +  $ticket->booking_fee;
+            $organiser_booking_fee = $organiser_booking_fee +  $ticket->organiser_booking_fee;
+
+            //validation options
+            $details = [];
+            foreach($ticket->options_enabled as $option){
+                $detail_ids = $request->get('attendee_' .$attendee_id. '_ticket_'.$ticket_id.'_options_'.$option->id);
+                if(!is_array($detail_ids)){
+                    $detail_ids = [$detail_ids];   
+                }
+                foreach($detail_ids as $detail_id){
+                    $detail = TicketOptionsDetails::find($detail_id);
+                    if(!$detail){
+                      continue;
+                    }
+
+                    if($detail->ticket_options_id != $option->id){
+                        continue; 
+                    }
+
+                    $details[] = $detail;
+                    $order_total = $order_total + $detail->price;
+                }
+            }
+
+            $attendee['first_name'] = $request->get('attendee_' .$attendee_id. '_first_name');
+            $attendee['last_name'] = $request->get('attendee_' .$attendee_id. '_last_name');
+            $attendee['email'] = $request->get('attendee_' .$attendee_id. '_email');
 
             $tickets[] = [
                 'ticket'                => $ticket,
                 'qty'                   => $current_ticket_quantity,
-                'price'                 => ($current_ticket_quantity * $ticket->price),
-                'booking_fee'           => ($current_ticket_quantity * $ticket->booking_fee),
-                'organiser_booking_fee' => ($current_ticket_quantity * $ticket->organiser_booking_fee),
+                'price'                 => $ticket->price,
+                'booking_fee'           => $ticket->booking_fee,
+                'organiser_booking_fee' => $ticket->organiser_booking_fee,
                 'full_price'            => $ticket->price + $ticket->total_booking_fee,
+                'options'               => $details,
+                'attendee'              => $attendee,
+                'attendee_id'           => $attendee_id,
             ];
 
             /*
@@ -148,31 +185,27 @@ class EventCheckoutController extends Controller
             $reservedTickets->session_id        = session()->getId();
             $reservedTickets->save();
 
-            for ($i = 0; $i < $current_ticket_quantity; $i++) {
-                /*
-                 * Create our validation rules here
-                 */
-                $validation_rules['ticket_holder_first_name.' . $i . '.' . $ticket_id] = ['required'];
-                $validation_rules['ticket_holder_last_name.' . $i . '.' . $ticket_id] = ['required'];
-                $validation_rules['ticket_holder_email.' . $i . '.' . $ticket_id] = ['required', 'email'];
+            /*
+             * Create our validation rules here
+             */
+            $validation_rules['ticket_holder_first_name.' . $attendee_id . '.' . $ticket_id] = ['required'];
+            $validation_rules['ticket_holder_last_name.' . $attendee_id . '.' . $ticket_id] = ['required'];
+            $validation_rules['ticket_holder_email.' . $attendee_id . '.' . $ticket_id] = ['required', 'email'];
 
-                $validation_messages['ticket_holder_first_name.' . $i . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($i + 1)]);
-                $validation_messages['ticket_holder_last_name.' . $i . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($i + 1)]);
-                $validation_messages['ticket_holder_email.' . $i . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.email_required', ['person' => ($i + 1)]);
-                $validation_messages['ticket_holder_email.' . $i . '.' . $ticket_id . '.email'] = __('controllers_eventcheckoutcontroller.email_invalid', ['person' => ($i + 1)]);
+            $validation_messages['ticket_holder_first_name.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($attendee_id + 1)]);
+            $validation_messages['ticket_holder_last_name.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($attendee_id + 1)]);
+            $validation_messages['ticket_holder_email.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.email_required', ['person' => ($attendee_id + 1)]);
+            $validation_messages['ticket_holder_email.' . $attendee_id . '.' . $ticket_id . '.email'] = __('controllers_eventcheckoutcontroller.email_invalid', ['person' => ($attendee_id + 1)]);
 
-                /*
-                 * Validation rules for custom questions
-                 */
-                foreach ($ticket->questions as $question) {
+            /*
+             * Validation rules for custom questions
+             */
+            foreach ($ticket->questions as $question) {
 
-                    if ($question->is_required && $question->is_enabled) {
-                        $validation_rules['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id] = ['required'];
-                        $validation_messages['ticket_holder_questions.' . $ticket_id . '.' . $i . '.' . $question->id . '.required'] = __('controllers_eventcheckoutcontroller.question_required');
-                    }
-
+                if ($question->is_required && $question->is_enabled) {
+                    $validation_rules['ticket_holder_questions.' . $ticket_id . '.' . $attendee_id . '.' . $question->id] = ['required'];
+                    $validation_messages['ticket_holder_questions.' . $ticket_id . '.' . $attendee_id . '.' . $question->id . '.required'] = __('controllers_eventcheckoutcontroller.question_required');
                 }
-
             }
 
         }
@@ -229,8 +262,8 @@ class EventCheckoutController extends Controller
             'order_requires_payment'  => (ceil($order_total) == 0) ? false : true,
             'account_id'              => $event->account->id,
             'affiliate_referral'      => Cookie::get('affiliate_' . $event_id),
-            'account_payment_gateway' => count($event->account->active_payment_gateway) ? $event->account->active_payment_gateway : false,
-            'payment_gateway'         => count($event->account->active_payment_gateway) ? $event->account->active_payment_gateway->payment_gateway : false,
+            'account_payment_gateway' => $event->account->active_payment_gateway ? $event->account->active_payment_gateway : false,
+            'payment_gateway'         => $event->account->active_payment_gateway ? $event->account->active_payment_gateway->payment_gateway : false,
         ]);
 
         /*
@@ -645,55 +678,61 @@ class EventCheckoutController extends Controller
                 $orderItem->unit_booking_fee = $attendee_details['ticket']['booking_fee'] + $attendee_details['ticket']['organiser_booking_fee'];
                 $orderItem->save();
 
+                $attendee = new Attendee();
+                $attendee->first_name = mb_convert_case(trim($request_data["ticket_holder_first_name"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']]), MB_CASE_TITLE, 'UTF-8');
+                $attendee->last_name = mb_convert_case(trim($request_data["ticket_holder_last_name"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']]), MB_CASE_UPPER, 'UTF-8');
+                $attendee->email = $request_data["ticket_holder_email"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
+                $attendee->event_id = $event_id;
+                $attendee->order_id = $order->id;
+                $attendee->ticket_id = $attendee_details['ticket']['id'];
+                $attendee->account_id = $event->account->id;
+                $attendee->reference_index = $attendee_increment;
+                $attendee->save();
+
+                foreach ($attendee_details['options'] as $option) {
+                    $attendee->options()->attach($option['id']);
+
+                    $orderItemOption = new OrderItemOption();
+                    $orderItemOption->title = $option['title'];
+                    $orderItemOption->order_item_id = $orderItem->id;
+                    $orderItemOption->price = $option['price'];
+                    $orderItemOption->save();
+                }
+
+
                 /*
-                 * Create the attendees
+                 * Save the attendee's questions
                  */
-                for ($i = 0; $i < $attendee_details['qty']; $i++) {
+                foreach ($attendee_details['ticket']->questions as $question) {
 
-                    $attendee                  = new Attendee();
-                    $attendee->first_name      = mb_convert_case(trim($request_data["ticket_holder_first_name"][$i][$attendee_details['ticket']['id']]), MB_CASE_TITLE, 'UTF-8');
-                    $attendee->last_name       = mb_convert_case(trim($request_data["ticket_holder_last_name"][$i][$attendee_details['ticket']['id']]), MB_CASE_UPPER, 'UTF-8');
-                    $attendee->email           = $request_data["ticket_holder_email"][$i][$attendee_details['ticket']['id']];
-                    $attendee->event_id        = $event_id;
-                    $attendee->order_id        = $order->id;
-                    $attendee->ticket_id       = $attendee_details['ticket']['id'];
-                    $attendee->account_id      = $event->account->id;
-                    $attendee->reference_index = $attendee_increment;
-                    $attendee->save();
 
-                    /*
-                     * Save the attendee's questions
-                     */
-                    foreach ($attendee_details['ticket']->questions as $question) {
+                    $ticket_answer = isset($ticket_questions[$attendee_details['ticket']->id][$attendee_details['attendee_id']][$question->id]) ? $ticket_questions[$attendee_details['ticket']->id][$attendee_details['attendee_id']][$question->id] : null;
 
-                        $ticket_answer = isset($ticket_questions[$attendee_details['ticket']->id][$i][$question->id]) ? $ticket_questions[$attendee_details['ticket']->id][$i][$question->id] : null;
-
-                        if (is_null($ticket_answer)) {
-                            continue;
-                        }
-
-                        /*
-                         * If there are multiple answers to a question then join them with a comma
-                         * and treat them as a single answer.
-                         */
-                        $ticket_answer = is_array($ticket_answer) ? implode(', ', $ticket_answer) : $ticket_answer;
-
-                        if (!empty($ticket_answer)) {
-                            QuestionAnswer::create([
-                                'answer_text' => $ticket_answer,
-                                'attendee_id' => $attendee->id,
-                                'event_id'    => $event->id,
-                                'account_id'  => $event->account->id,
-                                'question_id' => $question->id
-                            ]);
-
-                        }
+                    if (is_null($ticket_answer)) {
+                        continue;
                     }
 
+                    /*
+                     * If there are multiple answers to a question then join them with a comma
+                     * and treat them as a single answer.
+                     */
+                    $ticket_answer = is_array($ticket_answer) ? implode(', ', $ticket_answer) : $ticket_answer;
 
-                    /* Keep track of total number of attendees */
-                    $attendee_increment++;
+                    if (!empty($ticket_answer)) {
+                        QuestionAnswer::create([
+                            'answer_text' => $ticket_answer,
+                            'attendee_id' => $attendee->id,
+                            'event_id'    => $event->id,
+                            'account_id'  => $event->account->id,
+                            'question_id' => $question->id
+                        ]);
+
+                    }
                 }
+
+                /* Keep track of total number of attendees */
+                $attendee_increment++;
+                
             }
 
             /*

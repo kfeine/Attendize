@@ -56,6 +56,11 @@ return [
     'question_checkbox_multi'       => 5,
     'question_radio_single'         => 6,
 
+    /* Attendee ticket options types */
+    'ticket_options_dropdown_single'      => 1,
+    'ticket_options_dropdown_multi'       => 2,
+    'ticket_options_checkbox_multi'       => 3,
+    'ticket_options_radio_single'         => 4,
 
     'default_timezone'           => 30, #Europe/Dublin
     'default_currency'           => 2, #Euro

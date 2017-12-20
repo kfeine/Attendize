@@ -11,6 +11,10 @@ class OrderStatusSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
+        DB::table('order_statuses')->delete();
+        Schema::enableForeignKeyConstraints();
+
         $order_statuses = [
             [
                 'id' => 1,
