@@ -1,5 +1,5 @@
 @foreach ($tickets as $ticket)
-    <div class="ticket-options ticket-options-{{$ticket->id}} hide form-group">
+    <div class="ticket-options ticket-options-{{$ticket->id}} {{$loop->first?"":"hide"}} form-group">
         @foreach ($ticket->options_enabled as $option)
             <div class="form-group">
                 {!! Form::label("attendee_1_ticket_{$ticket->id}_options_$option->id", $option->title, ['class' => $option->is_required ? 'required' : '']) !!}
