@@ -20,7 +20,7 @@ class CreateBelongstoAttendeeTicketOptionsDetails extends Migration
             $table->foreign('attendee_id')->references('id')->on('attendees')->onDelete('cascade');
             
             $table->integer('ticket_options_details_id')->unsigned()->nullable();
-            $table->foreign('ticket_options_details_id')->references('id')->on('ticket_options_details')->onDelete('cascade');
+            $table->foreign('ticket_options_details_id', 'detail_id_foreign')->references('id')->on('ticket_options_details')->onDelete('cascade');
             $table->nullableTimestamps();
         });
     }
