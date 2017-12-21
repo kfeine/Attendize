@@ -578,6 +578,7 @@ class EventAttendeesController extends MyBaseController
 
         $select = [
               'attendees.id',
+              'attendees.gender',
               'attendees.first_name',
               'attendees.last_name',
               'attendees.email',
@@ -585,11 +586,13 @@ class EventAttendeesController extends MyBaseController
               'orders.created_at',
               DB::raw("(CASE WHEN attendees.has_arrived THEN 'YES' ELSE 'NO' END) AS has_arrived"),
               'attendees.arrival_time',
+              'tickets.custom_field',
               'tickets.title',
         ];
 
         $title_row = [
             'ID',
+            'Gender',
             'First Name',
             'Last Name',
             'Email',
@@ -597,6 +600,7 @@ class EventAttendeesController extends MyBaseController
             'Purchase Date',
             'Has Arrived',
             'Arrival Time',
+            'Custom Field',
             'Ticket Type',
         ];
 
