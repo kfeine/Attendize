@@ -10,9 +10,11 @@ use App\Models\Attendee;
 use App\Models\Event;
 use App\Models\EventStats;
 use App\Models\Message;
+use App\Models\Question;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Ticket;
+use App\Models\TicketOptionsDetails;
 use Auth;
 use Config;
 use DB;
@@ -550,7 +552,61 @@ class EventAttendeesController extends MyBaseController
     public function showExportAttendees($event_id, $export_as = 'xls')
     {
 
-        Excel::create('attendees-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event_id) {
+        $details = TicketOptionsDetails::where('tickets.event_id', '=', $event_id)
+          ->join('ticket_options', 'ticket_options_details.ticket_options_id', "=", 'ticket_options.id')
+          ->join('tickets', 'ticket_options.ticket_id', "=", 'tickets.id')
+          ->select([
+            'ticket_options_details.id',
+            'ticket_options_details.title',
+          ])
+          ->get();
+
+        $questions = Question::where('tickets.event_id', '=', $event_id)
+          ->where("questions.deleted_at","=", null)
+          ->join('question_ticket', 'questions.id', "=", 'question_ticket.question_id')
+          ->join('tickets', 'question_ticket.ticket_id', "=", 'tickets.id')
+          ->select([
+            'questions.id',
+            'questions.title',
+          ])
+          ->groupBy('questions.id')
+          ->get();
+
+        $select = [
+              'attendees.id',
+              'attendees.first_name',
+              'attendees.last_name',
+              'attendees.email',
+              'orders.order_reference',
+              'orders.created_at',
+              DB::raw("(CASE WHEN attendees.has_arrived THEN 'YES' ELSE 'NO' END) AS has_arrived"),
+              'attendees.arrival_time',
+              'tickets.title',
+        ];
+
+        $title_row = [
+            'ID',
+            'First Name',
+            'Last Name',
+            'Email',
+            'Order Reference',
+            'Purchase Date',
+            'Has Arrived',
+            'Arrival Time',
+            'Ticket Type',
+        ];
+
+        foreach($details as $detail){
+          $select[] = DB::raw("MAX(CASE WHEN attendee_ticket_options_details.ticket_options_details_id = ".$detail->id." THEN 1 ELSE 0 END) AS option".$detail->id);
+          $title_row[] = "Opt".$detail->id.": ".$detail->title;
+        }
+
+        foreach($questions as $question){
+          $select[] = DB::raw("MAX(CASE WHEN question_answers.question_id = ".$question->id." THEN question_answers.answer_text ELSE '' END) AS question".$question->id);
+          $title_row[] = "Q".$question->id.": ".$question->title;
+        }
+
+        Excel::create('attendees-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event_id, $select, $title_row) {
 
             $excel->setTitle('Attendees List');
 
@@ -558,7 +614,8 @@ class EventAttendeesController extends MyBaseController
             $excel->setCreator(config('attendize.app_name'))
                 ->setCompany(config('attendize.app_name'));
 
-            $excel->sheet('attendees_sheet_1', function ($sheet) use ($event_id) {
+            $excel->sheet('attendees_sheet_1', function ($sheet) use ($event_id, $select, $title_row) {
+
 
                 $data = Attendee::where('attendees.event_id', '=', $event_id)
                     ->where('attendees.is_cancelled', '=', 0)
@@ -566,28 +623,16 @@ class EventAttendeesController extends MyBaseController
                     ->join('events', 'events.id', '=', 'attendees.event_id')
                     ->join('orders', 'orders.id', '=', 'attendees.order_id')
                     ->join('tickets', 'tickets.id', '=', 'attendees.ticket_id')
-                    ->select([
-                        'attendees.first_name',
-                        'attendees.last_name',
-                        'attendees.email',
-                        'orders.order_reference',
-                        'tickets.title',
-                        'orders.created_at',
-                        DB::raw("(CASE WHEN attendees.has_arrived THEN 'YES' ELSE 'NO' END) AS has_arrived"),
-                        'attendees.arrival_time',
-                    ])->get();
+                    ->leftJoin('question_answers', 'question_answers.attendee_id', '=', 'attendees.id')
+                    ->leftJoin('attendee_ticket_options_details', 'attendee_ticket_options_details.attendee_id', '=', 'attendees.id')
+                    ->select($select)
+                    ->groupBy('attendees.id')
+                    ->get();
+                    //->toSql();
+                    //dd($data);
 
                 $sheet->fromArray($data);
-                $sheet->row(1, [
-                    'First Name',
-                    'Last Name',
-                    'Email',
-                    'Order Reference',
-                    'Ticket Type',
-                    'Purchase Date',
-                    'Has Arrived',
-                    'Arrival Time',
-                ]);
+                $sheet->row(1, $title_row);
 
                 // Set gray background on first row
                 $sheet->row(1, function ($row) {
