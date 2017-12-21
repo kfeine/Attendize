@@ -17,6 +17,7 @@
                     <i class="ico-cart"></i>
                     @lang('manageevent_modals_editorder.order') <b>{{$order->order_reference}}</b></h3>
             </div>
+
             <div class="modal-body">
                 <h3>@lang('manageevent_modals_editorder.details')</h3>
                 <div class="row">

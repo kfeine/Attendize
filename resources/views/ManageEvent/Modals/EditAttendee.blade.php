@@ -19,33 +19,35 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     {!! Form::label('first_name', __('manageevent_modals_editattendee.firstname'), array('class'=>'control-label required')) !!}
-                                    {!!  Form::text('first_name', Input::old('first_name'),
+                                    {!! Form::text('first_name', Input::old('first_name'),
                                             array(
                                             'class'=>'form-control'
-                                            ))  !!}
+                                        ))  !!}
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     {!! Form::label('last_name', __('manageevent_modals_editattendee.lastname'), array('class'=>'control-label')) !!}
-                                    {!!  Form::text('last_name', Input::old('last_name'),
+                                    {!! Form::text('last_name', Input::old('last_name'),
                                             array(
                                             'class'=>'form-control'
-                                            ))  !!}
+                                        ))  !!}
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {!! Form::label('email', __('manageevent_modals_editattendee.email'), array('class'=>'control-label required')) !!}
 
-                                    {!!  Form::text('email', Input::old('email'),
+                                    {!! Form::text('email', Input::old('email'),
                                             array(
                                             'class'=>'form-control'
                                             ))  !!}

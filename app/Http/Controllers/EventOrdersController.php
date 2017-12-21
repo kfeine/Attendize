@@ -156,9 +156,9 @@ class EventOrdersController extends MyBaseController
     public function postEditOrder(Request $request, $order_id)
     {
         $rules = [
-            'first_name' => ['required'],
-            'last_name'  => ['required'],
-            'email'      => ['required', 'email'],
+            'first_name'  => ['required'],
+            'last_name'   => ['required'],
+            'email'       => ['required', 'email'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -170,10 +170,10 @@ class EventOrdersController extends MyBaseController
             ]);
         }
 
-        $order             = Order::scope()->findOrFail($order_id);
-        $order->first_name = mb_convert_case(trim($request->get('first_name')), MB_CASE_TITLE, 'UTF-8');
-        $order->last_name  = mb_convert_case(trim($request->get('last_name')), MB_CASE_UPPER, 'UTF-8');
-        $order->email      = $request->get('email');
+        $order              = Order::scope()->findOrFail($order_id);
+        $order->first_name  = mb_convert_case(trim($request->get('first_name')), MB_CASE_TITLE, 'UTF-8');
+        $order->last_name   = mb_convert_case(trim($request->get('last_name')), MB_CASE_UPPER, 'UTF-8');
+        $order->email       = $request->get('email');
         $order->update();
 
 
@@ -339,7 +339,6 @@ class EventOrdersController extends MyBaseController
                 ->setCompany(config('attendize.app_name'));
 
             $excel->sheet('orders_sheet_1', function ($sheet) use ($event) {
-
                 if (env('APP_LANG') === "fr") {
                     $data = Order::where('orders.event_id', '=', $event->id)
                         ->where('orders.event_id', '=', $event->id)

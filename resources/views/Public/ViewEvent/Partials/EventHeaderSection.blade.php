@@ -24,15 +24,15 @@
             <h1 property="name">{{$event->title}}</h1>
             <div class="event_venue">
                 <span property="startDate" content="{{ $event->start_date->toIso8601String() }}">
-                    {{ $event->start_date->format('D d M H:i A') }}
+                    @if($event->start_date->month == $event->end_date->month) 
+                        {{ $event->start_date->formatLocalized('%d') }} 
+                    @else 
+                        {{ $event->start_date->formatLocalized('%A %d %B %Y') }} 
+                    @endif 
                 </span>
                 -
                 <span property="endDate" content="{{ $event->end_date->toIso8601String() }}">
-                     @if($event->start_date->diffInHours($event->end_date) <= 12)
-                        {{ $event->end_date->format('H:i A') }}
-                     @else
-                        {{ $event->end_date->format('D d M H:i A') }}
-                     @endif
+                     {{ $event->end_date->formatLocalized('%d %B %Y') }}
                 </span>
                 @
                 <span property="location" typeof="Place">
