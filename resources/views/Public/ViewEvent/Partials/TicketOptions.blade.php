@@ -4,9 +4,9 @@
             <div class="form-group">
                 {!! Form::label("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id", $option->title, ['class' => $option->is_required ? 'required' : '']) !!}
                 @if($option->ticket_options_type_id == config('attendize.ticket_options_dropdown_single'))
-                    {!! Form::select("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id", array('' => 'Please select one option') + $option->options->pluck('title', 'id')->toArray(), null, [$option->is_required ? 'required' : '', 'class' =>  "required form-control"]) !!}
+                    {!! Form::select("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id", array('' => 'Please select one option') + $option->options->pluck('title_with_price', 'id')->toArray(), null, [$option->is_required ? 'required' : '', 'class' =>  "required form-control"]) !!}
                 @elseif($option->ticket_options_type_id == config('attendize.ticket_options_dropdown_multi'))
-                    {!! Form::select("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id",$option->options->pluck('title', 'id'), null, [$option->is_required ? 'required' : '' => $option->is_required ? 'required' : '', 'multiple' => 'multiple','class' => "required form-control"]) !!}
+                    {!! Form::select("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id",$option->options->pluck('title_with_price', 'id'), null, [$option->is_required ? 'required' : '' => $option->is_required ? 'required' : '', 'multiple' => 'multiple','class' => "required form-control"]) !!}
                 @elseif($option->ticket_options_type_id == config('attendize.ticket_options_checkbox_multi'))
                     <br>
                     @foreach($option->options as $detail)
@@ -15,7 +15,7 @@
                         ?>
                         <div class="custom-checkbox">
                             {!! Form::checkbox("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id[]",$detail->id, false,['class' => "", 'id' => $checkbox_id]) !!}
-                            <label for="{{ $checkbox_id }}">{{$detail->title}}</label>
+                            <label for="{{ $checkbox_id }}">{{$detail->title_with_price}}</label>
                         </div>
                     @endforeach
                 @elseif($option->ticket_options_type_id == config('attendize.ticket_options_radio_single'))
@@ -26,7 +26,7 @@
                         ?>
                     <div class="custom-radio">
                         {!! Form::radio("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id",$detail->id, false, ['id' => $radio_id, 'class' => ""]) !!}
-                        <label for="{{ $radio_id }}">{{$detail->title}}</label>
+                        <label for="{{ $radio_id }}">{{$detail->title_with_price}}</label>
                     </div>
                     @endforeach
                 @endif

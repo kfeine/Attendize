@@ -52,6 +52,6 @@ class TicketOptionsDetails extends MyBaseModel
 
     public function getTitleWithPriceAttribute()
     {
-        return $this->title . ' (' . money($this->price, $this->ticket->event->currency) .')';
+        return $this->title . ' (' . money($this->price, $this->ticket_options->ticket->event->currency) .')';
     }
 }
