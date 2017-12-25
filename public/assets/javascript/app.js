@@ -123,6 +123,25 @@ $(function () {
         dataType: 'json'
     });
 
+    /*
+     * --------------------
+     * Create a simple way to show link from the frontend
+     * --------------------
+     *
+     * E.g :
+     * <a href='/route/to/link' class='loadLink'>
+     * </a>
+     *
+     */
+    $(document.body).on('click', '.loadLink, [data-invoke~=modal]', function (e) {
+
+        var loadUrl = $(this).data('href');
+
+        window.location = loadUrl;
+
+        e.preventDefault();
+    });
+
 
     /*
      * --------------------
@@ -450,6 +469,38 @@ $(function () {
             }).fail(function (data) {
             showMessage(Attendize.GenericErrorMessages);
         });
+        e.preventDefault();
+    });
+
+    $(document.body).on('click', '.enableTicketOption', function (e) {
+
+        var optionId = $(this).data('id'),
+                route = $(this).data('route');
+
+        $.post(route, 'option_id=' + optionId)
+                .done(function (data) {
+
+                    if (typeof data.message !== 'undefined') {
+                        showMessage(data.message);
+                    }
+
+                    switch (data.status) {
+                        case 'success':
+                            setTimeout(function () {
+                                document.location.reload();
+                            }, 300);
+                            break;
+                        case 'error':
+                            showMessage(Attendize.GenericErrorMessages);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }).fail(function (data) {
+            showMessage(Attendize.GenericErrorMessages);
+        });
+
         e.preventDefault();
     });
 

@@ -9122,6 +9122,7 @@ $.cf = {
         e.preventDefault();
     });
 
+
     /*
      * --------------------
      * Create a simple way to show remote dynamic modals from the frontend
@@ -9389,7 +9390,7 @@ $.cf = {
         }
     });
 
-    $(document.body).on('click', '.markPaymentNotReceived', function (e) {
+    $(document.body).on('click', '.markPaymentReceived', function (e) {
 
         var orderId = $(this).data('id'),
             route = $(this).data('route');
@@ -9420,7 +9421,7 @@ $.cf = {
         e.preventDefault();
     });
 
-    $(document.body).on('click', '.markPaymentReceived', function (e) {
+    $(document.body).on('click', '.markPaymentNotReceived', function (e) {
 
         var orderId = $(this).data('id'),
             route = $(this).data('route');
