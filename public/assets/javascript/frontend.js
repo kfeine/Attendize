@@ -15,8 +15,6 @@ void 0===c?d&&"get"in d&&null!==(e=d.get(a,b))?e:(e=n.find.attr(a,b),null==e?voi
 +function ($) {
   'use strict';
 
-  $('.required').prop('required', $(this).is(':visible'));
-
   // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
   // ============================================================
 
@@ -4569,6 +4567,8 @@ function log() {
 
 }).call(this);
 ;$(function() {
+    $('.required').prop('required', $(this).is(':visible'));
+
     $('form.ajax').on('submit', function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();

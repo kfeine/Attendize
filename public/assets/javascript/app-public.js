@@ -1,4 +1,6 @@
 $(function() {
+    $('.required').prop('required', $(this).is(':visible'));
+
     $('form.ajax').on('submit', function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -39,6 +41,10 @@ $(function() {
                         }
                         switch (data.status) {
                             case 'success':
+                                if (data.completePurchase) {
+                                    $form.replaceWith(data.completePurchase);
+                                    break; 
+                                }
 
                                 if (data.redirectUrl) {
                                     if(data.redirectData)  {
@@ -375,3 +381,28 @@ $.extend(
         return t.replace(/^\//, "").replace(/(?:index|default).[a-zA-Z]{3,4}$/, "").replace(/\/$/, "")
     }, t.fn.smoothScroll.defaults = s
 })(jQuery);
+
+// ajout pour la page de selection de ticket
+function changeTicket(select, attendee)
+{
+    var select = $(select);
+    var selected = select.find(':selected');
+
+    $('#attendee'+attendee+' .ticket-options').addClass('hide');
+    $('#attendee'+attendee+' .ticket-options-'+selected.val()).removeClass('hide');
+}
+
+function addAttendee()
+{
+  var formNumberAttendee = $('form').find('input[name="attendees[]"]').last().val();
+  var formAttendee = getFormAttendeeTicket(parseInt(formNumberAttendee)+1);
+  $( ".content-form" ).append( formAttendee );
+  console.log('#attendee'+(parseInt(formNumberAttendee)+1)+' .required');
+
+  $('.required').prop('required', $(this).is(':visible'));
+}
+
+function removeAttendee(id)
+{
+  $( "#attendee"+id ).remove();
+}
