@@ -136,6 +136,7 @@ class EventAttendeesController extends MyBaseController
 
         $ticket_id           = $request->get('ticket_id');
         $ticket_price        = 0;
+        $attendee_gender     = $request->get('gender');
         $attendee_first_name = mb_convert_case(trim($request->get('first_name')), MB_CASE_TITLE, 'UTF-8');
         $attendee_last_name  = mb_convert_case(trim($request->get('last_name')), MB_CASE_UPPER, 'UTF-8');
         $attendee_email      = $request->get('email');
@@ -188,6 +189,7 @@ class EventAttendeesController extends MyBaseController
              * Create the attendee
              */
             $attendee                  = new Attendee();
+            $attendee->gender          = $attendee_gender;
             $attendee->first_name      = $attendee_first_name;
             $attendee->last_name       = $attendee_last_name;
             $attendee->email           = $attendee_email;
@@ -197,7 +199,6 @@ class EventAttendeesController extends MyBaseController
             $attendee->account_id      = Auth::user()->account_id;
             $attendee->reference_index = 1;
             $attendee->save();
-
 
             if ($email_attendee == '1') {
                 $this->dispatch(new SendAttendeeInvite($attendee));
@@ -293,6 +294,7 @@ class EventAttendeesController extends MyBaseController
             foreach ($the_file as $rows) {
                 if (!empty($rows['first_name']) && !empty($rows['last_name']) && !empty($rows['email'])) {
                     $num_added++;
+                    $attendee_gender     = $rows['gender'];
                     $attendee_first_name = mb_convert_case(trim($rows['first_name']), MB_CASE_TITLE, 'UTF-8');
                     $attendee_last_name  = mb_convert_case(trim($rows['last_name']), MB_CASE_UPPER, 'UTF-8');
                     $attendee_email      = $rows['email'];
@@ -303,6 +305,7 @@ class EventAttendeesController extends MyBaseController
                      * Create the order
                      */
                     $order                  = new Order();
+                    $order->gender          = $attendee_gender;
                     $order->first_name      = $attendee_first_name;
                     $order->last_name       = $attendee_last_name;
                     $order->email           = $attendee_email;
@@ -341,6 +344,7 @@ class EventAttendeesController extends MyBaseController
                      * Create the attendee
                      */
                     $attendee                  = new Attendee();
+                    $attendee->gender          = $attendee_gender;
                     $attendee->first_name      = $attendee_first_name;
                     $attendee->last_name       = $attendee_last_name;
                     $attendee->email           = $attendee_email;
@@ -574,6 +578,7 @@ class EventAttendeesController extends MyBaseController
 
         $select = [
               'attendees.id',
+              'attendees.gender',
               'attendees.first_name',
               'attendees.last_name',
               'attendees.email',
@@ -586,6 +591,7 @@ class EventAttendeesController extends MyBaseController
 
         $title_row = [
             'ID',
+            'Gender',
             'First Name',
             'Last Name',
             'Email',
