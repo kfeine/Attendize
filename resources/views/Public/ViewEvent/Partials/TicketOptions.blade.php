@@ -11,7 +11,7 @@
                     <br>
                     @foreach($option->options as $detail)
                         <?php
-                            $checkbox_id = md5($numAttendee.$ticket->id.$option->id.$detail->title);
+                            $checkbox_id = $numAttendee . "_" . md5($ticket->id.$option->id.$detail->title);
                         ?>
                         <div class="custom-checkbox">
                             {!! Form::checkbox("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id[]",$detail->id, false,['class' => "", 'id' => $checkbox_id]) !!}
@@ -22,7 +22,7 @@
                     <br>
                     @foreach($option->options as $detail)
                         <?php
-                            $radio_id = md5($numAttendee.$ticket->id.$option->id.$detail->title);
+                            $radio_id = $numAttendee . "_" . md5($ticket->id.$option->id.$detail->title);
                         ?>
                     <div class="custom-radio">
                         {!! Form::radio("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id",$detail->id, false, ['id' => $radio_id, 'class' => ""]) !!}
