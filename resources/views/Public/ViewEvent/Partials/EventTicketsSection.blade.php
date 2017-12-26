@@ -23,28 +23,6 @@
                         </div>
                         <!-- start modal body -->
                         <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        {!! Form::label("attendee_1_first_name", __('public_viewevent_partials_eventticketssection.first_name')) !!}
-                                        {!! Form::text("attendee_1_first_name", null, ['required' => 'required', 'class' => "required attendee_1_first_name attendee_first_name form-control"]) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        {!! Form::label("attendee_1_last_name", __('public_viewevent_partials_eventticketssection.last_name')) !!}
-                                        {!! Form::text("attendee_1_last_name", null, ['required' => 'required', 'class' => "required attendee_1_last_name attendee_last_name form-control"]) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        {!! Form::label("attendee_1_email", __('public_viewevent_partials_eventticketssection.email')) !!}
-                                        {!! Form::text("attendee_1_email", null, ['required' => 'required', 'class' => "required attendee_1_email attendee_email form-control"]) !!}
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 {{ Form::label('Formule', null, ['class' => "control-label"]) }}
                                 {{ Form::select('attendee_1_ticket', $tickets->pluck('title_with_price', 'id')->all(), null, ['class' => "form-control", 'onChange' => 'changeTicket(this, 1)']) }}
@@ -89,29 +67,6 @@
                         </div>
                         <!-- start modal body -->
                         <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-
-                                        {!! Form::label("attendee_`+number+`_first_name", __('public_viewevent_partials_eventticketssection.first_name')) !!}
-                                        {!! Form::text("attendee_`+number+`_first_name", null, ['required' => 'required', 'class' => "required attendee_`+number+`_first_name attendee_first_name form-control"]) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        {!! Form::label("attendee_`+number+`_last_name", __('public_viewevent_partials_eventticketssection.last_name')) !!}
-                                        {!! Form::text("attendee_`+number+`_last_name", null, ['required' => 'required', 'class' => "required attendee_`+number+`_last_name attendee_last_name form-control"]) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        {!! Form::label("attendee_`+number+`_email", __('public_viewevent_partials_eventticketssection.email')) !!}
-                                        {!! Form::text("attendee_`+number+`_email", null, ['required' => 'required', 'class' => "required attendee_`+number+`_email attendee_email form-control"]) !!}
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 {{ Form::label('attendee_`+number+`_ticket', "Formule", ['class' => "control-label"]) }}
                                 {{ Form::select('attendee_`+number+`_ticket', $tickets->pluck('title_with_price', 'id')->all(), null, ['class' => "form-control", 'onChange' => 'changeTicket(this, `+number+`)']) }}
