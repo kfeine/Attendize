@@ -125,12 +125,12 @@
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    {!! Form::label("ticket_holder_gender[{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.gender')) !!}
+                                                    {!! Form::label("ticket_holder_gender[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.gender')) !!}
                                                     {!! Form::select(
-                                                        "ticket_holder_gender[{$ticket['ticket']['id']}]",
+                                                        "ticket_holder_gender[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]",
                                                         array('M' => __('public_viewevent_partials_eventcreateordersection.gender_male'), 'W' => __('public_viewevent_partials_eventcreateordersection.gender_female')),
                                                         null,
-                                                        ['required' => 'required', 'class' => "ticket_holder_gender.{$ticket['ticket']['id']} ticket_holder_gender form-control"]
+                                                        ['required' => 'required', 'class' => "ticket_holder_gender.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_gender form-control"]
                                                     ) !!}
                                                 </div>
                                             </div>

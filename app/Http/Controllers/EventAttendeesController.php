@@ -305,6 +305,7 @@ class EventAttendeesController extends MyBaseController
                      * Create the order
                      */
                     $order                  = new Order();
+                    $order->gender          = $attendee_gender;
                     $order->first_name      = $attendee_first_name;
                     $order->gender          = $attendee_gender;
                     $order->last_name       = $attendee_last_name;
