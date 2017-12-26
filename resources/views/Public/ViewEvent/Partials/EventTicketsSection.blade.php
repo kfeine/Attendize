@@ -40,8 +40,8 @@
                     </div>
                 </div>
             </div>
-               <input class="btn btn-success" onClick="addAttendee()" value="@lang('public_viewevent_partials_eventticketssection.add_attendee')">
-            {!!Form::submit(__('public_viewevent_partials_eventticketssection.register'), ['class' => 'btn btn-lg btn-primary pull-right'])!!}
+            <input id="add-attendee-button" class="btn btn-success" onClick="addAttendee()" value="@lang('public_viewevent_partials_eventticketssection.add_attendee')">
+            {!! Form::submit(__('public_viewevent_partials_eventticketssection.register'), ['class' => 'btn btn-lg btn-primary pull-right', 'id' => 'checkout-button']) !!}
             {!! Form::hidden('is_embedded', $is_embedded) !!}
             {!! Form::close() !!}
 
