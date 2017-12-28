@@ -53,6 +53,34 @@
                                         <td class="valign-top text-center"><span class="bold">{{$order_item->unit_price}}</span></td>
                                         <td class="valign-top text-center"><span class="text-primary bold">€{{$order_item->unit_price * $order_item->quantity}}</span></td>
                                     </tr>
+                                        @foreach($order_item->orderItemOptions as $option)
+                                            <tr>
+                                                <td>
+                                                      &nbsp&nbsp&nbsp   {{$option->title}}
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                    @if((int)ceil($option->price) == 0)
+                                                    @lang('public_viewevent_partials_eventviewordersection.free')
+                                                    @else
+                                                   {{money($option->price, $order->event->currency)}}
+                                                    @endif
+
+                                                </td>
+                                                <td>
+                                                    -
+                                                </td>
+                                                <td>
+                                                    @if((int)ceil($option->price) == 0)
+                                                    @lang('public_viewevent_partials_eventviewordersection.free')
+                                                    @else
+                                                    {{money($option->price, $order->event->currency)}}
+                                                    @endif
+
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     @endforeach
                                 </tbody>
                             </table>
