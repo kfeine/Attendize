@@ -16,7 +16,7 @@ class OrderMailer
 
         Mail::send('Emails.OrderNotification', $data, function ($message) use ($order) {
             $message->to($order->account->email);
-            $message->subject('New order received on the event ' . $order->event->title . ' [' . $order->order_reference . ']');
+            $message->subject(trans('ordermailer.ordernotification_subject') . $order->event->title . ' [' . $order->order_reference . ']');
         });
 
     }
@@ -32,7 +32,7 @@ class OrderMailer
 
         Mail::send('Mailers.TicketMailer.SendOrderTickets', $data, function ($message) use ($order) {
             $message->to($order->email);
-            $message->subject('Your tickets for the event ' . $order->event->title);
+            $message->subject(trans('ordermailer.orderticket_subject') . $order->event->title);
 
             $file_name = $order->order_reference;
             $file_path = public_path(config('attendize.event_pdf_tickets_path')) . '/' . $file_name . '.pdf';
