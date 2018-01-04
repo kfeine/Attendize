@@ -159,6 +159,7 @@ class EventCheckoutController extends Controller
             }
 
             $attendee['first_name'] = $request->get('attendee_' .$attendee_id. '_first_name');
+            $attendee['gender'] = $request->get('attendee_' .$attendee_id. '_gender');
             $attendee['last_name'] = $request->get('attendee_' .$attendee_id. '_last_name');
             $attendee['email'] = $request->get('attendee_' .$attendee_id. '_email');
 
@@ -190,10 +191,12 @@ class EventCheckoutController extends Controller
              */
             $validation_rules['ticket_holder_first_name.' . $attendee_id . '.' . $ticket_id] = ['required'];
             $validation_rules['ticket_holder_last_name.' . $attendee_id . '.' . $ticket_id] = ['required'];
+            $validation_rules['ticket_holder_gender.' . $attendee_id . '.' . $ticket_id] = ['required'];
             $validation_rules['ticket_holder_email.' . $attendee_id . '.' . $ticket_id] = ['required', 'email'];
 
             $validation_messages['ticket_holder_first_name.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_last_name.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($attendee_id + 1)]);
+            $validation_messages['ticket_holder_gender.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.gender', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_email.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.email_required', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_email.' . $attendee_id . '.' . $ticket_id . '.email'] = __('controllers_eventcheckoutcontroller.email_invalid', ['person' => ($attendee_id + 1)]);
 
