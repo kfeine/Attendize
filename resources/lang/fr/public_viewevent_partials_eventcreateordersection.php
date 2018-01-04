@@ -23,5 +23,14 @@ return [
     'expiry_month'  => 'Mois d\'expiration', 
     'expiry_year'   => 'Année d\'expiration', 
     'cvc'           => 'Cryptogramme', 
+    'address1'      => 'Adresse (1)',
+    'placeholder_address1' => 'Exemple : 12 rue du près',
+    'address2'      => 'Adresse (2)',
+    'placeholder_address2' => 'Exemple : Bâtiment B',
+    'city'          => 'Ville',
+    'placeholder_city' => 'Exemple : Lille',
+    'postcode'      => 'Code postal',
+    'placeholder_postcode' => 'Exemple : 43222',
+    'phone'         => 'Téléphone',
 
 ];

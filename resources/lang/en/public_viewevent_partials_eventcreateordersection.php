@@ -23,5 +23,14 @@ return [
     'expiry_month'  => 'Expiry Month',
     'expiry_year'   => 'Expiry Year',
     'cvc'           => 'CVC Number',
+    'address1'      => 'Address Line 1',
+    'placeholder_address1' => 'E.g: 45 Grafton St.',
+    'address2'      => 'Address Line 2',
+    'placeholder_address2' => 'E.g: Dublin',
+    'city'          => 'City',
+    'placeholder_city' => 'E.g: Dublin',
+    'postcode'      => 'Post Code',
+    'placeholder_postcode' => 'E.g: 94568',
+    'phone'         => 'Phone number',
 
 ];

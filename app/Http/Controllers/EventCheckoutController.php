@@ -609,6 +609,11 @@ class EventCheckoutController extends Controller
             $order->first_name            = mb_convert_case(trim($request_data['order_first_name']), MB_CASE_TITLE, 'UTF-8');
             $order->last_name             = mb_convert_case(trim($request_data['order_last_name']), MB_CASE_UPPER, 'UTF-8');
             $order->email                 = $request_data['order_email'];
+            $order->phone                 = $request_data['order_phone'];
+            $order->address1              = $request_data['order_address_line_1'];
+            $order->address2              = $request_data['order_address_line_2'];
+            $order->city                  = $request_data['order_city'];
+            $order->postal_code           = $request_data['order_postal_code'];
             $order->order_status_id       = isset($request_data['pay_offline']) ? config('attendize.order_awaiting_payment') : config('attendize.order_complete');
             $order->amount                = $ticket_order['order_total'];
             $order->booking_fee           = $ticket_order['booking_fee'];

@@ -34,5 +34,9 @@ return [
     'print'                     => 'Print Tickets',
     'resend'                    => 'Resend Tickets',
     'close'                     => 'Close',
+    'address1'                  => 'Address Line 1',
+    'address2'                  => 'Address Line 2',
+    'city'                      => 'City',
+    'postcode'                  => 'Post Code',
 
 ];

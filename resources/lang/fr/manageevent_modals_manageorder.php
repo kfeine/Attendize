@@ -34,5 +34,9 @@ return [
     'print'                     => 'Imprimer les tickets',
     'resend'                    => 'Renvoyer les tickets',
     'close'                     => 'Fermer',
+    'address1' => 'Adresse (1)',
+    'address2' => 'Adresse (2)',
+    'city' => 'Ville',
+    'postcode' => 'Code postal',
 
 ];
