@@ -26,5 +26,6 @@ return [
     'gender'        => 'Gender',
     'gender_male'   => 'Male',
     'gender_female' => 'Female',
+    'checkout'      => 'Checkout',
 
 ];

@@ -244,7 +244,7 @@
                 @endif
 
                {!! Form::hidden('is_embedded', $is_embedded) !!}
-               {!! Form::submit('Checkout', ['class' => 'btn btn-lg btn-success card-submit', 'style' => 'width:100%;']) !!}
+               {!! Form::submit(__('public_viewevent_partials_eventcreateordersection.checkout'), ['class' => 'btn btn-lg btn-success card-submit', 'style' => 'width:100%;']) !!}
 
             </div>
         </div>
