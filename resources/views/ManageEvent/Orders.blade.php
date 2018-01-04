@@ -87,6 +87,9 @@
                                {!! Html::sortable_link(__('manageevent_orders.amount'), $sort_by, 'amount', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
                             </th>
                             <th>
+                               {!! Html::sortable_link(__('manageevent_orders.offline_payment'), $sort_by, 'payment_gateway_id', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
+                            </th>
+                            <th>
                                {!! Html::sortable_link(__('manageevent_orders.status'), $sort_by, 'order_status_id', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
                             </th>
                             <th></th>
@@ -120,6 +123,11 @@
 
                                     @endif
                                 </a>
+                            </td>
+                            <td>
+                                @if(!$order->payment_gateway_id)
+                                    X                                 
+                                @endif
                             </td>
                             <td>
                                 <span class="label label-{{(!$order->is_payment_received || $order->is_refunded || $order->is_partially_refunded) ? 'warning' : 'success'}}">

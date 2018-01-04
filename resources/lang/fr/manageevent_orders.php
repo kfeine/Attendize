@@ -13,5 +13,6 @@ return [
     'amount'   => 'Montant',
     'status'   => 'Statut',
     'details'  => 'Détails / Modifier',
+    'offline_payment' => 'Chèque',
 
 ];

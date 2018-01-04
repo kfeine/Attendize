@@ -28,7 +28,7 @@ class EventOrdersController extends MyBaseController
      */
     public function showOrders(Request $request, $event_id = '')
     {
-        $allowed_sorts = ['first_name', 'email', 'order_reference', 'order_status_id', 'created_at'];
+        $allowed_sorts = ['first_name', 'email', 'order_reference', 'order_status_id', 'created_at', 'payment_gateway_id'];
 
         $searchQuery = $request->get('q');
         $sort_by     = (in_array($request->get('sort_by'), $allowed_sorts) ? $request->get('sort_by') : 'created_at');
@@ -49,6 +49,7 @@ class EventOrdersController extends MyBaseController
                 ->where(function ($query) use ($searchQuery) {
                     $query->where('order_reference', 'like', $searchQuery . '%')
                         ->orWhere('first_name', 'like', $searchQuery . '%')
+                        ->orWhere('city', 'like', $searchQuery . '%')
                         ->orWhere('email', 'like', $searchQuery . '%')
                         ->orWhere('last_name', 'like', $searchQuery . '%');
                 })
@@ -352,6 +353,10 @@ class EventOrdersController extends MyBaseController
                             'orders.city',
                             'orders.postal_code',
                             'orders.order_reference',
+                            \DB::raw("(CASE
+                                        WHEN orders.payment_gateway_id IS NULL THEN '1'
+                                        ELSE '0' END)
+                                        AS `orders.payment_gateway_id`"),
                             \DB::raw('replace(orders.amount, ".", ",")'),
                             \DB::raw("(CASE
                                         WHEN orders.order_status_id = 1 THEN 'Completed'
@@ -377,6 +382,10 @@ class EventOrdersController extends MyBaseController
                             'orders.postal_code',
                             'orders.city',
                             'orders.order_reference',
+                            \DB::raw("(CASE
+                                        WHEN orders.payment_gateway_id IS NULL THEN '1'
+                                        ELSE '0' END)
+                                        AS `orders.payment_gateway_id`"),
                             'orders.amount',
                             \DB::raw("(CASE
                                         WHEN orders.order_status_id = 1 THEN 'Completed'
@@ -404,6 +413,7 @@ class EventOrdersController extends MyBaseController
                     'Postal code',
                     'City',
                     'Order Reference',
+                    'Chèque',
                     'Amount',
                     'Status',
                     'Amount Refunded',

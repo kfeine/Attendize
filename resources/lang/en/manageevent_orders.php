@@ -14,5 +14,6 @@ return [
     'status'   => 'Status',
     'refund'   => 'Refund / Cancel',
     'details'  => 'Details / Edit',
+    'offline_payment' => 'Offline',
 
 ];
