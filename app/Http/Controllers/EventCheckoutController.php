@@ -121,7 +121,7 @@ class EventCheckoutController extends Controller
             if($total_ticket_quantity < $ticket->min_per_person){
                 return response()->json([
                     'status'   => 'error',
-                    'messages' => '__ le nombre de ticket "'.$ticket->title.'" excigé par personne n\'est pas respecté',
+                    'messages' => '__ le nombre de ticket "'.$ticket->title.'" exigé par personne n\'est pas respecté',
                 ]);
             } else if($total_ticket_quantity > $max_per_person){
                 return response()->json([
@@ -159,6 +159,7 @@ class EventCheckoutController extends Controller
             }
 
             $attendee['first_name'] = $request->get('attendee_' .$attendee_id. '_first_name');
+            $attendee['gender'] = $request->get('attendee_' .$attendee_id. '_gender');
             $attendee['last_name'] = $request->get('attendee_' .$attendee_id. '_last_name');
             $attendee['email'] = $request->get('attendee_' .$attendee_id. '_email');
 
@@ -190,10 +191,12 @@ class EventCheckoutController extends Controller
              */
             $validation_rules['ticket_holder_first_name.' . $attendee_id . '.' . $ticket_id] = ['required'];
             $validation_rules['ticket_holder_last_name.' . $attendee_id . '.' . $ticket_id] = ['required'];
+            $validation_rules['ticket_holder_gender.' . $attendee_id . '.' . $ticket_id] = ['required'];
             $validation_rules['ticket_holder_email.' . $attendee_id . '.' . $ticket_id] = ['required', 'email'];
 
             $validation_messages['ticket_holder_first_name.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_last_name.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($attendee_id + 1)]);
+            $validation_messages['ticket_holder_gender.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.gender', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_email.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.email_required', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_email.' . $attendee_id . '.' . $ticket_id . '.email'] = __('controllers_eventcheckoutcontroller.email_invalid', ['person' => ($attendee_id + 1)]);
 
@@ -606,6 +609,11 @@ class EventCheckoutController extends Controller
             $order->first_name            = mb_convert_case(trim($request_data['order_first_name']), MB_CASE_TITLE, 'UTF-8');
             $order->last_name             = mb_convert_case(trim($request_data['order_last_name']), MB_CASE_UPPER, 'UTF-8');
             $order->email                 = $request_data['order_email'];
+            $order->phone                 = $request_data['order_phone'];
+            $order->address1              = $request_data['order_address_line_1'];
+            $order->address2              = $request_data['order_address_line_2'];
+            $order->city                  = $request_data['order_city'];
+            $order->postal_code           = $request_data['order_postal_code'];
             $order->order_status_id       = isset($request_data['pay_offline']) ? config('attendize.order_awaiting_payment') : config('attendize.order_complete');
             $order->amount                = $ticket_order['order_total'];
             $order->booking_fee           = $ticket_order['booking_fee'];
@@ -734,7 +742,6 @@ class EventCheckoutController extends Controller
 
                 /* Keep track of total number of attendees */
                 $attendee_increment++;
-                
             }
 
             /*

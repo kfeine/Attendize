@@ -44,12 +44,12 @@ class UserController extends Controller
         ];
 
         $messages = [
-            'email.email'         => 'Please enter a valid E-mail address.',
-            'email.required'      => 'E-mail address is required.',
-            'password.passcheck'  => 'This password is incorrect.',
-            'email.unique'        => 'This E-mail is already in use.',
-            'first_name.required' => 'Please enter your first name.',
-            'last_name.required'  => 'Please enter your last name.',
+            'email.email'         => __('controllers_usercontroller.email_email'),
+            'email.required'      => __('controllers_usercontroller.email_required'),
+            'password.passcheck'  => __('controllers_usercontroller.password_passcheck'),
+            'email.unique'        => __('controllers_usercontroller.email_unique'),
+            'first_name.required' => __('controllers_usercontroller.first_name_required'),
+            'last_name.required'  => __('controllers_usercontroller.last_name_required'),
         ];
 
         $validation = Validator::make($request->all(), $rules, $messages);
@@ -75,7 +75,7 @@ class UserController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Successfully Saved Details',
+            'message' => __('controllers_usercontroller.details_saved'),
         ]);
     }
 }

@@ -4,7 +4,7 @@
             <div class="form-group">
                 {!! Form::label("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id", $option->title, ['class' => $option->is_required ? 'required' : '']) !!}
                 @if($option->ticket_options_type_id == config('attendize.ticket_options_dropdown_single'))
-                    {!! Form::select("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id", array('' => 'Please select one option') + $option->options->pluck('title_with_price', 'id')->toArray(), null, [$option->is_required ? 'required' : '', 'class' =>  "required form-control"]) !!}
+                    {!! Form::select("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id", array('' => __('public_viewevent_partials_ticketoptions.select_one_option')) + $option->options->pluck('title_with_price', 'id')->toArray(), null, [$option->is_required ? 'required' : '', 'class' =>  "required form-control"]) !!}
                 @elseif($option->ticket_options_type_id == config('attendize.ticket_options_dropdown_multi'))
                     {!! Form::select("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id",$option->options->pluck('title_with_price', 'id'), null, [$option->is_required ? 'required' : '' => $option->is_required ? 'required' : '', 'multiple' => 'multiple','class' => "required form-control"]) !!}
                 @elseif($option->ticket_options_type_id == config('attendize.ticket_options_checkbox_multi'))

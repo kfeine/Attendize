@@ -20,7 +20,7 @@ return [
     'id'                        => 'Identifiant de transaction',
     'gateway'                   => 'Portail de paiement',
     'items'                     => 'Contenu de la commande',
-    'ticket'                    => 'Ticket',
+    'ticket'                    => 'Formules',
     'quantity'                  => 'Quantité',
     'price'                     => 'Prix',
     'fee'                       => 'Frais',
@@ -32,8 +32,12 @@ return [
     'cancelled'                 => 'Annulé',
     'refunded'                  => 'Remboursé',
     'edit'                      => 'Modifer',
-    'print'                     => 'Imprimer les tickets',
-    'resend'                    => 'Renvoyer les tickets',
+    'print'                     => 'Imprimer les formules',
+    'resend'                    => 'Renvoyer les formules',
     'close'                     => 'Fermer',
+    'address1'                  => 'Adresse (1)',
+    'address2'                  => 'Adresse (2)',
+    'city'                      => 'Ville',
+    'postcode'                  => 'Code postal',
 
 ];

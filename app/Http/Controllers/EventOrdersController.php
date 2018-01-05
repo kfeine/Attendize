@@ -28,7 +28,7 @@ class EventOrdersController extends MyBaseController
      */
     public function showOrders(Request $request, $event_id = '')
     {
-        $allowed_sorts = ['first_name', 'email', 'order_reference', 'order_status_id', 'created_at'];
+        $allowed_sorts = ['first_name', 'email', 'order_reference', 'order_status_id', 'created_at', 'payment_gateway_id'];
 
         $searchQuery = $request->get('q');
         $sort_by     = (in_array($request->get('sort_by'), $allowed_sorts) ? $request->get('sort_by') : 'created_at');
@@ -49,6 +49,7 @@ class EventOrdersController extends MyBaseController
                 ->where(function ($query) use ($searchQuery) {
                     $query->where('order_reference', 'like', $searchQuery . '%')
                         ->orWhere('first_name', 'like', $searchQuery . '%')
+                        ->orWhere('city', 'like', $searchQuery . '%')
                         ->orWhere('email', 'like', $searchQuery . '%')
                         ->orWhere('last_name', 'like', $searchQuery . '%');
                 })
@@ -178,7 +179,7 @@ class EventOrdersController extends MyBaseController
         $order->update();
 
 
-        \Session::flash('message', 'The order has been updated');
+        \Session::flash('message', __('controllers_eventorderscontroller.order_updated'));
 
         return response()->json([
             'status'      => 'success',
@@ -199,7 +200,7 @@ class EventOrdersController extends MyBaseController
             'refund_amount' => ['numeric'],
         ];
         $messages = [
-            'refund_amount.integer' => 'Refund amount must only contain numbers.',
+            'refund_amount.integer' => __('controllers_eventorderscontroller.only_numbers'),
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -222,17 +223,17 @@ class EventOrdersController extends MyBaseController
 
         if ($refund_order && $order->payment_gateway->can_refund && !$is_free) {
             if (!$order->transaction_id) {
-                $error_message = 'Sorry, this order cannot be refunded.';
+                $error_message = __('controllers_eventorderscontroller.refund_error');
             }
 
             if ($order->is_refunded) {
-                $error_message = 'This order has already been refunded';
+                $error_message = __('controllers_eventorderscontroller.refund_already');
             } elseif ($order->organiser_amount == 0) {
-                $error_message = 'Nothing to refund';
+                $error_message = __('controllers_eventorderscontroller.refund_nothing');
             } elseif ($refund_type !== 'full' && $refund_amount > round(($order->organiser_amount - $order->amount_refunded),
                     2)
             ) {
-                $error_message = 'The maximum amount you can refund is ' . (money($order->organiser_amount - $order->amount_refunded,
+                $error_message =  __('controllers_eventorderscontroller.refund_max'). (money($order->organiser_amount - $order->amount_refunded,
                         $order->event->currency));
             }
             if (!$error_message) {
@@ -272,7 +273,7 @@ class EventOrdersController extends MyBaseController
                     $order->save();
                 } catch (\Exeption $e) {
                     Log::error($e);
-                    $error_message = 'There has been a problem processing your refund. Please check your information and try again.';
+                    $error_message = __('controllers_eventorderscontroller.problem');
                 }
             }
 
@@ -313,7 +314,7 @@ class EventOrdersController extends MyBaseController
         }
 
         \Session::flash('message',
-            (!$refund_amount && !$attendees) ? 'Nothing To Do' : 'Successfully ' . ($refund_order ? ' Refunded Order' : ' ') . ($attendees && $refund_order ? ' & ' : '') . ($attendees ? 'Cancelled Attendee(s)' : ''));
+            (!$refund_amount && !$attendees) ? __('controllers_eventorderscontroller.nothing_to_do') : __('controllers_eventorderscontroller.success') . ($refund_order ? __('controllers_eventorderscontroller.refunded_order') : ' ') . ($attendees && $refund_order ? ' & ' : '') . ($attendees ? __('controllers_eventorderscontroller.cancelled_attendee') : ''));
 
         return response()->json([
             'status'      => 'success',
@@ -333,7 +334,7 @@ class EventOrdersController extends MyBaseController
 
         Excel::create('orders-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event) {
 
-            $excel->setTitle('Orders For Event: ' . $event->title);
+            $excel->setTitle(__('controllers_eventorderscontroller.orders_for') . $event->title);
 
             // Chain the setters
             $excel->setCreator(config('attendize.app_name'))
@@ -347,7 +348,16 @@ class EventOrdersController extends MyBaseController
                             'orders.first_name',
                             'orders.last_name',
                             'orders.email',
+                            'orders.phone',
+                            'orders.address1',
+                            'orders.address2',
+                            'orders.city',
+                            'orders.postal_code',
                             'orders.order_reference',
+                            \DB::raw("(CASE
+                                        WHEN orders.payment_gateway_id IS NULL THEN '1'
+                                        ELSE '0' END)
+                                        AS `orders.payment_gateway_id`"),
                             \DB::raw('replace(orders.amount, ".", ",")'),
                             \DB::raw("(CASE
                                         WHEN orders.order_status_id = 1 THEN 'Completed'
@@ -368,7 +378,16 @@ class EventOrdersController extends MyBaseController
                             'orders.first_name',
                             'orders.last_name',
                             'orders.email',
+                            'orders.phone',
+                            'orders.address1',
+                            'orders.address2',
+                            'orders.postal_code',
+                            'orders.city',
                             'orders.order_reference',
+                            \DB::raw("(CASE
+                                        WHEN orders.payment_gateway_id IS NULL THEN '1'
+                                        ELSE '0' END)
+                                        AS `orders.payment_gateway_id`"),
                             'orders.amount',
                             \DB::raw("(CASE
                                         WHEN orders.order_status_id = 1 THEN 'Completed'
@@ -391,7 +410,13 @@ class EventOrdersController extends MyBaseController
                     'First Name',
                     'Last Name',
                     'Email',
+                    'Phone',
+                    'Address line 1',
+                    'Address line 2',
+                    'Postal code',
+                    'City',
                     'Order Reference',
+                    'Chèque',
                     'Amount',
                     'Status',
                     'Amount Refunded',
@@ -478,7 +503,7 @@ class EventOrdersController extends MyBaseController
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Message Successfully Sent',
+            'message' => __('controllers_eventorderscontroller.message_sent'),
         ]);
     }
 
@@ -498,7 +523,7 @@ class EventOrdersController extends MyBaseController
 
         $order->save();
 
-        session()->flash('message', 'Order Payment Status Successfully Updated');
+        session()->flash('message', __('controllers_eventorderscontroller.payment_status_update_success'));
 
         return response()->json([
             'status' => 'success',
@@ -521,7 +546,7 @@ class EventOrdersController extends MyBaseController
 
         $order->save();
 
-        session()->flash('message', 'Order Payment Status Successfully Updated');
+        session()->flash('message', __('controllers_eventorderscontroller.order_payment_update_success'));
 
         return response()->json([
             'status' => 'success',

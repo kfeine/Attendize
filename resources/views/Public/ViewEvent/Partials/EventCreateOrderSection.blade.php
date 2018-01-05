@@ -100,6 +100,56 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            {!! Form::label("order_phone", __('public_viewevent_partials_eventcreateordersection.phone')) !!}
+                            {!! Form::text("order_phone", null, ['required' => 'required', 'class' => 'required form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="address-manual">
+                    <div class="form-group">
+                        {!! Form::label('order_address_line_1', __('public_viewevent_partials_eventcreateordersection.address1')) !!}
+                        {!!  Form::text('order_address_line_1', null, [
+                                    'class'=>'form-control required',
+                                    'required' => 'required', 
+                                    'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_address1')
+                        ])  !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('order_address_line_2', __('public_viewevent_partials_eventcreateordersection.address2'), array('class'=>'control-label')) !!}
+                        {!!  Form::text('order_address_line_2', null, [
+                                    'class'=>'form-control',
+                                    'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_address2')
+                        ])  !!}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {!! Form::label('order_city', __('public_viewevent_partials_eventcreateordersection.city')) !!}
+                                {!!  Form::text('order_city', null, [
+                                            'class'=>'form-control required',
+                                            'required' => 'required', 
+                                            'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_city')
+                                ])  !!}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {!! Form::label('order_postal_code', __('public_viewevent_partials_eventcreateordersection.postcode')) !!}
+                                {!!  Form::text('order_postal_code', null, [
+                                            'class'=>'form-control required',
+                                            'required' => 'required', 
+                                            'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_postcode')
+                                ])  !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="p20 pl0">
                     <a href="javascript:void(0);" class="btn btn-primary btn-xs" id="mirror_buyer_info">
                         @lang('public_viewevent_partials_eventcreateordersection.copy')
@@ -123,13 +173,13 @@
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     {!! Form::label("ticket_holder_gender[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.gender')) !!}
                                                     {!! Form::select(
                                                         "ticket_holder_gender[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]",
                                                         array('M' => __('public_viewevent_partials_eventcreateordersection.gender_male'), 'W' => __('public_viewevent_partials_eventcreateordersection.gender_female')),
-                                                        null,
+                                                        $ticket['attendee']['gender'],
                                                         ['required' => 'required', 'class' => "ticket_holder_gender.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_gender form-control"]
                                                     ) !!}
                                                 </div>
@@ -140,7 +190,7 @@
                                                     {!! Form::text("ticket_holder_first_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['first_name'], ['required' => 'required', 'class' => "required ticket_holder_first_name.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_first_name form-control"]) !!}
                                                 </div>
                                             </div>
-                                            <div class="col-md-5">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     {!! Form::label("ticket_holder_last_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.last_name')) !!}
                                                     {!! Form::text("ticket_holder_last_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['last_name'], ['required' => 'required', 'class' => "required ticket_holder_last_name.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_last_name form-control"]) !!}

@@ -85,7 +85,7 @@ class EventCustomizeController extends MyBaseController
         ];
 
         $messages = [
-            'social_share_text.max' => 'Please keep the text under 3000 characters.',
+            'social_share_text.max' => __('controllers_eventcustomizecontroller.social_share_text_max'),
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -108,7 +108,7 @@ class EventCustomizeController extends MyBaseController
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Social Settings Successfully Updated',
+            'message' => __('controllers_eventcustomizecontroller.social_settings_update_success'),
         ]);
 
     }
@@ -132,7 +132,7 @@ class EventCustomizeController extends MyBaseController
             'is_1d_barcode_enabled' => ['required'],
         ];
         $messages = [
-            'ticket_bg_color.required' => 'Please enter a background color.',
+            'ticket_bg_color.required' => __('controllers_eventcustomizecontroller.ticket_bg_color_required'),
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -154,7 +154,7 @@ class EventCustomizeController extends MyBaseController
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Ticket Settings Updated',
+            'message' => __('controllers_eventcustomizecontroller.ticket_settings_update'),
         ]);
     }
 
@@ -174,9 +174,9 @@ class EventCustomizeController extends MyBaseController
             'organiser_fee_fixed'      => ['numeric', 'between:0,100'],
         ];
         $messages = [
-            'organiser_fee_percentage.numeric' => 'Please enter a value between 0 and 100',
-            'organiser_fee_fixed.numeric'      => 'Please check the format. It should be in the format 0.00.',
-            'organiser_fee_fixed.between'      => 'Please enter a value between 0 and 100.',
+            'organiser_fee_percentage.numeric' => __('controllers_eventcustomizecontroller.organiser_fee_percentage_numeric'),
+            'organiser_fee_fixed.numeric'      => __('controllers_eventcustomizecontroller.organiser_fee_fixed_numeric'),
+            'organiser_fee_fixed.between'      => __('controllers_eventcustomizecontroller.organiser_fee_fixed_between'),
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -194,7 +194,7 @@ class EventCustomizeController extends MyBaseController
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Order Page Successfully Updated',
+            'message' => __('controllers_eventcustomizecontroller.order_page_update'),
         ]);
     }
 
@@ -230,7 +230,7 @@ class EventCustomizeController extends MyBaseController
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Order Page Successfully Updated',
+            'message' => __('controllers_eventcustomizecontroller.order_page_update'),
         ]);
     }
 
@@ -249,8 +249,8 @@ class EventCustomizeController extends MyBaseController
             'bg_image_path' => ['mimes:jpeg,jpg,png', 'max:4000'],
         ];
         $messages = [
-            'bg_image_path.mimes' => 'Please ensure you are uploading an image (JPG, PNG, JPEG)',
-            'bg_image_path.max'   => 'Please ensure the image is not larger than 2.5MB',
+            'bg_image_path.mimes' => __('controllers_eventcustomizecontroller.bg_image_path_mimes'),
+            'bg_image_path.max'   => __('controllers_eventcustomizecontroller.bg_image_path_max'),
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -302,7 +302,7 @@ class EventCustomizeController extends MyBaseController
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Event Page Successfully Updated',
+            'message' => __('controllers_eventcustomizecontroller.event_page_update'),
             'runThis' => 'document.getElementById(\'previewIframe\').contentWindow.location.reload(true);',
         ]);
     }

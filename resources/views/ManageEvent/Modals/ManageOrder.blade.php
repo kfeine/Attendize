@@ -65,6 +65,18 @@
                         <div class="col-sm-6 col-xs-6">
                             <b>@lang('manageevent_modals_manageorder.email')</b><br> {{$order->email}}
                         </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <b>@lang('manageevent_modals_manageorder.address1')</b><br> {{$order->address1}}
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <b>@lang('manageevent_modals_manageorder.address2')</b><br> {{$order->address2}}
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <b>@lang('manageevent_modals_manageorder.city')</b><br> {{$order->city}}
+                        </div>
+                        <div class="col-sm-6 col-xs-6">
+                            <b>@lang('manageevent_modals_manageorder.postcode')</b><br> {{$order->postal_code}}
+                        </div>
 
                         @if($order->transaction_id)
                         <div class="col-sm-6 col-xs-6">

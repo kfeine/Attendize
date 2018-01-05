@@ -42,7 +42,7 @@ class ManageAccountController extends MyBaseController
 
     public function showStripeReturn()
     {
-        $error_message = 'There was an error connecting your Stripe account. Please try again.';
+        $error_message = __('controllers_manageaccountcontroller.stripe_error');
 
         if (Input::get('error') || !Input::get('code')) {
             \Session::flash('message', $error_message);
@@ -79,7 +79,7 @@ class ManageAccountController extends MyBaseController
 
         $account->save();
 
-        \Session::flash('message', 'You have successfully connected your Stripe account.');
+        \Session::flash('message', __('controllers_manageaccountcontroller.stripe_success'));
 
         return redirect()->route('showEventsDashboard');
     }
@@ -111,7 +111,7 @@ class ManageAccountController extends MyBaseController
         return response()->json([
             'status'  => 'success',
             'id'      => $account->id,
-            'message' => 'Account Successfully Updated',
+            'message' => __('controllers_manageaccountcontroller.account_update_success'),
         ]);
     }
 
@@ -160,7 +160,7 @@ class ManageAccountController extends MyBaseController
         return response()->json([
             'status'  => 'success',
             'id'      => $account_payment_gateway->id,
-            'message' => 'Payment Information Successfully Updated',
+            'message' => __('controllers_manageaccountcontroller.payment_info_update_success'),
         ]);
     }
 
@@ -176,9 +176,9 @@ class ManageAccountController extends MyBaseController
         ];
 
         $messages = [
-            'email.email'    => 'Please enter a valid E-mail address.',
-            'email.required' => 'E-mail address is required.',
-            'email.unique'   => 'E-mail already in use for this account.',
+            'email.email'    => __('controllers_manageaccountcontroller.email_email'),
+            'email.required' => __('controllers_manageaccountcontroller.email_required'),
+            'email.unique'   => __('controllers_manageaccountcontroller.email_unique'),
         ];
 
         $validation = Validator::make(Input::all(), $rules, $messages);
@@ -213,7 +213,7 @@ class ManageAccountController extends MyBaseController
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Success! <b>' . $user->email . '</b> has been sent further instructions.',
+            'message' => __('controllers_manageaccountcontroller.invite_success'),
         ]);
     }
 

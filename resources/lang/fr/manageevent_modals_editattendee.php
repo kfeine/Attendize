@@ -2,19 +2,16 @@
 
 return [
 
-    'edit'        => 'Modifier',
-    'ticket'      => 'Ticket',
+    'edit'          => 'Modifier',
+    'ticket'        => 'Formule',
     'gender'        => 'Civilité',
     'gender_male'   => 'M.',
     'gender_female' => 'Mme',
-    'firstname'   => 'Prénom',
-    'lastname'    => 'Nom',
-    'email'       => 'Email',
-    'cancel'      => 'Annuler',
-    'edit_submit' => 'Enregistrer',
-    'gender'        => 'Civilité',
-    'gender_male'   => 'M.',
-    'gender_female' => 'Mme',
+    'firstname'     => 'Prénom',
+    'lastname'      => 'Nom',
+    'email'         => 'Email',
+    'cancel'        => 'Annuler',
+    'edit_submit'   => 'Enregistrer',
     'custom_field'  => 'Champ personnalisé',
 
 ];

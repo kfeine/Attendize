@@ -2,8 +2,8 @@
 
 return [
 
-    'title' => 'Aucun ticket',
-    'text' => 'Créer un ticket en cliquant sur le lien ci-dessous.',
-    'create' => 'Créer un ticket',
+    'title'  => 'Aucune formule',
+    'text'   => 'Créer une formule en cliquant sur le lien ci-dessous.',
+    'create' => 'Créer une formule',
 
 ];
