@@ -83,11 +83,11 @@ class EventDiscountsController extends MyBaseController
 
         //$event->discounts()->attach($discount->id);
 
-        session()->flash('message', 'Successfully created discount');
+        session()->flash('message', __('controllers_eventdiscountscontroller.create_success'));
 
         return response()->json([
             'status'      => 'success',
-            'message'     => 'Refreshing..',
+            'message'     => __('controllers_eventdiscountscontroller.refreshing'),
             'redirectUrl' => '',
         ]);
     }
@@ -145,11 +145,11 @@ class EventDiscountsController extends MyBaseController
         $discount->quantity_available = !$request->get('quantity_available') ? null : $request->get('quantity_available');
         $discount->save();
 
-        session()->flash('message', 'Successfully edited discount');
+        session()->flash('message', __('controllers_eventdiscountscontroller.edit_success'));
 
         return response()->json([
             'status'      => 'success',
-            'message'     => 'Refreshing..',
+            'message'     => __('controllers_eventdiscountscontroller.refreshing'),
             'redirectUrl' => '',
         ]);
 
@@ -173,7 +173,7 @@ class EventDiscountsController extends MyBaseController
         if ($discount->save()) {
             return response()->json([
                 'status'  => 'success',
-                'message' => 'Discount Successfully Updated',
+                'message' => __('controllers_eventdiscountscontroller.update_success'),
                 'id'      => $discount->id,
             ]);
         }
@@ -181,7 +181,7 @@ class EventDiscountsController extends MyBaseController
         return response()->json([
             'status'  => 'error',
             'id'      => $discount->id,
-            'message' => 'Whoops! Looks like something went wrong. Please try again.',
+            'message' => __('controllers_eventdiscountscontroller.error'),
         ]);
     }
 
@@ -201,11 +201,11 @@ class EventDiscountsController extends MyBaseController
 
         if ($discount->delete()) {
 
-            session()->flash('message', 'Discount successfully deleted');
+            session()->flash('message', __('controllers_eventdiscountscontroller.delete_success'));
 
             return response()->json([
                 'status'      => 'success',
-                'message'     => 'Refreshing..',
+                'message'     => __('controllers_eventdiscountscontroller.refreshing'),
             ]);
         }
 

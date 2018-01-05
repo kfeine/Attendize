@@ -55,7 +55,7 @@ class EventTicketOptionsController extends MyBaseController
         if (!$request->has('details')) {
             return response()->json([
                 'status'  => 'error',
-                'message' => __('controllers_eventticket.no_options_selected'),
+                'message' => __('controllers_eventticketoptionscontroller.no_options_selected'),
             ]);
         }
 
@@ -89,11 +89,11 @@ class EventTicketOptionsController extends MyBaseController
         }
 
 
-        session()->flash('message', 'Successfully Created Option');
+        session()->flash('message', __('controllers_eventticketoptionscontroller.create_success'));
 
         return response()->json([
             'status'      => 'success',
-            'message'     => 'Refreshing..',
+            'message'     => __('controllers_eventticketoptionscontroller.refreshing'),
             'redirectUrl' => '',
         ]);
     }
@@ -144,7 +144,7 @@ class EventTicketOptionsController extends MyBaseController
         if (!$request->has('details')) {
             return response()->json([
                 'status'  => 'error',
-                'message' => __('controllers_eventticket.no_options_selected'),
+                'message' => __('controllers_eventticketoptionscontroller.no_options_selected'),
             ]);
         }
 
@@ -190,7 +190,7 @@ class EventTicketOptionsController extends MyBaseController
         return response()->json([
             'status'      => 'success',
             'id'          => $optionBlock->id,
-            'message'     => 'Refreshing...',
+            'message'     => __('controllers_eventticketoptionscontroller.refreshing'),
             'redirectUrl' => ""
         ]);
     }
@@ -210,11 +210,11 @@ class EventTicketOptionsController extends MyBaseController
 
         if ($option->delete()) {
 
-            session()->flash('message', __('controllers_eventticket.option_deleted'));
+            session()->flash('message', __('controllers_eventticketoptionscontroller.option_deleted'));
 
             return response()->json([
                 'status'      => 'success',
-                'message'     => 'Refreshing..',
+                'message'     => __('controllers_eventticketoptionscontroller.refreshing'),
                 'redirectUrl' => '',
             ]);
         }
@@ -222,7 +222,7 @@ class EventTicketOptionsController extends MyBaseController
         return response()->json([
             'status'  => 'error',
             'id'      => $option->id,
-            'message' => __('controllers_eventticket.cant_be_deleted'),
+            'message' => __('controllers_eventticketoptionscontroller.cant_be_deleted'),
         ]);
     }
 
@@ -244,7 +244,7 @@ class EventTicketOptionsController extends MyBaseController
         if ($option->save()) {
             return response()->json([
                 'status'  => 'success',
-                'message' => 'Option Successfully Updated',
+                'message' => __('controllers_eventticketoptionscontroller.update_success'),
                 'id'      => $option->id,
             ]);
         }
@@ -252,7 +252,7 @@ class EventTicketOptionsController extends MyBaseController
         return response()->json([
             'status'  => 'error',
             'id'      => $option->id,
-            'message' => 'Whoops! Looks like something went wrong. Please try again.',
+            'message' => __('controllers_eventticketoptionscontroller.error'),
         ]);
     }
 }

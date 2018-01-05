@@ -96,7 +96,7 @@ class EventAttendeesController extends MyBaseController
          * @todo This is a bit hackish
          */
         if ($event->tickets->count() === 0) {
-            return '<script>showMessage("You need to create a ticket before you can invite an attendee.");</script>';
+            return '<script>showMessage("' . __('controllers_eventattendeescontroller.need_ticket') . '");</script>';
         }
 
         return view('ManageEvent.Modals.InviteAttendee', [
@@ -121,8 +121,8 @@ class EventAttendeesController extends MyBaseController
         ];
 
         $messages = [
-            'ticket_id.exists'   => 'The ticket you have selected does not exist',
-            'ticket_id.required' => 'The ticket field is required. ',
+            'ticket_id.exists'   => __('controllers_eventattendeescontroller.ticket_absent'),
+            'ticket_id.required' => __('controllers_eventattendeescontroller.ticket_required'),
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -204,7 +204,7 @@ class EventAttendeesController extends MyBaseController
                 $this->dispatch(new SendAttendeeInvite($attendee));
             }
 
-            session()->flash('message', 'Attendee Successfully Invited');
+            session()->flash('message', __('controllers_eventattendeescontroller.invite_success'));
 
             DB::commit();
 
@@ -222,7 +222,7 @@ class EventAttendeesController extends MyBaseController
 
             return response()->json([
                 'status' => 'error',
-                'error'  => 'An error occurred while inviting this attendee. Please try again.'
+                'error'  => __('controllers_eventattendeescontroller.error_inviting')
             ]);
         }
 
@@ -244,7 +244,7 @@ class EventAttendeesController extends MyBaseController
          * @todo This is a bit hackish
          */
         if ($event->tickets->count() === 0) {
-            return '<script>showMessage("You need to create a ticket before you can add an attendee.");</script>';
+            return '<script>showMessage("' . __('controllers_eventattendeescontroller.need_ticket') . '");</script>';
         }
 
         return view('ManageEvent.Modals.ImportAttendee', [
@@ -269,7 +269,7 @@ class EventAttendeesController extends MyBaseController
         ];
 
         $messages = [
-            'ticket_id.exists' => 'The ticket you have selected does not exist',
+            'ticket_id.exists' => __('controllers_eventattendeescontroller.ticket_absent'),
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -362,7 +362,7 @@ class EventAttendeesController extends MyBaseController
             };
         }
 
-        session()->flash('message', $num_added . ' Attendees Successfully Invited');
+        session()->flash('message', $num_added . __('controllers_eventattendeescontroller.invite_success'));
 
         return response()->json([
             'status'      => 'success',
@@ -459,7 +459,7 @@ class EventAttendeesController extends MyBaseController
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Message Successfully Sent',
+            'message' => __('controllers_eventattendeescontroller.message_sent'),
         ]);
     }
 
@@ -517,7 +517,7 @@ class EventAttendeesController extends MyBaseController
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Message Successfully Sent',
+            'message' => __('controllers_eventattendeescontroller.message_sent'),
         ]);
     }
 
@@ -614,7 +614,7 @@ class EventAttendeesController extends MyBaseController
 
         Excel::create('attendees-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event_id, $select, $title_row) {
 
-            $excel->setTitle('Attendees List');
+            $excel->setTitle(__('controllers_eventattendeescontroller.attendee_list'));
 
             // Chain the setters
             $excel->setCreator(config('attendize.app_name'))
@@ -686,8 +686,8 @@ class EventAttendeesController extends MyBaseController
         ];
 
         $messages = [
-            'ticket_id.exists'   => 'The ticket you have selected does not exist',
-            'ticket_id.required' => 'The ticket field is required. ',
+            'ticket_id.exists'   => __('controllers_eventattendeescontroller.ticket_id_exists'),
+            'ticket_id.required' => __('controllers_eventattendeescontroller.ticket_id_required')
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -706,7 +706,7 @@ class EventAttendeesController extends MyBaseController
         $attendee->ticket_id    = $request->get('ticket_id');
         $attendee->update();
 
-        session()->flash('message', 'Successfully Updated Attendee');
+        session()->flash('message', __('controllers_eventattendeescontroller.attendee_update'));
 
         return response()->json([
             'status'      => 'success',
@@ -752,7 +752,7 @@ class EventAttendeesController extends MyBaseController
         if ($attendee->is_cancelled) {
             return response()->json([
                 'status'  => 'success',
-                'message' => 'Attendee Already Cancelled',
+                'message' => __('controllers_eventattendeescontroller.already_cancelled'),
             ]);
         }
 
@@ -832,7 +832,7 @@ class EventAttendeesController extends MyBaseController
 
             } catch (\Exception $e) {
                 \Log::error($e);
-                $error_message = 'There has been a problem processing your refund. Please check your information and try again.';
+                $error_message = __('controllers_eventattendeescontroller.problem_refund');
 
             }
         }
@@ -844,7 +844,7 @@ class EventAttendeesController extends MyBaseController
             ]);
         }
 
-        session()->flash('message', 'Successfully Cancelled Attenddee');
+        session()->flash('message', __('controllers_eventattendeescontroller.cancel_success'));
 
         return response()->json([
             'status'      => 'success',
@@ -887,7 +887,7 @@ class EventAttendeesController extends MyBaseController
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'Ticket Successfully Resent',
+            'message' => __('controllers_eventattendeescontroller.ticket_resent'),
         ]);
     }
 

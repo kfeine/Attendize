@@ -121,7 +121,7 @@ class EventCheckoutController extends Controller
             if($total_ticket_quantity < $ticket->min_per_person){
                 return response()->json([
                     'status'   => 'error',
-                    'messages' => '__ le nombre de ticket "'.$ticket->title.'" excigé par personne n\'est pas respecté',
+                    'messages' => '__ le nombre de ticket "'.$ticket->title.'" exigé par personne n\'est pas respecté',
                 ]);
             } else if($total_ticket_quantity > $max_per_person){
                 return response()->json([
@@ -741,7 +741,6 @@ class EventCheckoutController extends Controller
 
                 /* Keep track of total number of attendees */
                 $attendee_increment++;
-                
             }
 
             /*

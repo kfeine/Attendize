@@ -21,7 +21,7 @@ class InstallerController extends Controller
          * @todo Check if DB is installed etc.
          */
         if (file_exists(base_path('installed'))) {
-            abort(403, 'Unauthorized action.');
+            abort(403, __('controllers_installercontroller.unauthorized_action'));
         }
     }
 
@@ -106,14 +106,14 @@ class InstallerController extends Controller
             if ($is_db_valid === 'yes') {
                 return [
                     'status'  => 'success',
-                    'message' => 'Success, Your connection works!',
+                    'message' => __('controllers_installercontroller.connection_success'),
                     'test'    => 1,
                 ];
             }
 
             return [
                 'status'  => 'error',
-                'message' => 'Unable to connect! Please check your settings',
+                'message' => __('controllers_installercontroller.connection_fail'),
                 'test'    => 1,
             ];
         }
