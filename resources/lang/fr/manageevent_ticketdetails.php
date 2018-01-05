@@ -2,10 +2,10 @@
 
 return [
 
-    'ticket'             => 'Ticket',
-    'back_to_tickets'    => 'Revenir à la liste des tickets',
+    'ticket'             => 'Formule',
+    'back_to_tickets'    => 'Revenir à la liste des formules',
     'questions'          => 'Questions',
-    'ticket_information' => 'Informations sur le ticket',
+    'ticket_information' => 'Informations sur la formule',
     'name'               => 'Nom',
     'price'              => 'Prix',
     'quantity_available' => 'Quantité disponible',
@@ -16,7 +16,7 @@ return [
     'yes'                => 'Oui',
     'no'                 => 'Non',
     'edit_information'   => 'Modifier les informations',
-    'options'            => 'Options du ticket',
+    'options'            => 'Options de la formule',
     'actions'            => 'Actions',
     'edit'               => 'Éditer',
     'disable'            => 'Désactiver',

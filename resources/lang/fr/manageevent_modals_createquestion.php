@@ -9,7 +9,7 @@ return [
     'question_options'    => 'Choix possibles',
     'another'             => 'Ajouter un choix',
     'required_question'   => 'Rendre la question obligatoire',
-    'show_for_ticket'     => 'Montrer cette question pour le(s) ticket(s) :',
+    'show_for_ticket'     => 'Montrer cette question pour le(s) formule(s) :',
     'cancel'              => 'Annuler',
     'save'                => 'Enregistrer',
 

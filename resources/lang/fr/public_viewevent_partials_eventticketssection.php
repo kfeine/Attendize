@@ -2,7 +2,7 @@
 
 return [
 
-    'title'                => 'Tickets',
+    'title'                => 'Formules',
     'has_started'          => 'Cet événement a déjà débuté',
     'has_ended'            => 'Cet événement est déjà terminé',
     'free'                 => 'Gratuit',
@@ -14,7 +14,7 @@ return [
     'discount_description' => 'facultatif',
     'offline'              => 'Paiement possible par chèque ou en espèce',
     'register'             => 'Commander',
-    'unavailable'          => 'Les tickets sont actuellement indisponibles',
+    'unavailable'          => 'Les formules sont actuellement indisponibles',
     'attendee'             => 'Participant',
     'gender'               => 'Civilité',
     'gender_male'          => 'M.',

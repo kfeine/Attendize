@@ -2,8 +2,8 @@
 
 return [
 
-    'tickets' => 'Tickets',
+    'tickets'     => 'Formules',
     'information' => 'Informations',
-    'no_panel' => 'Aucun :title',
+    'no_panel'    => 'Aucun :title',
 
 ];

@@ -5,7 +5,7 @@ return [
     'social_share_text_max'            => 'Le texte doit être composé de moins de 3000 caractères',
     'social_settings_update_success'   => 'Les paramètres des réseaux sociaux ont été mis à jour',
     'ticket_bg_color_required'         => 'Merci de renseigner une couleur de fond',
-    'ticket_settings_update'           => 'Les paramères des tickets ont été mis à jour',
+    'ticket_settings_update'           => 'Les paramètres des formules ont été mis à jour',
     'organiser_fee_percentage_numeric' => 'Merci d\'entrer une valeur entre 0 et 100',
     'organiser_fee_fixed_numeric'      => 'Veuillez vérifier le format (il doit être de la forme : 0.0)',
     'organiser_fee_fixed_between'      => 'Merci d\'entrer une valeur entre 0 et 100',

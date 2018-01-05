@@ -2,18 +2,18 @@
 
 return [
 
-    'title'         => 'Tickets de l\'événement',
+    'title'         => 'Formules de l\'événement',
     'wrong'         => 'Une erreur s\'est produite, merci de réessayer ou de contacter les administrateurs du site.',
-    'create_ticket' => 'Créer un ticket',
+    'create_ticket' => 'Créer une formule',
     'questions'     => 'Questions',
     'coupon'        => 'Codes de réduction',
     'search'        => 'Rechercher…',
-    'tickets'       => ':number tickets',
+    'tickets'       => ':number formules',
     'free'          => 'Gratuit',
     'sold'          => 'Vendu',
     'remaining'     => 'Restant',
     'revenue'       => 'Recettes',
-    'paused'        => 'La vente de tickets est suspendue',
+    'paused'        => 'La vente de formules est suspendue',
     'resume'        => 'Reprendre',
     'on_sale'       => 'En vente',
     'pause'         => 'Suspendre',
