@@ -74,6 +74,24 @@
                 </div>
             </div>
             <input id="add-attendee-button" class="btn btn-success" onClick="addAttendee()" value="@lang('public_viewevent_partials_eventticketssection.add_attendee')">
+
+            <div class="row" id="discount">
+                <div class="col-md-6">
+                    <div class="col-md-6">
+                        <span class="ticket-title semibold" property="name">
+                            @lang('public_viewevent_partials_eventticketssection.discount')
+                        </span>
+                        <p class="ticket-descripton mb0 text-muted" property="description">
+                            @lang('public_viewevent_partials_eventticketssection.discount_description')
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        {!! Form::hidden('discount-code', '') !!}
+                        <input type="text" name="discount-code" style="text-align: center" class="form-control">
+                    </div>
+                </div>
+            </div>
+
             {!! Form::submit(__('public_viewevent_partials_eventticketssection.register'), ['class' => 'btn btn-lg btn-primary pull-right', 'id' => 'checkout-button']) !!}
             {!! Form::hidden('is_embedded', $is_embedded) !!}
             {!! Form::close() !!}
