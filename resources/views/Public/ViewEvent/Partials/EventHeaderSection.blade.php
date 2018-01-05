@@ -9,13 +9,6 @@
 @endif
 <section id="intro" class="content">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div onclick="window.location='{{$event->event_url}}#organiser'" class="event_organizer">
-                    <b>{{$event->organiser->name}}</b> @lang('public_viewevent_partials_eventheadersection.presents')
-                </div>
-            </div>
-        </div>
         <div class="col-md-9">
             <a href="{{route('showEventPagePreview', ['event_id'=>$event->id])}}"><h1 property="name">{{$event->title}}</h1></a>
             <div class="event_venue">

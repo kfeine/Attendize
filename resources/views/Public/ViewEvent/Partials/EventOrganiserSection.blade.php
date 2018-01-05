@@ -3,32 +3,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="event_organiser_details" property="organizer" typeof="Organization">
-                <div class="logo">
-                    <img alt="{{$event->organiser->name}}" src="{{asset($event->organiser->full_logo_path)}}" property="logo">
-                </div>
-                    @if($event->organiser->enable_organiser_page)
-                    <a href="{{route('showOrganiserHome', [$event->organiser->id, Str::slug($event->organiser->name)])}}" title="Organiser Page">
-                        {{$event->organiser->name}}
-                    </a>
-                    @else
-                        {{$event->organiser->name}}
-                    @endif
-                </h3>
-
-                <p property="description">
-                    {!! nl2br($event->organiser->about)!!}
-                </p>
                 <p>
-                    @if($event->organiser->facebook)
-                        <a property="sameAs" href="https://fb.com/{{$event->organiser->facebook}}" class="btn btn-facebook">
-                            <i class="ico-facebook"></i>&nbsp; Facebook
-                        </a>
-                    @endif
-                        @if($event->organiser->twitter)
-                            <a property="sameAs" href="https://twitter.com/{{$event->organiser->twitter}}" class="btn btn-twitter">
-                                <i class="ico-twitter"></i>&nbsp; Twitter
-                            </a>
-                        @endif
                     <button onclick="$(function(){ $('.contact_form').slideToggle(); });" type="button" class="btn btn-primary">
                         <i class="ico-envelop"></i>&nbsp; @lang('public_viewevent_partials_eventorganisersection.contact')
                     </button>
