@@ -14,7 +14,7 @@
 @stop
 
 @section('page_title')
-    <i class='ico-clipboard4 mr5'></i>
+    <i class='ico-gift mr5'></i>
     @lang('manageevent_discounts.title')
 @stop
 
