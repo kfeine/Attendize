@@ -55,7 +55,7 @@ class QuestionTypesSeeder extends Seeder
             [
                 'id' => 6,
                 'alias' => 'radio',
-                'name' => 'Radio input',
+                'name' => 'Case à choisir (choix unique)',
                 'has_options' => 1,
                 'allow_multiple' => 0,
             ],
