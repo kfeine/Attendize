@@ -53,7 +53,7 @@
                                            <span id="add-ticket-options-details" class="btn btn-success btn-xs"
                                                  onclick="addTicketOptionsDetails();">
                                                <i class="ico-plus"></i>
-                                               @lang('manageevent_modals_creaticketoption.another')
+                                               @lang('manageevent_modals_createticketoption.another')
                                            </span>
                             </td>
                         </tr>
