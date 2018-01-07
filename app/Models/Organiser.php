@@ -24,12 +24,14 @@ class Organiser extends MyBaseModel
      *
      * @var array $messages
      */
-    protected $messages = [
-        'name.required'        => 'You must at least give a name for the event organiser.',
-        'organiser_logo.max'   => 'Please upload an image smaller than 10Mb',
-        'organiser_logo.size'  => 'Please upload an image smaller than 10Mb',
-        'organiser_logo.mimes' => 'Please select a valid image type (jpeg, jpg, png)',
-    ];
+    protected function messages() {
+        return [
+            'name.required'        => __('models_organiser.name_required'),
+            'organiser_logo.max'   => __('models_organiser.organiser_logo_max'),
+            'organiser_logo.size'  => __('models_organiser.organiser_logo_size'),
+            'organiser_logo.mimes' => __('models_organiser.organiser_logo_mimes'),
+        ];
+    }
 
     /**
      * The account associated with the organiser
