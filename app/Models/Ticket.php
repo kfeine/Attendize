@@ -231,7 +231,10 @@ class Ticket extends MyBaseModel
 
     public function getTitleWithPriceAttribute()
     {
-        return $this->title . ' (' . money($this->price, $this->event->currency) .')';
+        if ($this->price == 0) {
+            return $this->title . ' (' . __('models_ticket.price_depends') .')';
+        } else {
+            return $this->title . ' (' . money($this->price, $this->event->currency) .')';
+        }
     }
-
 }
