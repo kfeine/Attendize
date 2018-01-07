@@ -25,11 +25,13 @@ class Ticket extends MyBaseModel
      *
      * @var array $messages
      */
-    public $messages = [
-        'price.numeric'              => 'The price must be a valid number (e.g 12.50)',
-        'title.required'             => 'You must at least give a title for your ticket. (e.g Early Bird)',
-        'quantity_available.integer' => 'Please ensure the quantity available is a number.',
-    ];
+    public function messages() {
+        return [
+            'price.numeric'              => __('models_ticket.price_numeric'),
+            'title.required'             => __('models_ticket.title_required'),
+            'quantity_available.integer' => __('models_ticket.quantity_available_integer'),
+        ];
+    }
     protected $perPage = 10;
 
     /**
@@ -231,7 +233,10 @@ class Ticket extends MyBaseModel
 
     public function getTitleWithPriceAttribute()
     {
-        return $this->title . ' (' . money($this->price, $this->event->currency) .')';
+        if ($this->price == 0) {
+            return $this->title . ' (' . __('models_ticket.price_depends') .')';
+        } else {
+            return $this->title . ' (' . money($this->price, $this->event->currency) .')';
+        }
     }
-
 }

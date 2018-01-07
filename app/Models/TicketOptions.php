@@ -55,9 +55,11 @@ class TicketOptions extends MyBaseModel
      *
      * @var array $messages
      */
-    public $messages = [
-        'title.required'             => 'You must at least give a title for your block option. (e.g Early Bird)',
-    ];
+    public function messages() {
+        return [
+            'title.required' => __('models_ticketoptions.title_required'),
+        ];
+    }
 
     /**
      * Scope a query to only include active options.

@@ -59,7 +59,7 @@
                     </div>
                     <div class="tab-pane" id="sent_messages">
 
-                        @if(count($event->messages) > 0)
+                        @if(count($event->validation_messages()) > 0)
                             <div class="table-layout">
                                 <!-- content -->
                                 <div class="col-lg-12 valign-top panel panel-default">
@@ -80,7 +80,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($event->messages as $message)
+                                            @foreach($event->validation_messages() as $message)
                                                 <tr>
                                                     <td class="meta">
                                                         <p class="date">{{$message->sent_at->format('M j, Y, g:i a')}}</p>

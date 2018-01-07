@@ -32,14 +32,16 @@ class Event extends MyBaseModel
      *
      * @var array $messages
      */
-    protected $messages = [
-        'title.required'                       => 'You must at least give a title for your event.',
-        'organiser_name.required_without'      => 'Please create an organiser or select an existing organiser.',
-        'event_image.mimes'                    => 'Please ensure you are uploading an image (JPG, PNG, JPEG)',
-        'event_image.max'                      => 'Pleae ensure the image is not larger then 3MB',
-        'location_venue_name.required_without' => 'Please enter a venue for your event',
-        'venue_name_full.required_without'     => 'Please enter a venue for your event',
-    ];
+    protected function validation_messages() {
+        return [
+            'title.required'                       => __('models_event.title_required'),
+            'organiser_name.required_without'      => __('models_event.organiser_name_required_without'),
+            'event_image.mimes'                    => __('models_event.event_image_mimes'),
+            'event_image.max'                      => __('models_event.event_image_max'),
+            'location_venue_name.required_without' => __('models_event.location_venue_name_required_without'),
+            'venue_name_full.required_without'     => __('models_event.venue_name_full_required_without'),
+        ];
+    }
 
     /**
      * The questions associated with the event.

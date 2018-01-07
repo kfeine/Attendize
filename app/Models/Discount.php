@@ -28,12 +28,14 @@ class Discount extends MyBaseModel
      *
      * @var array $messages
      */
-    public $messages = [
-        'price.numeric'              => 'The price must be a valid negative number (e.g -12.50)',
-        'title.required'             => 'You must at least give a title for your ticket. (e.g Special discount)',
-        'code.alpha_num'             => 'The code should be 8 alpha numerical characters (e.g ABCD1234).',
-        'quantity_available.integer' => 'Please ensure the quantity available is a number.',
-    ];
+    public function messages() {
+        return [
+            'price.numeric'              => __('models_discount.price_numeric'),
+            'title.required'             => __('models_discount.title_required'),
+            'code.alpha_num'             => __('models_discount.code_alpha_num'),
+            'quantity_available.integer' => __('models_discount.quantity_available_integer'),
+        ];
+    }
 
     /**
      * The event associated with the discount.

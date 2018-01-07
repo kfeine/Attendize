@@ -34,10 +34,12 @@ class TicketOptionsDetails extends MyBaseModel
      *
      * @var array $messages
      */
-    public $messages = [
-        'price.numeric'              => 'The price must be a valid number (e.g 12.50)',
-        'title.required'             => 'You must at least give a title for your option. (e.g Early Bird)',
-    ];
+    public function messages() {
+       return [
+            'price.numeric'  => __('models_ticketoptionsdetails.price_numeric'),
+            'title.required' => __('models_ticketoptionsdetails.title_required'),
+        ];
+    }
 
     /**
      * The Option associated with the option details.

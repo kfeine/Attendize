@@ -31,15 +31,17 @@ class Order extends MyBaseModel
      *
      * @var array $messages
      */
-    public $messages = [
-        'order_first_name.required' => 'Please enter a valid first name',
-        'order_last_name.required'  => 'Please enter a valid last name',
-        'order_email.email'         => 'Please enter a valid email',
-        'order_phone.required'         => 'Please enter a phone number',
-        'order_address_line_1.required' => 'Please enter a valid address line 1',
-        'order_city.required' => 'Please enter a city',
-        'order_postal_code.required' => 'Please enter a postal code',
-    ];
+    public function messages() {
+        return [
+            'order_first_name.required'     => __('models_order.order_first_name_required'),
+            'order_last_name.required'      => __('models_order.order_last_name_required'),
+            'order_email.email'             => __('models_order.order_email_email'),
+            'order_phone.required'          => __('models_order.order_phone_required'),
+            'order_address_line_1.required' => __('models_order.order_address_line_1_required'),
+            'order_city.required'           => __('models_order.order_city_required'),
+            'order_postal_code.required'    => __('models_order.order_postal_code_required'),
+        ];
+    }
 
     /**
      * The items associated with the order.
