@@ -26,7 +26,7 @@
                     <select id="ticket-options-type" class="form-control" name="ticket_options_type_id"
                             onchange="changeTicketOptionsType(this);">
                         @foreach ($ticket_options_types as $option_type)
-                            <option data-has-options="{{$option_type->has_options}}" value="{{$option_type->id}}" {{$option->ticket_options_type == $option_type ? "selected" : ""}}>
+                            <option data-has-options="{{$option_type->has_options}}" value="{{$option_type->id}}" {{$option->ticket_options_type_id == $option_type->id ? "selected" : ""}}>
                                 {{$option_type->name}}
                             </option>
                         @endforeach
