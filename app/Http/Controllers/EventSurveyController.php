@@ -205,7 +205,7 @@ class EventSurveyController extends MyBaseController
 
         if ($question->delete()) {
 
-            session()->flash('message', __('controllers_eventsurveycontroller.delete_success');
+            session()->flash('message', __('controllers_eventsurveycontroller.delete_success'));
 
             return response()->json([
                 'status'      => 'success',
