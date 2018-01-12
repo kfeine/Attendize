@@ -79,13 +79,13 @@
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="form-group">
-                            {!! Form::label("order_first_name", __('public_viewevent_partials_eventcreateordersection.first_name')) !!}
+                            {!! Form::label("order_first_name", __('public_viewevent_partials_eventcreateordersection.first_name'), ['class' => "required"]) !!}
                             {!! Form::text("order_first_name", null, ['required' => 'required', 'class' => 'required form-control']) !!}
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group">
-                            {!! Form::label("order_last_name", __('public_viewevent_partials_eventcreateordersection.last_name')) !!}
+                            {!! Form::label("order_last_name", __('public_viewevent_partials_eventcreateordersection.last_name'), ['class' => "required"]) !!}
                             {!! Form::text("order_last_name", null, ['required' => 'required', 'class' => 'required form-control']) !!}
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            {!! Form::label("order_email", __('public_viewevent_partials_eventcreateordersection.email')) !!}
+                            {!! Form::label("order_email", __('public_viewevent_partials_eventcreateordersection.email'), ['class' => "required"]) !!}
                             {!! Form::text("order_email", null, ['required' => 'required', 'class' => 'required form-control']) !!}
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            {!! Form::label("order_phone", __('public_viewevent_partials_eventcreateordersection.phone')) !!}
+                            {!! Form::label("order_phone", __('public_viewevent_partials_eventcreateordersection.phone'), ['class' => "required"]) !!}
                             {!! Form::text("order_phone", null, ['required' => 'required', 'class' => 'required form-control']) !!}
                         </div>
                     </div>
@@ -111,7 +111,7 @@
 
                 <div class="address-manual">
                     <div class="form-group">
-                        {!! Form::label('order_address_line_1', __('public_viewevent_partials_eventcreateordersection.address1')) !!}
+                        {!! Form::label('order_address_line_1', __('public_viewevent_partials_eventcreateordersection.address1'), ['class' => "required"]) !!}
                         {!!  Form::text('order_address_line_1', null, [
                                     'class'=>'form-control required',
                                     'required' => 'required', 
@@ -119,7 +119,7 @@
                         ])  !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label('order_address_line_2', __('public_viewevent_partials_eventcreateordersection.address2'), array('class'=>'control-label')) !!}
+                        {!! Form::label('order_address_line_2', __('public_viewevent_partials_eventcreateordersection.address2'), array('class'=>'')) !!}
                         {!!  Form::text('order_address_line_2', null, [
                                     'class'=>'form-control',
                                     'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_address2')
@@ -129,7 +129,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('order_city', __('public_viewevent_partials_eventcreateordersection.city')) !!}
+                                {!! Form::label('order_city', __('public_viewevent_partials_eventcreateordersection.city'), ['class' => "required"]) !!}
                                 {!!  Form::text('order_city', null, [
                                             'class'=>'form-control required',
                                             'required' => 'required', 
@@ -139,7 +139,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('order_postal_code', __('public_viewevent_partials_eventcreateordersection.postcode')) !!}
+                                {!! Form::label('order_postal_code', __('public_viewevent_partials_eventcreateordersection.postcode'), ['class' => "required"]) !!}
                                 {!!  Form::text('order_postal_code', null, [
                                             'class'=>'form-control required',
                                             'required' => 'required', 
@@ -175,7 +175,7 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    {!! Form::label("ticket_holder_gender[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.gender')) !!}
+                                                    {!! Form::label("ticket_holder_gender[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.gender'), ['class' => "required"]) !!}
                                                     {!! Form::select(
                                                         "ticket_holder_gender[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]",
                                                         array('M' => __('public_viewevent_partials_eventcreateordersection.gender_male'), 'W' => __('public_viewevent_partials_eventcreateordersection.gender_female')),
@@ -186,13 +186,13 @@
                                             </div>
                                             <div class="col-md-5">
                                                 <div class="form-group">
-                                                    {!! Form::label("ticket_holder_first_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.first_name')) !!}
+                                                    {!! Form::label("ticket_holder_first_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.first_name'), ['class' => "required"]) !!}
                                                     {!! Form::text("ticket_holder_first_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['first_name'], ['required' => 'required', 'class' => "required ticket_holder_first_name.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_first_name form-control"]) !!}
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    {!! Form::label("ticket_holder_last_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.last_name')) !!}
+                                                    {!! Form::label("ticket_holder_last_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.last_name'), ['class' => "required"]) !!}
                                                     {!! Form::text("ticket_holder_last_name[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['last_name'], ['required' => 'required', 'class' => "required ticket_holder_last_name.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_last_name form-control"]) !!}
                                                 </div>
                                             </div>
@@ -201,7 +201,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     {!! Form::label("ticket_holder_email[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.email')) !!}
-                                                    {!! Form::text("ticket_holder_email[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['email'], ['required' => 'required', 'class' => "required ticket_holder_email.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_email form-control"]) !!}
+                                                    {!! Form::text("ticket_holder_email[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['email'], [ 'class' => "ticket_holder_email.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_email form-control"]) !!}
                                                 </div>
                                             </div>
                                             @include('Public.ViewEvent.Partials.AttendeeQuestions', ['ticket' => $ticket['ticket'],'attendee_id' => $ticket['attendee_id'],'attendee_number' => $total_attendee_increment++])
