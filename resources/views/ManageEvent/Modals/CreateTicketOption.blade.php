@@ -18,6 +18,15 @@
                                 )) !!}
                 </div>
                 <div class="form-group">
+                  {!! Form::label('description', __('manageevent_modals_createticketoption.description'), array('class'=>'control-label')) !!}
+                  {!! Form::textarea('description', Input::old('description'),
+                     array(
+                     'class'=>'form-control',
+                     'placeholder'=>__('manageevent_modals_createticketoption.description')
+                     ))
+                  !!}
+              </div>
+                <div class="form-group">
                     <label for="ticket-options-type">
                         @lang('manageevent_modals_createticketoption.option_type')
                     </label>

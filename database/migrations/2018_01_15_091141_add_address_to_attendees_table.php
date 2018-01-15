@@ -20,6 +20,10 @@ class AddAddressToAttendeesTable extends Migration
             $table->string('postal_code');
             $table->string('phone');
         });
+
+      Schema::table('ticket_options', function (Blueprint $table) {
+            $table->text('description');
+        });
     }
 
     /**
@@ -35,6 +39,10 @@ class AddAddressToAttendeesTable extends Migration
             $table->dropColumn('city');
             $table->dropColumn('phone');
             $table->dropColumn('postal_code');
+        });
+
+        Schema::table('ticket_options', function (Blueprint $table) {
+            $table->dropColumn('description');
         });
     }
 }

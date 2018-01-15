@@ -69,6 +69,7 @@ class EventTicketOptionsController extends MyBaseController
         }
 
         $optionBlock->title = $request->get('title');
+        $optionBlock->description = $request->get('description');
         $optionBlock->is_required = ($request->get('is_required') == 'yes');
         $optionBlock->ticket_options_type_id = $ticket_options_type->id;
         $ticket->options()->save($optionBlock);
@@ -156,6 +157,7 @@ class EventTicketOptionsController extends MyBaseController
         }
 
         $optionBlock->title = $request->get('title');
+        $optionBlock->description = $request->get('description');
         $optionBlock->is_required = ($request->get('is_required') == 'yes');
         $optionBlock->ticket_options_type_id = $ticket_options_type->id;
         $optionBlock->save();

@@ -13,5 +13,6 @@ return [
     'options_details' => 'Choix possible',
     'another'       => 'Ajouter un choix',
     'required_option'       => 'Obliger au moins la sélection d\'un choix',
+    'description'   => 'Description', 
 
 ];

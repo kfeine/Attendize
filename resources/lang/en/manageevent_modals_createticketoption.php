@@ -13,5 +13,6 @@ return [
     'options_details' => 'Possible Choice',
     'another'       => 'Add choice',
     'required_option'       => 'Required option',
+    'description'   => 'Description', 
 
 ];
