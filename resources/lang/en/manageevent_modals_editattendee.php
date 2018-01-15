@@ -12,4 +12,9 @@ return [
     'email'       => 'Email',
     'cancel'      => 'Cancel',
     'edit_submit' => 'Edit Attendee',
+    'phone'         => 'Phone number', 
+    'address1'      => 'Address Line 1', 
+    'address2'      => 'Address Line 2', 
+    'city'          => 'City', 
+    'postcode'      => 'Post Code',
 ];

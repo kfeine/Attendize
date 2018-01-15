@@ -6,6 +6,7 @@ return [
     'attendees_for_event' => 'Participants à l\'événement event:',
     'name'                => 'Nom',
     'email'               => 'Email',
+    'city'                => 'Ville',
     'ticket'              => 'Formule',
     'ref'                 => 'Référence',
     'date'                => 'Date d\'achat',

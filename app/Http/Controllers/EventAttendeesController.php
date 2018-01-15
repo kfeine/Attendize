@@ -582,6 +582,11 @@ class EventAttendeesController extends MyBaseController
               'attendees.first_name',
               'attendees.last_name',
               'attendees.email',
+              'attendees.phone',
+              'attendees.address1',
+              'attendees.address2',
+              'attendees.postal_code',
+              'attendees.city',
               'orders.order_reference',
               'orders.created_at',
               DB::raw("(CASE WHEN attendees.has_arrived THEN 'YES' ELSE 'NO' END) AS has_arrived"),
@@ -595,6 +600,11 @@ class EventAttendeesController extends MyBaseController
             'First Name',
             'Last Name',
             'Email',
+            'Phone',
+            'Address 1',
+            'Address 2',
+            'Postal Code',
+            'City',
             'Order Reference',
             'Purchase Date',
             'Has Arrived',
@@ -683,6 +693,11 @@ class EventAttendeesController extends MyBaseController
             'first_name' => 'required',
             'ticket_id'  => 'required|exists:tickets,id,account_id,' . Auth::user()->account_id,
             'email'      => 'required|email',
+            'last_name' => 'required',
+            'phone' => 'required',
+            'address1' => 'required',
+            'city' => 'required',
+            'postal_code' => 'required',
         ];
 
         $messages = [
@@ -703,6 +718,11 @@ class EventAttendeesController extends MyBaseController
         $attendee->first_name   = mb_convert_case(trim($request->get('first_name')), MB_CASE_TITLE, 'UTF-8');
         $attendee->last_name    = mb_convert_case(trim($request->get('last_name')), MB_CASE_UPPER, 'UTF-8');
         $attendee->email        = $request->get('email');
+        $attendee->phone        = $request->get('phone');
+        $attendee->address1     = $request->get('address1');
+        $attendee->address2     = $request->get('address2');
+        $attendee->city         = $request->get('city');
+        $attendee->postal_code  = $request->get('postal_code');
         $attendee->ticket_id    = $request->get('ticket_id');
         $attendee->update();
 

@@ -193,12 +193,20 @@ class EventCheckoutController extends Controller
             $validation_rules['ticket_holder_last_name.' . $attendee_id . '.' . $ticket_id] = ['required'];
             $validation_rules['ticket_holder_gender.' . $attendee_id . '.' . $ticket_id] = ['required'];
             $validation_rules['ticket_holder_email.' . $attendee_id . '.' . $ticket_id] = ['email'];
+            $validation_rules['ticket_holder_phone.' . $attendee_id . '.' . $ticket_id] = ['required'];
+            $validation_rules['ticket_holder_address_line_1.' . $attendee_id . '.' . $ticket_id] = ['required'];
+            $validation_rules['ticket_holder_city.' . $attendee_id . '.' . $ticket_id] = ['required'];
+            $validation_rules['ticket_holder_postal_code.' . $attendee_id . '.' . $ticket_id] = ['required'];
 
             $validation_messages['ticket_holder_first_name.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_last_name.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_gender.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.gender', ['person' => ($attendee_id + 1)]);
             //$validation_messages['ticket_holder_email.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.email_required', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_email.' . $attendee_id . '.' . $ticket_id . '.email'] = __('controllers_eventcheckoutcontroller.email_invalid', ['person' => ($attendee_id + 1)]);
+            $validation_messages['ticket_holder_phone.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.phone_required', ['person' => ($attendee_id + 1)]);
+            $validation_messages['ticket_holder_address_line_1.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.address_line_1_required', ['person' => ($attendee_id + 1)]);
+            $validation_messages['ticket_holder_city.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.city_required', ['person' => ($attendee_id + 1)]);
+            $validation_messages['ticket_holder_postal_code.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.postal_code_required', ['person' => ($attendee_id + 1)]);
 
             /*
              * Validation rules for custom questions
@@ -691,6 +699,11 @@ class EventCheckoutController extends Controller
                 $attendee->first_name = mb_convert_case(trim($request_data["ticket_holder_first_name"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']]), MB_CASE_TITLE, 'UTF-8');
                 $attendee->last_name = mb_convert_case(trim($request_data["ticket_holder_last_name"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']]), MB_CASE_UPPER, 'UTF-8');
                 $attendee->email = $request_data["ticket_holder_email"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
+                $attendee->phone                 = $request_data['ticket_holder_phone'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
+                $attendee->address1              = $request_data['ticket_holder_address_line_1'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
+                $attendee->address2              = $request_data['ticket_holder_address_line_2'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
+                $attendee->city                  = $request_data['ticket_holder_city'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
+                $attendee->postal_code           = $request_data['ticket_holder_postal_code'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
                 $attendee->event_id = $event_id;
                 $attendee->order_id = $order->id;
                 $attendee->ticket_id = $attendee_details['ticket']['id'];

@@ -27,6 +27,7 @@
                 <tr>
                     <th>@lang('manageevent_printattendees.name')</th>
                     <th>@lang('manageevent_printattendees.email')</th>
+                    <th>@lang('manageevent_printattendees.city')</th>
                     <th>@lang('manageevent_printattendees.ticket')</th>
                     <th>@lang('manageevent_printattendees.ref')</th>
                     <th>@lang('manageevent_printattendees.date')</th>
@@ -39,6 +40,7 @@
                 <tr>
                     <td>{{{$attendee->full_name}}}</td>
                     <td>{{{$attendee->email}}}</td>
+                    <td>{{{$attendee->postal_code}}} {{{$attendee->city}}}</td>
                     <td>{{{$attendee->ticket->title}}}</td>
                     <td>{{{$attendee->getReferenceAttribute()}}}</td>
                     <td>{{$attendee->created_at->format('d/m/Y H:i')}}</td>

@@ -12,5 +12,9 @@ return [
     'email'         => 'Email',
     'cancel'        => 'Annuler',
     'edit_submit'   => 'Enregistrer',
-
+    'phone'         => 'Téléphone', 
+    'address1'      => 'Addresse (1)', 
+    'address2'      => 'Addresse (2)', 
+    'city'          => 'Ville', 
+    'postcode'      => 'Code postal',
 ];
