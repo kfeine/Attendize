@@ -48,6 +48,7 @@ class AddSupportForOfflinePayments extends Migration
             $table->dropColumn('offline_payment_instructions');
         });
 
+        DB::table('orders')->where('order_status_id', 5)->update(['order_status_id' => 1]);
         DB::table('order_statuses')->where('name', 'Awaiting Payment')->delete();
 
     }
