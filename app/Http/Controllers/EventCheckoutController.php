@@ -92,7 +92,7 @@ class EventCheckoutController extends Controller
         $organiser_booking_fee               = 0;
         $quantity_available_validation_rules = [];
 
-        $tickets_quantity_verification = [];
+        //$tickets_quantity_verification = [];
 
         foreach ($attendees_ids as $attendee_id) {
             //on récupère le ticket choisi pour l'utilisateur
@@ -103,12 +103,13 @@ class EventCheckoutController extends Controller
             }
 
             // Debut de la vérification du nombre de ticket pris par rapport au nombre de ticket disponible...
-            if(array_key_exists($ticket_id, $tickets_quantity_verification)){
-                $tickets_quantity_verification[$ticket_id] = $tickets_quantity_verification[$ticket_id] + 1;
-            } else {
-                $tickets_quantity_verification[$ticket_id] = 1;
-            }
-            $current_ticket_quantity = $tickets_quantity_verification[$ticket_id];
+            //if(array_key_exists($ticket_id, $tickets_quantity_verification)){
+            //    $tickets_quantity_verification[$ticket_id] = $tickets_quantity_verification[$ticket_id] + 1;
+            //} else {
+            //    $tickets_quantity_verification[$ticket_id] = 1;
+            //}
+            //$current_ticket_quantity = $tickets_quantity_verification[$ticket_id];
+            $current_ticket_quantity = 1;
 
             $total_ticket_quantity = $total_ticket_quantity + 1;
 
@@ -719,6 +720,8 @@ class EventCheckoutController extends Controller
                     $orderItemOption->order_item_id = $orderItem->id;
                     $orderItemOption->price = $option['price'];
                     $orderItemOption->save();
+
+                    $ticket->increment('sales_volume', $option['price']);
                 }
 
 

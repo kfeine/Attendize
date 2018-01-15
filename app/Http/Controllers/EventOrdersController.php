@@ -296,7 +296,14 @@ class EventOrdersController extends MyBaseController
 
                 if(!$is_free){
                     $attendee->ticket->decrement('sales_volume', $attendee->ticket->price);
-                    $order->event->decrement('sales_volume', $attendee->ticket->price); $order->decrement('amount', $attendee->ticket->price);
+                    $order->event->decrement('sales_volume', $attendee->ticket->price); 
+                    
+                    $order->decrement('amount', $attendee->ticket->price);
+                    foreach($attendee->options as $option){
+                        $attendee->ticket->decrement('sales_volume', $option->price);
+                        $order->event->decrement('sales_volume', $option->price); 
+                        $order->decrement('amount', $option->price);
+                    }
                 }
 
                 $eventStats = EventStats::where('event_id', $attendee->event_id)->where('date', $attendee->created_at->format('Y-m-d'))->first();
@@ -310,6 +317,19 @@ class EventOrdersController extends MyBaseController
 
                 $attendee->save();
             }
+
+            $all_attendees_canceled = 1;
+            foreach($order->attendees as $attendee){
+                if(!$attendee->is_cancelled){
+                    $all_attendees_canceled = 0; 
+                } 
+            }
+
+            if($all_attendees_canceled == 1){
+                $order->order_status_id = config('attendize.order_cancelled');
+                $order->save();
+            }
+
         }
 
         \Session::flash('message',

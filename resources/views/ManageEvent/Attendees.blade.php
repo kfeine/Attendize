@@ -119,7 +119,7 @@
                                    href="javascript:void(0);"
                                    data-href="{{route('showEditAttendee', ['event_id'=>$event->id, 'attendee_id'=>$attendee->id])}}"
                                    class="loadModal">
-                                    {{$attendee->reference_index}}
+                                    {{$attendee->id}}
                                 </a>
                             </td>
                             <td class="text-center">
