@@ -21,7 +21,6 @@
                             <td>
                                 <table>
                                     <tr>
-                                        <td class="pl0"><b>Participant {{{$ticket['attendee_id']}}}</b></br>{{{$ticket['ticket']['title']}}}</td>
                                         <td style="text-align: right;">
                                             @if((int)ceil($ticket['full_price']) === 0)
                                             @lang('public_viewevent_partials_eventcreateordersection.free')
@@ -202,6 +201,49 @@
                                                 <div class="form-group">
                                                     {!! Form::label("ticket_holder_email[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.email')) !!}
                                                     {!! Form::text("ticket_holder_email[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['email'], [ 'class' => "ticket_holder_email.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_email form-control"]) !!}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    {!! Form::label("ticket_holder_phone[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.phone'), ['class' => 'required']) !!}
+                                                    {!! Form::text("ticket_holder_phone[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => "required form-control ticket_holder_phone.{$ticket['attendee_id']}.{$ticket['ticket']['id']}"]) !!}
+                                                </div>
+
+                                                <div class="form-group">
+                                                    {!! Form::label("ticket_holder_address_line_1[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.address1'), ['class' => "required"]) !!}
+                                                    {!!  Form::text("ticket_holder_address_line_1[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", null, [
+                                                                'class'=>"form-control required ticket_holder_address_line_1.{$ticket['attendee_id']}.{$ticket['ticket']['id']}",
+                                                                'required' => 'required', 
+                                                                'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_address1')
+                                                    ])  !!}
+                                                </div>
+                                                <div class="form-group">
+                                                    {!! Form::label("ticket_holder_address_line_2[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.address2'), array('class'=>'')) !!}
+                                                    {!!  Form::text("ticket_holder_address_line_2[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", null, [
+                                                                'class'=>"form-control ticket_holder_address_line_2.{$ticket['attendee_id']}.{$ticket['ticket']['id']}",
+                                                                'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_address2')
+                                                    ])  !!}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    {!! Form::label("ticket_holder_city[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.city'), ['class' => "required"]) !!}
+                                                    {!!  Form::text("ticket_holder_city[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", null, [
+                                                                'class'=>"form-control required ticket_holder_city.{$ticket['attendee_id']}.{$ticket['ticket']['id']}",
+                                                                'required' => 'required', 
+                                                                'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_city')
+                                                    ])  !!}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    {!! Form::label("ticket_holder_postal_code[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.postcode'), ['class' => "required"]) !!}
+                                                    {!!  Form::text("ticket_holder_postal_code[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", null, [
+                                                                'class'=>"form-control required ticket_holder_postal_code.{$ticket['attendee_id']}.{$ticket['ticket']['id']}",
+                                                                'required' => 'required', 
+                                                                'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_postcode')
+                                                    ])  !!}
                                                 </div>
                                             </div>
                                             @include('Public.ViewEvent.Partials.AttendeeQuestions', ['ticket' => $ticket['ticket'],'attendee_id' => $ticket['attendee_id'],'attendee_number' => $total_attendee_increment++])

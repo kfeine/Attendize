@@ -3,6 +3,10 @@
         @foreach ($ticket->options_enabled as $option)
             <div class="form-group">
                 {!! Form::label("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id", $option->title, ['class' => $option->is_required ? 'required' : '']) !!}
+                @if($option->description)
+                <br/>
+                <small class="form-text text-muted">{!!$option->description!!}</small>
+                @endif
                 @if($option->ticket_options_type_id == config('attendize.ticket_options_dropdown_single'))
                     {!! Form::select("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id", array('' => __('public_viewevent_partials_ticketoptions.select_one_option')) + $option->options->pluck('title_with_price', 'id')->toArray(), null, [$option->is_required ? 'required' : '', 'class' =>  "required form-control"]) !!}
                 @elseif($option->ticket_options_type_id == config('attendize.ticket_options_dropdown_multi'))

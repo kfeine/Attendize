@@ -32,6 +32,7 @@ class CreateBelongstoAttendeeTicketOptionsDetails extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Schema::create('attendee_ticket_options', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('attendee_id');
@@ -39,5 +40,6 @@ class CreateBelongstoAttendeeTicketOptionsDetails extends Migration
             $table->timestamps();
         });
         Schema::dropIfExists('attendee_ticket_options_details');
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

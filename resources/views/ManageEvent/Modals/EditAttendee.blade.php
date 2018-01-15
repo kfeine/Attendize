@@ -41,6 +41,7 @@
                                         ))  !!}
                                 </div>
                             </div>
+
                             <div class="col-md-5">
                                 <div class="form-group">
                                     {!! Form::label('last_name', __('manageevent_modals_editattendee.lastname'), array('class'=>'control-label required')) !!}
@@ -53,10 +54,60 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     {!! Form::label('email', __('manageevent_modals_editattendee.email'), array('class'=>'control-label required')) !!}
                                     {!! Form::text('email', Input::old('email'),
+                                            array(
+                                            'class'=>'form-control'
+                                            ))  !!}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {!! Form::label('phone', __('manageevent_modals_editattendee.phone'), array('class'=>'control-label required')) !!}
+
+                                    {!! Form::text('phone', Input::old('phone'),
+                                            array(
+                                            'class'=>'form-control'
+                                            ))  !!}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('address1', __('manageevent_modals_editattendee.address1'), array('class'=>'control-label required')) !!}
+
+                                    {!! Form::text('address1', Input::old('address1'),
+                                            array(
+                                            'class'=>'form-control'
+                                            ))  !!}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('address2', __('manageevent_modals_editattendee.address2'), array('class'=>'control-label')) !!}
+
+                                    {!! Form::text('address2', Input::old('address2'),
+                                            array(
+                                            'class'=>'form-control'
+                                            ))  !!}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {!! Form::label('postal_code', __('manageevent_modals_editattendee.postcode'), array('class'=>'control-label required')) !!}
+
+                                    {!! Form::text('postal_code', Input::old('postal_code'),
+                                            array(
+                                            'class'=>'form-control'
+                                            ))  !!}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {!! Form::label('city', __('manageevent_modals_editattendee.city'), array('class'=>'control-label required')) !!}
+
+                                    {!! Form::text('city', Input::old('city'),
                                             array(
                                             'class'=>'form-control'
                                             ))  !!}

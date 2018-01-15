@@ -26,7 +26,7 @@ class AddGenderToAttendeesTable extends Migration
     public function down()
     {
         Schema::table('attendees', function (Blueprint $table) {
-            //
+            $table->dropColumn('gender');
         });
     }
 }

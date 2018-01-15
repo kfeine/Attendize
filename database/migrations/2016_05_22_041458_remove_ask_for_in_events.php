@@ -19,6 +19,8 @@ class RemoveAskForInEvents extends Migration
 
     public function down()
     {
-        
+        Schema::table('events', function (Blueprint $table) {
+            $table->unsignedInteger('ask_for_all_attendees_info')->default(0);
+        });
     }
 }
