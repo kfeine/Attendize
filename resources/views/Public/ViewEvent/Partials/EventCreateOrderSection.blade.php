@@ -21,6 +21,7 @@
                             <td>
                                 <table>
                                     <tr>
+                                        <td class="pl0"><b>{{ $ticket['ticket']['title'] }}</b></td>
                                         <td style="text-align: right;">
                                             @if((int)ceil($ticket['full_price']) === 0)
                                             @lang('public_viewevent_partials_eventcreateordersection.free')
