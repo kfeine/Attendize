@@ -25,12 +25,7 @@ class AttendeeMailer extends Mailer
 
         Mail::send('Mailers.TicketMailer.SendAttendeeTicket', $data, function ($message) use ($attendee) {
             $message->to($attendee->email);
-            $message->subject('Your ticket for the event ' . $attendee->order->event->title);
-
-            $file_name = $attendee->reference;
-            $file_path = public_path(config('attendize.event_pdf_tickets_path')) . '/' . $file_name . '.pdf';
-
-            $message->attach($file_path);
+            $message->subject(trans('ordermailer.ordernotification_subject') . $attendee->order->event->title);
         });
 
     }

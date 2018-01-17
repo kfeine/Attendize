@@ -4,7 +4,7 @@ return [
 
     'hi'        => 'Bonjour,',
     'message1'  => 'La commande pour :title a bien été enregistrée.',
-    'message2'  => 'Les tickets sont en pièce-jointe de cet email. Vous pouvez consulter les informations sur vos tickets et les télécharger ici : :reference.',
+    'message2'  => 'Vous pouvez consulter les informations sur votre commande ici : :reference.',
     'details'   => 'Détails de la commande',
     'reference' => 'Référence :',
     'name'      => 'Nom :',

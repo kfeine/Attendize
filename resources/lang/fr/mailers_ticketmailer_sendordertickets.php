@@ -3,8 +3,8 @@
 return [
 
     'hi'        => 'Bonjour,',
-    'order'     => 'La commande pour :title a bien été enregistrée.',
-    'tickets'   => 'Les tickets sont en pièce-jointe de cet email. Vous pouvez consulter les informations sur vos tickets et les télécharger ici : :reference.',
+    'order'     => 'Votre commande pour :title a bien été enregistrée',
+    'tickets'   => 'Vous pouvez consulter les informations sur votre commande ici : :reference.',
     'note'      => 'Attention, vous n\'avez pas encore effectué le paiement pour cette commande. Pour consulter les informations relatives au paiement, rendez-vous sur la page de votre commande : :reference.',
     'details'   => 'Détails de la commande',
     'reference' => 'Référence :',

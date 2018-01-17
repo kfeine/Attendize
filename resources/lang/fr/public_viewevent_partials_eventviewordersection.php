@@ -3,7 +3,7 @@
 return [
 
     'thanks'               => 'Merci pour votre commande !',
-    'message'              => 'Vos :openlink formules :endlink et la confirmation de votre commande vous ont été envoyés par email',
+    'message'              => 'La confirmation de votre commande vous a été envoyé par email',
     'firstname'            => 'Prénom',
     'lastname'             => 'Nom',
     'amount'               => 'Montant',
