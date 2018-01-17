@@ -80,13 +80,13 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                             {!! Form::label("order_last_name", __('public_viewevent_partials_eventcreateordersection.last_name'), ['class' => "required"]) !!}
-                            {!! Form::text("order_last_name", null, ['required' => 'required', 'class' => 'required form-control']) !!}
+                            {!! Form::text("order_last_name", $tickets[0]['attendee']['last_name'], ['required' => 'required', 'class' => 'required form-control']) !!}
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <div class="form-group">
                             {!! Form::label("order_first_name", __('public_viewevent_partials_eventcreateordersection.first_name'), ['class' => "required"]) !!}
-                            {!! Form::text("order_first_name", null, ['required' => 'required', 'class' => 'required form-control']) !!}
+                            {!! Form::text("order_first_name", $tickets[0]['attendee']['first_name'], ['required' => 'required', 'class' => 'required form-control']) !!}
                         </div>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             {!! Form::label("order_email", __('public_viewevent_partials_eventcreateordersection.email'), ['class' => "required"]) !!}
-                            {!! Form::text("order_email", null, ['required' => 'required', 'class' => 'required form-control']) !!}
+                            {!! Form::text("order_email", $tickets[0]['attendee']['email'], ['required' => 'required', 'class' => 'required form-control']) !!}
                         </div>
                     </div>
                 </div>
