@@ -28,14 +28,6 @@
                 <b>@lang('mailers_ticketmailer_sendordertickets.ticket')</b>
             </td>
             <td>
-                <b>@lang('mailers_ticketmailer_sendordertickets.qty')</b>
-            </td>
-            <td>
-                <b>@lang('mailers_ticketmailer_sendordertickets.price')</b>
-            </td>
-            <td>
-                <b>@lang('mailers_ticketmailer_sendordertickets.fee')</b>
-            </td>
             <td>
                 <b>@lang('mailers_ticketmailer_sendordertickets.total')</b>
             </td>
@@ -46,50 +38,17 @@
                 {{$order_item->title}}
             </td>
             <td>
-                {{$order_item->quantity}}
-            </td>
-            <td>
-                @if((int)ceil($order_item->unit_price) == 0)
-                @lang('mailers_ticketmailer_sendordertickets.free')
-                @else
-               {{money($order_item->unit_price, $order->event->currency)}}
-                @endif
-
-            </td>
-            <td>
-                @if((int)ceil($order_item->unit_price) == 0)
-                -
-                @else
-                {{money($order_item->unit_booking_fee, $order->event->currency)}}
-                @endif
-
-            </td>
-            <td>
                 @if((int)ceil($order_item->unit_price) == 0)
                 @lang('mailers_ticketmailer_sendordertickets.free')
                 @else
                 {{money(($order_item->unit_price + $order_item->unit_booking_fee) * ($order_item->quantity), $order->event->currency)}}
                 @endif
-
             </td>
         </tr>
             @foreach($order_item->orderItemOptions as $option)
                 <tr>
                     <td>
-                          &nbsp&nbsp&nbsp   {{$option->title}}
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                        @if((int)ceil($option->price) == 0)
-                        @lang('public_viewevent_partials_eventviewordersection.free')
-                        @else
-                       {{money($option->price, $order->event->currency)}}
-                        @endif
-
-                    </td>
-                    <td>
-                        -
+                       + {{$option->title}}
                     </td>
                     <td>
                         @if((int)ceil($option->price) == 0)
@@ -97,7 +56,6 @@
                         @else
                         {{money($option->price, $order->event->currency)}}
                         @endif
-
                     </td>
                 </tr>
             @endforeach
@@ -106,18 +64,6 @@
         <tr>
             <td>
                 {{$order->discount->title}}
-            </td>
-            <td>
-                1
-            </td>
-            <td>
-                @if($order->discount->type == "amount")
-                {{ money($order->discount->price, $order->event->currency) }}
-                @else
-                {{ $order->discount->price }} %
-                @endif
-            </td>
-            <td>
             </td>
             <td>
                 @if($order->discount->type == "amount")
@@ -130,15 +76,9 @@
         @endif
         <tr>
             <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
                 <b>@lang('mailers_ticketmailer_sendordertickets.subtotal')</b>
             </td>
-            <td colspan="2">
+            <td>
                {{money($order->amount + $order->order_fee, $order->event->currency)}}
             </td>
         </tr>

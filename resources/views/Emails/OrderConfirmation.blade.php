@@ -27,15 +27,6 @@
                 <b>@lang('emails_orderconfirmation.ticket')</b>
             </td>
             <td>
-                <b>@lang('emails_orderconfirmation.qty')</b>
-            </td>
-            <td>
-                <b>@lang('emails_orderconfirmation.price')</b>
-            </td>
-            <td>
-                <b>@lang('emails_orderconfirmation.fee')</b>
-            </td>
-            <td>
                 <b>@lang('emails_orderconfirmation.total')</b>
             </td>
         </tr>
@@ -43,23 +34,6 @@
         <tr>
             <td>
                 {{$order_item->title}}
-            </td>
-            <td>
-                {{$order_item->quantity}}
-            </td>
-            <td>
-                @if((int)ceil($order_item->unit_price) == 0)
-                @lang('emails_orderconfirmation.free')
-                @else
-                {{money($order_item->unit_price, $order->event->currency)}}
-                @endif
-            </td>
-            <td>
-                @if((int)ceil($order_item->unit_price) == 0)
-                -
-                @else
-                {{money($order_item->unit_booking_fee, $order->event->currency)}}
-                @endif
             </td>
             <td>
                 @if((int)ceil($order_item->unit_price) == 0)
@@ -76,18 +50,6 @@
                 {{$order->discount->title}}
             </td>
             <td>
-                1
-            </td>
-            <td>
-                @if($order->discount->type == "amount")
-                {{ money($order->discount->price, $order->event->currency) }}
-                @else
-                {{ $order->discount->price }} %
-                @endif
-            </td>
-            <td>
-            </td>
-            <td>
                 @if($order->discount->type == "amount")
                 {{ money($order->discount->price, $order->event->currency) }}
                 @else
@@ -98,15 +60,9 @@
         @endif
         <tr>
             <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
                 <b>@lang('emails_orderconfirmation.subtotal')</b>
             </td>
-            <td colspan="2">
+            <td>
                {{money($order->amount + $order->order_fee, $order->event->currency)}}
             </td>
         </tr>

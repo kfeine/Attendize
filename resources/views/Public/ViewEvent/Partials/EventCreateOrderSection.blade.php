@@ -45,13 +45,19 @@
                         @endforeach
                         @if($discount)
                         <tr>
-                            <td class="pl0">{{ $discount->title }}</td>
-                            <td style="text-align: right;">
-                                @if($discount->type === "amount")
-                                {{ money($discount->price, $event->currency) }}
-                                @else
-                                {{ $discount->price }} %
-                                @endif
+                            <td>
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td class="pl0"><b>{{ $discount->title }}</b></td>
+                                        <td style="text-align: right;">
+                                            @if($discount->type === "amount")
+                                            {{ money($discount->price, $event->currency) }}
+                                            @else
+                                            {{ $discount->price }} %
+                                            @endif
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                         @endif

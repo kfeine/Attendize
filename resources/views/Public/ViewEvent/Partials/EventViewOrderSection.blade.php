@@ -124,15 +124,6 @@
                                     @lang('public_viewevent_partials_eventviewordersection.ticket')
                                 </th>
                                 <th>
-                                    @lang('public_viewevent_partials_eventviewordersection.quantity')
-                                </th>
-                                <th>
-                                    @lang('public_viewevent_partials_eventviewordersection.price')
-                                </th>
-                                <th>
-                                    @lang('public_viewevent_partials_eventviewordersection.fee')
-                                </th>
-                                <th>
                                     @lang('public_viewevent_partials_eventviewordersection.total')
                                 </th>
                             </tr>
@@ -142,25 +133,6 @@
                                 <tr>
                                     <td>
                                         {{$order_item->title}}
-                                    </td>
-                                    <td>
-                                        {{$order_item->quantity}}
-                                    </td>
-                                    <td>
-                                        @if((int)ceil($order_item->unit_price) == 0)
-                                        @lang('public_viewevent_partials_eventviewordersection.free')
-                                        @else
-                                       {{money($order_item->unit_price, $order->event->currency)}}
-                                        @endif
-
-                                    </td>
-                                    <td>
-                                        @if((int)ceil($order_item->unit_price) == 0)
-                                        -
-                                        @else
-                                        {{money($order_item->unit_booking_fee, $order->event->currency)}}
-                                        @endif
-
                                     </td>
                                     <td>
                                         @if((int)ceil($order_item->unit_price) == 0)
@@ -174,20 +146,7 @@
                                 @foreach($order_item->orderItemOptions as $option)
                                     <tr>
                                         <td>
-                                              &nbsp&nbsp&nbsp   {{$option->title}}
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                            @if((int)ceil($option->price) == 0)
-                                            @lang('public_viewevent_partials_eventviewordersection.free')
-                                            @else
-                                           {{money($option->price, $order->event->currency)}}
-                                            @endif
-
-                                        </td>
-                                        <td>
-                                            -
+                                           + {{$option->title}}
                                         </td>
                                         <td>
                                             @if((int)ceil($option->price) == 0)
@@ -195,7 +154,6 @@
                                             @else
                                             {{money($option->price, $order->event->currency)}}
                                             @endif
-
                                         </td>
                                     </tr>
                                 @endforeach
@@ -204,18 +162,6 @@
                             <tr>
                                 <td>
                                     {{$order->discount->title}}
-                                </td>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    @if($order->discount->type == "amount")
-                                    {{ money($order->discount->price, $order->event->currency) }}
-                                    @else
-                                    {{ $order->discount->price }} %
-                                    @endif
-                                </td>
-                                <td>
                                 </td>
                                 <td>
                                     @if($order->discount->type == "amount")
@@ -228,44 +174,26 @@
                             @endif
                             <tr>
                                 <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
                                     <b>@lang('public_viewevent_partials_eventviewordersection.subtotal')</b>
                                 </td>
-                                <td colspan="2">
+                                <td>
                                     {{money($order->total_amount, $order->event->currency)}}
                                 </td>
                             </tr>
                             @if($order->is_refunded || $order->is_partially_refunded)
                                 <tr>
                                     <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
                                         <b>@lang('public_viewevent_partials_eventviewordersection.refunded')</b>
                                     </td>
-                                    <td colspan="2">
+                                    <td>
                                         {{money($order->amount_refunded, $order->event->currency)}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
-                                    </td>
-                                    <td>
                                         <b>@lang('public_viewevent_partials_eventviewordersection.total')</b>
                                     </td>
-                                    <td colspan="2">
+                                    <td>
                                         {{money($order->total_amount - $order->amount_refunded, $order->event->currency)}}
                                     </td>
                                 </tr>
@@ -290,11 +218,10 @@
                                     (<a href="mailto:{{$attendee->email}}">{{$attendee->email}}</a>)
                                 </td>
                                 <td>
-                                    {{{$attendee->ticket->title}}} </br> (
+                                    {{{$attendee->ticket->title}}}
                                     @foreach($attendee->options as $option)
-                                        {{{$option->title}}} | 
+                                         </br> + {{{$option->title}}}
                                     @endforeach
-                                    )
                                 </td>
                                 <td>
                                     @if($attendee->is_cancelled)
