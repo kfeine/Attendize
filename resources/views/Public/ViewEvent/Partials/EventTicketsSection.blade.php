@@ -37,14 +37,14 @@
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        {!! Form::label("attendee_1_first_name", __('public_viewevent_partials_eventticketssection.first_name'), ['class' => "required"]) !!}
-                                        {!! Form::text("attendee_1_first_name", null, ['required' => 'required', 'class' => "required attendee_1_first_name attendee_first_name form-control"]) !!}
+                                        {!! Form::label("attendee_1_last_name", __('public_viewevent_partials_eventticketssection.last_name'), ['class' => "required"]) !!}
+                                        {!! Form::text("attendee_1_last_name", null, ['required' => 'required', 'class' => "required attendee_1_last_name attendee_last_name form-control"]) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        {!! Form::label("attendee_1_last_name", __('public_viewevent_partials_eventticketssection.last_name'), ['class' => "required"]) !!}
-                                        {!! Form::text("attendee_1_last_name", null, ['required' => 'required', 'class' => "required attendee_1_last_name attendee_last_name form-control"]) !!}
+                                        {!! Form::label("attendee_1_first_name", __('public_viewevent_partials_eventticketssection.first_name'), ['class' => "required"]) !!}
+                                        {!! Form::text("attendee_1_first_name", null, ['required' => 'required', 'class' => "required attendee_1_first_name attendee_first_name form-control"]) !!}
                                     </div>
                                 </div>
                             </div>
@@ -132,15 +132,14 @@
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group">
-
-                                        {!! Form::label("attendee_`+number+`_first_name", __('public_viewevent_partials_eventticketssection.first_name'), ['class' => "required"]) !!}
-                                        {!! Form::text("attendee_`+number+`_first_name", null, ['required' => 'required', 'class' => "required attendee_`+number+`_first_name attendee_first_name form-control"]) !!}
+                                        {!! Form::label("attendee_`+number+`_last_name", __('public_viewevent_partials_eventticketssection.last_name'), ['class' => "required"]) !!}
+                                        {!! Form::text("attendee_`+number+`_last_name", null, ['required' => 'required', 'class' => "required attendee_`+number+`_last_name attendee_last_name form-control"]) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        {!! Form::label("attendee_`+number+`_last_name", __('public_viewevent_partials_eventticketssection.last_name'), ['class' => "required"]) !!}
-                                        {!! Form::text("attendee_`+number+`_last_name", null, ['required' => 'required', 'class' => "required attendee_`+number+`_last_name attendee_last_name form-control"]) !!}
+                                        {!! Form::label("attendee_`+number+`_first_name", __('public_viewevent_partials_eventticketssection.first_name'), ['class' => "required"]) !!}
+                                        {!! Form::text("attendee_`+number+`_first_name", null, ['required' => 'required', 'class' => "required attendee_`+number+`_first_name attendee_first_name form-control"]) !!}
                                     </div>
                                 </div>
                             </div>
