@@ -18,15 +18,17 @@
                 </span>
                 //
                 <span property="startDate" content="{{ $event->start_date->toIso8601String() }}">
-                    @if($event->start_date->month == $event->end_date->month) 
-                        {{ $event->start_date->formatLocalized('%d') }} 
-                    @else 
-                        {{ $event->start_date->formatLocalized('%A %d %B %Y') }} 
-                    @endif 
+                    @if($event->start_date->month == $event->end_date->month && $event->start_date->year == $event->end_date->year)
+                        {{ $event->start_date->formatLocalized('%d') }}
+                    @elseif($event->start_date->month == $event->end_date->month)
+                        {{ $event->start_date->formatLocalized('%d/%m') }}
+                    @else
+                        {{ $event->start_date->formatLocalized('%d/%m/%Y') }}
+                    @endif
                 </span>
                 -
                 <span property="endDate" content="{{ $event->end_date->toIso8601String() }}">
-                     {{ $event->end_date->formatLocalized('%d %B %Y') }}
+                     {{ $event->end_date->formatLocalized('%d/%m/%Y') }}
                 </span>
             </div>
         </div>
