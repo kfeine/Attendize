@@ -19,7 +19,7 @@ return [
     'fee'       => 'Frais',
     'total'     => 'Total',
     'free'      => 'Gratuit',
-    'subtotal'  => 'Sout-total',
+    'subtotal'  => 'Sous-total',
     'thanks'    => 'Merci,',
 
 ];
