@@ -230,7 +230,7 @@ class EventTicketsController extends MyBaseController
         $validation_messages['quantity_available.min'] = __('controllers_eventticketscontroller.quantity_min');
 
         $ticket->rules = $validation_rules + $ticket->rules;
-        $ticket->messages = $validation_messages + $ticket->validation_messages();
+        $ticket->validation_messages = $validation_messages + $ticket->messages();
 
         if (!$ticket->validate($request->all())) {
             return response()->json([

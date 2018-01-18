@@ -621,7 +621,7 @@ class EventCheckoutController extends Controller
             $order->phone                 = $request_data['order_phone'];
             $order->address1              = $request_data['order_address_line_1'];
             $order->address2              = $request_data['order_address_line_2'];
-            $order->city                  = $request_data['order_city'];
+            $order->city                  = mb_convert_case(trim($request_data['order_city']), MB_CASE_UPPER, 'UTF-8');
             $order->postal_code           = $request_data['order_postal_code'];
             $order->order_status_id       = isset($request_data['pay_offline']) ? config('attendize.order_awaiting_payment') : config('attendize.order_complete');
             $order->amount                = $ticket_order['order_total'];
@@ -695,20 +695,20 @@ class EventCheckoutController extends Controller
                 $orderItem->unit_booking_fee = $attendee_details['ticket']['booking_fee'] + $attendee_details['ticket']['organiser_booking_fee'];
                 $orderItem->save();
 
-                $attendee = new Attendee();
+                $attendee                  = new Attendee();
                 $attendee->gender          = $request_data["ticket_holder_gender"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
-                $attendee->first_name = mb_convert_case(trim($request_data["ticket_holder_first_name"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']]), MB_CASE_TITLE, 'UTF-8');
-                $attendee->last_name = mb_convert_case(trim($request_data["ticket_holder_last_name"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']]), MB_CASE_UPPER, 'UTF-8');
-                $attendee->email = $request_data["ticket_holder_email"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
-                $attendee->phone                 = $request_data['ticket_holder_phone'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
-                $attendee->address1              = $request_data['ticket_holder_address_line_1'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
-                $attendee->address2              = $request_data['ticket_holder_address_line_2'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
-                $attendee->city                  = $request_data['ticket_holder_city'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
-                $attendee->postal_code           = $request_data['ticket_holder_postal_code'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
-                $attendee->event_id = $event_id;
-                $attendee->order_id = $order->id;
-                $attendee->ticket_id = $attendee_details['ticket']['id'];
-                $attendee->account_id = $event->account->id;
+                $attendee->first_name      = mb_convert_case(trim($request_data["ticket_holder_first_name"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']]), MB_CASE_TITLE, 'UTF-8');
+                $attendee->last_name       = mb_convert_case(trim($request_data["ticket_holder_last_name"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']]), MB_CASE_UPPER, 'UTF-8');
+                $attendee->email           = $request_data["ticket_holder_email"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
+                $attendee->phone           = $request_data['ticket_holder_phone'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
+                $attendee->address1        = $request_data['ticket_holder_address_line_1'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
+                $attendee->address2        = $request_data['ticket_holder_address_line_2'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
+                $attendee->city            = mb_convert_case(trim($request_data["ticket_holder_city"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']]), MB_CASE_UPPER, 'UTF-8');
+                $attendee->postal_code     = $request_data['ticket_holder_postal_code'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
+                $attendee->event_id        = $event_id;
+                $attendee->order_id        = $order->id;
+                $attendee->ticket_id       = $attendee_details['ticket']['id'];
+                $attendee->account_id      = $event->account->id;
                 $attendee->reference_index = $attendee_increment;
                 $attendee->save();
 

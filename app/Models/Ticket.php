@@ -20,6 +20,7 @@ class Ticket extends MyBaseModel
         'end_sale_date'      => ['date', 'after:start_sale_date'],
         'quantity_available' => ['integer', 'min:0'],
     ];
+
     /**
      * The validation error messages.
      *
@@ -32,6 +33,9 @@ class Ticket extends MyBaseModel
             'quantity_available.integer' => __('models_ticket.quantity_available_integer'),
         ];
     }
+
+    public $validation_messages = [];
+
     protected $perPage = 10;
 
     /**

@@ -19,7 +19,7 @@
                         @foreach($tickets as $ticket)
                         <tr>
                             <td>
-                                <table>
+                                <table style="width: 100%;">
                                     <tr>
                                         <td class="pl0"><b>{{ $ticket['ticket']['title'] }}</b></td>
                                         <td style="text-align: right;">

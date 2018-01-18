@@ -16,7 +16,7 @@
 
             {!! Form::open(['url' => route('postValidateTickets', ['event_id' => $event->id]), 'class' => 'ajax']) !!}
             <div class="row content-form">
-                <div class="col-md-6" id="attendee1">
+                <div class="col-md-6 form_attendee" id="attendee1">
                     <div class="modal-content">
                         {!! Form::hidden('attendees[]', "1") !!}
                         <div class="modal-header text-center">
@@ -113,7 +113,7 @@
 <script>
   function getFormAttendeeTicket(number){
 
-      return `<div class="col-md-6" id='attendee`+number+`'> <div class='modal-content'>
+      return `<div class="col-md-6 form_attendee" id='attendee`+number+`'> <div class='modal-content'>
                         {!! Form::hidden('attendees[]', "`+number+`") !!}
                         <div class="modal-header text-center">
                             <h3>Participant `+number+`</h3>

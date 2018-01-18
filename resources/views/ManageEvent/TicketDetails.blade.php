@@ -2,7 +2,7 @@
 
 @section('title')
     @parent
-    __ticket : {{ $ticket->title }}
+    {{ $ticket->title }}
 @stop
 
 @section('top_nav')
