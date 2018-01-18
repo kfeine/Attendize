@@ -4567,7 +4567,7 @@ function log() {
 
 }).call(this);
 ;$(function() {
-    $('.required').prop('required', $(this).is(':visible'));
+    $('.form_attendee .hide select.required, .form_attendee .hide checkbox.required, .form_attendee .hide radio.required, .form_attendee .hide input.required, .form_attendee .hide textarea.required').prop('required', false);
 
     $('form.ajax').on('submit', function(e) {
         e.preventDefault();
@@ -4956,8 +4956,15 @@ function changeTicket(select, attendee)
     var select = $(select);
     var selected = select.find(':selected');
 
+    $('#attendee'+attendee+' select.required, #attendee'+attendee+' checkbox.required,#attendee'+attendee+' radio.required,#attendee'+attendee+' input.required,#attendee'+attendee+' textarea.required').prop('required', false);
     $('#attendee'+attendee+' .ticket-options').addClass('hide');
     $('#attendee'+attendee+' .ticket-options-'+selected.val()).removeClass('hide');
+
+    $('#attendee'+attendee+' .ticket-options-'+selected.val()+' select.required').prop('required', true);
+    $('#attendee'+attendee+' .ticket-options-'+selected.val()+' checkbox.required').prop('required', true);
+    $('#attendee'+attendee+' .ticket-options-'+selected.val()+' radio.required').prop('required', true);
+    $('#attendee'+attendee+' .ticket-options-'+selected.val()+' input.required').prop('required', true);
+    $('#attendee'+attendee+' .ticket-options-'+selected.val()+' textarea.required').prop('required', true);
 }
 
 function addAttendee()
@@ -4965,9 +4972,9 @@ function addAttendee()
   var formNumberAttendee = $('form').find('input[name="attendees[]"]').last().val();
   var formAttendee = getFormAttendeeTicket(parseInt(formNumberAttendee)+1);
   $( ".content-form" ).append( formAttendee );
-  console.log('#attendee'+(parseInt(formNumberAttendee)+1)+' .required');
 
-  $('.required').prop('required', $(this).is(':visible'));
+  $('.form_attendee .hide select.required, .form_attendee .hide checkbox.required, .form_attendee .hide radio.required, .form_attendee .hide input.required, .form_attendee .hide textarea.required').prop('required', false);
+
 }
 
 function removeAttendee(id)
