@@ -166,6 +166,11 @@ $(function() {
         $('.ticket_holder_first_name').val($('#order_first_name').val());
         $('.ticket_holder_last_name').val($('#order_last_name').val());
         $('.ticket_holder_email').val($('#order_email').val());
+        $('.ticket_holder_phone').val($('#order_phone').val());
+        $('.ticket_holder_address_line_1').val($('#order_address_line_1').val());
+        $('.ticket_holder_address_line_2').val($('#order_address_line_2').val());
+        $('.ticket_holder_city').val($('#order_city').val());
+        $('.ticket_holder_postal_code').val($('#order_postal_code').val());
     });
 
     $('.card-number').payment('formatCardNumber');
