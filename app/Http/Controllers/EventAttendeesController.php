@@ -596,22 +596,19 @@ class EventAttendeesController extends MyBaseController
         ];
 
         $title_row = [
-            'ID',
-            'Gender',
-            'First Name',
-            'Last Name',
-            'Email',
-            'Phone',
-            'Address 1',
-            'Address 2',
-            'Postal Code',
-            'City',
-            'Order Reference',
-            'Purchase Date',
-            'Payment received',
-            'Has Arrived',
-            'Arrival Time',
-            'Ticket Type',
+            __('controllers_eventattendeescontroller.xls_id'),
+            __('controllers_eventattendeescontroller.xls_gender'),
+            __('controllers_eventattendeescontroller.xls_first_name'),
+            __('controllers_eventattendeescontroller.xls_last_name'),
+            __('controllers_eventattendeescontroller.xls_email'),
+            __('controllers_eventattendeescontroller.xls_phone'),
+            __('controllers_eventattendeescontroller.xls_address_1'),
+            __('controllers_eventattendeescontroller.xls_address_2'),
+            __('controllers_eventattendeescontroller.xls_postal_code'),
+            __('controllers_eventattendeescontroller.xls_city'),
+            __('controllers_eventattendeescontroller.xls_order_ref'),
+            __('controllers_eventattendeescontroller.xls_purchase_date'),
+            __('controllers_eventattendeescontroller.xls_payment_received'),
         ];
 
         foreach($details as $detail){
