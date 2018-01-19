@@ -13,7 +13,7 @@ return [
     'first_name'           => 'Prénom',
     'last_name'            => 'Nom',
     'email'                => 'Email',
-    'copy'                 => 'Utiliser ces informations pour tous les participants',
+    'copy'                 => 'Copier l\'email, le téléphone et l\'adresse pour tous les participants', 
     'ticket'               => 'Information sur le participant',
     'details'              => 'Détails du participant :number',
     'payment'              => 'Informations de paiement',
