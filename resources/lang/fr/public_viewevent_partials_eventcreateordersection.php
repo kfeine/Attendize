@@ -6,7 +6,7 @@ return [
     'order_summary'        => 'Résumé de la commande',
     'free'                 => 'Gratuit',
     'countdown'            => 'Attention, il vous reste :countdown pour finaliser votre commande avant qu\'elle ne soit remise à zéro.',
-    'information'          => 'Vos informations',
+    'information'          => 'Informations de facturation',
     'gender'               => 'Civilité',
     'gender_male'          => 'M.',
     'gender_female'        => 'Mme',
