@@ -63,7 +63,7 @@
                                                 </td>
                                                 <td>
                                                     @if((int)ceil($option->price) == 0)
-                                                    @lang('public_viewevent_partials_eventviewordersection.free')
+                                                    -
                                                     @else
                                                    {{money($option->price, $order->event->currency)}}
                                                     @endif
@@ -74,7 +74,7 @@
                                                 </td>
                                                 <td>
                                                     @if((int)ceil($option->price) == 0)
-                                                    @lang('public_viewevent_partials_eventviewordersection.free')
+                                                    -
                                                     @else
                                                     {{money($option->price, $order->event->currency)}}
                                                     @endif
