@@ -6,11 +6,11 @@
 @stop
 
 @section('blankslate-title')
-    @lang('manageevent_partials_editeventform.title')
+    @lang('manageevent_partials_ordersblankslate.title')
 @stop
 
 @section('blankslate-text')
-    @lang('manageevent_partials_editeventform.text')
+    @lang('manageevent_partials_ordersblankslate.text')
 @stop
 
 @section('blankslate-body')
