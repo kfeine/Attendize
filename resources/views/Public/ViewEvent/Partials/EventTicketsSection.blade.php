@@ -61,7 +61,7 @@
                                 {{ Form::label('attendee_1_ticket', 'Formule', null, ['class' => "control-label"]) }}
                                 {{ Form::select('attendee_1_ticket', $tickets->pluck('title_with_price', 'id')->all(), null, ['class' => "form-control", 'onChange' => 'changeTicket(this, 1)']) }}
                                 @foreach ($tickets as $ticket)
-                                    <small class="ticket-options ticket-options-{{$ticket->id}} hide form-text">{{$ticket->description}}</small>
+                                    <small class="ticket-options ticket-options-{{$ticket->id}} {{$loop->first?"":"hide"}} form-text">{{$ticket->description}}</small>
                                 @endforeach
                             </div>
                             <div class="p0 well bgcolor-white order_overview">
@@ -157,7 +157,7 @@
                                 {{ Form::label('attendee_`+number+`_ticket', "Formule", ['class' => "control-label"]) }}
                                 {{ Form::select('attendee_`+number+`_ticket', $tickets->pluck('title_with_price', 'id')->all(), null, ['class' => "form-control", 'onChange' => 'changeTicket(this, `+number+`)']) }}
                                 @foreach ($tickets as $ticket)
-                                    <small class="ticket-options ticket-options-{{$ticket->id}} hide form-text">{{$ticket->description}}</small>
+                                    <small class="ticket-options ticket-options-{{$ticket->id}} {{$loop->first?"":"hide"}} form-text">{{$ticket->description}}</small>
                                 @endforeach
                             </div>
                             <div class="p0 well bgcolor-white order_overview">
