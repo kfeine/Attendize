@@ -122,7 +122,7 @@
                                 @endif
                                 {{$ticket->title}}
                                 <span class="pull-right">
-                                    {{ ($ticket->is_free) ? __('manageevent_tickets.free') : money($ticket->price, $event->currency) }}
+                                    {{ ($ticket->is_free) ? '-' : money($ticket->price, $event->currency) }}
                                 </span>
                             </h3>
                         </div>

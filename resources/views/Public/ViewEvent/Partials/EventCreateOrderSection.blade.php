@@ -24,7 +24,7 @@
                                         <td class="pl0"><b>{{ $ticket['ticket']['title'] }}</b></td>
                                         <td style="text-align: right;">
                                             @if((int)ceil($ticket['full_price']) === 0)
-                                            @lang('public_viewevent_partials_eventcreateordersection.free')
+                                            -
                                             @else
                                             {{ money($ticket['full_price'], $event->currency) }}
                                             @endif
@@ -34,7 +34,11 @@
                                     <tr>
                                         <td>+ {{{$option->title}}}</td>
                                               <td style="text-align: right;">
-                                                  {{ money($option->price, $event->currency) }}
+                                                    @if((int)ceil($option->price) === 0)
+                                                    -
+                                                    @else
+                                                    {{ money($option->price, $event->currency) }}
+                                                    @endif
                                               </td>
                                         </td>
                                     </tr>

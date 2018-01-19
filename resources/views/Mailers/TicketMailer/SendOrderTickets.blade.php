@@ -50,7 +50,7 @@
             </td>
             <td>
                 @if((int)ceil($order_item->unit_price) == 0)
-                @lang('mailers_ticketmailer_sendordertickets.free')
+                -
                 @else
                {{money($order_item->unit_price, $order->event->currency)}}
                 @endif
@@ -66,7 +66,7 @@
             </td>
             <td>
                 @if((int)ceil($order_item->unit_price) == 0)
-                @lang('mailers_ticketmailer_sendordertickets.free')
+                -
                 @else
                 {{money(($order_item->unit_price + $order_item->unit_booking_fee) * ($order_item->quantity), $order->event->currency)}}
                 @endif
@@ -82,7 +82,7 @@
                     </td>
                     <td>
                         @if((int)ceil($option->price) == 0)
-                        @lang('public_viewevent_partials_eventviewordersection.free')
+                        -
                         @else
                        {{money($option->price, $order->event->currency)}}
                         @endif
@@ -93,7 +93,7 @@
                     </td>
                     <td>
                         @if((int)ceil($option->price) == 0)
-                        @lang('public_viewevent_partials_eventviewordersection.free')
+                        -
                         @else
                         {{money($option->price, $order->event->currency)}}
                         @endif

@@ -49,7 +49,7 @@
             </td>
             <td>
                 @if((int)ceil($order_item->unit_price) == 0)
-                @lang('emails_orderconfirmation.free')
+                -
                 @else
                 {{money($order_item->unit_price, $order->event->currency)}}
                 @endif
@@ -63,7 +63,7 @@
             </td>
             <td>
                 @if((int)ceil($order_item->unit_price) == 0)
-                @lang('emails_orderconfirmation.free')
+                -
                 @else
                 {{money(($order_item->unit_price + $order_item->unit_booking_fee) * ($order_item->quantity), $order->event->currency)}}
                 @endif
