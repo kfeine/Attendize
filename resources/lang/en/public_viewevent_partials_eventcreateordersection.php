@@ -13,7 +13,7 @@ return [
     'first_name'    => 'First Name',
     'last_name'     => 'Last Name',
     'email'         => 'Email',
-    'copy'          => 'Copy buyer details to all ticket holders',
+    'copy'          => 'Copy email, phone number and address to all attendees',
     'ticket'        => 'Ticket Holder Information',
     'details'       => 'Ticket Holder :number Details',
     'payment'       => 'Payment Information',
