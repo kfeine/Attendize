@@ -377,6 +377,7 @@ class EventOrdersController extends MyBaseController
                                         WHEN orders.payment_gateway_id IS NULL THEN '1'
                                         ELSE '0' END)
                                         AS `orders.payment_gateway_id`"),
+                            'orders.transaction_id',
                             \DB::raw('replace(orders.amount, ".", ",")'),
                             \DB::raw("(CASE
                                         WHEN orders.order_status_id = 1 THEN 'Completed'
@@ -386,6 +387,7 @@ class EventOrdersController extends MyBaseController
                                         WHEN orders.order_status_id = 5 THEN 'Awaiting payment'
                                         ELSE 'Unknown' END)
                                         AS `orders.order_status_id`"),
+                            'orders.transaction_id',
                             'orders.amount_refunded',
                             'orders.created_at',
                         ])->get();
@@ -406,6 +408,7 @@ class EventOrdersController extends MyBaseController
                                         WHEN orders.payment_gateway_id IS NULL THEN '1'
                                         ELSE '0' END)
                                         AS `orders.payment_gateway_id`"),
+                            'orders.transaction_id',
                             'orders.amount',
                             \DB::raw("(CASE
                                         WHEN orders.order_status_id = 1 THEN 'Completed'
@@ -434,6 +437,7 @@ class EventOrdersController extends MyBaseController
                     'City',
                     'Order Reference',
                     'Chèque',
+                    'ID Scellius',
                     'Amount',
                     'Status',
                     'Amount Refunded',
