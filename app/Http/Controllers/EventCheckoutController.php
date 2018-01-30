@@ -442,6 +442,7 @@ class EventCheckoutController extends Controller
                         break;
                     case config('attendize.payment_gateway_scellius'):
                         $transaction_data += [
+                            'transactionId' => uniqid(),
                             'cancelUrl' => route('showEventCheckoutPaymentScelliusReturn', [
                                 'event_id'             => $event_id,
                                 'is_payment_cancelled' => 1
@@ -573,7 +574,8 @@ class EventCheckoutController extends Controller
         $response = $transaction->send();
 
         if ($response->isSuccessful()) {
-            session()->push('ticket_order_' . $event_id . '.transaction_id', $response->getTransactionReference());
+            session()->push('ticket_order_' . $event_id . '.transaction_id', $response->getTransactionId());
+            session()->push('ticket_order_' . $event_id . '.order_reference', $response->getOrderId());
             return $this->completeOrder($event_id, false);
         } else {
             session()->flash('message', $response->getMessage());
@@ -601,6 +603,8 @@ class EventCheckoutController extends Controller
 
             $order              = new Order();
             $ticket_order       = session()->get('ticket_order_' . $event_id);
+            $transaction_id     = session()->get('ticket_order_' . $event_id. '.transaction_id');
+            $order_reference    = session()->get('ticket_order_' . $event_id. '.order_reference');
             $request_data       = $ticket_order['request_data'][0];
             $event              = Event::findOrFail($ticket_order['event_id']);
             $attendee_increment = 1;
@@ -611,6 +615,11 @@ class EventCheckoutController extends Controller
              */
             if (isset($ticket_order['transaction_id'])) {
                 $order->transaction_id = $ticket_order['transaction_id'][0];
+            } else if (isset($transaction_id)){
+                $order->transaction_id = $transaction_id[0];
+            }
+            if (isset($order_reference)){
+              $order->order_reference = $order_reference[0];
             }
             if ($ticket_order['order_requires_payment'] && !isset($request_data['pay_offline'])) {
                 $order->payment_gateway_id = $ticket_order['payment_gateway']->id;
