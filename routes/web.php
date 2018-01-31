@@ -132,7 +132,7 @@ Route::group(['prefix' => 'e'], function () {
         'uses' => 'EventCheckoutController@showEventCheckoutPaymentReturn',
     ]);
 
-    Route::post('/{event_id}/checkout/success', [
+    Route::post('/scellius/{event_id}/checkout/success', [
         'as'   => 'showEventCheckoutPaymentScelliusReturn',
         'uses' => 'EventCheckoutController@showEventCheckoutPaymentReturn',
     ]);

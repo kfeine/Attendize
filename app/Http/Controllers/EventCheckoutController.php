@@ -441,15 +441,21 @@ class EventCheckoutController extends Controller
 
                         break;
                     case config('attendize.payment_gateway_scellius'):
+                        $transactionId = uniqid();
                         $transaction_data += [
-                            'transactionId' => uniqid(),
+                            'transactionId' => $transactionId,
                             'cancelUrl' => route('showEventCheckoutPaymentScelliusReturn', [
                                 'event_id'             => $event_id,
                                 'is_payment_cancelled' => 1
                             ]),
                             'returnUrl' => route('showEventCheckoutPaymentScelliusReturn', [
+                                'event_id'             => $event_id,
+                                'transactionId'       => $transactionId,
+                            ]),
+                            'automaticReturnUrl' => route('showEventCheckoutPaymentScelliusReturn', [
                                 'event_id'              => $event_id,
-                                'is_payment_successful' => 1
+                                'is_payment_successful' => 1,
+                                'session'               => session()->getId()
                             ]),
                         ];
                         break;
@@ -553,7 +559,6 @@ class EventCheckoutController extends Controller
      */
     public function showEventCheckoutPaymentReturn(Request $request, $event_id)
     {
-
         if ($request->get('is_payment_cancelled') == '1') {
             session()->flash('message', __('controllers_eventcheckoutcontroller.payment_cancelled'));
             return response()->redirectToRoute('showEventCheckout', [
@@ -562,7 +567,33 @@ class EventCheckoutController extends Controller
             ]);
         }
 
+        //If automatic return Url
+        if ($request->get('session')){
+          session()->setId($request->get('session'));
+          session()->start();
+        }
+
         $ticket_order = session()->get('ticket_order_' . $event_id);
+
+        //Si le ticket à déjà été validé par la banque
+        if(!isset($ticket_order)){
+          if($request->get('transactionId')){
+            return response()->redirectToRoute('showOrderDetails', [
+                'is_embedded'     => $this->is_embedded,
+                'order_reference' => $request->get('transactionId'),
+            ]);
+          
+          } else {
+            session()->flash('message', "désolé, une erreur est survenue");
+            return response()->redirectToRoute('showEventCheckout', [
+                'event_id'          => $event_id,
+                'is_payment_failed' => 1,
+            ]);
+          }
+        
+        }
+
+                                //'transactionId'       => $transactionId,
         $gateway = Omnipay::create($ticket_order['payment_gateway']->name);
 
         $gateway->initialize($ticket_order['account_payment_gateway']->config + [
@@ -772,6 +803,8 @@ class EventCheckoutController extends Controller
              * Kill the session
              */
             session()->forget('ticket_order_' . $event->id);
+            session()->forget('ticket_order_' . $event->id. '.transaction_id');
+            session()->forget('ticket_order_' . $event->id. '.order_reference');
 
             /*
              * Queue up some tasks - Emails to be sent, PDFs etc.
