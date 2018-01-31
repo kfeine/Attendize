@@ -591,9 +591,8 @@ class EventAttendeesController extends MyBaseController
               'orders.order_reference',
               'orders.created_at',
               DB::raw("(CASE WHEN orders.is_payment_received THEN 'YES' ELSE 'NO' END) AS is_payment_received"),
-              DB::raw("(CASE WHEN attendees.has_arrived THEN 'YES' ELSE 'NO' END) AS has_arrived"),
-              'attendees.arrival_time',
-              'tickets.custom_field',
+              //DB::raw("(CASE WHEN attendees.has_arrived THEN 'YES' ELSE 'NO' END) AS has_arrived"),
+              //'attendees.arrival_time',
               'tickets.title',
         ];
 
@@ -611,6 +610,7 @@ class EventAttendeesController extends MyBaseController
             __('controllers_eventattendeescontroller.xls_order_ref'),
             __('controllers_eventattendeescontroller.xls_purchase_date'),
             __('controllers_eventattendeescontroller.xls_payment_received'),
+            __('controllers_eventattendeescontroller.xls_tickets_title'),
         ];
 
         foreach($details as $detail){

@@ -29,5 +29,6 @@ return [
     'xls_order_ref'        => 'Order Reference',
     'xls_purchase_date'    => 'Purchase Date',
     'xls_payment_received' => 'Payment Received?',
+    'xls_tickets_title'    => 'Ticket',
 
 ];

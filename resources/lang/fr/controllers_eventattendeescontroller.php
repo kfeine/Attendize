@@ -29,5 +29,6 @@ return [
     'xls_order_ref'        => 'Référence de la commande',
     'xls_purchase_date'    => 'Date d\'achat',
     'xls_payment_received' => 'Payé',
+    'xls_tickets_title'    => 'Formule',
 
 ];
