@@ -444,6 +444,9 @@ class EventCheckoutController extends Controller
                         $transactionId = uniqid();
                         $transaction_data += [
                             'transactionId' => $transactionId,
+                            'customerEmail' => $request->input('order_email', 'test1'),
+                            'customerName' => $request->input('order_last_name', 'test2'),
+                            'customerFirstname' => $request->input('order_first_name', 'test3'),
                             'cancelUrl' => route('showEventCheckoutPaymentScelliusReturn', [
                                 'event_id'             => $event_id,
                                 'is_payment_cancelled' => 1
