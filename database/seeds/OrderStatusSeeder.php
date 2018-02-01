@@ -18,23 +18,23 @@ class OrderStatusSeeder extends Seeder
         $order_statuses = [
             [
                 'id' => 1,
-                'name' => 'Completed',
+                'name' => 'Finalisé',
             ],
             [
                 'id' => 2,
-                'name' => 'Refunded',
+                'name' => 'Remboursé',
             ],
             [
                 'id' => 3,
-                'name' => 'Partially Refunded',
+                'name' => 'Partiellement remboursé',
             ],
             [
                 'id' => 4,
-                'name' => 'Cancelled',
+                'name' => 'Annulé',
             ],
             [
                 'id' => 5,
-                'name' => 'Awaiting Payment',
+                'name' => 'En attente de paiement',
             ],
         ];
 
