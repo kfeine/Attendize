@@ -78,10 +78,7 @@
                                {!! Html::sortable_link(__('manageevent_orders.date'), $sort_by, 'created_at', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
                             </th>
                             <th>
-                               {!! Html::sortable_link(__('manageevent_orders.name'), $sort_by, 'first_name', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
-                            </th>
-                            <th>
-                               {!! Html::sortable_link(__('manageevent_orders.email'), $sort_by, 'email', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
+                               {!! Html::sortable_link(__('manageevent_orders.name_email'), $sort_by, 'first_name', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}<br>
                             </th>
                             <th>
                                {!! Html::sortable_link(__('manageevent_orders.amount'), $sort_by, 'amount', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
@@ -90,9 +87,8 @@
                                {!! Html::sortable_link(__('manageevent_orders.offline_payment'), $sort_by, 'payment_gateway_id', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
                             </th>
                             <th>
-                               {!! Html::sortable_link(__('manageevent_orders.status'), $sort_by, 'order_status_id', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
+                               {!! Html::sortable_link(__('manageevent_orders.status_actions'), $sort_by, 'order_status_id', $sort_order, ['q' => $q , 'page' => $orders->currentPage()]) !!}
                             </th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -105,12 +101,10 @@
                                 </a>
                             </td>
                             <td>
-                                {{ $order->created_at->toDayDateTimeString() }}
+                                {{ $order->created_at->formatLocalized('%d/%m/%Y') }}
                             </td>
                             <td>
-                                {{$order->first_name.' '.$order->last_name}}
-                            </td>
-                            <td>
+                                {{$order->first_name.' '.$order->last_name}}<br>
                                 <a href="javascript:void(0);" class="loadModal"
                                     data-modal-id="MessageOrder"
                                     data-href="{{route('showMessageOrder', ['order_id'=>$order->id])}}"
@@ -126,7 +120,7 @@
                             </td>
                             <td>
                                 @if(!$order->payment_gateway_id)
-                                    X                                 
+                                    X
                                 @endif
                             </td>
                             <td>
@@ -134,9 +128,7 @@
                                     @if($order->orderStatus)
                                         {{$order->orderStatus->name}}
                                     @endif
-                                </span>
-                            </td>
-                            <td class="text-center">
+                                </span><br>
                                 <a data-modal-id="view-order-{{ $order->id }}" data-href="{{route('showManageOrder', ['order_id'=>$order->id])}}" title="View Order" class="btn btn-xs btn-primary loadModal">@lang('manageevent_orders.details')</a>
                             </td>
                         </tr>
