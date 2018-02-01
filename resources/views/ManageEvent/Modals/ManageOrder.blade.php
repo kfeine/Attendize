@@ -115,7 +115,7 @@
                                 @foreach($order->orderItems as $order_item)
                                 <tr>
                                     <td>
-                                        {{$order_item->title}}
+                                        <strong>{{$order_item->title}}</strong>
                                     </td>
                                     <td>
                                         {{$order_item->quantity}}
@@ -145,6 +145,20 @@
 
                                     </td>
                                 </tr>
+                                @foreach($order_item->orderItemOptions as $option)
+                                    <tr>
+                                        <td>
+                                           + {{$option->title}}
+                                        </td>
+                                        <td>
+                                            @if((int)ceil($option->price) == 0)
+                                            -
+                                            @else
+                                            {{money($option->price, $order->event->currency)}}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 @endforeach
                                 @if($order->discount)
                                 <tr>
