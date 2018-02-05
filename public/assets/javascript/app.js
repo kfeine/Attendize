@@ -504,6 +504,37 @@ $(function () {
         e.preventDefault();
     });
 
+    $(document.body).on('click', '.enableTicketOptionDetail', function (e) {
+
+        var optionDetailId = $(this).data('id'),
+                     route = $(this).data('route');
+
+        $.post(route, 'option_detail_id=' + optionDetailId)
+                .done(function (data) {
+
+                    if (typeof data.message !== 'undefined') {
+                        showMessage(data.message);
+                    }
+
+                    switch (data.status) {
+                        case 'success':
+                            setTimeout(function () {
+                                document.location.reload();
+                            }, 300);
+                            break;
+                        case 'error':
+                            showMessage(Attendize.GenericErrorMessages);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }).fail(function (data) {
+            showMessage(Attendize.GenericErrorMessages);
+        });
+
+        e.preventDefault();
+    });
 
 });
 
