@@ -375,6 +375,10 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
             'as'   => 'postEnableTicketOption',
             'uses' => 'EventTicketOptionsController@postEnableOption',
         ]);
+        Route::post('{event_id}/tickets/{ticket_id}/options/{option_id}/details/{option_detail_id}/enable', [
+            'as'   => 'postEnableTicketOptionDetail',
+            'uses' => 'EventTicketOptionsController@postEnableTicketOptionDetail',
+        ]);
 
         /*
          * Ticket questions

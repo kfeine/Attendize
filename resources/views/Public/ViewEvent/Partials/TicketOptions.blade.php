@@ -8,12 +8,12 @@
                 <small class="form-text text-muted">{!!$option->description!!}</small>
                 @endif
                 @if($option->ticket_options_type_id == config('attendize.ticket_options_dropdown_single'))
-                    {!! Form::select("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id", array('' => __('public_viewevent_partials_ticketoptions.select_one_option')) + $option->options->pluck('title_with_price', 'id')->toArray(), null, ['class' =>  $option->is_required ? 'required form-control' : 'form-control', $option->is_required ? 'required' : '' => $option->is_required ? 'required' : '']) !!}
+                    {!! Form::select("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id", array('' => __('public_viewevent_partials_ticketoptions.select_one_option')) + $option->options_enabled->pluck('title_with_price', 'id')->toArray(), null, ['class' =>  $option->is_required ? 'required form-control' : 'form-control', $option->is_required ? 'required' : '' => $option->is_required ? 'required' : '']) !!}
                 @elseif($option->ticket_options_type_id == config('attendize.ticket_options_dropdown_multi'))
                     {!! Form::select("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id",$option->options->pluck('title_with_price', 'id'), null, [$option->is_required ? 'required' : '' => $option->is_required ? 'required' : '', 'multiple' => 'multiple','class' => $option->is_required ? 'required form-control' : 'form-control']) !!}
                 @elseif($option->ticket_options_type_id == config('attendize.ticket_options_checkbox_multi'))
                     <br>
-                    @foreach($option->options as $detail)
+                    @foreach($option->options_enabled as $detail)
                         <?php
                             $checkbox_id = $numAttendee."_".md5($ticket->id.$option->id.$detail->title);
                         ?>
@@ -24,7 +24,7 @@
                     @endforeach
                 @elseif($option->ticket_options_type_id == config('attendize.ticket_options_radio_single'))
                     <br>
-                    @foreach($option->options as $detail)
+                    @foreach($option->options_enabled as $detail)
                         <?php
                             $radio_id = $numAttendee."_".md5($ticket->id.$option->id.$detail->title);
                         ?>
@@ -34,7 +34,6 @@
                     </div>
                     @endforeach
                 @endif
-  
             </div>
         @endforeach
     </div>

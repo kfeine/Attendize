@@ -257,4 +257,35 @@ class EventTicketOptionsController extends MyBaseController
             'message' => __('controllers_eventticketoptionscontroller.error'),
         ]);
     }
+
+    /**
+     * Toggle the enabled status of option detail
+     *
+     * @param Request $request
+     * @param $event_id
+     * @param $ticket_id
+     * @param $option_id
+     * @param $option_detail_id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postEnableTicketOptionDetail(Request $request, $event_id, $ticket_id, $option_id, $option_detail_id)
+    {
+        $option_detail = TicketOptionsDetails::find($option_detail_id);
+
+        $option_detail->is_enabled = ($option_detail->is_enabled == 1) ? 0 : 1;
+
+        if ($option_detail->save()) {
+            return response()->json([
+                'status'  => 'success',
+                'message' => __('controllers_eventticketoptionscontroller.update_success'),
+                'id'      => $option_detail->id,
+            ]);
+        }
+
+        return response()->json([
+            'status'  => 'error',
+            'id'      => $option_detail->id,
+            'message' => __('controllers_eventticketoptionscontroller.error'),
+        ]);
+    }
 }

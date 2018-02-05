@@ -42,6 +42,13 @@ class TicketOptions extends MyBaseModel
         return $this->hasMany(\App\Models\TicketOptionsDetails::class);
     }
 
+    public function getOptionsEnabledAttribute()
+    {
+        return $this->options->filter(function($value, $key) {
+            return $value->is_enabled;
+        });
+    }
+
     /**
      * The rules to validate the model.
      *

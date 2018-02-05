@@ -53,7 +53,14 @@
                                 {!! Form::label("details_".$detail->id."_price", __('manageevent_modals_editticketoptions.price')) !!}
                                 {!! Form::text("details_".$detail->id."_price", $detail->price, ['required' => 'required', 'class' => "form-control"]) !!}</td>
                             <td width="50">
-                                <i class="btn btn-danger ico-remove" onclick="removeTicketOptionsDetails(this);"></i>
+                                <i class="btn btn-danger ico-remove" onclick="removeTicketOptionsDetails(this);"></i> <br>
+                                <a class="btn btn-primary enableTicketOptionDetail" href="javascript:void(0);" data-route="{{ route('postEnableTicketOptionDetail', ['event_id' => $event->id, 'ticket_id' => $ticket->id, 'option_id'=>$option->id, 'option_detail_id'=>$detail->id]) }}" data-id="{{ $detail->id }}">
+                                      @if($detail->is_enabled)
+                                          <i class="ico-pause"></i>
+                                      @else
+                                          <i class="ico-play4"></i>
+                                      @endif
+                                </a>
                             </td>
                         </tr>
                         @endforeach
