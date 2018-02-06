@@ -726,7 +726,7 @@ class EventAttendeesController extends MyBaseController
         $attendee->ticket_id    = $request->get('ticket_id');
         $attendee->update();
 
-        session()->flash('message', __('controllers_eventattendeescontroller.attendee_update'));
+        session()->flash('message', __('controllers_eventattendeescontroller.update_success'));
 
         return response()->json([
             'status'      => 'success',
