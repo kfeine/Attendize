@@ -11,6 +11,7 @@ return [
     'tickets'       => ':number formules',
     'free'          => 'Gratuit',
     'sold'          => 'Vendu',
+    'really_sold'   => 'Formules en cours',
     'remaining'     => 'Restant',
     'revenue'       => 'Recettes',
     'paused'        => 'La vente de formules est suspendue',
