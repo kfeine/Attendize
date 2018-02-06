@@ -243,4 +243,14 @@ class Ticket extends MyBaseModel
             return $this->title . ' (' . money($this->price, $this->event->currency) .')';
         }
     }
+
+    public function attendees()
+    {
+        return $this->hasMany(\App\Models\Attendee::class);
+    }
+
+    public function getRealQuantitySoldAttribute()
+    {
+        return $this->attendees->count();
+    }
 }

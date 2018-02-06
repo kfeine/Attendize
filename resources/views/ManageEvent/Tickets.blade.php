@@ -131,8 +131,13 @@
                                 <li>
                                     <div class="section">
                                         <h4 class="nm">{{ $ticket->quantity_sold }}</h4>
-
                                         <p class="nm text-muted">@lang('manageevent_tickets.sold')</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="section">
+                                        <h4 class="nm">{{ $ticket->real_quantity_sold }}</h4>
+                                        <p class="nm text-muted">@lang('manageevent_tickets.really_sold')</p>
                                     </div>
                                 </li>
                                 <li>
@@ -144,6 +149,8 @@
                                         <p class="nm text-muted">@lang('manageevent_tickets.remaining')</p>
                                     </div>
                                 </li>
+                            </ul>
+                            <ul class="nav nav-section nav-justified mt5 mb5">
                                 <li>
                                     <div class="section">
                                         <h4 class="nm hint--top"
@@ -154,8 +161,6 @@
                                         <p class="nm text-muted">@lang('manageevent_tickets.revenue')</p>
                                     </div>
                                 </li>
-                            </ul>
-                            <ul class="nav nav-section nav-justified mt5 mb5">
                                 <li>
                                     <div class="section">
                                         <h4 class="nm">{{ $ticket->options->count() }}</h4>
