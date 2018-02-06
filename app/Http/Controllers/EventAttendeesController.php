@@ -729,7 +729,7 @@ class EventAttendeesController extends MyBaseController
         $attendee->custom_field = $request->get('custom_field');
         $attendee->update();
 
-        session()->flash('message', __('controllers_eventattendeescontroller.attendee_update'));
+        session()->flash('message', __('controllers_eventattendeescontroller.update_success'));
 
         return response()->json([
             'status'      => 'success',

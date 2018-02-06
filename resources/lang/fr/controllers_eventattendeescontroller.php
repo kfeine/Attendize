@@ -12,7 +12,7 @@ return [
     'ticket_id_exists'     => 'La formule demandée n\'existe pas',
     'ticket_id_required'   => 'Merci de sélectionner une formule',
     'update_success'       => 'Le participant a bien été mis à jour',
-    'alrady_cancelled'     => 'Ce participant a déjà été annulé',
+    'already_cancelled'    => 'Ce participant a déjà été annulé',
     'problem_refund'       => 'Une erreur s\'est produite lors du remboursement. Merci de réessayer',
     'cancel_success'       => 'Le participant a bien été annulé',
     'ticket_resent'        => 'La formule a bien été renvoyée',
