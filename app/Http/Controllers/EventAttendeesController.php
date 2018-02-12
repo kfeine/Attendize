@@ -555,6 +555,7 @@ class EventAttendeesController extends MyBaseController
      */
     public function showExportAttendees($event_id, $export_as = 'xls')
     {
+        $tickets = Ticket::where('event_id', '=', $event_id)->get();
 
         $details = TicketOptionsDetails::where('tickets.event_id', '=', $event_id)
           ->join('ticket_options', 'ticket_options_details.ticket_options_id', "=", 'ticket_options.id')
@@ -611,6 +612,11 @@ class EventAttendeesController extends MyBaseController
             __('controllers_eventattendeescontroller.xls_payment_received'),
             __('controllers_eventattendeescontroller.xls_tickets_title'),
         ];
+
+        foreach($tickets as $ticket){
+          $select[] = DB::raw("MAX(CASE WHEN attendees.ticket_id = ".$ticket->id." THEN 1 ELSE 0 END) AS ticket".$ticket->id);
+          $title_row[] = "Formule ".$ticket->id.": ".$ticket->title;
+        }
 
         foreach($details as $detail){
           $select[] = DB::raw("MAX(CASE WHEN attendee_ticket_options_details.ticket_options_details_id = ".$detail->id." THEN 1 ELSE 0 END) AS option".$detail->id);
