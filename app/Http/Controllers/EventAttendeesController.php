@@ -614,11 +614,6 @@ class EventAttendeesController extends MyBaseController
             __('controllers_eventattendeescontroller.xls_tickets_title'),
         ];
 
-        foreach($tickets as $ticket){
-          $select[] = DB::raw("MAX(CASE WHEN attendees.ticket_id = ".$ticket->id." THEN 1 ELSE 0 END) AS ticket".$ticket->id);
-          $title_row[] = "Formule ".$ticket->id.": ".$ticket->title;
-        }
-
         foreach($details as $detail){
           $select[] = DB::raw("MAX(CASE WHEN attendee_ticket_options_details.ticket_options_details_id = ".$detail->id." THEN 1 ELSE 0 END) AS option".$detail->id);
           $title_row[] = "Opt".$detail->id.": ".$detail->title;
@@ -629,7 +624,7 @@ class EventAttendeesController extends MyBaseController
           $title_row[] = "Q".$question->id.": ".$question->title;
         }
 
-        Excel::create('attendees-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event_id, $select, $title_row) {
+        Excel::create('attendees-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event_id, $select, $title_row, $tickets) {
 
             $excel->setTitle(__('controllers_eventattendeescontroller.attendee_list'));
 
@@ -637,8 +632,7 @@ class EventAttendeesController extends MyBaseController
             $excel->setCreator(config('attendize.app_name'))
                 ->setCompany(config('attendize.app_name'));
 
-            $excel->sheet('attendees_sheet_1', function ($sheet) use ($event_id, $select, $title_row) {
-
+            $excel->sheet('attendees_sheet_1', function ($sheet) use ($event_id, $select, $title_row, $tickets) {
 
                 $data = Attendee::where('attendees.event_id', '=', $event_id)
                     ->where('attendees.is_cancelled', '=', 0)
@@ -662,6 +656,23 @@ class EventAttendeesController extends MyBaseController
                     $row->setBackground('#f5f5f5');
                 });
             });
+
+            $excel->sheet('summary', function ($sheet) use ($event_id, $tickets) {
+                // add total for each ticket
+                foreach($tickets as $ticket) {
+                    $sheet->appendRow(array($ticket->title, $ticket->attendees->count()));
+                    foreach($ticket->options as $ticket_option) {
+                        foreach($ticket_option->options as $ticket_option_detail) {
+                            $total = DB::table('attendee_ticket_options_details')
+                                 ->select(DB::raw('*'))
+                                 ->where('ticket_options_details_id', '=', $ticket_option_detail->id)
+                                 ->get();
+                            $sheet->appendRow(array(' - '.$ticket_option_detail->title, $total->count()));
+                        }
+                    }
+                }
+            });
+
         })->export($export_as);
     }
 
