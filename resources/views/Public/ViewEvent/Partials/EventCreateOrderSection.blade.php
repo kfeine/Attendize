@@ -139,21 +139,21 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('order_city', __('public_viewevent_partials_eventcreateordersection.city'), ['class' => "required"]) !!}
-                                {!!  Form::text('order_city', null, [
-                                            'class'=>'form-control required',
-                                            'required' => 'required', 
-                                            'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_city')
-                                ])  !!}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
                                 {!! Form::label('order_postal_code', __('public_viewevent_partials_eventcreateordersection.postcode'), ['class' => "required"]) !!}
                                 {!!  Form::text('order_postal_code', null, [
                                             'class'=>'form-control required',
                                             'required' => 'required', 
                                             'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_postcode')
+                                ])  !!}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {!! Form::label('order_city', __('public_viewevent_partials_eventcreateordersection.city'), ['class' => "required"]) !!}
+                                {!!  Form::text('order_city', null, [
+                                            'class'=>'form-control required',
+                                            'required' => 'required', 
+                                            'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_city')
                                 ])  !!}
                             </div>
                         </div>
