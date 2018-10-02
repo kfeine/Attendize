@@ -46,11 +46,21 @@
                     <table class="table table-bordered table-condensed">
                         <tbody>
                         <tr>
-                            <td>{!! Form::hidden('details[]', "1") !!}
+                            <td>
+                                {!! Form::hidden('details[]', "1") !!}
                                 {!! Form::label("details_1_title", __('manageevent_modals_createticketoption.title')) !!}
                                 {!! Form::text("details_1_title", null, ['required' => 'required', 'class' => "form-control"]) !!}
                                 {!! Form::label("details_1_price", __('manageevent_modals_createticketoption.price')) !!}
                                 {!! Form::text("details_1_price", null, ['required' => 'required', 'class' => "form-control"]) !!}</td>
+                                <div class="custom-checkbox">
+                                {!! Form::checkbox("details_1_is_forced", "yes", $detail->is_forced, ['data-toggle' => 'toggle', 'id' => "details_1_is_forced"]) !!}
+                                {!! Form::label("details_1_is_forced", __('manageevent_modals_editticketoptions.is_forced')) !!}</td>
+                                </div>
+                                <div class="custom-checkbox">
+                                {!! Form::checkbox("details_1_default_value", "yes", $detail->default_value, ['data-toggle' => 'toggle', 'id' => "details_1_default_value"]) !!}
+                                {!! Form::label("details_1_default_value", __('manageevent_modals_createticketoption.default_value')) !!}
+                                </div>
+                            </td>
                             <td width="50">
                                 <i class="btn btn-danger ico-remove" onclick="removeTicketOptionsDetails(this);"></i>
                             </td>
@@ -90,13 +100,23 @@
 <script>
   function getFormTicketDetails(number){
 
-      return ` 
+      return `
         <tr>
-            <td>{!! Form::hidden('details[]', "`+number+`") !!}
+        <td>
+                {!! Form::hidden('details[]', "`+number+`") !!}
                 {!! Form::label("details_`+number+`_title", __('manageevent_modals_createticketoption.title')) !!}
                 {!! Form::text("details_`+number+`_title", null, ['required' => 'required', 'class' => "form-control"]) !!}
                 {!! Form::label("details_`+number+`_price", __('manageevent_modals_createticketoption.price')) !!}
                 {!! Form::text("details_`+number+`_price", null, ['required' => 'required', 'class' => "form-control"]) !!}</td>
+                <div class="custom-checkbox">
+                {!! Form::checkbox("details_`+number+`_is_forced", "yes", null, ['data-toggle' => 'toggle', 'id' => "details_`+number+`_is_forced"]) !!}
+                {!! Form::label("details_`+number+`_is_forced", __('manageevent_modals_editticketoptions.is_forced')) !!}</td>
+                </div>
+                <div class="custom-checkbox">
+                {!! Form::checkbox("details_`+number+`_default_value", "yes", null, ['data-toggle' => 'toggle', 'id' => "details_`+number+`_default_value"]) !!}
+                {!! Form::label("details_`+number+`_default_value", __('manageevent_modals_createticketoption.default_value')) !!}
+                </div>
+            </td>
             <td width="50">
                 <i class="btn btn-danger ico-remove" onclick="removeTicketOptionsDetails(this);"></i>
             </td>

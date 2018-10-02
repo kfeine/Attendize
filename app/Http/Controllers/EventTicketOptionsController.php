@@ -79,12 +79,12 @@ class EventTicketOptionsController extends MyBaseController
         $optionDetails_ids = $request->get('details');
 
         foreach ($optionDetails_ids as $optionDetails_id) {
-            $title = $request->get('details_'. $optionDetails_id .'_title');
-            $price = $request->get('details_'. $optionDetails_id .'_price');
-
             $optionDetails = new TicketOptionsDetails();
-            $optionDetails->title = $title;
-            $optionDetails->price = $price;
+
+            $optionDetails->title = $request->get('details_'. $optionDetails_id .'_title');;
+            $optionDetails->price = $request->get('details_'. $optionDetails_id .'_price');
+            $optionDetails->is_forced = ($request->get('details_'. $optionDetails_id .'_is_forced') == 'yes');
+            $optionDetails->default_value = ($request->get('details_'. $optionDetails_id .'_default_value') == 'yes');
 
             $optionBlock->options()->save($optionDetails);
         }
@@ -174,19 +174,19 @@ class EventTicketOptionsController extends MyBaseController
         }
 
         foreach ($optionDetails_ids as $optionDetails_id) {
-            $title = $request->get('details_'. $optionDetails_id .'_title');
-            $price = $request->get('details_'. $optionDetails_id .'_price');
-
-            // ICI
             $optionDetails = TicketOptionsDetails::find($optionDetails_id);
+
             if(!$optionDetails){
                 $optionDetails = new TicketOptionsDetails();
             }
-            $optionDetails->title = $title;
-            $optionDetails->price = $price;
-            $optionDetails->ticket_options_id = $optionBlock->id;
-            $optionDetails->save();
 
+            $optionDetails->title = $request->get('details_'. $optionDetails_id .'_title');
+            $optionDetails->price = $request->get('details_'. $optionDetails_id .'_price');
+            $optionDetails->is_forced = ($request->get('details_'. $optionDetails_id .'_is_forced') == 'yes');
+            $optionDetails->default_value = ($request->get('details_'. $optionDetails_id .'_default_value') == 'yes');
+            $optionDetails->ticket_options_id = $optionBlock->id;
+
+            $optionDetails->save();
         }
 
         return response()->json([

@@ -20,6 +20,15 @@ label.required::after {
   font-size: 9px;
 }
 
+/* disabled checkbox customization */
+.custom-checkbox > label.disabled::before,
+.custom-checkbox > label.disabled::after,
+.custom-checkbox:hover > label.disabled::before,
+.custom-checkbox:hover > label.disabled::after {
+    background-color: #c8c8c8 !important;
+    border-color: #c8c8c8 !important;
+}
+
 @media (min-width: 768px) {
   .container {
     width: 750px;

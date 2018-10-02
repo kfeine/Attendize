@@ -9486,10 +9486,10 @@ $.cf = {
 
     $(document.body).on('click', '.enableTicketOptionDetail', function (e) {
 
-        var optionId = $(this).data('id'),
-               route = $(this).data('route');
+        var optionDetailId = $(this).data('id'),
+                     route = $(this).data('route');
 
-        $.post(route, 'option_detail_id=' + optionId)
+        $.post(route, 'option_detail_id=' + optionDetailId)
                 .done(function (data) {
 
                     if (typeof data.message !== 'undefined') {
