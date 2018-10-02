@@ -137,8 +137,8 @@ class EventAttendeesController extends MyBaseController
         $ticket_id           = $request->get('ticket_id');
         $ticket_price        = 0;
         $attendee_gender     = $request->get('gender');
-        $attendee_first_name = mb_convert_case(trim($request->get('first_name')), MB_CASE_TITLE, 'UTF-8');
-        $attendee_last_name  = mb_convert_case(trim($request->get('last_name')), MB_CASE_UPPER, 'UTF-8');
+        $attendee_first_name = mb_convert_case(trim(strip_tags($request->get('first_name'))), MB_CASE_TITLE, 'UTF-8');
+        $attendee_last_name  = mb_convert_case(trim(strip_tags($request->get('last_name'))), MB_CASE_UPPER, 'UTF-8');
         $attendee_email      = $request->get('email');
         $email_attendee      = $request->get('email_ticket');
 
@@ -733,8 +733,8 @@ class EventAttendeesController extends MyBaseController
         }
 
         $attendee               = Attendee::scope()->findOrFail($attendee_id);
-        $attendee->first_name   = mb_convert_case(trim($request->get('first_name')), MB_CASE_TITLE, 'UTF-8');
-        $attendee->last_name    = mb_convert_case(trim($request->get('last_name')), MB_CASE_UPPER, 'UTF-8');
+        $attendee->first_name   = mb_convert_case(trim(strip_tags($request->get('first_name'))), MB_CASE_TITLE, 'UTF-8');
+        $attendee->last_name    = mb_convert_case(trim(strip_tags($request->get('last_name'))), MB_CASE_UPPER, 'UTF-8');
         $attendee->email        = $request->get('email');
         $attendee->phone        = $request->get('phone');
         $attendee->address1     = $request->get('address1');

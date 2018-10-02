@@ -658,8 +658,8 @@ class EventCheckoutController extends Controller
             if ($ticket_order['order_requires_payment'] && !isset($request_data['pay_offline'])) {
                 $order->payment_gateway_id = $ticket_order['payment_gateway']->id;
             }
-            $order->first_name            = mb_convert_case(trim($request_data['order_first_name']), MB_CASE_TITLE, 'UTF-8');
-            $order->last_name             = mb_convert_case(trim($request_data['order_last_name']), MB_CASE_UPPER, 'UTF-8');
+            $order->first_name            = mb_convert_case(trim(strip_tags($request_data['order_first_name'])), MB_CASE_TITLE, 'UTF-8');
+            $order->last_name             = mb_convert_case(trim(strip_tags($request_data['order_last_name'])), MB_CASE_UPPER, 'UTF-8');
             $order->email                 = $request_data['order_email'];
             $order->phone                 = $request_data['order_phone'];
             $order->address1              = $request_data['order_address_line_1'];
@@ -740,8 +740,8 @@ class EventCheckoutController extends Controller
 
                 $attendee                  = new Attendee();
                 $attendee->gender          = $request_data["ticket_holder_gender"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
-                $attendee->first_name      = mb_convert_case(trim($request_data["ticket_holder_first_name"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']]), MB_CASE_TITLE, 'UTF-8');
-                $attendee->last_name       = mb_convert_case(trim($request_data["ticket_holder_last_name"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']]), MB_CASE_UPPER, 'UTF-8');
+                $attendee->first_name      = mb_convert_case(trim(strip_tags($request_data["ticket_holder_first_name"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']])), MB_CASE_TITLE, 'UTF-8');
+                $attendee->last_name       = mb_convert_case(trim(strip_tags($request_data["ticket_holder_last_name"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']])), MB_CASE_UPPER, 'UTF-8');
                 $attendee->email           = $request_data["ticket_holder_email"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
                 $attendee->phone           = $request_data['ticket_holder_phone'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
                 $attendee->address1        = $request_data['ticket_holder_address_line_1'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
