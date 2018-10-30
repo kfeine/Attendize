@@ -98,7 +98,7 @@
                         <li>Droit à la portabilité des données ;</li>
                         <li>Droit d'opposition au traitement.</li>
                     </ul>
-                    <p>Pour toute demande d'exercice de ces droits, merci d'adresse une demande par email à <a href="mailto:privacy@caef.net">privacy@caef.net</a>, ou par courrier à : <i>Entente Evangélique des CAEF, 18 bis rue Pasteur, 26000 Valence</i></p>
+                    <p>Pour toute demande d'exercice de ces droits, merci d'adresse une demande par email à <a href="mailto:vieprivee@caef.net">vieprivee@caef.net</a>, ou par courrier à : <i>Entente Evangélique des CAEF, 18 bis rue Pasteur, 26000 Valence</i></p>
 
                     <h2>Mesures de protection</h2>
                     <p>Les mesures suivantes sont mises en place afin de protéger vos données :</p>
