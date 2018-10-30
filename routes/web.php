@@ -141,6 +141,7 @@ Route::group(['prefix' => 'e'], function () {
         'as'   => 'postCreateOrder',
         'uses' => 'EventCheckoutController@postCreateOrder',
     ]);
+
 });
 
 /*
@@ -789,3 +790,10 @@ Route::get('/terms_and_conditions', [
         return 'TODO: add terms and cond';
     }
 ]);
+
+/*
+ * RGPD
+ */
+Route::get('privacy/policy', function () {
+    return View::make("Public.PrivacyPolicy");
+});
