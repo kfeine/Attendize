@@ -198,6 +198,7 @@ class EventCheckoutController extends Controller
             $validation_rules['ticket_holder_address_line_1.' . $attendee_id . '.' . $ticket_id] = ['required'];
             $validation_rules['ticket_holder_city.' . $attendee_id . '.' . $ticket_id] = ['required'];
             $validation_rules['ticket_holder_postal_code.' . $attendee_id . '.' . $ticket_id] = ['required'];
+            $validation_rules['privacy_policy_consent'] = ['required'];
 
             $validation_messages['ticket_holder_first_name.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_last_name.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($attendee_id + 1)]);
@@ -208,6 +209,7 @@ class EventCheckoutController extends Controller
             $validation_messages['ticket_holder_address_line_1.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.address_line_1_required', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_city.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.city_required', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_postal_code.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.postal_code_required', ['person' => ($attendee_id + 1)]);
+            $validation_messages['privacy_policy_consent'] = __('controllers_eventcheckoutcontroller.privacy_policy_required');
 
             /*
              * Validation rules for custom questions
