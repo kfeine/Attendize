@@ -75,7 +75,7 @@ class Ticket extends MyBaseModel
      */
     public function options()
     {
-        return $this->hasMany(\App\Models\TicketOptions::class);
+        return $this->hasMany(\App\Models\TicketOptions::class)->orderBy('block_order', 'ASC');
     }
 
     /**
