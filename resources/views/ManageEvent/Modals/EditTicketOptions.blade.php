@@ -28,6 +28,15 @@
                   !!}
               </div>
               <div class="form-group">
+                  {!! Form::label('block_order', __('manageevent_modals_editticketoptions.block_order'), array('class'=>'control-label')) !!}
+                  {!! Form::number('block_order', $option->block_order,
+                     array(
+                     'class'=>'form-control',
+                     'placeholder'=>__('manageevent_modals_editticketoptions.block_order')
+                     ))
+                  !!}
+              </div>
+              <div class="form-group">
                     <label for="ticket-options-type">
                         @lang('manageevent_modals_editticketoptions.option_type')
                     </label>
