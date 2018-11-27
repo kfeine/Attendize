@@ -60,7 +60,7 @@
                                 {!! Form::text("details_1_title", null, ['required' => 'required', 'class' => "form-control"]) !!}
                                 {!! Form::label("details_1_price", __('manageevent_modals_createticketoption.price')) !!}
                                 {!! Form::text("details_1_price", null, ['required' => 'required', 'class' => "form-control"]) !!}
-                                {!! Form::label("details_1_option_order", __('manageevent_modals_editticketoptions.option_order')) !!}
+                                {!! Form::label("details_1_option_order", __('manageevent_modals_createticketoption.option_order')) !!}
                                 {!! Form::number("details_1_option_order", null, ['class' => "form-control"]) !!}
                             </td>
                             <td width="50">
@@ -109,7 +109,7 @@
                 {!! Form::text("details_`+number+`_title", null, ['required' => 'required', 'class' => "form-control"]) !!}
                 {!! Form::label("details_`+number+`_price", __('manageevent_modals_createticketoption.price')) !!}
                 {!! Form::text("details_`+number+`_price", null, ['required' => 'required', 'class' => "form-control"]) !!}
-                {!! Form::label("details_`+number+`_option_order", __('manageevent_modals_editticketoptions.option_order')) !!}
+                {!! Form::label("details_`+number+`_option_order", __('manageevent_modals_createticketoption.option_order')) !!}
                 {!! Form::number("details_`+number+`_option_order", null, ['class' => "form-control"]) !!}
             </td>
             <td width="50">

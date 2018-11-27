@@ -12,6 +12,7 @@ return [
     'create'          => 'Create',
     'option_type'     => 'Option type',
     'options_details' => 'Possible Choice',
+    'option_order'    => "Option order",
     'another'         => 'Add choice',
     'required_option' => 'Required option',
     'description'     => 'Description',
