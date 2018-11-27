@@ -112,7 +112,7 @@ class EventTicketOptionsController extends MyBaseController
         $event = Event::scope()->findOrFail($event_id);
         $ticket = Ticket::scope()->findOrFail($ticket_id);
         $option = TicketOptions::scope()->findOrFail($option_id);
-        $details = $option->options;
+        $details = $option->options_by_id;
         $optionType = TicketOptionsType::all();
 
         $data = [
