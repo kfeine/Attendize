@@ -80,12 +80,11 @@ class EventTicketOptionsController extends MyBaseController
         $optionDetails_ids = $request->get('details');
 
         foreach ($optionDetails_ids as $optionDetails_id) {
-            $title = $request->get('details_'. $optionDetails_id .'_title');
-            $price = $request->get('details_'. $optionDetails_id .'_price');
-
             $optionDetails = new TicketOptionsDetails();
-            $optionDetails->title = $title;
-            $optionDetails->price = $price;
+
+            $optionDetails->title = $request->get('details_'. $optionDetails_id .'_title');
+            $optionDetails->price = $request->get('details_'. $optionDetails_id .'_price');
+            $optionDetails->option_order = $request->get('details_'. $optionDetails_id .'_option_order');
 
             $optionBlock->options()->save($optionDetails);
         }
@@ -164,31 +163,33 @@ class EventTicketOptionsController extends MyBaseController
         $optionBlock->ticket_options_type_id = $ticket_options_type->id;
         $optionBlock->save();
 
-
-        //detail ids du formulare
+        // detail ids du formulaire
         $optionDetails_ids = $request->get('details');
+        // detail ids EN BASE
+        $oldOptionDetails_ids = [];
 
         foreach($optionBlock->options as $detail){
+            array_push($oldOptionDetails_ids, $detail->id);
             if(!in_array($detail->id, $optionDetails_ids))  {
               //si ce n'est pas dans la liste, supprimer de la base
               $detail->delete();
             }
         }
 
-        foreach ($optionDetails_ids as $optionDetails_id) {
-            $title = $request->get('details_'. $optionDetails_id .'_title');
-            $price = $request->get('details_'. $optionDetails_id .'_price');
+        Log::debug(print_r($oldOptionDetails_ids, true));
+        Log::debug(print_r($optionDetails_ids, true));
 
-            // ICI
+        foreach ($optionDetails_ids as $optionDetails_id) {
             $optionDetails = TicketOptionsDetails::find($optionDetails_id);
-            if(!$optionDetails){
+            // Créer l'optionDetail si n'existe pas pour cette option
+            if(!$optionDetails || !in_array($optionDetails_id, $oldOptionDetails_ids)) {
                 $optionDetails = new TicketOptionsDetails();
             }
-            $optionDetails->title = $title;
-            $optionDetails->price = $price;
+            $optionDetails->title = $request->get('details_'. $optionDetails_id .'_title');
+            $optionDetails->price = $request->get('details_'. $optionDetails_id .'_price');
+            $optionDetails->option_order = $request->get('details_'. $optionDetails_id .'_option_order');
             $optionDetails->ticket_options_id = $optionBlock->id;
             $optionDetails->save();
-
         }
 
         return response()->json([

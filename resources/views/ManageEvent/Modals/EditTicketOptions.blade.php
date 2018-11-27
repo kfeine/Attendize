@@ -60,7 +60,10 @@
                                 {!! Form::label("details_".$detail->id."_title", __('manageevent_modals_editticketoptions.title')) !!}
                                 {!! Form::text("details_".$detail->id."_title", $detail->title, ['required' => 'required', 'class' => "form-control"]) !!}
                                 {!! Form::label("details_".$detail->id."_price", __('manageevent_modals_editticketoptions.price')) !!}
-                                {!! Form::text("details_".$detail->id."_price", $detail->price, ['required' => 'required', 'class' => "form-control"]) !!}</td>
+                                {!! Form::text("details_".$detail->id."_price", $detail->price, ['required' => 'required', 'class' => "form-control"]) !!}
+                                {!! Form::label("details_".$detail->id."_option_order", __('manageevent_modals_editticketoptions.option_order')) !!}
+                                {!! Form::number("details_".$detail->id."_option_order", $detail->option_order, ['class' => "form-control"]) !!}
+                            </td>
                             <td width="50">
                                 <i class="btn btn-danger ico-remove" onclick="removeTicketOptionsDetails(this);"></i> <br>
                                 <a class="btn btn-primary enableTicketOptionDetail" href="javascript:void(0);" data-route="{{ route('postEnableTicketOptionDetail', ['event_id' => $event->id, 'ticket_id' => $ticket->id, 'option_id'=>$option->id, 'option_detail_id'=>$detail->id]) }}" data-id="{{ $detail->id }}">
@@ -112,7 +115,10 @@
                 {!! Form::label("details_`+number+`_title", __('manageevent_modals_createticketoption.title')) !!}
                 {!! Form::text("details_`+number+`_title", null, ['required' => 'required', 'class' => "form-control"]) !!}
                 {!! Form::label("details_`+number+`_price", __('manageevent_modals_createticketoption.price')) !!}
-                {!! Form::text("details_`+number+`_price", null, ['required' => 'required', 'class' => "form-control"]) !!}</td>
+                {!! Form::text("details_`+number+`_price", null, ['required' => 'required', 'class' => "form-control"]) !!}
+                {!! Form::label("details_`+number+`_option_order", __('manageevent_modals_editticketoptions.option_order')) !!}
+                {!! Form::number("details_`+number+`_option_order", null, ['class' => "form-control"]) !!}
+            </td>
             <td width="50">
                 <i class="btn btn-danger ico-remove" onclick="removeTicketOptionsDetails(this);"></i>
             </td>
