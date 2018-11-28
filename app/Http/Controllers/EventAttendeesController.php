@@ -656,18 +656,17 @@ class EventAttendeesController extends MyBaseController
         //   $title_row[] = "Opt".$detail->id.": ".$detail->title;
         // }
         foreach($options_one_choice_titles as $option_title){
-          $select[] = DB::raw("(case when ticket_options.title='".$option_title."' then ticket_options_details.title end) as ".str_replace(' ','_',$option_title));
+          $select[] = DB::raw("MAX(CASE WHEN ticket_options.title='".$option_title."' THEN ticket_options_details.title END) AS ".str_replace(' ','_',$option_title));
           $title_row[] = $option_title;
         }
         foreach($options_multiple_choices_titles as $option_title){
-          $select[] = DB::raw("(case when concat(ticket_options.title, ' ', ticket_options_details.title)='".$option_title."' then 'Y' end) as ".str_replace(' ','_',$option_title));
+          $select[] = DB::raw("MAX(CASE WHEN CONCAT(ticket_options.title, ' ', ticket_options_details.title)='".$option_title."' THEN 'Y' END) AS ".str_replace(' ','_',$option_title));
           $title_row[] = $option_title;
         }
-        Log::info($select);
 
         foreach($questions as $question){
-          $select[] = DB::raw("MAX(CASE WHEN question_answers.question_id = ".$question->id." THEN question_answers.answer_text ELSE '' END) AS ".$question->id);
-          $title_row[] = "Q".$question->id.": ".$question->title;
+          $select[] = DB::raw("MAX(CASE WHEN question_answers.question_id = ".$question->id." THEN question_answers.answer_text ELSE '' END) AS question_".$question->id);
+          $title_row[] = $question->title;
         }
 
         Excel::create('attendees-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event_id, $select, $title_row, $tickets) {
@@ -693,7 +692,6 @@ class EventAttendeesController extends MyBaseController
                     ->select($select)
                     ->groupBy('attendees.id')
                     ->get();
-             // Log::info($data);
 
                 $sheet->fromArray($data);
                 $sheet->row(1, $title_row);
