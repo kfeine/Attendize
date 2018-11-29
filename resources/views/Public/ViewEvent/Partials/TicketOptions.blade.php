@@ -18,9 +18,8 @@
                             $checkbox_id = $numAttendee."_".md5($ticket->id.$option->id.$detail->title);
                         ?>
                         <div class="custom-checkbox">
-                            {!! Form::checkbox("nope", $detail->id, $detail->default_value, ["disabled" => $detail->is_forced ? true : false, 'id' => $checkbox_id]) !!}
+                            {!! Form::checkbox("attendee_{$numAttendee}_ticket_{$ticket->id}_options_$option->id[]", $detail->id, $detail->default_value, ['id' => $checkbox_id, "onclick" => "return false;"]) !!}
                             <label for="{{ $checkbox_id }}" {{ $detail->is_forced ? 'class=disabled' : '' }}>{{ $detail->title_with_price }}</label>
-                            <input name="attendee_{{ $numAttendee }}_ticket_{{ $ticket->id }}_options_{{ $option->id }}[]" type="hidden" value="true"/>
                         </div>
                     @endforeach
                 @elseif($option->ticket_options_type_id == config('attendize.ticket_options_radio_single'))
