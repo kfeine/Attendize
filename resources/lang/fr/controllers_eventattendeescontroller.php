@@ -26,6 +26,7 @@ return [
     'xls_address_2'        => 'Adresse 2',
     'xls_postal_code'      => 'Code postal',
     'xls_city'             => 'Ville',
+    'xls_custom_field'     => 'Champ personnalisé',
     'xls_order_ref'        => 'Référence de la commande',
     'xls_purchase_date'    => 'Date d\'achat',
     'xls_payment_received' => 'Payé',

@@ -26,6 +26,7 @@ return [
     'xls_address_2'        => 'Address 2',
     'xls_postal_code'      => 'Postal Code',
     'xls_city'             => 'City',
+    'xls_custom_field'     => 'Custom field',
     'xls_order_ref'        => 'Order Reference',
     'xls_purchase_date'    => 'Purchase Date',
     'xls_payment_received' => 'Payment Received?',
