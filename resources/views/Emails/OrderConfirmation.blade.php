@@ -71,5 +71,7 @@
     <br><br>
 </div>
 <br><br>
-@lang('emails_orderconfirmation.thanks')
+@lang('emails_orderconfirmation.thanks')<br><br>
+
+<i>@lang('emails_common.privacypolicy')</i><br>
 @stop

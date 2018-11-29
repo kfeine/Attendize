@@ -87,5 +87,9 @@
     <br><br>
 </div>
 <br><br>
-@lang('mailers_ticketmailer_sendordertickets.thanks')
+@lang('mailers_ticketmailer_sendordertickets.thanks'),
+
+<br>
+<br>
+<i>@lang('emails_common.privacypolicy')</i><br>
 @stop

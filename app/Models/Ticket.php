@@ -75,7 +75,19 @@ class Ticket extends MyBaseModel
      */
     public function options()
     {
-        return $this->hasMany(\App\Models\TicketOptions::class);
+        // sort by block_order
+        return $this->hasMany(\App\Models\TicketOptions::class)->orderBy('block_order', 'ASC');
+    }
+
+    /**
+     * The options associated with the ticket.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function options_by_id()
+    {
+        // sort by id
+        return $this->hasMany(\App\Models\TicketOptions::class)->orderBy('block_order', 'ASC');
     }
 
     /**

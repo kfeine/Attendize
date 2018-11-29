@@ -14,6 +14,7 @@ use App\Models\Question;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Ticket;
+use App\Models\TicketOptions;
 use App\Models\TicketOptionsDetails;
 use Auth;
 use Config;
@@ -564,8 +565,46 @@ class EventAttendeesController extends MyBaseController
           ->select([
             'ticket_options_details.id',
             'ticket_options_details.title',
+            'ticket_options.title',
           ])
           ->get();
+
+        // options avec 1 seul choix possible
+        $options_one_choice_titles = [];
+        $options_one_choice = TicketOptions::where('tickets.event_id', '=', $event_id)
+          ->where("ticket_options_type_id","=", 1)
+          ->join('tickets', 'ticket_options.ticket_id', "=", 'tickets.id')
+          ->select(['ticket_options.title'])
+          ->get();
+        foreach($options_one_choice as $option) {
+            if (!in_array($option["title"], $options_one_choice_titles)) {
+                $options_one_choice_titles[] = $option["title"];
+            }
+        }
+
+        // options avec choix multiples
+        $options_multiple_choices_titles = [];
+        $options_multiple_choices = TicketOptions::where('tickets.event_id', '=', $event_id)
+          ->where("ticket_options_type_id","=", 3)
+          ->join('tickets', 'ticket_options.ticket_id', "=", 'tickets.id')
+          ->leftJoin('ticket_options_details', 'ticket_options.id', "=", 'ticket_options_details.ticket_options_id')
+          ->select([
+            'ticket_options.title as option_title',
+            'ticket_options_details.title as option_detail_title',
+          ])
+          ->get();
+        // foreach($options_multiple_choices as $option) {
+        //     if (!in_array($option["title"], $options_multiple_choices_titles)) {
+        //         $options_multiple_choices_titles[] = $option["title"];
+        //     }
+        // }
+        foreach($options_multiple_choices as $option) {
+            $complete_title = $option["option_title"]." ".$option["option_detail_title"];
+            if (!in_array($complete_title, $options_multiple_choices_titles)) {
+                $options_multiple_choices_titles[] = $complete_title;
+            }
+        }
+            //Log::info($options_multiple_choices_titles);
 
         $questions = Question::where('tickets.event_id', '=', $event_id)
           ->where("questions.deleted_at","=", null)
@@ -592,8 +631,6 @@ class EventAttendeesController extends MyBaseController
               'orders.order_reference',
               'orders.created_at',
               DB::raw("(CASE WHEN orders.is_payment_received THEN 'YES' ELSE 'NO' END) AS is_payment_received"),
-              //DB::raw("(CASE WHEN attendees.has_arrived THEN 'YES' ELSE 'NO' END) AS has_arrived"),
-              //'attendees.arrival_time',
               'tickets.title',
         ];
 
@@ -614,14 +651,22 @@ class EventAttendeesController extends MyBaseController
             __('controllers_eventattendeescontroller.xls_tickets_title'),
         ];
 
-        foreach($details as $detail){
-          $select[] = DB::raw("MAX(CASE WHEN attendee_ticket_options_details.ticket_options_details_id = ".$detail->id." THEN 1 ELSE 0 END) AS option".$detail->id);
-          $title_row[] = "Opt".$detail->id.": ".$detail->title;
+        // foreach($details as $detail){
+        //   $select[] = DB::raw("MAX(CASE WHEN attendee_ticket_options_details.ticket_options_details_id = ".$detail->id." THEN 1 ELSE 0 END) AS option".$detail->id);
+        //   $title_row[] = "Opt".$detail->id.": ".$detail->title;
+        // }
+        foreach($options_one_choice_titles as $option_title){
+          $select[] = DB::raw("MAX(CASE WHEN ticket_options.title='".$option_title."' THEN ticket_options_details.title END) AS ".str_replace(' ','_',$option_title));
+          $title_row[] = $option_title;
+        }
+        foreach($options_multiple_choices_titles as $option_title){
+          $select[] = DB::raw("MAX(CASE WHEN CONCAT(ticket_options.title, ' ', ticket_options_details.title)='".$option_title."' THEN 'Y' END) AS ".str_replace(' ','_',$option_title));
+          $title_row[] = $option_title;
         }
 
         foreach($questions as $question){
-          $select[] = DB::raw("MAX(CASE WHEN question_answers.question_id = ".$question->id." THEN question_answers.answer_text ELSE '' END) AS question".$question->id);
-          $title_row[] = "Q".$question->id.": ".$question->title;
+          $select[] = DB::raw("MAX(CASE WHEN question_answers.question_id = ".$question->id." THEN question_answers.answer_text ELSE '' END) AS question_".$question->id);
+          $title_row[] = $question->title;
         }
 
         Excel::create('attendees-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event_id, $select, $title_row, $tickets) {
@@ -642,11 +687,11 @@ class EventAttendeesController extends MyBaseController
                     ->join('tickets', 'tickets.id', '=', 'attendees.ticket_id')
                     ->leftJoin('question_answers', 'question_answers.attendee_id', '=', 'attendees.id')
                     ->leftJoin('attendee_ticket_options_details', 'attendee_ticket_options_details.attendee_id', '=', 'attendees.id')
+                    ->leftJoin('ticket_options_details', 'attendee_ticket_options_details.ticket_options_details_id', '=', 'ticket_options_details.id')
+                    ->leftJoin('ticket_options', 'ticket_options.id', '=', 'ticket_options_details.ticket_options_id')
                     ->select($select)
                     ->groupBy('attendees.id')
                     ->get();
-                    //->toSql();
-                    //dd($data);
 
                 $sheet->fromArray($data);
                 $sheet->row(1, $title_row);

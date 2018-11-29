@@ -269,6 +269,12 @@
                     </div>
                 </div>
 
+                <h3 class="required">@lang('public_viewevent_partials_eventcreateordersection.privacy')</h3>
+                <div class="privacy_policy_consent">
+                        <input data-toggle="toggle" id="privacy_policy_consent" name="privacy_policy_consent" type="checkbox" required>
+                        <label for="privacy_policy_consent">@lang('public_viewevent_partials_eventcreateordersection.privacy_policy_consent') <span style="color: red; font-size: 9px;"><b>*</b></span></label>
+                </div>
+
                 <style>
                     .offline_payment_toggle {
                         padding: 20px 0;

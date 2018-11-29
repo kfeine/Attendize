@@ -7,6 +7,7 @@ return [
     'title'           => 'Option title',
     'price'           => 'Price',
     'description'     => 'Description',
+    'block_order'     => "Option block order",
     'close'           => 'Close',
     'save'            => 'Save',
     'option_type'     => 'Option type',

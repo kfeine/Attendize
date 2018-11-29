@@ -7,6 +7,7 @@ return [
     'title'           => 'Titre de l\'option',
     'price'           => 'Prix',
     'description'     => 'Description',
+    'block_order'     => "Ordre du bloc d'options",
     'close'           => 'Fermer',
     'save'            => 'Enregistrer',
     'option_type'     => 'Type d\'option',

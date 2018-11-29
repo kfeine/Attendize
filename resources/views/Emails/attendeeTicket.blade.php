@@ -6,5 +6,6 @@
 
 @lang('emails_attendeeticket.reference') <b>{{$attendee->order->order_reference}}</b>.<br>
 
-@lang('emails_attendeeticket.thanks')<br>
+@lang('emails_attendeeticket.thanks')<br><br>
 
+<i>@lang('emails_common.privacypolicy')</i><br>

@@ -70,6 +70,7 @@ class EventTicketOptionsController extends MyBaseController
 
         $optionBlock->title = $request->get('title');
         $optionBlock->description = $request->get('description');
+        $optionBlock->block_order = $request->get('block_order');
         $optionBlock->is_required = ($request->get('is_required') == 'yes');
         $optionBlock->ticket_options_type_id = $ticket_options_type->id;
         $ticket->options()->save($optionBlock);
@@ -81,10 +82,14 @@ class EventTicketOptionsController extends MyBaseController
         foreach ($optionDetails_ids as $optionDetails_id) {
             $optionDetails = new TicketOptionsDetails();
 
-            $optionDetails->title = $request->get('details_'. $optionDetails_id .'_title');;
+            // $optionDetails->title = $title;
+            // $optionDetails->price = $price;
+
+            $optionDetails->title = $request->get('details_'. $optionDetails_id .'_title');
             $optionDetails->price = $request->get('details_'. $optionDetails_id .'_price');
             $optionDetails->is_forced = ($request->get('details_'. $optionDetails_id .'_is_forced') == 'yes');
             $optionDetails->default_value = ($request->get('details_'. $optionDetails_id .'_default_value') == 'yes');
+            $optionDetails->option_order = $request->get('details_'. $optionDetails_id .'_option_order');
 
             $optionBlock->options()->save($optionDetails);
         }
@@ -112,7 +117,7 @@ class EventTicketOptionsController extends MyBaseController
         $event = Event::scope()->findOrFail($event_id);
         $ticket = Ticket::scope()->findOrFail($ticket_id);
         $option = TicketOptions::scope()->findOrFail($option_id);
-        $details = $option->options;
+        $details = $option->options_by_id;
         $optionType = TicketOptionsType::all();
 
         $data = [
@@ -158,15 +163,18 @@ class EventTicketOptionsController extends MyBaseController
 
         $optionBlock->title = $request->get('title');
         $optionBlock->description = $request->get('description');
+        $optionBlock->block_order = $request->get('block_order');
         $optionBlock->is_required = ($request->get('is_required') == 'yes');
         $optionBlock->ticket_options_type_id = $ticket_options_type->id;
         $optionBlock->save();
 
-
-        //detail ids du formulare
+        // detail ids du formulaire
         $optionDetails_ids = $request->get('details');
+        // detail ids EN BASE
+        $oldOptionDetails_ids = [];
 
         foreach($optionBlock->options as $detail){
+            array_push($oldOptionDetails_ids, $detail->id);
             if(!in_array($detail->id, $optionDetails_ids))  {
               //si ce n'est pas dans la liste, supprimer de la base
               $detail->delete();
@@ -174,16 +182,21 @@ class EventTicketOptionsController extends MyBaseController
         }
 
         foreach ($optionDetails_ids as $optionDetails_id) {
+            $title = $request->get('details_'. $optionDetails_id .'_title');
+            $price = $request->get('details_'. $optionDetails_id .'_price');
+
             $optionDetails = TicketOptionsDetails::find($optionDetails_id);
 
-            if(!$optionDetails){
+            // Créer l'optionDetail si n'existe pas pour cette option
+            if(!$optionDetails || !in_array($optionDetails_id, $oldOptionDetails_ids)) {
                 $optionDetails = new TicketOptionsDetails();
             }
 
-            $optionDetails->title = $request->get('details_'. $optionDetails_id .'_title');
-            $optionDetails->price = $request->get('details_'. $optionDetails_id .'_price');
+            $optionDetails->title = $title;
+            $optionDetails->price = $price;
             $optionDetails->is_forced = ($request->get('details_'. $optionDetails_id .'_is_forced') == 'yes');
             $optionDetails->default_value = ($request->get('details_'. $optionDetails_id .'_default_value') == 'yes');
+            $optionDetails->option_order = $request->get('details_'. $optionDetails_id .'_option_order');
             $optionDetails->ticket_options_id = $optionBlock->id;
 
             $optionDetails->save();

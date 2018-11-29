@@ -12,6 +12,7 @@ return [
     'email_required'           => 'L\'email du titulaire  :person est obligatoire',
     'email_invalid'            => 'L\'email du titulaire :person semble invalide',
     'question_required'        => 'Cette question est obligatoire',
+    "privacy_policy_required"  => "Pour vous inscrire, il vous faut accepter la politique concernant les données personnelles",
     'enable_javascript'        => 'Veuillez activer Javascript dans votre navigateur',
     'session_expired'          => 'Votre session est expirée',
     'no_gateway_configured'    => 'Aucune passerelle de paiement configurée',

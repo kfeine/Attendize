@@ -28,6 +28,15 @@
                   !!}
               </div>
               <div class="form-group">
+                  {!! Form::label('block_order', __('manageevent_modals_editticketoptions.block_order'), array('class'=>'control-label')) !!}
+                  {!! Form::number('block_order', $option->block_order,
+                     array(
+                     'class'=>'form-control',
+                     'placeholder'=>__('manageevent_modals_editticketoptions.block_order')
+                     ))
+                  !!}
+              </div>
+              <div class="form-group">
                     <label for="ticket-options-type">
                         @lang('manageevent_modals_editticketoptions.option_type')
                     </label>
@@ -52,6 +61,7 @@
                                 {!! Form::label("details_".$detail->id."_title", __('manageevent_modals_editticketoptions.title')) !!}
                                 {!! Form::text("details_".$detail->id."_title", $detail->title, ['required' => 'required', 'class' => "form-control"]) !!}
                                 {!! Form::label("details_".$detail->id."_price", __('manageevent_modals_editticketoptions.price')) !!}
+<<<<<<< HEAD
                                 {!! Form::text("details_".$detail->id."_price", $detail->price, ['required' => 'required', 'class' => "form-control"]) !!}
                                 <div class="custom-checkbox">
                                 {!! Form::checkbox("details_".$detail->id."_is_forced", "yes", $detail->is_forced, ['data-toggle' => 'toggle', 'id' => "details_".$detail->id."_is_forced"]) !!}
@@ -62,6 +72,14 @@
                                 {!! Form::label("details_".$detail->id."_default_value", __('manageevent_modals_editticketoptions.default_value')) !!}
                                 </div>
                             </td>
+||||||| merged common ancestors
+                                {!! Form::text("details_".$detail->id."_price", $detail->price, ['required' => 'required', 'class' => "form-control"]) !!}</td>
+=======
+                                {!! Form::text("details_".$detail->id."_price", $detail->price, ['required' => 'required', 'class' => "form-control"]) !!}
+                                {!! Form::label("details_".$detail->id."_option_order", __('manageevent_modals_editticketoptions.option_order')) !!}
+                                {!! Form::number("details_".$detail->id."_option_order", $detail->option_order, ['class' => "form-control"]) !!}
+                            </td>
+>>>>>>> congres2019
                             <td width="50">
                                 <i class="btn btn-danger ico-remove" onclick="removeTicketOptionsDetails(this);"></i> <br>
                                 <a class="btn btn-primary enableTicketOptionDetail" href="javascript:void(0);" data-route="{{ route('postEnableTicketOptionDetail', ['event_id' => $event->id, 'ticket_id' => $ticket->id, 'option_id'=>$option->id, 'option_detail_id'=>$detail->id]) }}" data-id="{{ $detail->id }}">
@@ -116,17 +134,19 @@
                 {!! Form::label("details_`+number+`_price", __('manageevent_modals_createticketoption.price')) !!}
                 {!! Form::text("details_`+number+`_price", null, ['required' => 'required', 'class' => "form-control"]) !!}
                 <div class="custom-checkbox">
-                {!! Form::checkbox("details_`+number+`_is_forced", "yes", null, ['data-toggle' => 'toggle', 'id' => "details_`+number+`_is_forced"]) !!}
-                {!! Form::label("details_`+number+`_is_forced", __('manageevent_modals_editticketoptions.is_forced')) !!}
+                    {!! Form::checkbox("details_`+number+`_is_forced", "yes", null, ['data-toggle' => 'toggle', 'id' => "details_`+number+`_is_forced"]) !!}
+                    {!! Form::label("details_`+number+`_is_forced", __('manageevent_modals_editticketoptions.is_forced')) !!}
                 </div>
                 <div class="custom-checkbox">
-                {!! Form::checkbox("details_`+number+`_default_value", "yes", null, ['data-toggle' => 'toggle', 'id' => "details_`+number+`_default_value"]) !!}
-                {!! Form::label("details_`+number+`_default_value", __('manageevent_modals_createticketoption.default_value')) !!}
+                    {!! Form::checkbox("details_`+number+`_default_value", "yes", null, ['data-toggle' => 'toggle', 'id' => "details_`+number+`_default_value"]) !!}
+                    {!! Form::label("details_`+number+`_default_value", __('manageevent_modals_createticketoption.default_value')) !!}
                 </div>
+                {!! Form::label("details_`+number+`_option_order", __('manageevent_modals_editticketoptions.option_order')) !!}
+                {!! Form::number("details_`+number+`_option_order", null, ['class' => "form-control"]) !!}
             </td>
             <td width="50">
                 <i class="btn btn-danger ico-remove" onclick="removeTicketOptionsDetails(this);"></i>
             </td>
-        </tr>`; 
+        </tr>`;
   }
 </script>
