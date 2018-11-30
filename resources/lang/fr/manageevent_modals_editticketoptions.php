@@ -15,6 +15,7 @@ return [
     'another'         => 'Ajouter un choix',
     'required_option' => 'Obliger au moins la sélection d\'un choix',
     'is_forced'       => "Forcer le choix avec le choix par défault",
-    'default_value'   => "Cocher par défaut"
+    'default_value'   => "Cocher par défaut",
+    'option_order'    => "Ordre de l'option"
 
 ];

@@ -15,6 +15,7 @@ return [
     'another'         => 'Add choice',
     'required_option' => 'Required option',
     'is_forced'       => "Force choice with default choice",
-    'default_value'   => "Check by default"
+    'default_value'   => "Check by default",
+    'option_order'    => "Option order"
 
 ];
