@@ -443,9 +443,16 @@ class EventCheckoutController extends Controller
 
                         break;
                     case config('attendize.payment_gateway_scellius'):
-                        $transactionId = uniqid();
+                        $transactionId = mt_rand(100000, 999999); //transaction ID 6 chiffre numérique obligatoire
+
+                        $firstname = $request->input('order_first_name', 'test3');
+                        $lastname = $request->input('order_last_name', 'test2');
+                        $suffix_reference = substr($lastname,0,3).substr($firstname,0,3);
+
+                        $transactionReference = strtoupper(substr(uniqid($suffix_reference),0,15)); //transaction reference (order id) 15 maxi dans attendize
                         $transaction_data += [
                             'transactionId' => $transactionId,
+                            'transactionReference' => $transactionReference,
                             'customerEmail' => $request->input('order_email', 'test1'),
                             'customerName' => $request->input('order_last_name', 'test2'),
                             'customerFirstname' => $request->input('order_first_name', 'test3'),
