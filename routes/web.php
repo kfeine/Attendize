@@ -777,6 +777,17 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
             'as'   => 'showEventPromote',
             'uses' => 'EventPromoteController@showPromote',
         ]);
+
+        /*
+         * -------
+         * Options Generic
+         * -------
+         */
+        Route::group(['prefix' => '{event_id}'], function(){
+            Route::resource('options_generic', 'EventTicketOptionsGenericController')->except([
+                'show'
+            ]);;
+        });
     });
 });
 

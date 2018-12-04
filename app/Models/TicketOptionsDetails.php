@@ -52,6 +52,17 @@ class TicketOptionsDetails extends MyBaseModel
         return $this->belongsTo(\App\Models\TicketOptions::class);
     }
 
+    /**
+     * The Option Generic associated with the option details.
+     *
+     * @access public
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function ticket_options_details_generic()
+    {
+        return $this->belongsTo(\App\Models\TicketOptionsDetailsGeneric::class);
+    }
+
     public function getTitleWithPriceAttribute()
     {
         return $this->title . ' (' . money($this->price, $this->ticket_options->ticket->event->currency) .')';
