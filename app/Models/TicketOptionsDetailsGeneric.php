@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class TicketOptionsDetailsGeneric extends \Illuminate\Database\Eloquent\Model
+class TicketOptionsDetailsGeneric extends MyBaseModel
 {
 
     /**
@@ -40,6 +40,7 @@ class TicketOptionsDetailsGeneric extends \Illuminate\Database\Eloquent\Model
             'quantity_available.integer' => __('models_ticketoptionsdetailsgeneric.quantity_available_integer'),
         ];
     }
+    public $validation_messages = [];
 
     /**
      * Scope a query to only include options generic that are sold out.

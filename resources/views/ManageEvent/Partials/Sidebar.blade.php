@@ -23,6 +23,12 @@
                     <span class="text">@lang('manageevent_partials_sidebar.tickets')</span>
                 </a>
             </li>
+            <li class="{{ Request::is('*options_generic*') ? 'active' : '' }}">
+                <a href="{{route('options_generic.index', array('event_id' => $event->id))}}">
+                    <span class="figure"><i class="ico-ticket"></i></span>
+                    <span class="text">@lang('manageevent_partials_sidebar.options_generic')</span>
+                </a>
+            </li>
             <li class="{{ Request::is('*orders*') ? 'active' : '' }}">
                 <a href="{{route('showEventOrders', array('event_id' => $event->id))}}">
                     <span class="figure"><i class="ico-cart"></i></span>

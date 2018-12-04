@@ -784,9 +784,11 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
          * -------
          */
         Route::group(['prefix' => '{event_id}'], function(){
-            Route::resource('options_generic', 'EventTicketOptionsGenericController')->except([
+            Route::resource('options_generic', 'EventTicketOptionsGenericController', ['parameters' => [
+                'options_generic' => 'ticket_options_details_generic',
+            ]])->except([
                 'show'
-            ]);;
+            ]);
         });
     });
 });

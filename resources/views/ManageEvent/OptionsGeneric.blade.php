@@ -78,12 +78,12 @@
                                         {{ ($option->quantity_available === null) ? '&infin;' : $option->quantity_remaining }}
                                     </td>
                                     <td>
-                                        <a data-modal-id="view-option-{{ $option->id }}" data-href="{{route('showManageOrder', ['option_id'=>$option->id])}}" title="View Option" class="btn btn-xs btn-primary loadModal">@lang('manageevent_optionsgeneric.details')</a>
+                                        <a data-modal-id="view-option-{{ $option->id }}" data-href="{{route('options_generic.edit', ['event_id' => $event->id, 'option_id'=>$option->id])}}" title="View Option" class="btn btn-xs btn-primary loadModal">@lang('manageevent_optionsgeneric.details')</a>
                                         @if($option->quantity_sold == 0)
-                                            {!! Form::model($option, ['url' => route('postDeleteTicket', ['event_id' => $event->id]), 'class' => 'ajax pull-right']) !!}
+                                            {!! Form::model($option, ['url' => route('options_generic.destroy', ['event_id' => $event->id, 'options_generic'=>$option->id]), 'class' => 'ajax pull-right']) !!}
+                                            {{ method_field('DELETE') }}
 
                                             {{ csrf_field() }}
-                                            <input type="hidden" name="option_id" value="{{ $option->id }}">
 
                                             <button class="btn btn-danger btn-xs">@lang('manageevent_optionsgeneric.delete')</button>
                                             {!! Form::close() !!}

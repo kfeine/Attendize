@@ -16,4 +16,5 @@ return [
     'discounts' => 'Discounts',
     'surveys' => 'Surveys',
     'widgets' => 'Widgets',
+    'options_generic' => "Generic Options",
 ];
