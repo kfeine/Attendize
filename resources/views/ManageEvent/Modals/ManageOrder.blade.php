@@ -72,10 +72,10 @@
                             <b>@lang('manageevent_modals_manageorder.address2')</b><br> {{$order->address2}}
                         </div>
                         <div class="col-sm-6 col-xs-6">
-                            <b>@lang('manageevent_modals_manageorder.city')</b><br> {{$order->city}}
+                            <b>@lang('manageevent_modals_manageorder.postcode')</b><br> {{$order->postal_code}}
                         </div>
                         <div class="col-sm-6 col-xs-6">
-                            <b>@lang('manageevent_modals_manageorder.postcode')</b><br> {{$order->postal_code}}
+                            <b>@lang('manageevent_modals_manageorder.city')</b><br> {{$order->city}}
                         </div>
 
                         @if($order->transaction_id)

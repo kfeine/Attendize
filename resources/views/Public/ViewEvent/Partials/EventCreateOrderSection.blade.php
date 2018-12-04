@@ -239,21 +239,21 @@
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    {!! Form::label("ticket_holder_city[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.city'), ['class' => "required"]) !!}
-                                                    {!!  Form::text("ticket_holder_city[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", null, [
-                                                                'class'=>"form-control required ticket_holder_city.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_city",
-                                                                'required' => 'required',
-                                                                'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_city')
-                                                    ])  !!}
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
                                                     {!! Form::label("ticket_holder_postal_code[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.postcode'), ['class' => "required"]) !!}
                                                     {!!  Form::text("ticket_holder_postal_code[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", null, [
                                                                 'class'=>"form-control required ticket_holder_postal_code.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_postal_code",
                                                                 'required' => 'required',
                                                                 'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_postcode')
+                                                    ])  !!}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    {!! Form::label("ticket_holder_city[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.city'), ['class' => "required"]) !!}
+                                                    {!!  Form::text("ticket_holder_city[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", null, [
+                                                                'class'=>"form-control required ticket_holder_city.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_city",
+                                                                'required' => 'required',
+                                                                'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_city')
                                                     ])  !!}
                                                 </div>
                                             </div>
