@@ -28,6 +28,7 @@ class FixDefaultOptionDetails extends Migration
     {
         Schema::table('ticket_options_details', function (Blueprint $table) {
             $table->dropColumn('default_value');
+            $table->boolean('default')->default(0);
         });
     }
 }
