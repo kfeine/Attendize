@@ -129,6 +129,5 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
 </div>
 </section>
