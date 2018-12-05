@@ -18,5 +18,6 @@ return [
     'description'     => 'Description',
     'is_forced'       => "Force choice with default choice",
     'default_value'   => "Check by default",
+    'generic'         => "Generic option",
 
 ];

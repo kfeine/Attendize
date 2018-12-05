@@ -17,5 +17,6 @@ return [
     'is_forced'       => "Force choice with default choice",
     'default_value'   => "Check by default",
     'option_order'    => "Option order"
+    'generic'         => "Generic option",
 
 ];

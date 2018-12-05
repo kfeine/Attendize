@@ -52,6 +52,11 @@ class TicketOptionsDetailsGeneric extends MyBaseModel
         $query->where('remaining_tickets', '=', 0);
     }
 
+    public function scopeEvent($query, $event_id)
+    {
+        $query->where('event_id', '=', $event_id);
+    }
+
     /**
      * Get the number of options generic remaining.
      *
@@ -79,6 +84,20 @@ class TicketOptionsDetailsGeneric extends MyBaseModel
             ->sum('quantity_reserved');
 
         return $reserved_total;
+    }
+
+    /**
+     * Get the number of options generic used by Option.
+     *
+     * @return mixed
+     */
+    public function getQuantityUsedForOptionAttribute()
+    {
+        $used_total = TicketOptionsDetails::
+            where('ticket_options_details_generic_id', $this->id)
+            ->count();
+
+        return $used_total;
     }
 
 }

@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\Ticket;
 use App\Models\TicketOptions;
 use App\Models\TicketOptionsDetails;
+use App\Models\TicketOptionsDetailsGeneric;
 use App\Models\TicketOptionsType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -34,6 +35,7 @@ class EventTicketOptionsController extends MyBaseController
             'event' => $event,
             'ticket' => $ticket,
             'ticket_options_types' => TicketOptionsType::all(),
+            'ticket_options_generic' => TicketOptionsDetailsGeneric::Event($event_id)->pluck('title', 'id'),
         ]);
     }
 
@@ -91,6 +93,10 @@ class EventTicketOptionsController extends MyBaseController
             $optionDetails->default_value = ($request->get('details_'. $optionDetails_id .'_default_value') == 'yes');
             $optionDetails->option_order = $request->get('details_'. $optionDetails_id .'_option_order');
 
+            if($request->filled('details_'. $optionDetails_id .'_generic')){
+                $optionDetails->ticket_options_details_generic_id = $request->get('details_'. $optionDetails_id .'_generic');
+            }
+
             $optionBlock->options()->save($optionDetails);
         }
 
@@ -119,6 +125,7 @@ class EventTicketOptionsController extends MyBaseController
         $option = TicketOptions::scope()->findOrFail($option_id);
         $details = $option->options_by_id;
         $optionType = TicketOptionsType::all();
+        $ticket_options_details_generic = TicketOptionsDetailsGeneric::Event($event_id)->pluck('title', 'id'); 
 
         $data = [
             'event'  => $event,
@@ -126,6 +133,7 @@ class EventTicketOptionsController extends MyBaseController
             'option' => $option,
             'details' => $details,
             'ticket_options_types' => $optionType,
+            'ticket_options_generic' => $ticket_options_details_generic,
         ];
 
         return view('ManageEvent.Modals.EditTicketOptions', $data);
@@ -198,6 +206,12 @@ class EventTicketOptionsController extends MyBaseController
             $optionDetails->default_value = ($request->get('details_'. $optionDetails_id .'_default_value') == 'yes');
             $optionDetails->option_order = $request->get('details_'. $optionDetails_id .'_option_order');
             $optionDetails->ticket_options_id = $optionBlock->id;
+
+            if($request->filled('details_'. $optionDetails_id .'_generic')){
+                $optionDetails->ticket_options_details_generic_id = $request->get('details_'. $optionDetails_id .'_generic');
+            }else {
+                $optionDetails->ticket_options_details_generic_id = null;
+            }
 
             $optionDetails->save();
         }

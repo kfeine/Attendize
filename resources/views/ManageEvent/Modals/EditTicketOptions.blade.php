@@ -60,6 +60,8 @@
                                 {!! Form::hidden('details[]', $detail->id) !!}
                                 {!! Form::label("details_".$detail->id."_title", __('manageevent_modals_editticketoptions.title')) !!}
                                 {!! Form::text("details_".$detail->id."_title", $detail->title, ['required' => 'required', 'class' => "form-control"]) !!}
+                                {!! Form::label("details_".$detail->id."_generic", __('manageevent_modals_editticketoptions.generic')) !!}
+                                {!! Form::select("details_".$detail->id."_generic", $ticket_options_generic, $detail->ticket_options_details_generic_id, ['placeholder' => 'Aucune', 'class' => "form-control"]) !!}
                                 {!! Form::label("details_".$detail->id."_price", __('manageevent_modals_editticketoptions.price')) !!}
                                 {!! Form::text("details_".$detail->id."_price", $detail->price, ['required' => 'required', 'class' => "form-control"]) !!}
                                 <div class="custom-checkbox">
@@ -125,6 +127,8 @@
                 {!! Form::hidden('details[]', "`+number+`") !!}
                 {!! Form::label("details_`+number+`_title", __('manageevent_modals_createticketoption.title')) !!}
                 {!! Form::text("details_`+number+`_title", null, ['required' => 'required', 'class' => "form-control"]) !!}
+                {!! Form::label("details_`+number+`_generic", __('manageevent_modals_editticketoptions.generic')) !!}
+                {!! Form::select("details_`+number+`_generic", $ticket_options_generic, null, ['placeholder' => 'Aucune', 'class' => "form-control"]) !!}
                 {!! Form::label("details_`+number+`_price", __('manageevent_modals_createticketoption.price')) !!}
                 {!! Form::text("details_`+number+`_price", null, ['required' => 'required', 'class' => "form-control"]) !!}
                 <div class="custom-checkbox">

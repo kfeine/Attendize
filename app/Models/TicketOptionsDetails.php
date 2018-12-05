@@ -70,4 +70,15 @@ class TicketOptionsDetails extends MyBaseModel
     {
         return $this->title . ' (' . money($this->price, $this->ticket_options->ticket->event->currency) .')';
     }
+
+    //vérifie s'il reste la possibilité d'en acheter
+    public function isRemaining()
+    {
+        if(!$this->ticket_options_details_generic or $this->ticket_options_details_generic->quantity_remaining > 0){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }

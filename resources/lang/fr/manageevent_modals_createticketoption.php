@@ -17,6 +17,7 @@ return [
     'required_option' => 'Obliger au moins la sélection d\'un choix',
     'description'     => 'Description',
     'is_forced'       => "Forcer le choix avec le choix par défault",
-    'default_value'   => "Cocher par défaut"
+    'default_value'   => "Cocher par défaut",
+    'generic'         => "Option générique"
 
 ];

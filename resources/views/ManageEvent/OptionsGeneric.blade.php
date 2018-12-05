@@ -56,6 +56,7 @@
                                     <th>@lang('manageevent_optionsgeneric.sold')</th>
                                     <th>@lang('manageevent_optionsgeneric.really_sold')</th>
                                     <th>@lang('manageevent_optionsgeneric.remaining')</th>
+                                    <th>@lang('manageevent_optionsgeneric.used')</th>
                                     <th>@lang('manageevent_optionsgeneric.actions')</th>
                                 </tr>
                             </thead>
@@ -78,8 +79,11 @@
                                         {{ ($option->quantity_available === null) ? '&infin;' : $option->quantity_remaining }}
                                     </td>
                                     <td>
+                                        {{ $option->quantity_used_for_option }}
+                                    </td>
+                                    <td>
                                         <a data-modal-id="view-option-{{ $option->id }}" data-href="{{route('options_generic.edit', ['event_id' => $event->id, 'option_id'=>$option->id])}}" title="View Option" class="btn btn-xs btn-primary loadModal">@lang('manageevent_optionsgeneric.details')</a>
-                                        @if($option->quantity_sold == 0)
+                                        @if($option->quantity_sold == 0 && $option->quantity_used_for_option == 0)
                                             {!! Form::model($option, ['url' => route('options_generic.destroy', ['event_id' => $event->id, 'options_generic'=>$option->id]), 'class' => 'ajax pull-right']) !!}
                                             {{ method_field('DELETE') }}
 

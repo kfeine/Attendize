@@ -59,6 +59,8 @@
                                 {!! Form::hidden('details[]', "1") !!}
                                 {!! Form::label("details_1_title", __('manageevent_modals_createticketoption.title')) !!}
                                 {!! Form::text("details_1_title", null, ['required' => 'required', 'class' => "form-control"]) !!}
+                                {!! Form::label("details_1_generic", __('manageevent_modals_createticketoption.generic')) !!}
+                                {!! Form::select("details_1_generic", $ticket_options_generic, null, ['placeholder' => 'Aucune', 'class' => "form-control"]) !!}
                                 {!! Form::label("details_1_price", __('manageevent_modals_createticketoption.price')) !!}
                                 {!! Form::text("details_1_price", null, ['required' => 'required', 'class' => "form-control"]) !!}
                                 {!! Form::label("details_1_option_order", __('manageevent_modals_createticketoption.option_order')) !!}
@@ -117,6 +119,8 @@
                 {!! Form::hidden('details[]', "`+number+`") !!}
                 {!! Form::label("details_`+number+`_title", __('manageevent_modals_createticketoption.title')) !!}
                 {!! Form::text("details_`+number+`_title", null, ['required' => 'required', 'class' => "form-control"]) !!}
+                {!! Form::label("details_`+number+`_generic", __('manageevent_modals_createticketoption.generic')) !!}
+                {!! Form::select("details_`+number+`_generic", $ticket_options_generic, null, ['placeholder' => 'Aucune', 'class' => "form-control"]) !!}
                 {!! Form::label("details_`+number+`_price", __('manageevent_modals_createticketoption.price')) !!}
                 {!! Form::text("details_`+number+`_price", null, ['required' => 'required', 'class' => "form-control"]) !!}
                 {!! Form::label("details_`+number+`_option_order", __('manageevent_modals_createticketoption.option_order')) !!}
