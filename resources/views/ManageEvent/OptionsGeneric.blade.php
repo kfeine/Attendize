@@ -73,7 +73,7 @@
                                         {{ $option->quantity_sold }}
                                     </td>
                                     <td>
-                                        {{ $option->real_quantity_sold }}
+                                        {{ $option->quantity_reserved }}
                                     </td>
                                     <td>
                                         {{ ($option->quantity_available === null) ? '&infin;' : $option->quantity_remaining }}

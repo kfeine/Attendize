@@ -12,6 +12,7 @@ use App\Models\OrderItem;
 use App\Models\OrderItemOption;
 use App\Models\QuestionAnswer;
 use App\Models\ReservedTickets;
+use App\Models\ReservedOptionsGeneric;
 use App\Models\Ticket;
 use App\Models\TicketOptions;
 use App\Models\TicketOptionsDetails;
@@ -74,9 +75,10 @@ class EventCheckoutController extends Controller
         $attendees_ids = $request->get('attendees');
 
         /*
-         * Remove any tickets the user has reserved
+         * Remove any tickets and options the user has reserved
          */
         ReservedTickets::where('session_id', '=', session()->getId())->delete();
+        ReservedOptionsGeneric::where('session_id', '=', session()->getId())->delete();
 
         /*
          * Go though the selected tickets and check if they're available
@@ -122,12 +124,12 @@ class EventCheckoutController extends Controller
             if($total_ticket_quantity < $ticket->min_per_person){
                 return response()->json([
                     'status'   => 'error',
-                    'messages' => '__ le nombre de ticket "'.$ticket->title.'" exigé par personne n\'est pas respecté',
+                    'message' => '__ le nombre de ticket "'.$ticket->title.'" exigé par personne n\'est pas respecté',
                 ]);
             } else if($total_ticket_quantity > $max_per_person){
                 return response()->json([
                     'status'   => 'error',
-                    'messages' => '__ le nombre de ticket "'.$ticket->title.'" reservé dépasse la quantité disponible',
+                    'message' => '__ le nombre de ticket "'.$ticket->title.'" reservé dépasse la quantité disponible',
                 ]);
             }
 
@@ -152,6 +154,13 @@ class EventCheckoutController extends Controller
 
                     if($detail->ticket_options_id != $option->id){
                         continue; 
+                    }
+
+                    if(!$detail->isRemaining()){
+                        return response()->json([
+                            'status'   => 'error',
+                            'message' => 'l\'option : "'.$detail->title.'" n\'est plus disponible',
+                        ]);
                     }
 
                     $details[] = $detail;
@@ -186,6 +195,20 @@ class EventCheckoutController extends Controller
             $reservedTickets->expires           = $order_expires_time;
             $reservedTickets->session_id        = session()->getId();
             $reservedTickets->save();
+
+            /*
+             * Reserve options for X amount of minutes
+             */
+            foreach($details as $detail){
+                if($detail->ticket_options_details_generic){
+                    $reservedOptionsGeneric                    = new ReservedOptionsGeneric();
+                    $reservedOptionsGeneric->ticket_options_details_generic_id = $detail->ticket_options_details_generic->id;
+                    $reservedOptionsGeneric->quantity_reserved = 1;
+                    $reservedOptionsGeneric->expires           = $order_expires_time;
+                    $reservedOptionsGeneric->session_id        = session()->getId();
+                    $reservedOptionsGeneric->save();
+                }
+            }
 
             /*
              * Create our validation rules here
@@ -767,6 +790,13 @@ class EventCheckoutController extends Controller
                 foreach ($attendee_details['options'] as $option) {
                     $attendee->options()->attach($option['id']);
 
+                    $details = TicketOptionsDetails::findOrFail($option['id']);
+                    if($details->ticket_options_details_generic){
+                        $details->ticket_options_details_generic->increment('quantity_sold');
+                    }
+
+
+
                     $orderItemOption = new OrderItemOption();
                     $orderItemOption->title = $option['title'];
                     $orderItemOption->order_item_id = $orderItem->id;
@@ -812,11 +842,18 @@ class EventCheckoutController extends Controller
             }
 
             /*
+             * Remove any tickets and options the user has reserved
+             */
+            ReservedTickets::where('session_id', '=', session()->getId())->delete();
+            ReservedOptionsGeneric::where('session_id', '=', session()->getId())->delete();
+
+            /*
              * Kill the session
              */
             session()->forget('ticket_order_' . $event->id);
             session()->forget('ticket_order_' . $event->id. '.transaction_id');
             session()->forget('ticket_order_' . $event->id. '.order_reference');
+            
 
             /*
              * Queue up some tasks - Emails to be sent, PDFs etc.
