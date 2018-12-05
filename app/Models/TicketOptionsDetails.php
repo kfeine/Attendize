@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TicketOptionsDetails extends MyBaseModel
 {
+
+    use SoftDeletes;
 
     /**
      * Indicates if the model should be timestamped.

@@ -8,6 +8,9 @@ class TicketOptions extends MyBaseModel
 {
 
     use SoftDeletes;
+    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+
+    protected $softCascade = ['options'];
 
     /**
      * The type associated with the question.
