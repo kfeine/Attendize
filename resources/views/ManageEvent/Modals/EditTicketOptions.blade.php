@@ -72,7 +72,6 @@
                                 {!! Form::checkbox("details_".$detail->id."_default_value", "yes", $detail->default_value, ['data-toggle' => 'toggle', 'id' => "details_".$detail->id."_default_value"]) !!}
                                 {!! Form::label("details_".$detail->id."_default_value", __('manageevent_modals_editticketoptions.default_value')) !!}
                                 </div>
-                                {!! Form::text("details_".$detail->id."_price", $detail->price, ['required' => 'required', 'class' => "form-control"]) !!}
                                 {!! Form::label("details_".$detail->id."_option_order", __('manageevent_modals_editticketoptions.option_order')) !!}
                                 {!! Form::number("details_".$detail->id."_option_order", $detail->option_order, ['class' => "form-control"]) !!}
                             </td>
