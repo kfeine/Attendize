@@ -98,7 +98,7 @@ cp .env.example .env
 chmod -R a+w storage
 chmod -R a+w public/user_content
 docker-compose build
-docker run --rm -v $(pwd):/app composer/composer install
+docker run --rm -it -v $(pwd):/usr/share/nginx/html/attendize attendize_composer composer install
 docker-compose up -d
 docker-compose run php php artisan attendize:install
 ```
