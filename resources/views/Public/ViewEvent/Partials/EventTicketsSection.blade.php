@@ -65,8 +65,6 @@
                                 @endforeach
                             </div>
                             <div class="p0 well bgcolor-white order_overview">
-                                <h5>@lang('public_viewevent_partials_eventticketssection.options')</h5>
-                                <hr/>
                                 @include('Public.ViewEvent.Partials.TicketOptions', ['tickets' => $tickets, 'numAttendee' => 1])
                             </div>
                         </div>
