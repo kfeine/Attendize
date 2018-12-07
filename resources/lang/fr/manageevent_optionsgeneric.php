@@ -2,7 +2,7 @@
 
 return [
 
-    'title'         => 'Options généric',
+    'title'         => 'Options générique',
     'create_optionsgeneric' => 'Créer une option',
     'optionsgeneric'=> ':number options',
     'subtitle'       => '30 options sur :count Total',
