@@ -17,7 +17,7 @@
                     >
                         <option>@lang('public_viewevent_partials_ticketoptions.select_one_option')</option>
                         @foreach ($option->options_enabled as $detail)
-                            <option value="{!!$detail->title_with_price!!}" {!! $detail->isRemaining() ? '' : 'disabled'!!}>{{$detail->title_with_price}} {!! $detail->isRemaining() ? '' : " (".__('public_viewevent_partials_ticketoptions.exhausted').")"!!}</option>
+                            <option value="{!!$detail->id!!}" {!! $detail->isRemaining() ? '' : 'disabled'!!}>{{$detail->title_with_price}} {!! $detail->isRemaining() ? '' : " (".__('public_viewevent_partials_ticketoptions.exhausted').")"!!}</option>
                         @endforeach
                     </select>
                 @elseif($option->ticket_options_type_id == config('attendize.ticket_options_checkbox_multi'))
