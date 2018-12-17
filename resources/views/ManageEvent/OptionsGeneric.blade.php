@@ -54,7 +54,6 @@
                                 <tr>
                                     <th>@lang('manageevent_optionsgeneric.title')</th>
                                     <th>@lang('manageevent_optionsgeneric.sold')</th>
-                                    <th>@lang('manageevent_optionsgeneric.really_sold')</th>
                                     <th>@lang('manageevent_optionsgeneric.remaining')</th>
                                     <th>@lang('manageevent_optionsgeneric.used')</th>
                                     <th>@lang('manageevent_optionsgeneric.actions')</th>
@@ -73,10 +72,7 @@
                                         {{ $option->quantity_sold }}
                                     </td>
                                     <td>
-                                        {{ $option->quantity_reserved }}
-                                    </td>
-                                    <td>
-                                        {{ ($option->quantity_available === null) ? '&infin;' : $option->quantity_remaining }}
+                                        {!! ($option->quantity_available === null) ? '&infin;' : $option->quantity_remaining !!}
                                     </td>
                                     <td>
                                         {{ $option->quantity_used_for_option }}

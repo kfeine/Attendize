@@ -12,7 +12,7 @@ return [
     'delete'        => 'Delete',
     'actions'       => 'Actions',
     'details'       => 'Modify',
-    'used'          => 'Used',
+    'used'          => 'Used by # options',
 
     'wrong'         => 'Something went wrong. Please try again.',
     'create_ticket' => 'Create Ticket',

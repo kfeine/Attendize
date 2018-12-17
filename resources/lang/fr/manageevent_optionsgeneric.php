@@ -12,7 +12,7 @@ return [
     'delete'        => 'Supprimer',
     'actions'       => 'Actions',
     'details'       => 'Modifier',
-    'used'          => 'Utilisé',
+    'used'          => "Utilisé par # d'options",
 
     'wrong'         => 'Une erreur s\'est produite, merci de réessayer ou de contacter les administrateurs du site.',
     'create_ticket' => 'Créer une formule',
