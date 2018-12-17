@@ -4599,7 +4599,7 @@ function log() {
 
                         toggleSubmitDisabled($submitButton);
                         showMessage('Oups ! Le serveur vient de retourner une erreur.\n\
-                   Veuillez réessayer, et nous contacter (ben.narang [arobase] posteo.net) si le problème se reproduit.');
+                   Veuillez réessayer, et nous contacter (ben.narang@posteo.net) si le problème se reproduit.');
                     },
                     success: function(data, statusText, xhr, $form) {
                         var $submitButton = $form.find('input[type=submit]');

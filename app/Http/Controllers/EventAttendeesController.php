@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\GenerateInvoice;
-use App\Jobs\SendMessageToAttendees;
 use App\Models\Attendee;
 use App\Models\Event;
 use App\Models\EventStats;
@@ -111,121 +110,6 @@ class EventAttendeesController extends MyBaseController
         ];
 
         return view('ManageEvent.Modals.MessageAttendee', $data);
-    }
-
-    /**
-     * Send a message to an attendee
-     *
-     * @param Request $request
-     * @param $attendee_id
-     * @return mixed
-     */
-    public function postMessageAttendee(Request $request, $attendee_id)
-    {
-        $rules = [
-            'subject' => 'required',
-            'message' => 'required',
-        ];
-
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status'   => 'error',
-                'messages' => $validator->messages()->toArray(),
-            ]);
-        }
-
-        $attendee = Attendee::scope()->findOrFail($attendee_id);
-
-        $data = [
-            'attendee'        => $attendee,
-            'message_content' => $request->get('message'),
-            'subject'         => $request->get('subject'),
-            'event'           => $attendee->event,
-            'email_logo'      => $attendee->event->organiser->full_logo_path,
-        ];
-
-        //@todo move this to the SendAttendeeMessage Job
-        Mail::send('Emails.messageReceived', $data, function ($message) use ($attendee, $data) {
-            $message->to($attendee->email, $attendee->full_name)
-                ->from(config('attendize.outgoing_email_noreply'), $attendee->event->organiser->name)
-                ->replyTo($attendee->event->organiser->email, $attendee->event->organiser->name)
-                ->subject($data['subject']);
-        });
-
-        /* Could bcc in the above? */
-        if ($request->get('send_copy') == '1') {
-            Mail::send('Emails.messageReceived', $data, function ($message) use ($attendee, $data) {
-                $message->to($attendee->event->organiser->emails)
-                    ->from(config('attendize.outgoing_email_noreply'), $attendee->event->organiser->name)
-                    ->replyTo($attendee->event->organiser->email, $attendee->event->organiser->name)
-                    ->subject($data['subject'] . '[ORGANISER COPY]');
-            });
-        }
-
-        return response()->json([
-            'status'  => 'success',
-            'message' => __('controllers_eventattendeescontroller.message_sent'),
-        ]);
-    }
-
-    /**
-     * Shows the 'Message Attendees' modal
-     *
-     * @param $event_id
-     * @return View
-     */
-    public function showMessageAttendees(Request $request, $event_id)
-    {
-        $data = [
-            'event'   => Event::scope()->find($event_id),
-            'tickets' => Event::scope()->find($event_id)->tickets()->pluck('title', 'id')->toArray(),
-        ];
-
-        return view('ManageEvent.Modals.MessageAttendees', $data);
-    }
-
-    /**
-     * Send a message to attendees
-     *
-     * @param Request $request
-     * @param $event_id
-     * @return mixed
-     */
-    public function postMessageAttendees(Request $request, $event_id)
-    {
-        $rules = [
-            'subject'    => 'required',
-            'message'    => 'required',
-            'recipients' => 'required',
-        ];
-
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status'   => 'error',
-                'messages' => $validator->messages()->toArray(),
-            ]);
-        }
-
-        $message = Message::createNew();
-        $message->message    = $request->get('message');
-        $message->subject    = $request->get('subject');
-        $message->recipients = ($request->get('recipients') == 'all') ? 'all' : $request->get('recipients');
-        $message->event_id   = $event_id;
-        $message->save();
-
-        /*
-         * Queue the emails
-         */
-        $this->dispatch(new SendMessageToAttendees($message));
-
-        return response()->json([
-            'status'  => 'success',
-            'message' => __('controllers_eventattendeescontroller.message_sent'),
-        ]);
     }
 
     /**

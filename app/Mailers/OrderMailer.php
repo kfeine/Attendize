@@ -33,7 +33,7 @@ class OrderMailer
             $message->subject(trans('ordermailer.orderticket_subject') . $order->event->title);
         });
 
-        $file_path = public_path(config('attendize.event_pdf_tickets_path')) . '/' . $order->order_reference . '.pdf';
+        $file_path = public_path(config('attendize.event_pdf_invoices_path')) . '/' . $order->order_reference . '.pdf';
         if (!file_exists($file_path)) {
             Log::error("Could not send invoice to: " . $order->email . " as invoice file does not exist on disk");
             Mail::send('Emails.OrderNotification', $data, function ($message) use ($order) {

@@ -7,7 +7,7 @@ return [
     'invite'           => 'Inviter un participant',
     'invite_attendees' => 'Inviter des participants',
     'print_list'       => 'Imprimer la liste des participants',
-    'export'           => 'Exporter',
+    'export'           => 'Exporter (XLSX)',
     'message'          => 'Envoyer un message',
     'search'           => 'Rechercher',
     'name'             => 'Nom',
