@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Log;
-use PDF;
+use Konekt\PdfInvoice\InvoicePrinter;
 
 class GenerateTicket extends Job implements ShouldQueue
 {
@@ -43,38 +43,48 @@ class GenerateTicket extends Job implements ShouldQueue
         $file_name = $this->reference;
         $file_path = public_path(config('attendize.event_pdf_tickets_path')) . '/' . $file_name;
         $file_with_ext = $file_path . ".pdf";
-
-        if (file_exists($file_with_ext)) {
-            Log::info("Use ticket from cache: " . $file_with_ext);
-            return;
-        }
-
         $order = Order::where('order_reference', $this->order_reference)->first();
-        Log::info($order);
-        $event = $order->event;
 
-        $query = $order->attendees();
-        if ($this->isAttendeeTicket()) {
-            $query = $query->where('reference_index', '=', $this->attendee_reference_index);
+        $invoice = new InvoicePrinter("A4", "€ ", "fr");
+        $invoice->setLogo(public_path($order->event->organiser->full_logo_path));
+        $invoice->setColor("#b8db74");
+        $invoice->setType("Facture");
+        $invoice->setReference($this->order_reference);
+        $invoice->setDate(date('d/m/Y',time()));
+        $invoice->setTime(date('H \h i',time()));
+        $invoice->setFrom(array(utf8_decode("Entente Évangélique des CAEF"), "18bis rue Pasteur", "26000 VALENCE", "04 26 50 27 37"));
+        $invoice->setTo(array($order->first_name . " " . $order->last_name, $order->address1, $order->postal_code . " " . $order->city, $order->email));
+
+        // add items
+        foreach ($order->orderItems as $order_item) {
+            $invoice->addItem($order_item->title, "", $order_item->quantity, 0, $order_item->unit_price, 0, $order_item->unit_price * $order_item->quantity);
+            foreach($order_item->orderItemOptions as $option) {
+                $invoice->addItem(" + " . $option->title, "", 1, 0, $option->price, 0, $option->price);
+            }
+        };
+        // if discount, insert it
+        if($order->discount) {
+            $invoice->addItem("Réduction : " . $order->discount->title, "", 1, 0, 0, 0, ($order->discount->type == "amount") ? $order->discount->price : -1 * $order->amount * (1/(1+$order->discount->price/100)-1));
         }
-        $attendees = $query->get();
 
-        $image_path = $event->organiser->full_logo_path;
-        if ($event->images->first() != null) {
-            $image_path = $event->images()->first()->image_path;
+        $invoice->addTotal("Total",$order->amount,true);
+
+        // if payé
+        //$invoice->addBadge("Payment Paid");
+        if ($order->order_status_id == 1) {
+            $invoice->addTitle("Commande payée");
+            $invoice->addParagraph("Cette commande a entièrement été réglée");
+        }
+        // if not payé
+        else {
+            $invoice->addTitle("Commande en attente de paiement");
+            $invoice->addParagraph("Cette commande n'a pas été réglée");
+            $invoice->addParagraph("Paiement par chèqueà l’ordre de l’Entente Evangélique des CAEF");
+            $invoice->addParagraph("ou par virement :\n    IBAN : FR11 2004 1010 0710 5500 3R03 896\n    BIC : PSSTFRPPLYO");
         }
 
-        $data = [
-            'order'     => $order,
-            'event'     => $event,
-            'attendees' => $attendees,
-            'css'       => file_get_contents(public_path('assets/stylesheet/ticket.css')),
-            'image'     => base64_encode(file_get_contents(public_path($image_path))),
-        ];
-
-        PDF::setOutputMode('F'); // force to file
-        PDF::html('Public.ViewEvent.Partials.PDFTicket', $data, $file_path);
-
+        $invoice->setFooternote(utf8_decode("Entente Évangélique des CAEF - 18bis rue Pasteur - 26000 Valence"));
+        $invoice->render($file_with_ext,'F');
         Log::info("Ticket generated!");
     }
 
