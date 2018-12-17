@@ -271,8 +271,10 @@
 
                 <h3 class="required">@lang('public_viewevent_partials_eventcreateordersection.privacy')</h3>
                 <div class="privacy_policy_consent">
+                    <div class="custom-checkbox">
                         <input data-toggle="toggle" id="privacy_policy_consent" name="privacy_policy_consent" type="checkbox" required>
                         <label for="privacy_policy_consent">@lang('public_viewevent_partials_eventcreateordersection.privacy_policy_consent') <span style="color: red; font-size: 9px;"><b>*</b></span></label>
+                    </div>
                 </div>
 
                 <style>
@@ -292,12 +294,14 @@
                             <label for="pay_offline">@lang('public_viewevent_partials_eventcreateordersection.offline')</label>
                         </div>
                     </div>
+                    @if(!empty($event->offline_payment_instructions))
                     <div class="offline_payment" style="display: none;">
                         <h5>@lang('public_viewevent_partials_eventcreateordersection.instructions')</h5>
                         <div class="well">
                             {!! Markdown::parse($event->offline_payment_instructions) !!}
                         </div>
                     </div>
+                    @endif
 
                 @endif
 
