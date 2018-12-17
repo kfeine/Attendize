@@ -8,22 +8,21 @@ use Carbon\Carbon;
 use Log;
 use Mail;
 use App\Mail\MessageReceived;
-use App\Mail\SendAttendeeInvite;
 
 
 class AttendeeMailer extends Mailer
 {
 
-    public function sendAttendeeTicket($attendee)
+    public function sendAttendeeConfirmation($attendee)
     {
 
-        Log::info("Sending ticket to: " . $attendee->email);
+        Log::info("Sending confirmation to: " . $attendee->email);
 
         $data = [
             'attendee' => $attendee,
         ];
 
-        Mail::send('Mailers.TicketMailer.SendAttendeeTicket', $data, function ($message) use ($attendee) {
+        Mail::send('Mailers.TicketMailer.SendAttendeeConfirmation', $data, function ($message) use ($attendee) {
             $message->to($attendee->email);
             $message->subject(trans('ordermailer.ordernotification_subject') . $attendee->order->event->title);
         });
@@ -53,15 +52,4 @@ class AttendeeMailer extends Mailer
         $message_object->sent_at = Carbon::now();
         $message_object->save();
     }
-
-    public function SendAttendeeInvite($attendee)
-    {
-
-        Log::info("Sending invite to: " . $attendee->email);
-
-        Mail::to($attendee->email)
-          ->queue(new SendAttendeeInvite($attendee));
-    }
-
-
 }

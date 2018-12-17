@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Jobs\SendOrderTickets;
+use App\Jobs\SendOrderInvoice;
 use App\Models\Attendee;
 use App\Models\Event;
 use App\Models\EventStats;
@@ -139,7 +139,7 @@ class EventOrdersController extends MyBaseController
     {
         $order = Order::scope()->find($order_id);
 
-        $this->dispatch(new SendOrderTickets($order));
+        $this->dispatch(new SendOrderInvoice($order));
 
         return response()->json([
             'status'      => 'success',

@@ -27,6 +27,7 @@ return [
     'event_images_path'      => 'user_content/event_images',
     'organiser_images_path'  => 'user_content/organiser_images',
     'event_pdf_tickets_path' => 'user_content/pdf_tickets',
+    'event_pdf_invoices_path' => 'user_content/pdf_invoices',
     'event_bg_images'        => 'assets/images/public/EventPage/backgrounds',
 
     'fallback_organiser_logo_url' => '/assets/images/logo-dark.png',

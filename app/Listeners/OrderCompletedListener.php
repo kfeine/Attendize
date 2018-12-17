@@ -3,9 +3,9 @@
 namespace App\Listeners;
 
 use App\Events\OrderCompletedEvent;
-use App\Jobs\GenerateTicket;
+use App\Jobs\GenerateInvoice;
 use App\Jobs\SendOrderNotification;
-use App\Jobs\SendOrderTickets;
+use App\Jobs\SendOrderInvoice;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
@@ -34,11 +34,11 @@ class OrderCompletedListener implements ShouldQueue
     public function handle(OrderCompletedEvent $event)
     {
         /**
-         * Generate the PDF tickets and send notification emails etc.
+         * Generate the PDF invoice and send email etc.
          */
         Log::info('Begin Processing Order: ' . $event->order->order_reference);
-        $this->dispatchNow(new GenerateTicket($event->order->order_reference));
-        $this->dispatch(new SendOrderTickets($event->order));
+        $this->dispatchNow(new GenerateInvoice($event->order->order_reference));
+        $this->dispatch(new SendOrderInvoice($event->order));
         $this->dispatch(new SendOrderNotification($event->order));
 
     }
