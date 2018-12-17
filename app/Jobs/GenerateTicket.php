@@ -39,10 +39,7 @@ class GenerateTicket extends Job implements ShouldQueue
      */
     public function handle()
     {
-
-        $file_name = $this->reference;
-        $file_path = public_path(config('attendize.event_pdf_tickets_path')) . '/' . $file_name;
-        $file_with_ext = $file_path . ".pdf";
+        $file_path = public_path(config('attendize.event_pdf_tickets_path')) . '/' . $this->reference . '.pdf';
         $order = Order::where('order_reference', $this->order_reference)->first();
 
         $invoice = new InvoicePrinter("A4", "€ ", "fr");
@@ -84,7 +81,7 @@ class GenerateTicket extends Job implements ShouldQueue
         }
 
         $invoice->setFooternote(utf8_decode("Entente Évangélique des CAEF - 18bis rue Pasteur - 26000 Valence"));
-        $invoice->render($file_with_ext,'F');
+        $invoice->render($file_path,'F');
         Log::info("Ticket generated!");
     }
 
