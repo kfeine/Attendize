@@ -613,10 +613,11 @@ class EventCheckoutController extends Controller
         //Si le ticket à déjà été validé par la banque
         if(!isset($ticket_order)){
           if($request->get('transactionId')){
-            return response()->redirectToRoute('showOrderDetails', [
-                'is_embedded'     => $this->is_embedded,
-                'order_reference' => $request->get('transactionId'),
-            ]);
+                $order = Order::where('transaction_id', $request->get('transactionId'))->first();
+                return response()->redirectToRoute('showOrderDetails', [
+                    'is_embedded'     => $this->is_embedded,
+                    'order_reference' => $order->order_reference,
+                ]);
           
           } else {
             session()->flash('message', "désolé, une erreur est survenue");
