@@ -925,13 +925,13 @@ class EventCheckoutController extends Controller
     }
 
     /**
-     * Shows the tickets for an order - either HTML or PDF
+     * Shows the invoice for an order in PDF
      *
      * @param Request $request
      * @param $order_reference
      * @return \Illuminate\View\View
      */
-    public function showOrderTickets(Request $request, $order_reference)
+    public function showOrderInvoice(Request $request, $order_reference)
     {
         $order = Order::where('order_reference', '=', $order_reference)->first();
 
@@ -939,20 +939,12 @@ class EventCheckoutController extends Controller
             abort(404);
         }
 
-        $data = [
-            'order'     => $order,
-            'event'     => $order->event,
-            'tickets'   => $order->event->tickets,
-            'attendees' => $order->attendees,
-            'css'       => file_get_contents(public_path('assets/stylesheet/ticket.css')),
-            'image'     => base64_encode(file_get_contents(public_path($order->event->organiser->full_logo_path))),
+        $file_path = public_path(config('attendize.event_pdf_invoices_path')) . '/' . $order->order_reference . '.pdf';
 
-        ];
+        if (!file_exists($file_path))
+            abort(404);
 
-        if ($request->get('download') == '1') {
-            return PDF::html('Public.ViewEvent.Partials.PDFTicket', $data, 'Tickets');
-        }
-        return view('Public.ViewEvent.Partials.PDFTicket', $data);
+        return response()->file($file_path);
     }
 
 }

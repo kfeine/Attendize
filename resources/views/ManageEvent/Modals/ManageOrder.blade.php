@@ -210,7 +210,7 @@
                 <a href="javascript:void(0);" data-modal-id="edit-order-{{ $order->id }}" data-href="{{route('showEditOrder', ['order_id'=>$order->id])}}" title="Edit Order" class="btn btn-info loadModal">
                     @lang('manageevent_modals_manageorder.edit')
                 </a>
-                <a class="btn btn-primary" target="_blank" href="{{route('showOrderTickets', ['order_reference' => $order->order_reference])}}?download=1">@lang('manageevent_modals_manageorder.print')</a>
+                <a class="btn btn-primary" target="_blank" href="{{route('showOrderInvoice', ['order_reference' => $order->order_reference])}}">@lang('manageevent_modals_manageorder.show_invoice')</a>
                 <span class="pauseTicketSales btn btn-success" data-id="{{$order->id}}" data-route="{{route('resendOrder', ['order_id'=>$order->id])}}">@lang('manageevent_modals_manageorder.resend')</span>
                {!! Form::button(__('manageevent_modals_manageorder.close'), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
             </div>

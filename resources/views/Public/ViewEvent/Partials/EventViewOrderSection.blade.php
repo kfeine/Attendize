@@ -42,7 +42,7 @@
         overflow: hidden;
     }
 
-    .ticket_download_link {
+    .invoice_download_link {
         border-bottom: 3px solid;
     }
 </style>
@@ -55,7 +55,7 @@
             </span>
             <h1>@lang('public_viewevent_partials_eventviewordersection.thanks')</h1>
             <h2>
-                @lang('public_viewevent_partials_eventviewordersection.message', ['openlink' => '<a title="Download Tickets" class="ticket_download_link" href="'.route('showOrderTickets', ['order_reference' => $order->order_reference]).'?download=1">', 'endlink' => '</a>'])
+                @lang('public_viewevent_partials_eventviewordersection.message', ['openlink' => '<a title="Download Invoice" class="invoice_download_link" href="'.route('showOrderInvoice', ['order_reference' => $order->order_reference]).'">', 'endlink' => '</a>'])
             </h2>
         </div>
     </div>

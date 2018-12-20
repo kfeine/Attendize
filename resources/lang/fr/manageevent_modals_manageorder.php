@@ -39,5 +39,5 @@ return [
     'address2'                  => 'Adresse (2)',
     'city'                      => 'Ville',
     'postcode'                  => 'Code postal',
-
+    'show_invoice'              => "Afficher la facture",
 ];

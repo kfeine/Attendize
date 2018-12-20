@@ -152,9 +152,9 @@ Route::get('order/{order_reference}', [
     'uses' => 'EventCheckoutController@showOrderDetails',
 ]);
 
-Route::get('order/{order_reference}/tickets', [
-    'as'   => 'showOrderTickets',
-    'uses' => 'EventCheckoutController@showOrderTickets',
+Route::get('order/{order_reference}/invoice', [
+    'as'   => 'showOrderInvoice',
+    'uses' => 'EventCheckoutController@showOrderInvoice',
 ]);
 
 /*

@@ -39,5 +39,5 @@ return [
     'address2'                  => 'Address Line 2',
     'city'                      => 'City',
     'postcode'                  => 'Post Code',
-
+    'show_invoice'              => "Show invoice",
 ];

@@ -13,5 +13,5 @@ return [
     'status_actions'  => 'Statut / Actions',
     'details'         => 'Détails / Modifier',
     'offline_payment' => 'Chèque',
-
+    'show_invoice'    => "Afficher la facture",
 ];

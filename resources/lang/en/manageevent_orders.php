@@ -13,5 +13,5 @@ return [
     'status_actions'  => 'Status / Actions',
     'details'         => 'Details / Edit',
     'offline_payment' => 'Offline',
-
+    'show_invoice'    => "Show invoice",
 ];

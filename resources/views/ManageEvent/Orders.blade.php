@@ -130,6 +130,7 @@
                                     @endif
                                 </span><br>
                                 <a data-modal-id="view-order-{{ $order->id }}" data-href="{{route('showManageOrder', ['order_id'=>$order->id])}}" title="View Order" class="btn btn-xs btn-primary loadModal">@lang('manageevent_orders.details')</a>
+                                <a class="btn btn-info btn-xs" target="_blank" href="{{route('showOrderInvoice', ['order_reference' => $order->order_reference])}}">@lang('manageevent_orders.show_invoice')</a>
                             </td>
                         </tr>
                         @endforeach
