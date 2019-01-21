@@ -15,7 +15,7 @@
                         {!!$option->is_required ? 'required="required"' : ''!!}
                         {!!$option->ticket_options_type_id == config('attendize.ticket_options_dropdown_multi') ?'multiple="multiple"' : ""!!}
                     >
-                        <option>@lang('public_viewevent_partials_ticketoptions.select_one_option')</option>
+                        <option value="">@lang('public_viewevent_partials_ticketoptions.select_one_option')</option>
                         @foreach ($option->options_enabled as $detail)
                             <option value="{!!$detail->id!!}" {!! $detail->isRemaining() ? '' : 'disabled'!!}>{{$detail->title_with_price}} {!! $detail->isRemaining() ? '' : " (".__('public_viewevent_partials_ticketoptions.exhausted').")"!!}</option>
                         @endforeach
