@@ -18,12 +18,12 @@
 
 % You may change the following two values (within reason).  Everything
 % else will be recomputed automatically.
-\newcommand{\BadgeWidth}{9cm}
-\newcommand{\BadgeHeight}{5.9cm}
+\newcommand{\BadgeWidth}{10.5cm}
+\newcommand{\BadgeHeight}{7cm}
 
 % Distance between badges.  You probably do not need to change this.
 \newcommand{\BadgeSepX}{0cm}
-\newcommand{\BadgeSepY}{0.5cm}
+\newcommand{\BadgeSepY}{0cm}
 
 % The amount of overprinting (irrelevant for draft mode)
 \newcommand{\Fudge}{1.5mm}
@@ -32,8 +32,8 @@
 \newcommand{\CropMarksSep}{0.5mm}
 
 % There are 8 badges per page, so we can compute the margins.
-\pgfmathsetlengthmacro{\BadgeMarginTop}{(\paperheight - 4 * \BadgeHeight - 3 * \BadgeSepY) / 2}
-\pgfmathsetlengthmacro{\BadgeMarginLeft}{(\paperwidth - 2 * \BadgeWidth - \BadgeSepX) / 2}
+\pgfmathsetlengthmacro{\BadgeMarginTop}{0}
+\pgfmathsetlengthmacro{\BadgeMarginLeft}{\paperwidth - 2 * \BadgeWidth - \BadgeSepX}
 
 % No overprinting in draft mode.
 \ifDraftMode
@@ -83,13 +83,13 @@
 
     % Logo
     \node[anchor=north] at (\BadgeWidth / 2,\BadgeHeight) {
-        \includegraphics[width=6cm]{caef-bandeau2018.png}
+        \includegraphics[width=10cm]{caef-bandeau2019.jpg}
     };
 
     % Name and origin
-    \node [anchor=south] at (\BadgeWidth / 2, 1.4) {\textbf{\LARGE{\firstname~\lastname}}};
-    \node [anchor=south] at (\BadgeWidth / 2, 0.7) {\large{\church}};
-    \node [anchor=south] at (\BadgeWidth / 2, 0.2) {\large{\postalcode}};
+    \node [anchor=south] at (\BadgeWidth / 2, 1.8) {\textbf{\LARGE{\firstname~\lastname}}};
+    \node [anchor=south] at (\BadgeWidth / 2, 1.1) {\large{\church}};
+    \node [anchor=south] at (\BadgeWidth / 2, 0.6) {\large{\postalcode}};
 
     %% A frame
     % Draw a frame around the badge if in draft mode.
@@ -116,11 +116,11 @@
 
     % meals
     \draw (0.8cm, \BadgeHeight - 4.3cm)
-      rectangle ++(1.5cm, 1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealA}{}}{}{Jeu. midi}}
-      rectangle ++(1.5cm,-1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealB}{}}{}{Jeu. soir}}
-      rectangle ++(1.5cm, 1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealC}{}}{}{Ven. midi}}
-      rectangle ++(1.5cm,-1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealD}{}}{}{Ven. soir}}
-      rectangle ++(1.5cm, 1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealE}{}}{}{Sam. midi}};
+      rectangle ++(1.5cm, 1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealA}{}}{}{JM}}
+      rectangle ++(1.5cm,-1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealB}{}}{}{JS}}
+      rectangle ++(1.5cm, 1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealC}{}}{}{VM}}
+      rectangle ++(1.5cm,-1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealD}{}}{}{VS}}
+      rectangle ++(1.5cm, 1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealE}{}}{}{SM}};
 
     %\node at (\BadgeWidth / 2, \BadgeHeight - 0.45cm) {
     %  \textbf{\Large{Congrès CAEF 2019}}};
@@ -147,79 +147,6 @@
   };
 }
 
-% Drawing the crop marks is rather elaborate.
-\pgfmathsetlengthmacro{\VerticalMarkLength}{\BadgeMarginTop - \CropMarksSep}
-\newcommand*{\VerticalMarksHelper}[2]{
-  \draw ($ (current page.#1 west) + (\BadgeMarginLeft, 0) $)
-     -- ($ (current page.#1 west) + (\BadgeMarginLeft, -\VerticalMarkLength * #2) $);
-  \draw ($ (current page.#1 west) + (\BadgeMarginLeft + \BadgeWidth, 0) $)
-     -- ($ (current page.#1 west) + (\BadgeMarginLeft + \BadgeWidth, -\VerticalMarkLength * #2) $);
-  \draw ($ (current page.#1 west) + (\BadgeMarginLeft + \BadgeWidth + \BadgeSepX, 0) $)
-     -- ($ (current page.#1 west) + (\BadgeMarginLeft + \BadgeWidth + \BadgeSepX, -\VerticalMarkLength * #2) $);
-  \draw ($ (current page.#1 west) + (\BadgeMarginLeft + 2 * \BadgeWidth + \BadgeSepX, 0) $)
-     -- ($ (current page.#1 west) + (\BadgeMarginLeft + 2 * \BadgeWidth + \BadgeSepX, -\VerticalMarkLength * #2) $);
-}
-\newcommand{\VerticalMarks}{
-  % top
-  \VerticalMarksHelper{north}{1}
-  % bottom
-  \VerticalMarksHelper{south}{-1}
-  % between the badges
-  \foreach \i in {0,...,2} {
-    \pgfmathsetmacro{\step}{\i * \BadgeHeight + \i * \BadgeSepY}
-    \draw ($ (current page.north west) +
-      (\BadgeMarginLeft, -\BadgeMarginTop - \step - \BadgeHeight - \CropMarksSep) $)
-       -- ($ (current page.north west) +
-      (\BadgeMarginLeft, -\BadgeMarginTop - \step - \BadgeHeight - \BadgeSepY + \CropMarksSep) $);
-    \draw ($ (current page.north west) +
-      (\BadgeMarginLeft + \BadgeWidth, -\BadgeMarginTop - \step - \BadgeHeight - \CropMarksSep) $)
-       -- ($ (current page.north west) +
-      (\BadgeMarginLeft + \BadgeWidth, -\BadgeMarginTop - \step - \BadgeHeight - \BadgeSepY + \CropMarksSep) $);
-    \draw ($ (current page.north west) +
-      (\BadgeMarginLeft + \BadgeWidth + \BadgeSepX, -\BadgeMarginTop - \step - \BadgeHeight - \CropMarksSep) $)
-       -- ($ (current page.north west) +
-      (\BadgeMarginLeft + \BadgeWidth + \BadgeSepX, -\BadgeMarginTop - \step - \BadgeHeight - \BadgeSepY + \CropMarksSep) $);
-    \draw ($ (current page.north west) +
-      (\BadgeMarginLeft + 2 * \BadgeWidth + \BadgeSepX, -\BadgeMarginTop - \step - \BadgeHeight - \CropMarksSep) $)
-       -- ($ (current page.north west) +
-      (\BadgeMarginLeft + 2 * \BadgeWidth + \BadgeSepX, -\BadgeMarginTop - \step - \BadgeHeight - \BadgeSepY + \CropMarksSep) $);
-  }
-}
-\pgfmathsetlengthmacro{\HorizontalMarkLength}{\BadgeMarginLeft - \CropMarksSep}
-\newcommand{\HorizontalMarks}{
-  \foreach \i in {0,...,3} {
-    \pgfmathsetmacro{\step}{\i * \BadgeHeight + \i * \BadgeSepY}
-    % left
-    \draw ($ (current page.north west) + (0, -\BadgeMarginTop - \step) $)
-       -- ($ (current page.north west) + (\HorizontalMarkLength, -\BadgeMarginTop - \step) $);
-    \draw ($ (current page.north west) + (0, -\BadgeMarginTop - \BadgeHeight - \step) $)
-       -- ($ (current page.north west) + (\HorizontalMarkLength, -\BadgeMarginTop - \BadgeHeight - \step) $);
-
-    % middle
-    \draw ($ (current page.north west) + (\BadgeMarginLeft + \BadgeWidth + \CropMarksSep, -\BadgeMarginTop - \step) $)
-       -- ($ (current page.north west) + (\BadgeMarginLeft + \BadgeWidth + \BadgeSepX - \CropMarksSep, -\BadgeMarginTop - \step) $);
-    \draw ($ (current page.north west) + (\BadgeMarginLeft + \BadgeWidth + \CropMarksSep, -\BadgeMarginTop - \BadgeHeight - \step) $)
-       -- ($ (current page.north west) + (\BadgeMarginLeft + \BadgeWidth + \BadgeSepX - \CropMarksSep, -\BadgeMarginTop - \BadgeHeight - \step) $);
-
-    % right
-    \draw ($ (current page.north east) + (0, -\BadgeMarginTop - \step) $)
-       -- ($ (current page.north east) + (-\HorizontalMarkLength, -\BadgeMarginTop - \step) $);
-    \draw ($ (current page.north east) + (0, -\BadgeMarginTop - \BadgeHeight - \step) $)
-       -- ($ (current page.north east) + (-\HorizontalMarkLength, -\BadgeMarginTop - \BadgeHeight - \step) $);
-  }
-}
-
-\newcommand{\CropMarks}{
-  \begin{tikzpicture}[remember picture,overlay,
-    every path/.style={
-        color=black,
-        line width=0.01pt
-    }]
-    \VerticalMarks
-    \HorizontalMarks
-  \end{tikzpicture}
-}
-
 \newcommand{\BadgesPerPage}{8}
 
 \pagestyle{empty}
@@ -228,9 +155,9 @@
   \def\i{0}
   % The number of badges already printed on this page plus 1.
   \def\onthispagesofar{1}
-  \csvreader{participants2.csv}{%
-    3=\lastname,4=\firstname,20=\church,9=\postalcode,
-    14=\ticket,15=\room,16=\mealA,17=\mealB,18=\mealC,19=\mealD,19=\mealE}%
+  \csvreader{participants3.csv}{%
+    3=\firstname,4=\lastname,26=\church,9=\postalcode,
+    15=\ticket,16=\room,18=\mealA,19=\mealB,20=\mealC,21=\mealD,22=\mealE}%
   {
     \pgfmathtruncatemacro{\j}{mod(\i, 4)}
 
@@ -245,8 +172,6 @@
     \begin{tikzpicture}[remember picture,overlay]
       \SingleBadge{\j}
     \end{tikzpicture}
-
-    \CropMarks
 
     \pgfmathtruncatemacro{\i}{\i+1}
     \pgfmathtruncatemacro{\onthispagesofar}{mod(\onthispagesofar, \BadgesPerPage) + 1}
