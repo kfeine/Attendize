@@ -76,5 +76,12 @@
         @endif
 
         @include('Shared.Partials.GlobalFooterJS')
+
+<script>
+$(document).ready(function(){
+    if (window.navigator.userAgent.indexOf("MSIE ") > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))
+        $("h1.section_head").before('<p id="ie_warning">Attention, vous utilisez visiblement le navigateur Internet Explorer, pour lequel ce site n\'a pas été conçu. Nous vous recommandons d\'utiliser un autre navigateur comme <a href="https://www.mozilla.org/fr/firefox/">Firefox</a>.</div>');
+});
+</script>
     </body>
 </html>
