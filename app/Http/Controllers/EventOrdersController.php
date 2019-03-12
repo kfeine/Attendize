@@ -364,6 +364,7 @@ class EventOrdersController extends MyBaseController
                 if (env('APP_LANG') === "fr") {
                     $data = Order::where('orders.event_id', '=', $event->id)
                         ->where('orders.event_id', '=', $event->id)
+                        ->where('orders.order_status_id', '<>', '4')
                         ->select([
                             'orders.first_name',
                             'orders.last_name',
