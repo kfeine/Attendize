@@ -87,9 +87,9 @@
     };
 
     % Name and origin
-    \node [anchor=south] at (\BadgeWidth / 2, 1.8) {\textbf{\LARGE{\firstname~\lastname}}};
-    \node [anchor=south] at (\BadgeWidth / 2, 1.1) {\large{\church}};
-    \node [anchor=south] at (\BadgeWidth / 2, 0.6) {\large{\postalcode}};
+    \node [anchor=south] at (\BadgeWidth / 2, 2.0) {\textbf{\LARGE{\firstname~\lastname}}};
+    \node [anchor=south] at (\BadgeWidth / 2, 1.3) {\large{\church}};
+    \node [anchor=south] at (\BadgeWidth / 2, 0.7) {\large{\postalcode - \city}};
 
     %% A frame
     % Draw a frame around the badge if in draft mode.
@@ -111,16 +111,15 @@
 
     % room
     \ifthenelse{\equal{\room}{}}{}{
-      \node[anchor=west] at (0.7cm,\BadgeHeight - 2cm) {Chambre \room};
+      \node[anchor=west] at (0.7cm,\BadgeHeight - 2cm) {\room};
     }
 
     % meals
-    \draw (0.8cm, \BadgeHeight - 4.3cm)
-      rectangle ++(1.5cm, 1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealA}{}}{}{JM}}
-      rectangle ++(1.5cm,-1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealB}{}}{}{JS}}
-      rectangle ++(1.5cm, 1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealC}{}}{}{VM}}
-      rectangle ++(1.5cm,-1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealD}{}}{}{VS}}
-      rectangle ++(1.5cm, 1.3cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealE}{}}{}{SM}};
+    \draw (0.8cm, \BadgeHeight - 5cm)
+      rectangle ++(2cm, 1.8cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealA}{}}{}{\textbf{\huge{JS}}}}
+      rectangle ++(2cm,-1.8cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealB}{}}{}{\textbf{\huge{VM}}}}
+      rectangle ++(2cm, 1.8cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealC}{}}{}{\textbf{\huge{VS}}}}
+      rectangle ++(2cm,-1.8cm) node[text width=1cm,pos=0.5,align=center] {\ifthenelse{\equal{\mealD}{}}{}{\textbf{\huge{SM}}}};
 
     %\node at (\BadgeWidth / 2, \BadgeHeight - 0.45cm) {
     %  \textbf{\Large{Congrès CAEF 2019}}};
@@ -156,8 +155,8 @@
   % The number of badges already printed on this page plus 1.
   \def\onthispagesofar{1}
   \csvreader{participants3.csv}{%
-    3=\firstname,4=\lastname,26=\church,9=\postalcode,
-    15=\ticket,16=\room,18=\mealA,19=\mealB,20=\mealC,21=\mealD,22=\mealE}%
+    3=\firstname,4=\lastname,26=\church,9=\postalcode,10=\city,
+    15=\ticket,16=\room,18=\mealA,19=\mealB,20=\mealC,21=\mealD}%
   {
     \pgfmathtruncatemacro{\j}{mod(\i, 4)}
 
