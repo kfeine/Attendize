@@ -14,3 +14,7 @@ _ide_helper.php
 *.swo
 docker/
 storage/database.sqlite
+badges/*.aux
+badges/*.log
+badges/*.pdf
+badges/*.csv
