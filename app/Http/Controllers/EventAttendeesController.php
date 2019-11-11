@@ -120,6 +120,18 @@ class EventAttendeesController extends MyBaseController
      */
     public function showExportAttendees($event_id, $export_as = 'xls')
     {
+        $this->generateExportAttendees($event_id, $export_as);
+        return response()->file(storage_path('exports/attendees.' . $export_as));
+    }
+
+    /**
+     * Generate an export of attendees
+     *
+     * @param $event_id
+     * @param string $export_as (xlsx, xls, csv, html)
+     */
+    public function generateExportAttendees($event_id, $export_as = 'xls')
+    {
         $tickets = Ticket::where('event_id', '=', $event_id)->get();
 
         $details = TicketOptionsDetails::where('tickets.event_id', '=', $event_id)
@@ -225,7 +237,7 @@ class EventAttendeesController extends MyBaseController
           $title_row[] = $question->title;
         }
 
-        Excel::create('attendees-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event_id, $select, $title_row, $tickets) {
+        Excel::create('attendees', function ($excel) use ($event_id, $select, $title_row, $tickets) {
 
             $excel->setTitle(__('controllers_eventattendeescontroller.attendee_list'));
 
@@ -274,7 +286,18 @@ class EventAttendeesController extends MyBaseController
                 }
             });
 
-        })->export($export_as);
+        })->store($export_as);
+    }
+
+    /**
+     * Download PDF generated from latex
+     *
+     * @return Illuminate\Http\Response
+     */
+    public function exportBadges($event_id) {
+        $this->generateExportAttendees($event_id, 'csv');
+        Log::info(shell_exec('cd ' . storage_path('exports/') . ' && pdflatex -quiet ' . resource_path('badges/badges.tex')));
+        return response()->file(storage_path('exports/badges.pdf'));
     }
 
     /**

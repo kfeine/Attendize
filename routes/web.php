@@ -482,6 +482,11 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
             'uses' => 'EventAttendeesController@showExportAttendees',
         ]);
 
+        Route::get('{event_id}/attendees/export_badges', [
+            'as'   => 'exportBadges',
+            'uses' => 'EventAttendeesController@exportBadges',
+        ]);
+
         Route::get('{event_id}/attendees/{attendee_id}/edit', [
             'as'   => 'showEditAttendee',
             'uses' => 'EventAttendeesController@showEditAttendee',
@@ -611,17 +616,6 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
             'uses' => 'EventCustomizeController@postEditEventFees',
         ]);
 
-
-        /*
-         * -------
-         * Event Widget page
-         * -------
-         */
-        Route::get('{event_id}/widgets', [
-            'as'   => 'showEventWidgets',
-            'uses' => 'EventWidgetsController@showEventWidgets',
-        ]);
-
         /*
          * -------
          * Event Discounts page
@@ -723,60 +717,6 @@ Route::group(['middleware' => ['auth', 'first.run']], function () {
          * Check In App
          * -------
          */
-        Route::get('{event_id}/check_in', [
-            'as'   => 'showChechIn',
-            'uses' => 'EventCheckInController@showCheckIn',
-        ]);
-        Route::post('{event_id}/check_in/search', [
-            'as'   => 'postCheckInSearch',
-            'uses' => 'EventCheckInController@postCheckInSearch',
-        ]);
-        Route::post('{event_id}/check_in/', [
-            'as'   => 'postCheckInAttendee',
-            'uses' => 'EventCheckInController@postCheckInAttendee',
-        ]);
-
-        Route::post('{event_id}/qrcode_check_in', [
-            'as'   => 'postQRCodeCheckInAttendee',
-            'uses' => 'EventCheckInController@postCheckInAttendeeQr',
-        ]);
-
-        Route::post('{event_id}/confirm_order_tickets/{order_id}', [
-            'as'   => 'confirmCheckInOrderTickets',
-            'uses' => 'EventCheckInController@confirmOrderTicketsQr',
-        ]);
-
-
-        /*
-         * -------
-         * QRCode Check In App
-         * -------
-
-        Route::get('{event_id}/qrcode_check_in', [
-            'as'   => 'showQRCodeChechIn',
-            'uses' => 'EventQrcodeCheckInController@showCheckIn',
-        ]);
-
-        Route::post('{event_id}/qrcode_check_in', [
-            'as'   => 'postQRCodeCheckInAttendee',
-            'uses' => 'EventQrcodeCheckInController@postCheckInAttendee',
-        ]);
-
-        Route::match(['PUT', 'PATCH'], '{event_id}/confirm_order_tickets/{order_id}', [
-            'as'   => 'confirmCheckInOrderTickets',
-            'uses' => 'EventQrcodeCheckInController@confirmOrderTickets',
-        ]);
-        */
-
-        /*
-         * -------
-         * Promote
-         * -------
-         */
-        Route::get('{event_id}/promote', [
-            'as'   => 'showEventPromote',
-            'uses' => 'EventPromoteController@showPromote',
-        ]);
 
         /*
          * -------
