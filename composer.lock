@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "55ee4a5028422afccaa51427154f6f0d",
+    "content-hash": "9129d91485ac5affa5421b74dae46542",
     "packages": [
         {
             "name": "askedio/laravel-soft-cascade",
@@ -1648,16 +1648,16 @@
         },
         {
             "name": "konekt/pdf-invoice",
-            "version": "1.1.5",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/artkonekt/pdf-invoice.git",
-                "reference": "58a38f3be9299356ad34133e9a33f80e4d7ae57a"
+                "reference": "466e24b975ecf94795290a959e3bdabd6ee3edd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/artkonekt/pdf-invoice/zipball/58a38f3be9299356ad34133e9a33f80e4d7ae57a",
-                "reference": "58a38f3be9299356ad34133e9a33f80e4d7ae57a",
+                "url": "https://api.github.com/repos/artkonekt/pdf-invoice/zipball/466e24b975ecf94795290a959e3bdabd6ee3edd7",
+                "reference": "466e24b975ecf94795290a959e3bdabd6ee3edd7",
                 "shasum": ""
             },
             "require": {
@@ -1697,7 +1697,7 @@
                 "konekt",
                 "pdf"
             ],
-            "time": "2018-12-17T11:29:25+00:00"
+            "time": "2019-09-20T08:57:19+00:00"
         },
         {
             "name": "laracasts/utilities",

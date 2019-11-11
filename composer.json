@@ -39,7 +39,7 @@
        "vinelab/http": "~1.5",
        "shafan/omnipay-scellius": "dev-master",
         "askedio/laravel-soft-cascade": "^5.7",
-        "konekt/pdf-invoice": "^1.1"
+        "konekt/pdf-invoice": "^1.4"
     },
     "require-dev": {
       "phpunit/phpunit": "7.3.*",
