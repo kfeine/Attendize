@@ -30,6 +30,7 @@
     <div class="btn-toolbar" role="toolbar">
         <div class="btn-group btn-group-responsive">
             <a href="{{route('showExportAttendees', ['event_id'=>$event->id,'export_as'=>'xlsx'])}}"><button class="btn btn-success" type="button"><i class="ico-users"></i> @lang('manageevent_attendees.export')</button></a>
+            <a href="{{route('exportBadges', ['event_id'=>$event->id])}}" target="_blank"><button class="btn btn-success" type="button"><i class="ico-users"></i> @lang('manageevent_attendees.export_badges')</button></a>
         </div>
     </div>
 </div>

@@ -12,9 +12,7 @@ return [
     'promote' => 'Promote',
     'customize' => 'Customize',
     'event_tools' => 'Event Tools',
-    'checkin' => 'Check-In',
     'discounts' => 'Discounts',
     'surveys' => 'Surveys',
-    'widgets' => 'Widgets',
     'options_generic' => "Generic Options",
 ];

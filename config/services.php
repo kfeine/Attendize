@@ -14,31 +14,31 @@ return [
     |
     */
 
-    'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
-    ],
-
-    'mandrill' => [
-        'secret' => '',
-    ],
-
-    'ses' => [
-        'key'    => '',
-        'secret' => '',
-        'region' => 'us-east-1',
-    ],
-
-    'stripe' => [
-        'model'  => 'User',
-        'secret' => '',
-    ],
-
-    'twitter' => [
-        'widget_id' => env('TWITTER_WIDGET_ID'),
-    ],
-
-    'sparkpost' => [
-        'secret' => env('SPARKPOST_SECRET')
-    ]
+//     'mailgun' => [
+//         'domain' => env('MAILGUN_DOMAIN'),
+//         'secret' => env('MAILGUN_SECRET'),
+//     ],
+//
+//     'mandrill' => [
+//         'secret' => '',
+//     ],
+//
+//     'ses' => [
+//         'key'    => '',
+//         'secret' => '',
+//         'region' => 'us-east-1',
+//     ],
+//
+//     'stripe' => [
+//         'model'  => 'User',
+//         'secret' => '',
+//     ],
+//
+//     'twitter' => [
+//         'widget_id' => env('TWITTER_WIDGET_ID'),
+//     ],
+//
+//     'sparkpost' => [
+//         'secret' => env('SPARKPOST_SECRET')
+//     ]
 ];
