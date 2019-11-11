@@ -2,7 +2,7 @@
 
 return [
 
-    'title' => 'Événement non accessible',
-    'message' => 'Cet événement n\'est pas public.',
+    'title' => 'Inscriptions non ouvertes',
+    'message' => 'Les inscriptions à cet événement ne sont pas encore ouvertes',
 
 ];
