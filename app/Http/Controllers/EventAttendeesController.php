@@ -224,11 +224,11 @@ class EventAttendeesController extends MyBaseController
         ];
 
         foreach($options_one_choice_titles as $option_title){
-          $select[] = DB::raw("MAX(CASE WHEN ticket_options.title='".$option_title."' THEN ticket_options_details.title END) AS ".str_replace(' ','_',$option_title));
+          $select[] = DB::raw("MAX(CASE WHEN ticket_options.title='".$option_title."' THEN ticket_options_details.title END) AS ".str_replace(' ','_',str_replace(array('(',')','-'),'',$option_title)));
           $title_row[] = $option_title;
         }
         foreach($options_multiple_choices_titles as $option_title){
-          $select[] = DB::raw("MAX(CASE WHEN CONCAT(ticket_options.title, ' ', ticket_options_details.title)='".$option_title."' THEN 'Y' END) AS ".str_replace(' ','_',$option_title));
+          $select[] = DB::raw("MAX(CASE WHEN CONCAT(ticket_options.title, ' ', ticket_options_details.title)='".$option_title."' THEN 'Y' END) AS ".str_replace(' ','_',str_replace(array('(',')','-'),'',$option_title)));
           $title_row[] = $option_title;
         }
 
