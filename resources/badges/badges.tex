@@ -1,12 +1,13 @@
 \documentclass{scrartcl}
-\usepackage[sfdefault]{cabin}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{anyfontsize,csvsimple,ifthen,tikz,xcolor,graphicx,xcolor}
+\usepackage{csvsimple,ifthen,tikz,graphicx,xcolor}
 \usepackage{xstring}
 \usetikzlibrary{calc}
 \newif\ifDraftMode\DraftModefalse
 \newif\ifMirroredPage\MirroredPagefalse
+
+\renewcommand{\sfdefault}{lmss}
 
 % You may change the following two values (within reason).  Everything
 % else will be recomputed automatically.
