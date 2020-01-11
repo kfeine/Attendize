@@ -296,7 +296,7 @@ class EventAttendeesController extends MyBaseController
      */
     public function exportBadges($event_id) {
         $this->generateExportAttendees($event_id, 'csv');
-        shell_exec('cd ' . storage_path('exports/') . ' && pdflatex -quiet ' . resource_path('badges/badges.tex'));
+        shell_exec('cd ' . storage_path('exports/') . ' && ' . preg_replace("#\r|\n#","",shell_exec('which pdflatex')) . ' -quiet ' . resource_path('badges/badges.tex'));
         return response()->file(storage_path('exports/badges.pdf'));
     }
 
