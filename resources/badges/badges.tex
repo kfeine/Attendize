@@ -73,10 +73,10 @@
 
     % meals
     \draw (0.8cm, \BadgeHeight - 6cm)
-      rectangle ++(2cm, 1.8cm) node[text width=1cm,pos=0.5,align=center] { \ifthenelse{ \equal{\mealA}{} \and \equal{\mealAB}{} }{  }{ \textbf{\huge{VS}} } }
-      rectangle ++(2cm, -1.8cm) node[text width=1cm,pos=0.5,align=center] { \ifthenelse{ \equal{\mealB}{} \and \equal{\mealBB}{} }{  }{ \textbf{\huge{SM}} } }
-      rectangle ++(2cm, 1.8cm) node[text width=1cm,pos=0.5,align=center] { \ifthenelse{ \equal{\mealC}{} \and \equal{\mealCB}{} }{  }{ \textbf{\huge{SS}} } }
-      rectangle ++(2cm, -1.8cm) node[text width=1cm,pos=0.5,align=center] { \ifthenelse{ \equal{\mealD}{} \and \equal{\mealDB}{} }{  }{ \textbf{\huge{DM}} } };
+      rectangle ++(2cm, 1.8cm) node[text width=1cm,pos=0.5,align=center] { \ifthenelse{ \equal{\mealA}{""} \and \equal{\mealAB}{""} }{  }{ \textbf{\huge{VS}} } }
+      rectangle ++(2cm, -1.8cm) node[text width=1cm,pos=0.5,align=center] { \ifthenelse{ \equal{\mealB}{""} \and \equal{\mealBB}{""} }{  }{ \textbf{\huge{SM}} } }
+      rectangle ++(2cm, 1.8cm) node[text width=1cm,pos=0.5,align=center] { \ifthenelse{ \equal{\mealC}{""} \and \equal{\mealCB}{""} }{  }{ \textbf{\huge{SS}} } }
+      rectangle ++(2cm, -1.8cm) node[text width=1cm,pos=0.5,align=center] { \ifthenelse{ \equal{\mealD}{""} \and \equal{\mealDB}{""} }{  }{ \textbf{\huge{DM}} } };
 
     %% A frame
     % Draw a frame around the badge if in draft mode.
