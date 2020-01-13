@@ -4,7 +4,7 @@ return [
 
     'hi'        => 'Bonjour,',
     'order'     => 'Votre commande pour :title a bien été enregistrée.',
-    'attachment' => 'Veuillez trouver en pièce-jointe la facture correspondante.',
+    'attachment' => 'Veuillez trouver en pièce-jointe la facture correspondante',
     'tickets'   => 'Vous pouvez consulter les informations sur votre commande ici : :reference.',
     'note'      => 'Attention, vous n\'avez pas encore effectué le paiement pour cette commande. Pour consulter les informations relatives au paiement, rendez-vous sur la page de votre commande : :reference.',
     'details'   => 'Détails de la commande',
