@@ -115,8 +115,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
+                        <div class="row"> <div class="col-md-12">
                                 <div class="form-group">
                                     {!! Form::label('custom_field', __('manageevent_modals_editattendee.custom_field'), array('class'=>'control-label')) !!}
                                     {!! Form::textarea('custom_field', Input::old('custom_field'),
@@ -124,6 +123,32 @@
                                             'class' => 'form-control',
                                             'size'  => '20x8'
                                             )) !!}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>Attention, ne modifier ces champs que sur instruction de la personne concernée !</p>
+                                <div class="form-group">
+                                    {!! Form::checkbox('consent_privacy', Input::old('consent_privacy'), Input::old('consent_privacy') ) !!}
+                                    {!! Form::label('consent_privacy', __('manageevent_modals_editattendee.consent_privacy'), array('class'=>'control-label')) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::checkbox('consent_share_coordinates', Input::old('consent_share_coordinates'), Input::old('consent_share_coordinates') ) !!}
+                                    {!! Form::label('consent_share_coordinates', __('manageevent_modals_editattendee.consent_share_coordinates'), array('class'=>'control-label')) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::checkbox('consent_contact_reminder', Input::old('consent_contact_reminder'), Input::old('consent_contact_reminder') ) !!}
+                                    {!! Form::label('consent_contact_reminder', __('manageevent_modals_editattendee.consent_contact_reminder'), array('class'=>'control-label')) !!}
                                 </div>
                             </div>
                         </div>

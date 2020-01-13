@@ -377,9 +377,9 @@ class EventAttendeesController extends MyBaseController
         $attendee->ticket_id    = $request->get('ticket_id');
         $attendee->gender       = $request->get('gender');
         $attendee->custom_field = $request->get('custom_field');
-        $attendee->consent_privacy = $request->get('consent_privacy');
-        $attendee->consent_share_coordinates = $request->get('consent_share_coordinates');
-        $attendee->consent_contact_reminder = $request->get('consent_contact_reminder');
+        $attendee->consent_privacy = $request->get('consent_privacy') ? 1 : 0;
+        $attendee->consent_share_coordinates = $request->get('consent_share_coordinates') ? 1 : 0;
+        $attendee->consent_contact_reminder = $request->get('consent_contact_reminder') ? 1 : 0;
         $attendee->room         = $request->get('room');
         $attendee->update();
 
