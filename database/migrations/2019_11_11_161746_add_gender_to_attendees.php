@@ -13,9 +13,11 @@ class AddGenderToAttendees extends Migration
      */
     public function up()
     {
-        Schema::table('attendees', function (Blueprint $table) {
-            $table->char('gender', 1);
-        });
+        if (!Schema::hasColumn('attendees','gender')) {
+            Schema::table('attendees', function (Blueprint $table) {
+                $table->char('gender', 1);
+            });
+        }
     }
 
     /**
@@ -25,8 +27,10 @@ class AddGenderToAttendees extends Migration
      */
     public function down()
     {
-        Schema::table('attendees', function (Blueprint $table) {
-            $table->dropColumn('gender');
-        });
+        if (Schema::hasColumn('attendees','gender')) {
+            Schema::table('attendees', function (Blueprint $table) {
+                $table->char('gender', 1);
+            });
+        }
     }
 }
