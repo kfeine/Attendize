@@ -4,7 +4,7 @@
 @lang('mailers_ticketmailer_sendordertickets.hi')<br><br>
 
 
-@lang('mailers_ticketmailer_sendordertickets.order', ['title' => '<b>'.$order->event->title.'</b>']).<br><br>
+@lang('mailers_ticketmailer_sendordertickets.order', ['title' => '<b>'.$order->event->title.'</b>']) <b>@lang('mailers_ticketmailer_sendordertickets.attachment').</b><br><br>
 
 @lang('mailers_ticketmailer_sendordertickets.tickets', ['reference' => route('showOrderDetails', ['order_reference' => $order->order_reference])])
 
