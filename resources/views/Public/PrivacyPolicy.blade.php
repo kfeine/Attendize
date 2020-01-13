@@ -107,7 +107,7 @@
                     <ul>
                         <li>Bonnes pratiques de sécurisation des serveurs (pare-feu, mises à jours, etc.) ;</li>
                         <li>Accès au site uniquement en HTTPS, assurant le chiffrement des échanges ;</li>
-                        <li>Sauvegardes.</li>
+                        <li>Sauvegardes chiffrées.</li>
                     </ul>
 
                     <h2>Contact</h2>
