@@ -64,7 +64,7 @@
     \draw [use as bounding box,draw=none] (0,0) rectangle (\BadgeWidth,\BadgeHeight);
 
     % ticket
-    \node[anchor=west] at (0.7cm,\BadgeHeight - 1cm) {\textbf{\StrDel{\ticket}{"}}};
+    \node[anchor=west] at (0.7cm,\BadgeHeight - 1cm) {\textbf{ \StrDel{ \StrDel{\ticket}{"} }{ par personne} }};
 
     % room
     \ifthenelse{ \equal{\room}{} }{ }{
