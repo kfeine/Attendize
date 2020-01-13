@@ -72,7 +72,7 @@ class GenerateInvoice extends Job implements ShouldQueue
         else {
             $invoice->addTitle("Commande en attente de paiement");
             $invoice->addParagraph("Cette commande n'a pas été réglée");
-            $invoice->addParagraph("Paiement par chèqueà l’ordre de l’Entente Evangélique des CAEF");
+            $invoice->addParagraph("Paiement par chèque à l’ordre de l’Entente Evangélique des CAEF");
             $invoice->addParagraph("ou par virement :\n    IBAN : FR11 2004 1010 0710 5500 3R03 896\n    BIC : PSSTFRPPLYO");
         }
 
