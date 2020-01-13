@@ -15,8 +15,9 @@ _ide_helper.php
 docker/
 storage/database.sqlite
 storage/exports
-badges/*.aux
-badges/*.log
-badges/*.pdf
-badges/*.csv
+resources/badges/*.aux
+resources/badges/*.log
+resources/badges/*.pdf
+resources/badges/*.csv
+resources/badges/*.xlsx
 .DS_Store
