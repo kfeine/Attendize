@@ -128,6 +128,18 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label('room', __('manageevent_modals_editattendee.room'), array('class'=>'control-label')) !!}
+                                    {!! Form::text('room', Input::old('room'),
+                                            array(
+                                            'class'=>'form-control'
+                                        ))  !!}
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div> <!-- /end modal body-->

@@ -199,6 +199,7 @@ class EventAttendeesController extends MyBaseController
               'attendees.postal_code',
               'attendees.city',
               'attendees.custom_field',
+              'attendees.room',
               'orders.order_reference',
               'orders.created_at',
               DB::raw("(CASE WHEN orders.is_payment_received THEN 'YES' ELSE 'NO' END) AS is_payment_received"),
@@ -217,6 +218,7 @@ class EventAttendeesController extends MyBaseController
             __('controllers_eventattendeescontroller.xls_postal_code'),
             __('controllers_eventattendeescontroller.xls_city'),
             __('controllers_eventattendeescontroller.xls_custom_field'),
+            __('controllers_eventattendeescontroller.xls_room'),
             __('controllers_eventattendeescontroller.xls_order_ref'),
             __('controllers_eventattendeescontroller.xls_purchase_date'),
             __('controllers_eventattendeescontroller.xls_payment_received'),
@@ -238,6 +240,7 @@ class EventAttendeesController extends MyBaseController
         }
 
         Excel::create('attendees', function ($excel) use ($event_id, $select, $title_row, $tickets) {
+            Config::set('excel.csv.enclosure', '');
 
             $excel->setTitle(__('controllers_eventattendeescontroller.attendee_list'));
 
@@ -366,8 +369,9 @@ class EventAttendeesController extends MyBaseController
         $attendee->city         = $request->get('city');
         $attendee->postal_code  = $request->get('postal_code');
         $attendee->ticket_id    = $request->get('ticket_id');
-        $attendee->gender     = $request->get('gender');
+        $attendee->gender       = $request->get('gender');
         $attendee->custom_field = $request->get('custom_field');
+        $attendee->room         = $request->get('room');
         $attendee->update();
 
         session()->flash('message', __('controllers_eventattendeescontroller.update_success'));
