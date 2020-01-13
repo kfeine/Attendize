@@ -34,6 +34,10 @@ return [
     'placeholder_postcode'   => 'Exemple : 43222',
     'phone'                  => 'Téléphone',
     "privacy"                => "Politique de vie privée",
-    "privacy_policy_consent" => "En cochant cette case je consents à l'utilisation des données renseignées conformément à la <a href='/privacy/policy' target='_blank' rel='noopener noreferrer'>politique d'utilisation et de protection des données personnelles</a>"
+    "consent_privacy" => "des données renseignées pour le <b>traitement d'inscription au congrès CAEF 2020</b>. <span style='color: red;'>Ce traitement est nécessaire pour l'inscription au congrès.</span>",
+    "privacy"                => "Politique de vie privée",
+    "consent_share_coordinates" => "des <b>coordonnées pour qu'elles soient imprimées dans le livret distribué à tous les participants du congrès CAEF 2020</b>. Ce traitement est optionnel (mais conseillé) pour l'inscription au congrès.",
+    "privacy"                => "Politique de vie privée",
+    "consent_contact_reminder" => "l'utilisation de <b>l'adresse email pour être contacté pour l'organisation du prochain congrès</b>. Ce traitement est optionnel (mais conseillé) pour l'inscription au congrès.",
 
 ];

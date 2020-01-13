@@ -65,6 +65,7 @@
                     <p>Afin de pouvoir gérer les inscriptions aux événements (congrès annuel CAEF) et leur logistique (logements, repas, communication, etc.), les données suivantes sont récoltées sur chaque participant :</p>
                     <ul>
                         <li>Civilité, nom, prénom</li>
+                        <li>Téléphone</li>
                         <li>Adresse email</li>
                         <li>Adresse postale</li>
                         <li>Église d'origine</li>
@@ -76,16 +77,17 @@
                     <h2>Finalités, traitements et utilisation</h2>
                     <p>Les données récoltées sont utilisées exclusivement pour :</p>
                     <ul>
-                        <li>La gestion des commandes et des paiements (données de la personne effectuant la commande) ;</li>
-                        <li>La gestion de l'inscription et de l'organisation à l'événement concerné, notamment en termes de communication.</li>
+                        <li>La gestion des commandes et des paiements (données de la personne effectuant la commande), la gestion de l'inscription et de l'organisation à l'événement concerné, notamment en termes de communication (traitement obligatoire pour l'inscription) ;</li>
+                        <li>L'impression des coordonnées (nom, prénom, adresse email, numéro de téléphone, église) dans le livret distribué à chaque participant sous format papier (traitement facultatif) ;</li>
+                        <li>Contacter les personnes concernées au sujet des événements suivants (prochain congrès) via l'adresse mail.</li>
                     </ul>
                     <p>Les données ne seront pas utilisées à d'autres fins, ni transmises à d'autres organisations, sans votre consentement explicite.</p>
 
                     <h2>Localisation</h2>
-                    <p>Les données (données de production et sauvegardes) sont conservées uniquement sur des serveurs gérés par l'organisation et localisés en France</p>
+                    <p>Les données (données de production et sauvegardes) sont conservées uniquement sur des serveurs gérés par l'organisation et localisés en France.</p>
 
                     <h2>Durée de conservation</h2>
-                    <p>Les données sont supprimées des serveurs un an après l'événement.</p>
+                    <p>Les données d'inscription (hors informations de commande pour des raisons légales) sont supprimées des serveurs trois an après l'événement.</p>
 
                     <h2>Droits et législation</h2>
                     <p>Nous vous rappelons que vos droits et nos devoirs concernant la protection des données à caractères personnelles, ainsi que les définitions, sont inscrites dans le <a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A32016R0679">Règlement (UE) 2016/679 (règlement général sur la protection des données ou RGPD)</a>.</p>
@@ -105,7 +107,7 @@
                     <ul>
                         <li>Bonnes pratiques de sécurisation des serveurs (pare-feu, mises à jours, etc.) ;</li>
                         <li>Accès au site uniquement en HTTPS, assurant le chiffrement des échanges ;</li>
-                        <li>Chiffrement des sauvegardes.</li>
+                        <li>Sauvegardes.</li>
                     </ul>
 
                     <h2>Contact</h2>

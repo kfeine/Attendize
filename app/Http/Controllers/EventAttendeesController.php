@@ -198,6 +198,9 @@ class EventAttendeesController extends MyBaseController
               'attendees.address2',
               'attendees.postal_code',
               'attendees.city',
+              'attendees.consent_privacy',
+              'attendees.consent_share_coordinates',
+              'attendees.consent_contact_reminder',
               'attendees.custom_field',
               'attendees.room',
               'orders.order_reference',
@@ -217,6 +220,9 @@ class EventAttendeesController extends MyBaseController
             __('controllers_eventattendeescontroller.xls_address_2'),
             __('controllers_eventattendeescontroller.xls_postal_code'),
             __('controllers_eventattendeescontroller.xls_city'),
+            __('controllers_eventattendeescontroller.xls_consent_privacy'),
+            __('controllers_eventattendeescontroller.xls_consent_share_coordinates'),
+            __('controllers_eventattendeescontroller.xls_consent_contact_reminder'),
             __('controllers_eventattendeescontroller.xls_custom_field'),
             __('controllers_eventattendeescontroller.xls_room'),
             __('controllers_eventattendeescontroller.xls_order_ref'),
@@ -371,6 +377,9 @@ class EventAttendeesController extends MyBaseController
         $attendee->ticket_id    = $request->get('ticket_id');
         $attendee->gender       = $request->get('gender');
         $attendee->custom_field = $request->get('custom_field');
+        $attendee->consent_privacy = $request->get('consent_privacy');
+        $attendee->consent_share_coordinates = $request->get('consent_share_coordinates');
+        $attendee->consent_contact_reminder = $request->get('consent_contact_reminder');
         $attendee->room         = $request->get('room');
         $attendee->update();
 

@@ -124,7 +124,7 @@
                         {!! Form::label('order_address_line_1', __('public_viewevent_partials_eventcreateordersection.address1'), ['class' => "required"]) !!}
                         {!!  Form::text('order_address_line_1', null, [
                                     'class'=>'form-control required',
-                                    'required' => 'required', 
+                                    'required' => 'required',
                                     'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_address1')
                         ])  !!}
                     </div>
@@ -142,7 +142,7 @@
                                 {!! Form::label('order_postal_code', __('public_viewevent_partials_eventcreateordersection.postcode'), ['class' => "required"]) !!}
                                 {!!  Form::text('order_postal_code', null, [
                                             'class'=>'form-control required',
-                                            'required' => 'required', 
+                                            'required' => 'required',
                                             'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_postcode')
                                 ])  !!}
                             </div>
@@ -152,7 +152,7 @@
                                 {!! Form::label('order_city', __('public_viewevent_partials_eventcreateordersection.city'), ['class' => "required"]) !!}
                                 {!!  Form::text('order_city', null, [
                                             'class'=>'form-control required',
-                                            'required' => 'required', 
+                                            'required' => 'required',
                                             'placeholder'=>__('public_viewevent_partials_eventcreateordersection.placeholder_city')
                                 ])  !!}
                             </div>
@@ -178,7 +178,7 @@
 
                                     <div class="panel-heading">
                                         <h3 class="panel-title">
-                                            @lang('public_viewevent_partials_eventcreateordersection.details', ['number' => $ticket['attendee_id']]): <b>{{$ticket['ticket']['title']}}</b> 
+                                            @lang('public_viewevent_partials_eventcreateordersection.details', ['number' => $ticket['attendee_id']]): <b>{{$ticket['ticket']['title']}}</b>
                                         </h3>
                                     </div>
                                     <div class="panel-body">
@@ -270,10 +270,26 @@
                 </div>
 
                 <h3 class="required">@lang('public_viewevent_partials_eventcreateordersection.privacy')</h3>
-                <div class="privacy_policy_consent">
+                <div>
+                    <p>Vous trouverez tous les détails concernant le traitement et la protection des données à caractère personnel sur cette page : <a href="/privacy/policy">Politique de protection de la vie privée</a></p>
+                    <p>En cochant chacun des case suivantes, je certifie que chacune des personnes inscrites (dans le cas de personnes de moins de 15 ans, je certifie que le titulaire de l'autorité parentale consent aussi au traitement), ainsi la personne effectuant la commandent, consent à l'utilisation :</p>
+                </div>
+                <div class="consent_privacy">
                     <div class="custom-checkbox">
-                        <input data-toggle="toggle" id="privacy_policy_consent" name="privacy_policy_consent" type="checkbox" required>
-                        <label for="privacy_policy_consent">@lang('public_viewevent_partials_eventcreateordersection.privacy_policy_consent') <span style="color: red; font-size: 9px;"><b>*</b></span></label>
+                        <input data-toggle="toggle" id="consent_privacy" name="consent_privacy" type="checkbox" required>
+                        <label for="consent_privacy">@lang('public_viewevent_partials_eventcreateordersection.consent_privacy') <span style="color: red; font-size: 9px;"><b>*</b></span></label>
+                    </div>
+                </div>
+                <div class="consent_share_coordinates">
+                    <div class="custom-checkbox">
+                        <input data-toggle="toggle" id="consent_share_coordinates" name="consent_share_coordinates" type="checkbox">
+                        <label for="consent_share_coordinates">@lang('public_viewevent_partials_eventcreateordersection.consent_share_coordinates')</label>
+                    </div>
+                </div>
+                <div class="consent_contact_reminder">
+                    <div class="custom-checkbox">
+                        <input data-toggle="toggle" id="consent_contact_reminder" name="consent_contact_reminder" type="checkbox">
+                        <label for="consent_contact_reminder">@lang('public_viewevent_partials_eventcreateordersection.consent_contact_reminder')</label>
                     </div>
                 </div>
 
@@ -365,4 +381,3 @@
 @if(session()->get('message'))
     <script>showMessage('{{session()->get('message')}}');</script>
 @endif
-

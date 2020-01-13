@@ -6,6 +6,8 @@
                 {{--Attendize is provided free of charge on the condition the below hyperlink is left in place.--}}
                 {{--See https://www.attendize.com/licence.php for more information.--}}
                 @include('Shared.Partials.PoweredBy')
+                &bull;
+                <a class="adminLink " href='/privacy/policy'>Politique de vie privée et de protection des données</a>
 
                 @if(Utils::userOwns($event))
                 &bull;

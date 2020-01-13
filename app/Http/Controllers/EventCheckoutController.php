@@ -144,7 +144,7 @@ class EventCheckoutController extends Controller
             foreach($ticket->options_enabled as $option){
                 $detail_ids = $request->get('attendee_' .$attendee_id. '_ticket_'.$ticket_id.'_options_'.$option->id);
                 if(!is_array($detail_ids)){
-                    $detail_ids = [$detail_ids];   
+                    $detail_ids = [$detail_ids];
                 }
                 foreach($detail_ids as $detail_id){
                     $detail = TicketOptionsDetails::find($detail_id);
@@ -153,7 +153,7 @@ class EventCheckoutController extends Controller
                     }
 
                     if($detail->ticket_options_id != $option->id){
-                        continue; 
+                        continue;
                     }
 
                     if(!$detail->isRemaining()){
@@ -221,12 +221,11 @@ class EventCheckoutController extends Controller
             $validation_rules['ticket_holder_address_line_1.' . $attendee_id . '.' . $ticket_id] = ['required'];
             $validation_rules['ticket_holder_city.' . $attendee_id . '.' . $ticket_id] = ['required'];
             $validation_rules['ticket_holder_postal_code.' . $attendee_id . '.' . $ticket_id] = ['required'];
-            $validation_rules['privacy_policy_consent'] = ['required'];
+            $validation_rules['consent_privacy'] = ['required'];
 
             $validation_messages['ticket_holder_first_name.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_last_name.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.first_name', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_gender.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.gender', ['person' => ($attendee_id + 1)]);
-            //$validation_messages['ticket_holder_email.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.email_required', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_email.' . $attendee_id . '.' . $ticket_id . '.email'] = __('controllers_eventcheckoutcontroller.email_invalid', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_phone.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.phone_required', ['person' => ($attendee_id + 1)]);
             $validation_messages['ticket_holder_address_line_1.' . $attendee_id . '.' . $ticket_id . '.required'] = __('controllers_eventcheckoutcontroller.address_line_1_required', ['person' => ($attendee_id + 1)]);
@@ -618,7 +617,7 @@ class EventCheckoutController extends Controller
                     'is_embedded'     => $this->is_embedded,
                     'order_reference' => $order->order_reference,
                 ]);
-          
+
           } else {
             session()->flash('message', "désolé, une erreur est survenue");
             return response()->redirectToRoute('showEventCheckout', [
@@ -626,7 +625,7 @@ class EventCheckoutController extends Controller
                 'is_payment_failed' => 1,
             ]);
           }
-        
+
         }
 
                                 //'transactionId'       => $transactionId,
@@ -781,6 +780,9 @@ class EventCheckoutController extends Controller
                 $attendee->address2        = $request_data['ticket_holder_address_line_2'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
                 $attendee->city            = mb_convert_case(trim($request_data["ticket_holder_city"][$attendee_details['attendee_id']][$attendee_details['ticket']['id']]), MB_CASE_UPPER, 'UTF-8');
                 $attendee->postal_code     = $request_data['ticket_holder_postal_code'][$attendee_details['attendee_id']][$attendee_details['ticket']['id']];
+                $attendee->consent_privacy = isset($request_data['consent_privacy']) ? 1 : 0;
+                $attendee->consent_share_coordinates = isset($request_data['consent_share_coordinates']) ? 1 : 0;
+                $attendee->consent_contact_reminder = isset($request_data['consent_contact_reminder']) ? 1 : 0;
                 $attendee->event_id        = $event_id;
                 $attendee->order_id        = $order->id;
                 $attendee->ticket_id       = $attendee_details['ticket']['id'];
@@ -854,7 +856,7 @@ class EventCheckoutController extends Controller
             session()->forget('ticket_order_' . $event->id);
             session()->forget('ticket_order_' . $event->id. '.transaction_id');
             session()->forget('ticket_order_' . $event->id. '.order_reference');
-            
+
 
             /*
              * Queue up some tasks - Emails to be sent, PDFs etc.
