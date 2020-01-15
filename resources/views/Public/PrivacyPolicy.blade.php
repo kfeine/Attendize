@@ -77,10 +77,35 @@
                     <h2>Finalités, traitements et utilisation</h2>
                     <p>Les données récoltées sont utilisées exclusivement pour :</p>
                     <ul>
-                        <li>La gestion des commandes et des paiements (données de la personne effectuant la commande), la gestion de l'inscription et de l'organisation à l'événement concerné, notamment en termes de communication (traitement obligatoire pour l'inscription) ;</li>
-                        <li>L'impression des coordonnées (nom, prénom, adresse email, numéro de téléphone, église) dans le livret distribué à chaque participant sous format papier (traitement facultatif) ;</li>
-                        <li>Contacter les personnes concernées au sujet des événements suivants (prochain congrès) via l'adresse mail.</li>
+                        <li>La gestion des commandes et des paiements (données de la personne effectuant la commande), la gestion de l'inscription et de l'organisation à l'événement concerné, notamment en termes de communication (traitement obligatoire pour l'inscription). Ce traitement nécessite les données suivantes au sujet de la personne effectuant la commande :
+                            <ul>
+                                <li>Civilité,</li>
+                                <li>Nom,</li>
+                                <li>Prénom,</li>
+                                <li>Adresse email,</li>
+                                <li>Téléphone,</li>
+                                <li>Adresse postale,</li>
+                            </ul>
+                        et pour les participants :
+                            <ul>
+                                <li>Civilité,</li>
+                                <li>Nom,</li>
+                                <li>Prénom,</li>
+                                <li>Téléphone,</li>
+                                <li>Adresse postale,</li>
+                                <li>Église fréquentée ;</li>
+                            </ul>
+                        </li>
+                        <li>L'impression dans le livret distribué à chaque participant sous format papier (traitement facultatif) des données suivantes :
+                            <ul>
+                                <li>Nom,</li>
+                                <li>Prénom,</li>
+                                <li>Église fréquentée ;</li>
+                            </ul>
+                        </li>
+                        <li>Contacter les personnes concernées au sujet de l'actualité des CAEF (2 emails par an) et des événements suivants (prochains congrès) via l'adresse mail.</li>
                     </ul>
+                    <p>Ces trois traitements sont indépendants, et vous pouvez exercer vos droits pour chacun d'entre eux.</p>
                     <p>Les données ne seront pas utilisées à d'autres fins, ni transmises à d'autres organisations, sans votre consentement explicite.</p>
 
                     <h2>Localisation</h2>
