@@ -71,7 +71,7 @@
                         <li>Église d'origine</li>
                         <li>Âge</li>
                     </ul>
-                    <p>Concernant la personne effectuant la commande du ou des inscriptions, ces données suivantes sont demandées pour des raisons légales.</p>
+                    <p>Concernant la personne effectuant la commande du ou des participants, ces données suivantes sont demandées pour des raisons légales.</p>
                     <p>Ces données sont récoltées avec votre consentement lors de l'inscription à l'événement.</p>
 
                     <h2>Finalités, traitements et utilisation</h2>
@@ -112,10 +112,10 @@
                     <p>Les données (données de production et sauvegardes) sont conservées uniquement sur des serveurs gérés par l'organisation et localisés en France.</p>
 
                     <h2>Durée de conservation</h2>
-                    <p>Les données d'inscription (hors informations de commande pour des raisons légales) sont supprimées des serveurs trois an après l'événement.</p>
+                    <p>Les données d'inscription (hors informations de commande pour des raisons légales) sont supprimées des serveurs trois ans après l'événement.</p>
 
                     <h2>Droits et législation</h2>
-                    <p>Nous vous rappelons que vos droits et nos devoirs concernant la protection des données à caractères personnelles, ainsi que les définitions, sont inscrites dans le <a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A32016R0679">Règlement (UE) 2016/679 (règlement général sur la protection des données ou RGPD)</a>.</p>
+                    <p>Nous vous rappelons que vos droits et nos devoirs concernant la protection des données à caractère personnel, ainsi que les définitions, sont inscrites dans le <a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A32016R0679">Règlement (UE) 2016/679 (règlement général sur la protection des données ou RGPD)</a>.</p>
                     <p>Vos droits incluent :</p>
                     <ul>
                         <li>Droit d'accès à vos données ;</li>
@@ -125,7 +125,7 @@
                         <li>Droit à la portabilité des données ;</li>
                         <li>Droit d'opposition au traitement.</li>
                     </ul>
-                    <p>Pour toute demande d'exercice de ces droits, merci d'adresse une demande par email à <a href="mailto:vieprivee@caef.net">vieprivee@caef.net</a>, ou par courrier à : <i>Entente Evangélique des CAEF, 18 bis rue Pasteur, 26000 Valence</i></p>
+                    <p>Pour toute demande d'exercice de ces droits, merci d'adresser une demande par email à <a href="mailto:vieprivee@caef.net">vieprivee@caef.net</a>, ou par courrier à : <i>Entente Evangélique des CAEF, 18 bis rue Pasteur, 26000 Valence</i></p>
 
                     <h2>Mesures de protection</h2>
                     <p>Les mesures suivantes sont mises en place afin de protéger vos données :</p>
@@ -136,7 +136,7 @@
                     </ul>
 
                     <h2>Contact</h2>
-                    <p>Pour toute demande ou information, merci d'adresse une demande par email à <a href="mailto:privacy@caef.net">privacy@caef.net</a>, ou par courrier à : <i>Entente Evangélique des CAEF, 18 bis rue Pasteur, 26000 Valence</i></p>
+                    <p>Pour toute demande ou information, merci d'adresser une demande par email à <a href="mailto:vieprivee@caef.net">vieprivee@caef.net</a>, ou par courrier à : <i>Entente Evangélique des CAEF, 18 bis rue Pasteur, 26000 Valence</i></p>
                 </div>
             <section>
         </div>
