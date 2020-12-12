@@ -21,6 +21,7 @@ return [
     'xls_first_name'       => 'Prénom',
     'xls_last_name'        => 'Nom',
     'xls_email'            => 'Mail',
+    'xls_email'            => 'Date de naissance',
     'xls_phone'            => 'Téléphone',
     'xls_address_1'        => 'Adresse 1',
     'xls_address_2'        => 'Adresse 2',

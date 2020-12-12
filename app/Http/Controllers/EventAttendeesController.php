@@ -130,7 +130,7 @@ class EventAttendeesController extends MyBaseController
      * @param $event_id
      * @param string $export_as (xlsx, xls, csv, html)
      */
-    public function generateExportAttendees($event_id, $export_as = 'xls')
+    public function generateExportAttendees($event_id, $export_as = 'xlsx')
     {
         $tickets = Ticket::where('event_id', '=', $event_id)->get();
 
@@ -193,6 +193,7 @@ class EventAttendeesController extends MyBaseController
               'attendees.first_name',
               'attendees.last_name',
               'attendees.email',
+              'attendees.birthdate',
               'attendees.phone',
               'attendees.address1',
               'attendees.address2',
@@ -215,6 +216,7 @@ class EventAttendeesController extends MyBaseController
             __('controllers_eventattendeescontroller.xls_first_name'),
             __('controllers_eventattendeescontroller.xls_last_name'),
             __('controllers_eventattendeescontroller.xls_email'),
+            __('controllers_eventattendeescontroller.xls_birthdate'),
             __('controllers_eventattendeescontroller.xls_phone'),
             __('controllers_eventattendeescontroller.xls_address_1'),
             __('controllers_eventattendeescontroller.xls_address_2'),
@@ -245,7 +247,7 @@ class EventAttendeesController extends MyBaseController
           $title_row[] = $question->title;
         }
 
-        Excel::create('attendees' . date('d-m-Y-g.i.a'), function ($excel) use ($event_id, $select, $title_row, $tickets) {
+        Excel::create('attendees-' . date('d-m-Y-g.i.a'), function ($excel) use ($event_id, $select, $title_row, $tickets) {
             Config::set('excel.csv.enclosure', '');
 
             $excel->setTitle(__('controllers_eventattendeescontroller.attendee_list'));
@@ -295,7 +297,7 @@ class EventAttendeesController extends MyBaseController
                 }
             });
 
-        })->store($export_as);
+        })->export($export_as);
     }
 
     /**
