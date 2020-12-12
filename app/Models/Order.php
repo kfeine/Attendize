@@ -157,9 +157,10 @@ class Order extends MyBaseModel
 
         static::creating(function ($order) {
             if(empty($order->order_reference)){
-              $order->order_reference = strtoupper(iconv('UTF-8', 'ASCII//TRANSLIT', substr($order->last_name, 0, 5))) . date('jn') . strtoupper(str_random(5));
-            } else {
-                $order->order_reference = strtoupper(iconv('UTF-8', 'ASCII//TRANSLIT', $order->order_reference));
+                $firstname = strtoupper(iconv('UTF-8', 'ASCII//TRANSLIT', $order->first_name));
+                $lastname =  strtoupper(iconv('UTF-8', 'ASCII//TRANSLIT', $order->last_name));
+                $prefix_reference = substr($lastname,0,3).substr($firstname,0,3);
+                $order->order_reference = strtoupper(substr(uniqid($prefix_reference),0,15)); //transaction reference (order id) 15 maxi dans attendize
             }
         });
     }
