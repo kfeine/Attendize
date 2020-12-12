@@ -27,6 +27,7 @@ class Attendee extends MyBaseModel
         'first_name',
         'last_name',
         'email',
+        'birthdate',
         'event_id',
         'order_id',
         'ticket_id',

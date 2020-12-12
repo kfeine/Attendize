@@ -245,7 +245,7 @@ class EventAttendeesController extends MyBaseController
           $title_row[] = $question->title;
         }
 
-        Excel::create('attendees', function ($excel) use ($event_id, $select, $title_row, $tickets) {
+        Excel::create('attendees' . date('d-m-Y-g.i.a'), function ($excel) use ($event_id, $select, $title_row, $tickets) {
             Config::set('excel.csv.enclosure', '');
 
             $excel->setTitle(__('controllers_eventattendeescontroller.attendee_list'));
