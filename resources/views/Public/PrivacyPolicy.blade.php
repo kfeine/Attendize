@@ -67,6 +67,7 @@
                         <li>Civilité, nom, prénom</li>
                         <li>Téléphone</li>
                         <li>Adresse email</li>
+                        <li>Date de naissance</li>
                         <li>Adresse postale</li>
                         <li>Église d'origine</li>
                         <li>Âge</li>
@@ -91,6 +92,7 @@
                                 <li>Civilité,</li>
                                 <li>Nom,</li>
                                 <li>Prénom,</li>
+                                <li>Date de naissance,</li>
                                 <li>Téléphone,</li>
                                 <li>Adresse postale,</li>
                                 <li>Église fréquentée ;</li>

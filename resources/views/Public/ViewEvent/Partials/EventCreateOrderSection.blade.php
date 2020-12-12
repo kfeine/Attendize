@@ -278,7 +278,7 @@
                 <h3 class="required">@lang('public_viewevent_partials_eventcreateordersection.privacy')</h3>
                 <div>
                     <p>Vous trouverez tous les détails concernant le traitement et la protection des données à caractère personnel sur cette page : <a target="_blank" rel="noopener noreferrer" href="/privacy/policy">Politique de protection de la vie privée</a></p>
-                    <p>En cochant chacun des case suivantes, je certifie que chacune des personnes inscrites (dans le cas de personnes de moins de 15 ans, je certifie que le titulaire de l'autorité parentale consent aussi au traitement), ainsi la personne effectuant la commande, consent à l'utilisation :</p>
+                    <p>En cochant chacune des case suivantes, je certifie que chacune des personnes inscrites (dans le cas de personnes de moins de 15 ans, je certifie que le titulaire de l'autorité parentale consent aussi au traitement), ainsi la personne effectuant la commande, consent à l'utilisation :</p>
                 </div>
                 <div class="consent_privacy">
                     <div class="custom-checkbox">
