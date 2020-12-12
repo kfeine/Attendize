@@ -13,6 +13,7 @@ return [
     'first_name'             => 'Prénom',
     'last_name'              => 'Nom',
     'email'                  => 'Email',
+    'birthdate'              => 'Date de naissance',
     'copy'                   => 'Copier l\'email, le téléphone et l\'adresse pour tous les participants',
     'ticket'                 => 'Information sur le participant',
     'details'                => 'Détails du participant :number',
