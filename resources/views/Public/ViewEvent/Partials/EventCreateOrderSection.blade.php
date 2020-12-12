@@ -216,6 +216,12 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
+                                                    {!! Form::label("ticket_holder_birthdate[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.birthdate')) !!}
+                                                    {!! Form::date("ticket_holder_birthdate[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", $ticket['attendee']['birthdate'], [ 'class' => "ticket_holder_birthdate.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_birthdate form-control"]) !!}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
                                                     {!! Form::label("ticket_holder_phone[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", __('public_viewevent_partials_eventcreateordersection.phone'), ['class' => 'required']) !!}
                                                     {!! Form::text("ticket_holder_phone[{$ticket['attendee_id']}][{$ticket['ticket']['id']}]", null, ['required' => 'required', 'class' => "required form-control ticket_holder_phone.{$ticket['attendee_id']}.{$ticket['ticket']['id']} ticket_holder_phone"]) !!}
                                                 </div>

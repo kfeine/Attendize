@@ -52,14 +52,6 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        {!! Form::label("attendee_1_birthdate", __('public_viewevent_partials_eventticketssection.birthdate')) !!}
-                                        {!! Form::date("attendee_1_birthdate", null, ['class' => "attendee_1_birthdate attendee_birthdate form-control"]) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
                                         {!! Form::label("attendee_1_email", __('public_viewevent_partials_eventticketssection.email')) !!}
                                         {!! Form::text("attendee_1_email", null, ['class' => "attendee_1_email attendee_email form-control"]) !!}
                                     </div>
@@ -156,14 +148,6 @@
                                     <div class="form-group">
                                         {!! Form::label("attendee_`+number+`_email", __('public_viewevent_partials_eventticketssection.email')) !!}
                                         {!! Form::text("attendee_`+number+`_email", null, ['class' => "attendee_`+number+`_email attendee_email form-control"]) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        {!! Form::label("attendee_`+number+`_birthdate", __('public_viewevent_partials_eventticketssection.birthdate')) !!}
-                                        {!! Form::date("attendee_`+number+`_birthdate", null, ['class' => "attendee_`+number+`_birthdate attendee_birthdate form-control"]) !!}
                                     </div>
                                 </div>
                             </div>
