@@ -157,8 +157,9 @@ class Order extends MyBaseModel
 
         static::creating(function ($order) {
             if(empty($order->order_reference)){
-              $order->order_reference = strtoupper(str_random(5)) . date('jn'). strtoupper(iconv('UTF-8', 'ASCII//TRANSLIT', substr($order->last_name, 0, 5)));
-              //$order->order_reference = strtoupper(uniqid());
+              $order->order_reference = strtoupper(iconv('UTF-8', 'ASCII//TRANSLIT', substr($order->last_name, 0, 5))) . date('jn') . strtoupper(str_random(5));
+            } else {
+                $order->order_reference = strtoupper(iconv('UTF-8', 'ASCII//TRANSLIT', $order->order_reference));
             }
         });
     }

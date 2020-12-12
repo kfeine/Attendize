@@ -685,7 +685,7 @@ class EventCheckoutController extends Controller
                 $order->transaction_id = $transaction_id[0];
             }
             if (isset($order_reference)){
-              $order->order_reference = $order_reference[0];
+              $order->order_reference = strtoupper(iconv('UTF-8', 'ASCII//TRANSLIT', $order_reference[0]));
             }
             if ($ticket_order['order_requires_payment'] && !isset($request_data['pay_offline'])) {
                 $order->payment_gateway_id = $ticket_order['payment_gateway']->id;
